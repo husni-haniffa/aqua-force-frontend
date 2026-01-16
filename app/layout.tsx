@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/shared/Navbar";
 import { ClerkProvider } from "@clerk/nextjs";
+import ClientProviders from "@/components/shared/ClientProviders";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
   description: "Together. Future. Life",
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -34,7 +36,8 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${poppins.className} ${geistSans.variable} ${geistMono.variable} antialiased max-w-full`}>
-          {children}
+          <ClientProviders>{children}</ClientProviders>
+          <Toaster position="top-center"/>
         </body>
       </html>
     </ClerkProvider> 
