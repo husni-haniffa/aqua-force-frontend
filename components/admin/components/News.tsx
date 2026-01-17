@@ -10,12 +10,14 @@ import { NewsForm } from '../forms/News'
 import { toast } from 'sonner'
 import ButtonLoader from '@/components/ui/button-loader'
 import { NewsResponse } from '@/types/news'
+import { EditNewsForm } from '../forms/EditNews'
 
 const News = () => {
 
     const [open, setOpen] = useState(false)
-    const [deletingId, setDeletingId] = useState<string | null>(null);
-
+    const [editingId, setEditingId] = useState<string | null>(null)
+    const [deletingId, setDeletingId] = useState<string | null>(null)
+   
     const { data, isLoading, error } = useQuery<NewsResponse[]>({
         queryKey: ["news"],
         queryFn: fetchNews
@@ -26,19 +28,19 @@ const News = () => {
     const deleteMutation = useMutation({
         mutationFn: deleteNews,
         onMutate: (id: string) => {
-        setDeletingId(id);
+            setDeletingId(id);
         },
         onSettled: () => {
             setDeletingId(null);
         },
         onSuccess: () => {
-        toast.success('Category deleted')
-        queryClient.invalidateQueries({
-            queryKey: ["categories"]
-        })
+            toast.success('News deleted')
+            queryClient.invalidateQueries({
+                queryKey: ["news"]
+            })
         },
         onError: (err) => {
-        toast.error(err.message)
+            toast.error(err.message)
         }
     })
 
@@ -89,9 +91,16 @@ const News = () => {
                                 </TableCell>
                                 <TableCell>{news.createdAt}</TableCell>
                                 <TableCell>{news.updatedAt}</TableCell>
-                                <TableCell>
-                                    <Button>Edit</Button>
-                                </TableCell>
+                                    <Dialog open={editingId === news._id} 
+                                        onOpenChange={(open) => setEditingId(open ? news._id : null)}>
+                                        <DialogTrigger asChild>
+                                            <Button>Edit</Button>
+                                        </DialogTrigger>
+                                        <DialogHeader className='sr-only'><DialogTitle></DialogTitle></DialogHeader>
+                                        <DialogContent>
+                                            <EditNewsForm newsId={news._id} onSuccess={() => setEditingId(null)} />
+                                        </DialogContent>
+                                    </Dialog>
                                 <TableCell>
                                     <Button 
                                         variant={'destructive'} 

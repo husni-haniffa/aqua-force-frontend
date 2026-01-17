@@ -17,6 +17,10 @@ export interface NewsFormProps {
     onSuccess?: () => void
 }
 
+export interface EditNewsFormProps extends NewsFormProps {
+    newsId: string
+}
+
 export const formSchema = z.object({
     title: z
     .string()

@@ -11,12 +11,14 @@ import { deleteEvent, fetchEvents } from '@/api/event'
 import { DialogTitle } from '@radix-ui/react-dialog'
 import { toast } from 'sonner'
 import ButtonLoader from '@/components/ui/button-loader'
+import { EditEventForm } from '../forms/EditEvent'
 
 const Event = () => {
 
     const [open, setOpen] = useState(false)
+    const [editingId, setEditingId] = useState<string | null>(null)
     const [deletingId, setDeletingId] = useState<string | null>(null);
-
+    
     const { data, isLoading, error } = useQuery<EventResponse[]>({
         queryKey: ["events"],
         queryFn: fetchEvents
@@ -27,19 +29,19 @@ const Event = () => {
     const deleteMutation = useMutation({
         mutationFn: deleteEvent,
         onMutate: (id: string) => {
-        setDeletingId(id);
+            setDeletingId(id);
         },
         onSettled: () => {
-        setDeletingId(null);
+            setDeletingId(null);
         },
         onSuccess: () => {
-        toast.success('Category deleted')
-        queryClient.invalidateQueries({
-            queryKey: ["categories"]
-        })  
+            toast.success('Category deleted')
+            queryClient.invalidateQueries({
+                queryKey: ["categories"]
+            })  
         },
         onError: (err) => {
-        toast.error(err.message)
+            toast.error(err.message)
         }
     }) 
 
@@ -92,8 +94,19 @@ const Event = () => {
                                 <TableCell>{event.location}</TableCell>
                                 <TableCell>{event.createdAt}</TableCell>
                                 <TableCell>{event.updatedAt}</TableCell>
-                                 <TableCell><Button>Edit</Button></TableCell>
-                                  <TableCell>
+                                <TableCell>
+                                    <Dialog open={editingId === event._id} 
+                                        onOpenChange={(open) => setEditingId(open ? event._id : null)}>
+                                        <DialogTrigger asChild>
+                                            <Button>Edit</Button>
+                                        </DialogTrigger>
+                                        <DialogHeader className='sr-only'><DialogTitle></DialogTitle></DialogHeader>
+                                        <DialogContent>
+                                            <EditEventForm eventId={event._id} onSuccess={() => setEditingId(null)} />
+                                        </DialogContent>
+                                    </Dialog>
+                                </TableCell>
+                                <TableCell>
                                     <Button 
                                         variant={'destructive'} 
                                         onClick={() => handleDelete(event._id)} 

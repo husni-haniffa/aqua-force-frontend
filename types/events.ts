@@ -23,6 +23,10 @@ export interface EventFormProps {
     onSuccess?: () => void
 }
 
+export interface EditEventFormProps extends EventFormProps {
+    eventId: string
+}
+
 export const formSchema = z.object({
     title: z
     .string()

@@ -23,6 +23,28 @@ export const fetchEvents = async (): Promise<EventResponse[]> => {
     return result.data
 }
 
+export const fetchEventById = async (id: string): Promise<EventResponse> => {
+    const response = await fetch(`${BASE_URL}/events/${id}`)
+    const result = await response.json()
+    if (!response.ok) {
+        throw new Error(result.message || 'Failed to fetch event with id')
+    }
+    return result.data
+}
+
+export const updateEvent = async ({id, data}: {id: string, data: EventRequest}): Promise<EventResponse> => {
+    const response = await fetch(`${BASE_URL}/events/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+    })
+    const result = await response.json()
+    if (!response.ok) {
+        throw new Error(result.message || "Failed to update event")
+    }
+    return result.data
+}
+
 export const deleteEvent = async (id: string) => {
     const response = await fetch(`${BASE_URL}/events/${id}`, {
         method: 'DELETE',
