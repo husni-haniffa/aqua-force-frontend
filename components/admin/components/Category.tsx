@@ -10,10 +10,12 @@ import { CategoryForm } from '../forms/Category'
 import { CategoryResponse } from '@/types/category'
 import { toast } from 'sonner'
 import ButtonLoader from '@/components/ui/button-loader'
+import { EditCategoryForm } from '../forms/EditCategory'
 
 const Category = () => {
 
     const [open, setOpen] = useState(false)
+    const [editingId, setEditingId] = useState<string | null>(null)
     const [deletingId, setDeletingId] = useState<string | null>(null);
     
     const { data, isLoading, error } = useQuery<CategoryResponse[]>({
@@ -32,13 +34,13 @@ const Category = () => {
             setDeletingId(null);
         },
         onSuccess: () => {
-        toast.success('Category deleted')
-        queryClient.invalidateQueries({
-            queryKey: ["categories"]
-        })
+            toast.success('Category deleted')
+            queryClient.invalidateQueries({
+                queryKey: ["categories"]
+            })
         },
         onError: (err) => {
-        toast.error(err.message)
+            toast.error(err.message)
         }
     }) 
 
@@ -84,7 +86,16 @@ const Category = () => {
                                 <TableCell>{category.createdAt}</TableCell>
                                 <TableCell>{category.updatedAt}</TableCell>
                                 <TableCell>
-                                    <Button>Edit</Button>
+                                    <Dialog open={editingId === category._id} 
+                                        onOpenChange={(open) => setEditingId(open ? category._id : null)}>
+                                        <DialogTrigger asChild>
+                                            <Button>Edit</Button>
+                                        </DialogTrigger>
+                                        <DialogHeader className='sr-only'><DialogTitle></DialogTitle></DialogHeader>
+                                        <DialogContent>
+                                            <EditCategoryForm categoryId={category._id} onSuccess={() => setEditingId(null)} />
+                                        </DialogContent>
+                                    </Dialog>
                                 </TableCell>
                                 <TableCell>
                                     <Button 
@@ -92,7 +103,7 @@ const Category = () => {
                                         onClick={() => handleDelete(category._id)} 
                                         disabled={deletingId === category._id}
                                     >
-                                        {deletingId === category._id ? <ButtonLoader text="deleting"/> : 'delete'}
+                                        {deletingId === category._id ? <ButtonLoader text="Deleting"/> : 'Delete'}
                                     </Button>
                                 </TableCell>
                             </TableRow>

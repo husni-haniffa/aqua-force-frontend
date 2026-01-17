@@ -18,12 +18,13 @@ import {
   FieldLabel,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { createCategory } from "@/api/category"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { fetchCategoryById, updateCategory } from "@/api/category"
 import ButtonLoader from "@/components/ui/button-loader"
-import { CategoryFormProps, formSchema } from "@/types/category"
+import { CategoryResponse, EditCategoryFormProps, formSchema } from "@/types/category"
+import { useEffect } from "react"
 
-export function CategoryForm({ onSuccess }: CategoryFormProps) {
+export function EditCategoryForm({ categoryId, onSuccess }: EditCategoryFormProps) {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -34,12 +35,15 @@ export function CategoryForm({ onSuccess }: CategoryFormProps) {
 
   const queryClient = useQueryClient()
 
-  const createMutation = useMutation({
-    mutationFn: createCategory,
+  const updateMutation = useMutation({
+    mutationFn: updateCategory,
     onSuccess: () => {
-      toast.success('Category created')
+      toast.success('Category updated')
       queryClient.invalidateQueries({
         queryKey: ["categories"]
+      })
+      queryClient.invalidateQueries({
+        queryKey: ["categories", categoryId]
       })
       onSuccess?.()
     },
@@ -47,30 +51,50 @@ export function CategoryForm({ onSuccess }: CategoryFormProps) {
       toast.error(err.message)
     }
   })
- 
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    createMutation.mutate(data)
+
+  const { data, isLoading, error } = useQuery<CategoryResponse>({
+      queryKey: ["categories", categoryId],
+      queryFn: () => fetchCategoryById(categoryId)
+  })
+
+  useEffect(() => {
+    if (data) {
+      form.reset({
+        name: data.name,
+      })
+    }
+  }, [data, form])
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    updateMutation.mutate({
+      id: categoryId,
+      data: values,
+    })
   }
 
+  if (isLoading) return <p>Loading...</p>
+
+  if (error instanceof Error) return <p>{error.message}</p>
+ 
   return (
     <Card className="w-full border-0 shadow-none">
       <CardHeader>
-        <CardTitle>Add Category</CardTitle>
+        <CardTitle>Edit Category</CardTitle>
       </CardHeader>
         <CardContent>
-          <form id="rhf-category-form" onSubmit={form.handleSubmit(onSubmit)}>
+          <form id="rhf-category-edit-form" onSubmit={form.handleSubmit(onSubmit)}>
             <FieldGroup>
                 <Controller
                   name="name"
                   control={form.control}
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
-                        <FieldLabel htmlFor="rhf-category-name-label">
+                        <FieldLabel htmlFor="rhf-category-edit-name-label">
                           Category Name
                         </FieldLabel>
                         <Input
                             {...field}
-                            id="rhf-category-name-value"
+                            id="rhf-category-edit-name-value"
                             aria-invalid={fieldState.invalid}
                             placeholder="Enter a category name"
                             autoComplete="off"
@@ -89,8 +113,12 @@ export function CategoryForm({ onSuccess }: CategoryFormProps) {
                 <Button type="button" variant="outline" onClick={() => form.reset()}>
                     Cancel
                 </Button>
-                <Button type="submit" form="rhf-category-form" disabled={createMutation.isPending}>
-                    {createMutation.isPending ? <ButtonLoader text="Creating"/> : 'Create'}
+                <Button
+                  type="submit"
+                  form="rhf-category-edit-form"
+                  disabled={updateMutation.isPending}
+                >
+                  {updateMutation.isPending ? <ButtonLoader text="Saving" /> : "Update"}
                 </Button>
             </Field>
         </CardFooter>

@@ -15,6 +15,10 @@ export interface CategoryFormProps {
     onSuccess?: () => void
 }
 
+export interface EditCategoryFormProps extends CategoryFormProps {
+    categoryId: string
+}
+
 export const formSchema = z.object({
     name: z
     .string()
