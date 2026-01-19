@@ -12,22 +12,28 @@ import { DialogTitle } from '@radix-ui/react-dialog'
 import { toast } from 'sonner'
 import ButtonLoader from '@/components/ui/button-loader'
 import { EditEventForm } from '../forms/EditEvent'
+import { useAuth } from '@clerk/nextjs'
 
 const Event = () => {
 
     const [open, setOpen] = useState(false)
     const [editingId, setEditingId] = useState<string | null>(null)
     const [deletingId, setDeletingId] = useState<string | null>(null);
-    
+    const { getToken } = useAuth()
     const { data, isLoading, error } = useQuery<EventResponse[]>({
         queryKey: ["events"],
-        queryFn: fetchEvents
+         queryFn: fetchEvents,
     })
 
     const queryClient = useQueryClient()
 
     const deleteMutation = useMutation({
-        mutationFn: deleteEvent,
+        mutationFn: async (id: string) => {
+           const token = await getToken()
+           if (!token) throw new Error("Not authenticated")
+       
+           return deleteEvent(id, token)
+         },
         onMutate: (id: string) => {
             setDeletingId(id);
         },

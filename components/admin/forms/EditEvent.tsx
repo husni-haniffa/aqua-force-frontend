@@ -26,6 +26,7 @@ import { EditEventFormProps } from "@/types/events"
 import { DatePicker } from "@/components/ui/date-picker"
 import { fetchEventById, updateEvent } from "@/api/event"
 import { useEffect } from "react"
+import { useAuth } from "@clerk/nextjs"
 
 export function EditEventForm({onSuccess, eventId}: EditEventFormProps) {
 
@@ -40,10 +41,24 @@ export function EditEventForm({onSuccess, eventId}: EditEventFormProps) {
       },
     })
 
+     const { getToken } = useAuth()
   const queryClient = useQueryClient()
 
   const updateMutation = useMutation({
-    mutationFn: updateEvent,
+     mutationFn: async (values: {
+        id: string
+        data: z.infer<typeof formSchema>
+      }) => {
+        const token = await getToken()
+        if (!token) throw new Error("Not authenticated")
+    
+        return updateEvent({
+          id: values.id,
+          data: values.data,
+          token,
+        })
+      },
+    
     onSuccess: () => {
       toast.success('Event updated')
       queryClient.invalidateQueries({

@@ -25,6 +25,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { createEvent } from "@/api/event"
 import ButtonLoader from "@/components/ui/button-loader"
 import { EventFormProps, formSchema } from "@/types/events"
+import { useAuth } from "@clerk/nextjs"
 
 export function EventForm({onSuccess}: EventFormProps) {
 
@@ -38,11 +39,19 @@ export function EventForm({onSuccess}: EventFormProps) {
       location: "",  
     },
   })
-
+  const { getToken } = useAuth()
   const queryClient = useQueryClient()
 
   const createMutation = useMutation({
-    mutationFn: createEvent,
+     mutationFn: async (data: z.infer<typeof formSchema>) => {
+        const token = await getToken()
+    
+        if (!token) {
+          throw new Error("Not authenticated")
+        }
+    
+        return createEvent(data, token)
+      },
     onSuccess: () => {
     toast.success('Event created')
     queryClient.invalidateQueries({

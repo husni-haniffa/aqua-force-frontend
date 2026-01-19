@@ -23,6 +23,7 @@ import { fetchCategoryById, updateCategory } from "@/api/category"
 import ButtonLoader from "@/components/ui/button-loader"
 import { CategoryResponse, EditCategoryFormProps, formSchema } from "@/types/category"
 import { useEffect } from "react"
+import { useAuth } from "@clerk/nextjs"
 
 export function EditCategoryForm({ categoryId, onSuccess }: EditCategoryFormProps) {
 
@@ -33,29 +34,48 @@ export function EditCategoryForm({ categoryId, onSuccess }: EditCategoryFormProp
     },
   })
 
+  const { getToken } = useAuth()
   const queryClient = useQueryClient()
 
   const updateMutation = useMutation({
-    mutationFn: updateCategory,
-    onSuccess: () => {
-      toast.success('Category updated')
-      queryClient.invalidateQueries({
-        queryKey: ["categories"]
-      })
-      queryClient.invalidateQueries({
-        queryKey: ["categories", categoryId]
-      })
-      onSuccess?.()
-    },
-    onError: (err) => {
-      toast.error(err.message)
-    }
-  })
+  mutationFn: async (values: {
+    id: string
+    data: z.infer<typeof formSchema>
+  }) => {
+    const token = await getToken()
+    if (!token) throw new Error("Not authenticated")
 
-  const { data, isLoading, error } = useQuery<CategoryResponse>({
+    return updateCategory({
+      id: values.id,
+      data: values.data,
+      token,
+    })
+  },
+
+  onSuccess: () => {
+    toast.success("Category updated")
+    queryClient.invalidateQueries({ queryKey: ["categories"] })
+    queryClient.invalidateQueries({
       queryKey: ["categories", categoryId],
-      queryFn: () => fetchCategoryById(categoryId)
-  })
+    })
+    onSuccess?.()
+  },
+
+  onError: (err: any) => {
+    toast.error(err.message ?? "Update failed")
+  },
+})
+
+ const { data, isLoading, error } = useQuery({
+  queryKey: ["categories", categoryId],
+  enabled: !!categoryId,
+  queryFn: async () => {
+    const token = await getToken()
+    if (!token) throw new Error("Not authenticated")
+
+    return fetchCategoryById(categoryId, token)
+  },
+})
 
   useEffect(() => {
     if (data) {

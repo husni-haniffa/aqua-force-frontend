@@ -4,6 +4,7 @@ import {
   SidebarInset,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { SignedIn, UserButton } from "@clerk/nextjs"
 
 export default function AdminLayout({
   children,
@@ -17,9 +18,9 @@ export default function AdminLayout({
         <header className="flex h-14 items-center gap-4 border-b bg-background px-6">
           <SidebarTrigger />
           <div className="flex-1" />
-          <span className="text-sm text-muted-foreground">
-            Admin Panel
-          </span>
+        <SignedIn>
+                                <UserButton/>
+                            </SignedIn>
         </header>
         <main className="flex-1 p-6">
           {children}

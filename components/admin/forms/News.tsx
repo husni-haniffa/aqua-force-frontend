@@ -24,6 +24,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { createNews } from "@/api/news"
 import { NewsFormProps } from "@/types/news"
 import { formSchema } from "@/types/news"
+import { useAuth } from "@clerk/nextjs"
 
 export function NewsForm({onSuccess}: NewsFormProps) {
 
@@ -35,10 +36,19 @@ export function NewsForm({onSuccess}: NewsFormProps) {
     },
   })
 
+  const { getToken } = useAuth()
   const queryClient = useQueryClient()
 
   const createMutation = useMutation({
-        mutationFn: createNews,
+        mutationFn: async (data: z.infer<typeof formSchema>) => {
+            const token = await getToken()
+        
+            if (!token) {
+              throw new Error("Not authenticated")
+            }
+        
+            return createNews(data, token)
+          },
         onSuccess: () => {
         toast.success('News created')
         queryClient.invalidateQueries({

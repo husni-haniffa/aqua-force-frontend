@@ -25,6 +25,7 @@ import { fetchNewsById, updateNews } from "@/api/news"
 import { EditNewsFormProps, NewsResponse } from "@/types/news"
 import { formSchema } from "@/types/news"
 import { useEffect } from "react"
+import { useAuth } from "@clerk/nextjs"
 
 export function EditNewsForm({newsId, onSuccess}: EditNewsFormProps) {
 
@@ -35,11 +36,23 @@ export function EditNewsForm({newsId, onSuccess}: EditNewsFormProps) {
       content: ""
     },
   })
-
+  const { getToken } = useAuth()
   const queryClient = useQueryClient()
 
   const updateMutation = useMutation({
-    mutationFn: updateNews,
+    mutationFn: async (values: {
+        id: string
+        data: z.infer<typeof formSchema>
+      }) => {
+        const token = await getToken()
+        if (!token) throw new Error("Not authenticated")
+    
+        return updateNews({
+          id: values.id,
+          data: values.data,
+          token,
+        })
+      },
     onSuccess: () => {
       toast.success('Event updated')
       queryClient.invalidateQueries({
@@ -57,7 +70,13 @@ export function EditNewsForm({newsId, onSuccess}: EditNewsFormProps) {
 
   const { data, isLoading, error } = useQuery<NewsResponse>({
       queryKey: ["news", newsId],
-      queryFn: () => fetchNewsById(newsId)
+      enabled: !!newsId,
+        queryFn: async () => {
+          const token = await getToken()
+          if (!token) throw new Error("Not authenticated")
+      
+          return fetchNewsById(newsId, token)
+        },
   })
 
   useEffect(() => {

@@ -11,22 +11,28 @@ import { toast } from 'sonner'
 import ButtonLoader from '@/components/ui/button-loader'
 import { NewsResponse } from '@/types/news'
 import { EditNewsForm } from '../forms/EditNews'
+import { useAuth } from '@clerk/nextjs'
 
 const News = () => {
 
     const [open, setOpen] = useState(false)
     const [editingId, setEditingId] = useState<string | null>(null)
     const [deletingId, setDeletingId] = useState<string | null>(null)
-   
+   const { getToken } = useAuth()
     const { data, isLoading, error } = useQuery<NewsResponse[]>({
         queryKey: ["news"],
-        queryFn: fetchNews
+        queryFn: fetchNews,
     })
 
     const queryClient = useQueryClient()
 
     const deleteMutation = useMutation({
-        mutationFn: deleteNews,
+       mutationFn: async (id: string) => {
+           const token = await getToken()
+           if (!token) throw new Error("Not authenticated")
+       
+           return deleteNews(id, token)
+         },
         onMutate: (id: string) => {
             setDeletingId(id);
         },

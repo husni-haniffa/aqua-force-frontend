@@ -22,8 +22,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { createCategory } from "@/api/category"
 import ButtonLoader from "@/components/ui/button-loader"
 import { CategoryFormProps, formSchema } from "@/types/category"
+import { useAuth } from "@clerk/nextjs"
 
 export function CategoryForm({ onSuccess }: CategoryFormProps) {
+ 
+  
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -32,22 +35,30 @@ export function CategoryForm({ onSuccess }: CategoryFormProps) {
     },
   })
 
-  const queryClient = useQueryClient()
+  const { getToken } = useAuth()
+const queryClient = useQueryClient()
 
-  const createMutation = useMutation({
-    mutationFn: createCategory,
-    onSuccess: () => {
-      toast.success('Category created')
-      queryClient.invalidateQueries({
-        queryKey: ["categories"]
-      })
-      onSuccess?.()
-    },
-    onError: (err) => {
-      toast.error(err.message)
+const createMutation = useMutation({
+  mutationFn: async (data: z.infer<typeof formSchema>) => {
+    const token = await getToken()
+
+    if (!token) {
+      throw new Error("Not authenticated")
     }
-  })
- 
+
+    return createCategory(data, token)
+  },
+
+  onSuccess: () => {
+    toast.success("Category created")
+    queryClient.invalidateQueries({ queryKey: ["categories"] })
+    onSuccess?.()
+  },
+
+  onError: (err: any) => {
+    toast.error(err.message ?? "Something went wrong")
+  },
+})
   function onSubmit(data: z.infer<typeof formSchema>) {
     createMutation.mutate(data)
   }
