@@ -1,10 +1,13 @@
 import { EventRequest, EventResponse} from "@/types/events";
 import { BASE_URL } from "@/types/api";
 
-export const createEvent = async (data: EventRequest) => {
+export const createEvent = async (data: EventRequest, token: string) => {
     const response = await fetch(`${BASE_URL}/events`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearor ${token}`
+        },
         body: JSON.stringify(data)
     })
     const result = await response.json()
@@ -32,10 +35,13 @@ export const fetchEventById = async (id: string): Promise<EventResponse> => {
     return result.data
 }
 
-export const updateEvent = async ({id, data}: {id: string, data: EventRequest}): Promise<EventResponse> => {
+export const updateEvent = async ({id, data, token}: {id: string, data: EventRequest, token: string}): Promise<EventResponse> => {
     const response = await fetch(`${BASE_URL}/events/${id}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+            "Content-Type": "application/json" ,
+            'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify(data),
     })
     const result = await response.json()
@@ -45,9 +51,12 @@ export const updateEvent = async ({id, data}: {id: string, data: EventRequest}):
     return result.data
 }
 
-export const deleteEvent = async (id: string) => {
+export const deleteEvent = async (id: string, token: string) => {
     const response = await fetch(`${BASE_URL}/events/${id}`, {
         method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
     })
     const result = await response.json()
     if (!response.ok) {

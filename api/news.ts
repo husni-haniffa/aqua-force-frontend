@@ -1,10 +1,13 @@
 import { NewsRequest, NewsResponse } from "@/types/news";
 import { BASE_URL } from "@/types/api";
 
-export const createNews = async (data: NewsRequest) => {
+export const createNews = async (data: NewsRequest, token: string) => {
     const response = await fetch(`${BASE_URL}/news`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearor ${token}`
+        },
         body: JSON.stringify(data)
     })
     const result = await response.json()
@@ -32,10 +35,13 @@ export const fetchNewsById = async (id: string): Promise<NewsResponse> => {
     return result.data
 }
 
-export const updateNews = async ({id, data}: {id: string, data: NewsRequest}): Promise<NewsResponse> => {
+export const updateNews = async ({id, data, token}: {id: string, data: NewsRequest, token: string}): Promise<NewsResponse> => {
     const response = await fetch(`${BASE_URL}/news/${id}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify(data),
     })
     const result = await response.json()
@@ -45,10 +51,12 @@ export const updateNews = async ({id, data}: {id: string, data: NewsRequest}): P
     return result.data
 }
 
-
-export const deleteNews = async (id: string) => {
+export const deleteNews = async (id: string, token: string) => {
     const response = await fetch(`${BASE_URL}/news/${id}`, {
         method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
     })
     const result = await response.json()
     if (!response.ok) {
