@@ -27,22 +27,40 @@ export const formSchema = z.object({
         .string()
         .trim()
         .min(5, "Title must be at least 5 characters")
-        .max(50, "Title must not exceed 50 characters"),
+        .max(50, "Title must not exceed 50 characters")
+        .regex(
+            /^[A-Za-z0-9\s:,\-()./]+$/,
+            "Title contains invalid characters"
+        ),
 
     abstract: z
         .string()
         .trim()
-        .min(25, "Abstract must be at least 25 characters")
-        .max(25, "Abstract must not exceed 1000 characters"),
+        .min(500, "Abstract must be at least 500 characters")
+        .max(1000, "Abstract must not exceed 1000 characters"),
 
     keywords: z
-        .array(z.string().trim().min(1))
-        .min(1)
-        .max(5),
+        .array(
+            z
+            .string()
+            .trim()
+            .min(1, "Keyword cannot be empty")
+            .regex(/^[A-Za-z0-9\- ]+$/, "Invalid keyword")
+    )
+        .min(1, "At least one keyword is required")
+        .max(5, "No more than 5 keywords allowed"),
 
     file: z
         .instanceof(File)
-        .refine((file) => file.type === "application/pdf", {
-            message: "Only PDF files are allowed",
-        }),
+        .refine(
+            (file) =>
+                [
+                    "application/pdf",
+                    "application/msword",
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                ].includes(file.type),
+            {
+                message: "Only PDF, DOC, or DOCX files are allowed",
+            }
+        ),
 });

@@ -20,14 +20,16 @@ export interface EditNewsFormProps extends CreateNewsFormProps {
 
 export const formSchema = z.object({
     title: z
-    .string()
-    .min(10, 'Title must be atleast 25 characters')
-    .max(10, 'Title must not be more than 50 characters'),
+        .string()
+        .trim()
+        .min(25, "Title must be at least 25 characters")
+        .max(50, "Title must not exceed 50 characters"),
 
     content: z
-    .string()
-    .min(10, 'Content must be atleast 75 characters')
-    .max(10, 'Content must not be more than 725 characters'),
+        .string()
+        .trim()
+        .min(75, "Content must be at least 75 characters")
+        .max(725, "Content must not exceed 725 characters"),
 
     file: z
         .instanceof(File)
@@ -35,15 +37,13 @@ export const formSchema = z.object({
         .refine(
             (file) =>
                 !file ||
-                [ "image/jpeg", "image/png", "image/jpg"].includes(
-                    file.type
-                ),
+                ["image/jpeg", "image/jpg", "image/png"].includes(file.type),
             {
-                message: " JPG, JPEG, or PNG files are allowed",
+                message: "Only JPG, JPEG, or PNG files are allowed",
             }
         ),
+});
 
-})
 
 
 

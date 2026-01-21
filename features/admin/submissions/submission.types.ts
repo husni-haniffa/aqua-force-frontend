@@ -3,6 +3,7 @@ type Status = 'PENDING' | 'UNDER_REVIEW' | 'APPROVED' | 'REJECTED'
 export interface SubmissionResponse {
     _id: string
     userId: string
+    userName: string
     title: string
     abstract: string
     fileUrl: string

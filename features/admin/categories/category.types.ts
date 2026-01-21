@@ -21,9 +21,11 @@ export interface EditCategoryFormProps extends CreateCategoryFormProps {
 
 export const formSchema = z.object({
     name: z
-    .string()
-    .min(5, 'Name must be atleast 5 characters')
-    .max(25, 'Name must not be more than 25 characters')
-    .regex(/^[a-zA-Z ]+$/, 'Name must be only alphabets')
-})
+        .string()
+        .trim()
+        .min(5, "Name must be at least 5 characters")
+        .max(25, "Name must not exceed 25 characters")
+        .regex(/^[A-Za-z ]+$/, "Name must contain only alphabets"),
+});
+
 

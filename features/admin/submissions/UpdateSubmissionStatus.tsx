@@ -1,34 +1,14 @@
-"use client"
-
 import * as React from "react"
 import { Button } from "@/components/ui/button"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from "@/components/ui/radio-group"
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { useSubmissionApproved, useSubmissionReject, useSubmissionUnderReview } from "./submission.hooks"
 import ButtonLoader from "@/components/ui/button-loader"
 
+type Status = | "PENDING" | "UNDER_REVIEW" | "APPROVED" | "REJECTED"
 
-
-type Status =
-  | "PENDING"
-  | "UNDER_REVIEW"
-  | "APPROVED"
-  | "REJECTED"
-
-type StatusUpdateProps = {
+type UpdateSubmissionStatusProps = {
   id: string
   currentStatus: Status
 }
@@ -40,28 +20,22 @@ const statusOptions = [
   { label: "Rejected", value: "REJECTED" },
 ] as const
 
-const StatusUpdate: React.FC<StatusUpdateProps> = ({
+const UpdateSubmissionStatus: React.FC<UpdateSubmissionStatusProps> = ({
   id,
   currentStatus,
 }) => {
-  const [status, setStatus] =
-    React.useState<Status>(currentStatus)
 
-    
+  const [status, setStatus] = React.useState<Status>(currentStatus)
   const [open, setOpen] = React.useState(false)
 
   const underReviewMutation = useSubmissionUnderReview()
   const approvedMutation = useSubmissionApproved()
   const rejectedMutation = useSubmissionReject()
 
-  const isLoading =
-    underReviewMutation.isPending ||
-    approvedMutation.isPending ||
-    rejectedMutation.isPending
+  const isLoading = underReviewMutation.isPending || approvedMutation.isPending || rejectedMutation.isPending
 
   const handleConfirm = () => {
     if (status === currentStatus) return
-
     const onSuccess = () => setOpen(false)
     switch (status) {
       case "UNDER_REVIEW":
@@ -85,14 +59,12 @@ const StatusUpdate: React.FC<StatusUpdateProps> = ({
           Update Status
         </Button>
       </AlertDialogTrigger>
-
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
             Update Submission Status
           </AlertDialogTitle>
         </AlertDialogHeader>
-
         <RadioGroup
           value={status}
           onValueChange={(value) =>
@@ -117,12 +89,10 @@ const StatusUpdate: React.FC<StatusUpdateProps> = ({
             </div>
           ))}
         </RadioGroup>
-
         <AlertDialogFooter>
           <AlertDialogCancel disabled={isLoading}>
             Cancel
           </AlertDialogCancel>
-
           <AlertDialogAction
             onClick={handleConfirm}
             disabled={
@@ -137,4 +107,4 @@ const StatusUpdate: React.FC<StatusUpdateProps> = ({
   )
 }
 
-export default StatusUpdate
+export default UpdateSubmissionStatus
