@@ -52,7 +52,7 @@ const EventTable = ({ search }: { search: string }) => {
                     <TableCell>
                         <Dialog open={editingId === event._id} onOpenChange={(open) => setEditingId(open ? event._id : null)}>
                             <DialogTrigger asChild>
-                                <Button>Edit</Button>
+                                <Button disabled={deletingId === event._id}>Edit</Button>
                             </DialogTrigger>
                             <DialogHeader className='sr-only'>
                                 <DialogTitle></DialogTitle>

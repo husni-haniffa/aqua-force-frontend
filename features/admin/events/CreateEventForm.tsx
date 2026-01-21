@@ -15,7 +15,7 @@ const CreateEventForm = ({ onSuccess } : CreateEventFormProps) => {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: { title: "", description: "", eventDate: new Date(), eventTime: "10:10", location: "" },
+        defaultValues: { title: "", description: "", eventDate: new Date(), eventTime: "10:30", location: "" },
     })
     
     const createMutation = useCreateEvent(onSuccess)
@@ -40,7 +40,7 @@ const CreateEventForm = ({ onSuccess } : CreateEventFormProps) => {
                                     {...field}
                                     id="create-event-title-value"
                                     aria-invalid={fieldState.invalid}
-                                    placeholder="Research Methodology Workshop"
+                                    placeholder="Data Science Workshop"
                                     autoComplete="off"
                                 />
                                 {fieldState.invalid && (
@@ -61,7 +61,7 @@ const CreateEventForm = ({ onSuccess } : CreateEventFormProps) => {
                                     {...field}
                                     id="create-event-description-value"
                                     aria-invalid={fieldState.invalid}
-                                    placeholder="A hands-on workshop focusing on quantitative and qualitative research methods for undergraduate and postgraduate students."
+                                    placeholder="This workshop covers applied data science concepts and tools."
                                     autoComplete="off"
                                 />
                                 {fieldState.invalid && (
@@ -127,7 +127,7 @@ const CreateEventForm = ({ onSuccess } : CreateEventFormProps) => {
                                     {...field}
                                     id="create-event-location-value"
                                     aria-invalid={fieldState.invalid}
-                                    placeholder="GOA"
+                                    placeholder="University of Moratuwa"
                                     autoComplete="off"
                                 />
                                 {fieldState.invalid && (

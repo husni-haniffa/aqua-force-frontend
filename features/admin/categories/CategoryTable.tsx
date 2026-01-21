@@ -44,7 +44,7 @@ const CategoryTable = ({ search }: { search: string }) => {
                     <TableCell>
                         <Dialog open={editingId === category._id} onOpenChange={(open) => setEditingId(open ? category._id : null)}>
                             <DialogTrigger asChild>
-                                <Button>Edit</Button>
+                                <Button disabled={deletingId === category._id}>Edit</Button>
                             </DialogTrigger>
                             <DialogHeader className='sr-only'>
                                 <DialogTitle></DialogTitle>

@@ -16,14 +16,14 @@ const EditNewsForm = ({ newsId, onSuccess } : EditNewsFormProps) => {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: { title: "", content: "" },
+        defaultValues: { title: "", content: ""},
     })
     
     const { data, isLoading, error} = useNewsById(newsId)
     const updateMutation = useUpdateNews(newsId, onSuccess)
     
     useEffect(() => {
-        if (data) form.reset({ title: data.title, content: data.content  })
+        if (data) form.reset({ title: data.title, content: data.content, file: undefined })
     }, [data, form])
     
     if (isLoading) return <p>Loading...</p>
@@ -88,7 +88,12 @@ const EditNewsForm = ({ newsId, onSuccess } : EditNewsFormProps) => {
                                 News Post
                             </FieldLabel>
                             {data?.imageUrl && (
-                                <Image src={data.imageUrl} alt="current news post" width={300} height={300}/>
+                                <Image
+                                    src={`${data.imageUrl}?t=${Date.now()}`}
+                                    alt="current news post"
+                                    width={300}
+                                    height={300}
+                                />
                             )}
                             <Input
                                 type="file"

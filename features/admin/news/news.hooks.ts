@@ -57,8 +57,8 @@ export function useUpdateNews(newsId: string, onSuccess?: () => void) {
             const token = await getToken()
             if (!token) throw new Error("Not authenticated")
             const formData = new FormData()
-            if (data.image) {
-                formData.append("image", data.image)
+            if (data.file) {
+                formData.append("file", data.file)
             }
             formData.append("title", data.title)
             formData.append("content", data.content)

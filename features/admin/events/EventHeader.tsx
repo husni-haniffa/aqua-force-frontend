@@ -17,7 +17,7 @@ const EventHeader = ({ onSearch }: { onSearch: (value: string) => void }) => {
   return (
     <div className="flex items-center justify-between gap-3">
       <Input
-        placeholder="Search for a category"
+        placeholder="Search for an event"
         className="w-96"
         onChange={(e) => onSearch(e.target.value)}
       />

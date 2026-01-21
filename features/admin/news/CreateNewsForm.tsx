@@ -39,7 +39,7 @@ const CreateNewsForm = ({ onSuccess } : CreateNewsFormProps) => {
                                     {...field}
                                     id="create-news-title-value"
                                     aria-invalid={fieldState.invalid}
-                                    placeholder="Call for Papers: International Conference on AI 2026"
+                                    placeholder="University Launches New Artificial Intelligence Research Center"
                                     autoComplete="off"
                                 />
                                 {fieldState.invalid && (
@@ -60,7 +60,7 @@ const CreateNewsForm = ({ onSuccess } : CreateNewsFormProps) => {
                                 {...field}
                                 id="create-news-content-value"
                                 aria-invalid={fieldState.invalid}
-                                placeholder="Researchers are invited to submit original papers for the upcoming International Conference on Artificial Intelligence 2026. Selected papers will be published in indexed proceedings."
+                                placeholder="The university has launched a new AI research center focusing on innovation, collaboration, and real-world applications across multiple departments."
                                 autoComplete="off"
                             />
                             {fieldState.invalid && (

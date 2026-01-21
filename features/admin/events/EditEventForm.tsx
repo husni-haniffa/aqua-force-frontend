@@ -16,7 +16,7 @@ const EditEventForm = ({ eventId, onSuccess } : EditEventFormProps) => {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: { title: "", description: "", eventDate: new Date(), eventTime: "10:10", location: "" },
+        defaultValues: { title: "", description: "", eventDate: new Date(), eventTime: "10:30", location: "" },
     })
     
     const { data, isLoading, error} = useEventById(eventId)
@@ -54,7 +54,7 @@ const EditEventForm = ({ eventId, onSuccess } : EditEventFormProps) => {
                                     {...field}
                                     id="edit-event-title-value"
                                     aria-invalid={fieldState.invalid}
-                                    placeholder="Did you know?"
+                                    placeholder="Data Science Workshop"
                                     autoComplete="off"
                                 />
                                 {fieldState.invalid && (
@@ -75,7 +75,7 @@ const EditEventForm = ({ eventId, onSuccess } : EditEventFormProps) => {
                                     {...field}
                                     id="edit-event-description-value"
                                     aria-invalid={fieldState.invalid}
-                                    placeholder="Yes i know..."
+                                    placeholder="This workshop covers applied data science concepts and tools."
                                     autoComplete="off"
                                 />
                                 {fieldState.invalid && (
@@ -141,7 +141,7 @@ const EditEventForm = ({ eventId, onSuccess } : EditEventFormProps) => {
                                     {...field}
                                     id="edit-event-location-value"
                                     aria-invalid={fieldState.invalid}
-                                    placeholder="GOA"
+                                    placeholder="University of Moratuwa"
                                     autoComplete="off"
                                 />
                                 {fieldState.invalid && (
@@ -159,7 +159,7 @@ const EditEventForm = ({ eventId, onSuccess } : EditEventFormProps) => {
                     Cancel
                 </Button>
                 <Button type="submit" form="edit-event" disabled={updateMutation.isPending}>
-                    {updateMutation.isPending ? <ButtonLoader text="Creating"/> : 'Create'}
+                    {updateMutation.isPending ? <ButtonLoader text="Updating"/> : 'Update'}
                 </Button>
             </Field>
         </CardFooter>
