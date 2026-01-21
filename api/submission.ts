@@ -75,3 +75,17 @@ export const publishSubmission = async (
     }
     return result.message
 }
+
+export const deleteSubmission = async (id: string, token: string) => {
+    const response = await fetch(`${BASE_URL}/submissions/delete/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+    })
+    const result = await response.json()
+    if (!response.ok) {
+        throw new Error(result.message || "Failed to delete submission")
+    }
+    return result
+}

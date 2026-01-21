@@ -15,7 +15,7 @@ export const fetchSubmissionByUserId = async (id: string, token: string): Promis
 }
 
 export const fetchSubmissionById = async (id: string, token: string): Promise<UserSubmissionResponse> => {
-    const response = await fetch(`${BASE_URL}/users/submissions/${id}`, {
+    const response = await fetch(`${BASE_URL}/users/submission/${id}`, {
         headers: {
             'Authorization': `Bearer ${token}`
         },
@@ -43,8 +43,8 @@ export const createSubmission = async(formData: FormData, token: string) => {
 }
 
 export const updateSubmission = async (id: string, formData: FormData, token: string) => {
-   const response = await fetch(`${BASE_URL}/users/submission/${id}`, {
-        method: 'POST',
+   const response = await fetch(`${BASE_URL}/users/submissions/${id}`, {
+        method: 'PUT',
         headers: {
             'Authorization': `Bearer ${token}`
         },
