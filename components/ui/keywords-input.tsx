@@ -11,7 +11,7 @@ type KeywordsInputProps = {
 export const KeywordsInput = ({ 
   value, 
   onChange, 
-  placeholder = "Type keyword & press enter" 
+  placeholder = "Enter Keyword & Press Enter" 
 }: KeywordsInputProps) => {
   const [input, setInput] = useState("")
 

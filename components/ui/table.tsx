@@ -70,7 +70,7 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
     <th
       data-slot="table-head"
       className={cn(
-        "text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 *:[[role=checkbox]]:translate-y-0.5",
+        "text-foreground h-10 px-2 text-left align-middle font-bold whitespace-nowrap [&:has([role=checkbox])]:pr-0 *:[[role=checkbox]]:translate-y-0.5",
         className
       )}
       {...props}
@@ -78,18 +78,25 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
   )
 }
 
-function TableCell({ className, ...props }: React.ComponentProps<"td">) {
+function TableCell({ className, children, ...props }: React.ComponentProps<"td"> & { children: React.ReactNode }) {
+  // Convert children to string for tooltip (works for text only; for more complex nodes, you may need additional handling)
+  const text = typeof children === "string" ? children : "";
+
   return (
     <td
       data-slot="table-cell"
+      title={text} // full text on hover
       className={cn(
-        "p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 *:[[role=checkbox]]:translate-y-0.5",
+        "p-2 align-middle whitespace-nowrap overflow-hidden text-ellipsis max-w-xs", // auto truncate
         className
       )}
       {...props}
-    />
+    >
+      {children}
+    </td>
   )
 }
+
 
 function TableCaption({
   className,
