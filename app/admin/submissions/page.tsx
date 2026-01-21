@@ -1,9 +1,8 @@
-import Submission from '@/components/admin/components/Submission'
-import React from 'react'
+import AdminSubmissions from "@/features/admin/submissions/AdminSubmissions"
 
 const page = () => {
   return (
-    <Submission/>
+    <AdminSubmissions/>
   )
 }
 

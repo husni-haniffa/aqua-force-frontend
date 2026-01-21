@@ -1,26 +1,11 @@
-import { EventRequest, EventResponse} from "@/types/events";
-import { BASE_URL } from "@/types/api";
 
-export const createEvent = async (data: EventRequest, token: string) => {
-    const response = await fetch(`${BASE_URL}/events`, {
-        method: 'POST',
-        headers: { 
-            'Content-Type': 'application/json',
-            'Authorization': `Bearor ${token}`
-        },
-        body: JSON.stringify(data)
-    })
-    const result = await response.json()
-    if (!response.ok) {
-        throw new Error(result.message || "Failed to create event")
-    }
-    return result
-}
+import { EventRequest, EventResponse } from "@/features/admin/events/event.types";
+import { BASE_URL } from "@/types/api";
 
 export const fetchEvents = async (): Promise<EventResponse[]> => {
     const response = await fetch(`${BASE_URL}/events`)
     const result = await response.json()
-    if(!response.ok){
+    if (!response.ok) {
         throw new Error(result.message || 'Failed to fetch events')
     }
     return result.data
@@ -33,6 +18,22 @@ export const fetchEventById = async (id: string): Promise<EventResponse> => {
         throw new Error(result.message || 'Failed to fetch event with id')
     }
     return result.data
+}
+
+export const createEvent = async (data: EventRequest, token: string) => {
+    const response = await fetch(`${BASE_URL}/events`, {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(data)
+    })
+    const result = await response.json()
+    if (!response.ok) {
+        throw new Error(result.message || "Failed to create event")
+    }
+    return result
 }
 
 export const updateEvent = async ({id, data, token}: {id: string, data: EventRequest, token: string}): Promise<EventResponse> => {

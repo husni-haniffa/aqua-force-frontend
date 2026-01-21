@@ -1,26 +1,11 @@
-import { NewsRequest, NewsResponse } from "@/types/news";
-import { BASE_URL } from "@/types/api";
 
-export const createNews = async (data: NewsRequest, token: string) => {
-    const response = await fetch(`${BASE_URL}/news`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearor ${token}`
-        },
-        body: JSON.stringify(data)
-    })
-    const result = await response.json()
-    if (!response.ok) {
-        throw new Error(result.message || "Failed to create news")
-    }
-    return result
-}
+import { NewsResponse } from "@/features/admin/news/news.types";
+import { BASE_URL } from "@/types/api";
 
 export const fetchNews = async (): Promise<NewsResponse[]> => {
     const response = await fetch(`${BASE_URL}/news`)
     const result = await response.json()
-    if(!response.ok){
+    if (!response.ok) {
         throw new Error(result.message || 'Failed to fetch news')
     }
     return result.data
@@ -30,19 +15,33 @@ export const fetchNewsById = async (id: string): Promise<NewsResponse> => {
     const response = await fetch(`${BASE_URL}/news/${id}`)
     const result = await response.json()
     if (!response.ok) {
-        throw new Error(result.message || 'Failed to news event with id')
+        throw new Error(result.message || 'Failed to news with id')
     }
     return result.data
 }
 
-export const updateNews = async ({id, data, token}: {id: string, data: NewsRequest, token: string}): Promise<NewsResponse> => {
+export const createNews = async (formData: FormData, token: string) => {
+    const response = await fetch(`${BASE_URL}/news`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+        body: formData
+    })
+    const result = await response.json()
+    if (!response.ok) {
+        throw new Error(result.message || "Failed to create news")
+    }
+    return result
+}
+
+export const updateNews = async ({id, formData, token}: {id: string, formData: FormData, token: string}) => {
     const response = await fetch(`${BASE_URL}/news/${id}`, {
         method: "PUT",
         headers: { 
-            "Content-Type": "application/json",
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(data),
+        body: formData
     })
     const result = await response.json()
     if (!response.ok) {
@@ -60,7 +59,7 @@ export const deleteNews = async (id: string, token: string) => {
     })
     const result = await response.json()
     if (!response.ok) {
-        throw new Error(result.message || "Failed to delete event")
+        throw new Error(result.message || "Failed to delete news")
     }
     return result
 }

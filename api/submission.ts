@@ -1,55 +1,77 @@
+import { SubmissionResponse } from "@/features/admin/submissions/submission.types";
 import { BASE_URL } from "@/types/api";
 
-export const createSubmission = async (
-    formData: FormData,
+export const fetchSubmissions = async (token: string): Promise<SubmissionResponse[]> => {
+    const response = await fetch(`${BASE_URL}/submissions`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+    const result = await response.json()
+    if (!response.ok) {
+        throw new Error(result.message || "Failed to fetch submission")
+    }
+    return result.data
+}
+
+export const submissionUnderReview = async (id: string, token: string) => {
+    const response = await fetch(`${BASE_URL}/submissions/review/${id}`, {
+        method: 'PUT',
+        headers: {       
+            Authorization: `Bearer ${token}`,        
+        },
+    })
+    const result = await response.json()
+    if (!response.ok) {
+        throw new Error(result.message || "Failed to update submission status")
+    }
+    return result.message
+}
+
+export const submissionApproved = async (id: string, token: string) => {
+    const response = await fetch(`${BASE_URL}/submissions/accept/${id}`, {
+        method: 'PUT',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+    const result = await response.json()
+    if (!response.ok) {
+        throw new Error(result.message || "Failed to update submission status")
+    }
+    return result.message
+}
+
+export const submissionRejected = async (id: string, token: string) => {
+    const response = await fetch(`${BASE_URL}/submissions/reject/${id}`, {
+        method: 'PUT',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+    const result = await response.json()
+    if (!response.ok) {
+        throw new Error(result.message || "Failed to update submission status")
+    }
+    return result.message
+}
+
+export const publishSubmission = async (
+    id: string,
+    accessLevel: "PUBLIC" | "MEMBERS",
     token: string
 ) => {
-    const response = await fetch(`${BASE_URL}/submissions`, {
-        method: "POST",
+    const response = await fetch(`${BASE_URL}/submissions/publish/${id}`, {
+        method: "PUT",
         headers: {
-            Authorization: `Bearer ${token}`, // ✅ keep auth
-            // ❌ DO NOT set Content-Type
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
         },
-        body: formData,
+        body: JSON.stringify({ accessLevel }),
     })
-
     const result = await response.json()
     if (!response.ok) {
-        throw new Error(result.message || "Failed to create submission")
+        throw new Error(result.message || "Failed to publish")
     }
-
-   return result
-
-}
-
-export const getSubmissionByUserId = async(userId: string, token: string) => {
-    const response = await fetch(`${BASE_URL}/submissions/${userId}`, {
-        headers: {
-            Authorization: `Bearer ${token}`, // ✅ keep auth
-            // ❌ DO NOT set Content-Type
-        },
-    })
-
-    const result = await response.json()
-    if (!response.ok) {
-        throw new Error(result.message || "Failed to create submission")
-    }
-
-    return result.data
-}
-
-export const getAllSubmissions = async (token: string) => {
-    const response = await fetch(`${BASE_URL}/submissions`, {
-        headers: {
-            Authorization: `Bearer ${token}`, // ✅ keep auth
-            // ❌ DO NOT set Content-Type
-        },
-    })
-
-    const result = await response.json()
-    if (!response.ok) {
-        throw new Error(result.message || "Failed to create submission")
-    }
-
-    return result.data
+    return result.message
 }

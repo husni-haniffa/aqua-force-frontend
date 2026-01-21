@@ -1,9 +1,9 @@
-import Event from '@/components/admin/components/Event'
+import AdminEvents from '@/features/admin/events/AdminEvents'
 
-const EventsPage = () => {
+const Page = () => {
   return (
-    <Event/>
+   <AdminEvents/>
   )
 }
 
-export default EventsPage
+export default Page

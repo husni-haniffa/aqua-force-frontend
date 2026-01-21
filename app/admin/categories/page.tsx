@@ -1,9 +1,9 @@
-import Category from '@/components/admin/components/Category'
+import AdminCategories from '@/features/admin/categories/AdminCategories'
 
-const CategoriesPage = () => {
+const Page = () => {
   return (
-    <Category/>
+    <AdminCategories/>
   )
 }
 
-export default CategoriesPage
+export default Page

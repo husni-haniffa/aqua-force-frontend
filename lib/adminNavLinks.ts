@@ -32,10 +32,10 @@ export const adminNavLinks = [
         ],
     },
     {
-        label: "Submissions",
+        label: "Research",
         items: [
             {
-                title: "All Submissions",
+                title: "Submissions",
                 url: "/admin/submissions",
                 icon: Inbox,
             },

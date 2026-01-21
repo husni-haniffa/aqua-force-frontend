@@ -1,9 +1,9 @@
-import News from '@/components/admin/components/News'
+import AdminNews from '@/features/admin/news/AdminNews'
 
-const NewsPage = () => {
+const Page = () => {
   return (
-    <News/>
+    <AdminNews/>
   )
 }
 
-export default NewsPage
+export default Page

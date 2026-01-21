@@ -46,14 +46,14 @@ const Navbar = () => {
                         </Link>
                     ))}
                     <SignedIn>
-                        <Link href="/my-submissions"
+                        <Link href="/user/submissions"
                             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                             pathname === "/submissions"
                                 ? "bg-secondary text-primary"
                                 : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
                             }`}
                         >
-                            My Submissions
+                            Submissions
                         </Link>
                     </SignedIn>
                 </div>

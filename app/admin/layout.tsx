@@ -1,9 +1,10 @@
-import { AppSidebar } from "@/components/admin/components/AppSidebar"
+"use client"
 import {
   SidebarProvider,
   SidebarInset,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { AdminAppSideBar } from "@/features/admin/dashboard/AdminAppSideBar"
 import { SignedIn, UserButton } from "@clerk/nextjs"
 
 export default function AdminLayout({
@@ -13,14 +14,14 @@ export default function AdminLayout({
 }) {
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AdminAppSideBar />
       <SidebarInset>
         <header className="flex h-14 items-center gap-4 border-b bg-background px-6">
           <SidebarTrigger />
           <div className="flex-1" />
         <SignedIn>
-                                <UserButton/>
-                            </SignedIn>
+          <UserButton/>
+        </SignedIn>
         </header>
         <main className="flex-1 p-6">
           {children}
