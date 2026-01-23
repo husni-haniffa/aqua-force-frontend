@@ -1,11 +1,11 @@
-import { SignIn } from '@clerk/nextjs'
+import { SignUp } from '@clerk/nextjs'
 
 const page = () => {
   return (
     <div className='min-h-screen flex items-center justify-center'>
-        <SignIn 
+        <SignUp 
           fallbackRedirectUrl={"/"}
-          signUpUrl='/sign-up'
+          signInUrl='/sign-in'
         />
     </div>
   )

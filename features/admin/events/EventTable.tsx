@@ -5,6 +5,9 @@ import { Button } from '@/components/ui/button'
 import ButtonLoader from '@/components/ui/button-loader'
 import { useDeleteEvent, useEvents } from './event.hooks'
 import EditEventForm from './EditEventForm'
+import { ConfirmDialog } from '@/components/ui/confirm-dialog'
+import { EventTableSkeleton } from './Skeleton'
+import { AlertError } from '@/components/ui/alert-error'
 
 const EventTable = ({ search }: { search: string }) => {
 
@@ -14,8 +17,8 @@ const EventTable = ({ search }: { search: string }) => {
     const { data, isLoading, error } = useEvents()
     const deleteMutation = useDeleteEvent(setDeletingId)
 
-    if (isLoading) return <p>Loading...</p>
-    if (error instanceof Error) return <p>{error.message}</p>
+    if (isLoading) return <EventTableSkeleton/>
+    if (error instanceof Error) return <AlertError message={error.message}/>
     if (!data || data.length === 0) return <p>No Events</p>
     
     const filtered = data?.filter((event) =>
@@ -44,8 +47,21 @@ const EventTable = ({ search }: { search: string }) => {
                 <TableRow key={event._id}>
                     <TableCell>{event.title}</TableCell>
                     <TableCell>{event.description}</TableCell>
-                    <TableCell>{event.eventDate.toString()}</TableCell>
-                    <TableCell>{event.eventTime}</TableCell>
+                   <TableCell>
+  {new Date(event.eventDate).toLocaleDateString("en-GB", {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+  })}
+</TableCell>
+<TableCell>
+  {(() => {
+    const [hour, minute] = event.eventTime.split(":").map(Number)
+    const period = hour >= 12 ? "PM" : "AM"
+    const hour12 = hour % 12 === 0 ? 12 : hour % 12
+    return `${hour12}:${minute.toString().padStart(2, "0")} ${period}`
+  })()}
+</TableCell>
                     <TableCell>{event.location}</TableCell>
                     <TableCell>{event.createdAt}</TableCell>
                     <TableCell>{event.updatedAt}</TableCell>
@@ -63,16 +79,14 @@ const EventTable = ({ search }: { search: string }) => {
                         </Dialog>
                     </TableCell>
                     <TableCell>
-                        <Button
-                            variant="destructive"
-                            onClick={() => deleteMutation.mutate(event._id)}
-                            disabled={deletingId === event._id}
-                        >
-                            {deletingId === event._id
-                            ? <ButtonLoader text="Deleting" />
-                            : "Delete"}
-                        </Button>
-                    </TableCell>
+                                  <ConfirmDialog
+                                    onConfirm={() => deleteMutation.mutate(event._id)}
+                                    disabled={deletingId === event._id}
+                                    triggerText={
+                                      deletingId === event._id ? <ButtonLoader text="Deleting" /> : "Delete"
+                                    }
+                                  />
+                                </TableCell>
                 </TableRow>
             ))}
         </TableBody>

@@ -8,7 +8,7 @@ export const SubmissionTableSkeleton = () => {
         <TableRow>
           <TableHead>Submitted By</TableHead>
           <TableHead>Title</TableHead>
-          <TableHead>Abstract</TableHead>
+          <TableHead>Category</TableHead>
           <TableHead>File</TableHead>
           <TableHead>Status</TableHead>
           <TableHead>Move To</TableHead>

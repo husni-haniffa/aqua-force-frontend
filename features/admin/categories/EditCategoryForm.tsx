@@ -9,6 +9,8 @@ import { EditCategoryFormProps, formSchema } from "./category.types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import z from "zod"
 import { useEffect } from "react"
+import { CategoryFormSkeleton } from "./Skeleton"
+import { AlertError } from "@/components/ui/alert-error"
 
 const EditCategoryForm = ({ categoryId, onSuccess }: EditCategoryFormProps) => {
 
@@ -24,8 +26,8 @@ const EditCategoryForm = ({ categoryId, onSuccess }: EditCategoryFormProps) => {
     if (data) form.reset({ name: data.name })
   }, [data, form])
 
-  if (isLoading) return <p>Loading...</p>
-  if (error instanceof Error) return <p>{error.message}</p>
+  if (isLoading) return <CategoryFormSkeleton/>
+  if (error instanceof Error) return <AlertError message={error.message}/>
 
   return (
     <Card className="w-full border-0 shadow-none">

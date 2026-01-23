@@ -3,11 +3,17 @@ import z from "zod"
 export interface UserSubmissionResponse {
     _id: string
     userId: string
+    userName: string
+    categoryId: {
+        _id: string
+        name: string
+    }
     title: string
     abstract: string
     keywords: string[]
     fileUrl: string
     status: string
+    isPublished: boolean
     createdAt: string
     updatedAt: string
 }

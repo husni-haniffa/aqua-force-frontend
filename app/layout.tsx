@@ -37,7 +37,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={`${poppins.className} ${geistSans.variable} ${geistMono.variable} antialiased max-w-full`}>
           <ClientProviders>{children}</ClientProviders>
-          <Toaster position="top-center"/>
+          <Toaster position="top-center" richColors/>
         </body>
       </html>
     </ClerkProvider> 

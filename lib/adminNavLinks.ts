@@ -2,7 +2,7 @@ import { Home, Layers, Newspaper, Calendar, Inbox } from "lucide-react"
 
 export const adminNavLinks = [
     {
-        label: "Dashboard",
+        label: "DASHBOARD",
         items: [
             {
                 title: "Overview",
@@ -12,7 +12,7 @@ export const adminNavLinks = [
         ],
     },
     {
-        label: "Content",
+        label: "CONTENT",
         items: [
             {
                 title: "Categories",
@@ -32,11 +32,22 @@ export const adminNavLinks = [
         ],
     },
     {
-        label: "Research",
+        label: "RESEARCH",
         items: [
             {
                 title: "Submissions",
                 url: "/admin/submissions",
+                icon: Inbox,
+            },
+        ],
+    },
+
+    {
+        label: "USERS",
+        items: [
+            {
+                title: "Users",
+                url: "/admin/users",
                 icon: Inbox,
             },
         ],

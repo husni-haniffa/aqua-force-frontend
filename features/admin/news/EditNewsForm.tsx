@@ -11,6 +11,8 @@ import { useNewsById, useUpdateNews } from './news.hooks'
 import { Textarea } from "@/components/ui/textarea"
 import { useEffect } from "react"
 import Image from "next/image"
+import { NewsFormSkeleton } from "./Skeleton"
+import { AlertError } from "@/components/ui/alert-error"
 
 const EditNewsForm = ({ newsId, onSuccess } : EditNewsFormProps) => {
 
@@ -26,8 +28,8 @@ const EditNewsForm = ({ newsId, onSuccess } : EditNewsFormProps) => {
         if (data) form.reset({ title: data.title, content: data.content, file: undefined })
     }, [data, form])
     
-    if (isLoading) return <p>Loading...</p>
-    if (error instanceof Error) return <p>{error.message}</p>
+    if (isLoading) return <NewsFormSkeleton/>
+    if (error instanceof Error) return <AlertError message={error.message}/>
 
   return (
     <Card className="w-full border-0 shadow-none">
@@ -91,13 +93,13 @@ const EditNewsForm = ({ newsId, onSuccess } : EditNewsFormProps) => {
                                 <Image
                                     src={`${data.imageUrl}?t=${Date.now()}`}
                                     alt="current news post"
-                                    width={300}
-                                    height={300}
+                                    width={500}
+                                    height={500}
                                 />
                             )}
                             <Input
                                 type="file"
-                                accept="image/*"
+                                accept="image/jpeg,image/png,image/jpg"
                                 onChange={(e) => field.onChange(e.target.files?.[0])}
                             />
                             </Field>

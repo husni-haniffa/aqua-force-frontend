@@ -5,6 +5,9 @@ import { useCategories, useDeleteCategory } from './category.hooks'
 import { Button } from '@/components/ui/button'
 import EditCategoryForm from './EditCategoryForm'
 import ButtonLoader from '@/components/ui/button-loader'
+import { ConfirmDialog } from '@/components/ui/confirm-dialog'
+import { CategoryTableSkeleton } from './Skeleton'
+import { AlertError } from '@/components/ui/alert-error'
 
 const CategoryTable = ({ search }: { search: string }) => {
 
@@ -14,9 +17,9 @@ const CategoryTable = ({ search }: { search: string }) => {
     const { data, isLoading, error } = useCategories()
     const deleteMutation = useDeleteCategory(setDeletingId)
 
-    if (isLoading) return <p>Loading...</p>
-    if (error instanceof Error) return <p>{error.message}</p>
-    if (!data || data.length === 0) return <p>No categories</p>
+    if (isLoading) return <CategoryTableSkeleton/>
+    if (error instanceof Error) return <AlertError message={error.message}/>
+    if (!data || data.length === 0) return <p>No categories, create one</p>
     
     const filtered = data?.filter((category) =>
         category.name.toLowerCase().includes(search.toLowerCase())
@@ -55,16 +58,14 @@ const CategoryTable = ({ search }: { search: string }) => {
                         </Dialog>
                     </TableCell>
                     <TableCell>
-                        <Button
-                            variant="destructive"
-                            onClick={() => deleteMutation.mutate(category._id)}
-                            disabled={deletingId === category._id}
-                        >
-                            {deletingId === category._id
-                            ? <ButtonLoader text="Deleting" />
-                            : "Delete"}
-                        </Button>
-                    </TableCell>
+              <ConfirmDialog
+                onConfirm={() => deleteMutation.mutate(category._id)}
+                disabled={deletingId === category._id}
+                triggerText={
+                  deletingId === category._id ? <ButtonLoader text="Deleting" /> : "Delete"
+                }
+              />
+            </TableCell>
                 </TableRow>
             ))}
         </TableBody>

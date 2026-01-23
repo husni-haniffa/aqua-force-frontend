@@ -4,6 +4,10 @@ export interface SubmissionResponse {
     _id: string
     userId: string
     userName: string
+    categoryId: {
+        _id: string
+        name: string
+    }
     title: string
     abstract: string
     fileUrl: string

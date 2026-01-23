@@ -1,6 +1,6 @@
 import { useAuth } from "@clerk/nextjs"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { fetchSubmissions, submissionApproved, submissionRejected, submissionUnderReview, publishSubmission } from "./submission.api"
+import { fetchSubmissions, submissionApproved, submissionRejected, submissionUnderReview, publishSubmission, deleteSubmission } from "./submission.api"
 import { toast } from "sonner"
 
 
@@ -100,6 +100,30 @@ export function usePublishSubmission() {
         },
         onError: (err: any) => {
             toast.error(err.message ?? "Publish failed")
+        },
+    })
+}
+
+export function useDeleteSubmission(
+    setDeletingId: (id: string | null) => void
+) {
+    const { getToken } = useAuth()
+    const queryClient = useQueryClient()
+
+    return useMutation({
+        mutationFn: async (id: string) => {
+            const token = await getToken()
+            if (!token) throw new Error("Not authenticated")
+            return deleteSubmission(id, token)
+        },
+        onMutate: (id) => setDeletingId(id),
+        onSettled: () => setDeletingId(null),
+        onSuccess: () => {
+            toast.success("Submission deleted")
+            queryClient.invalidateQueries({ queryKey: ["submissions"] })
+        },
+        onError: (err: any) => {
+            toast.error(err.message ?? "Delete failed")
         },
     })
 }

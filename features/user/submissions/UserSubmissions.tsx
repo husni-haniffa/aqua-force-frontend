@@ -1,7 +1,8 @@
 "use client"
 import { useState } from 'react'
 import SubmissionHeader from './SubmissionHeader'
-import SubmissiosCard from './SubmissionCard'
+
+import SubmissionsTable from './SubmissionsTable'
 
 const UserSubmissions = () => {
 
@@ -10,7 +11,7 @@ const UserSubmissions = () => {
   return (
     <div className='flex flex-col gap-9'>
       <SubmissionHeader onSearch={setSearch}/>
-      <SubmissiosCard search={search}/>
+      <SubmissionsTable search={search}/>
     </div>
   )
 }

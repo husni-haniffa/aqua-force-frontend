@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button"
 import { JSX } from "react"
 
 interface ConfirmDialogProps {
+  text?: string
   onConfirm: () => void
   triggerText?: string | JSX.Element
   triggerVariant?: "default" | "destructive" | "outline"
@@ -20,6 +21,7 @@ interface ConfirmDialogProps {
 }
 
 export function ConfirmDialog({
+  text,
   onConfirm,
   triggerText = "Delete",
   triggerVariant = "destructive",
@@ -36,7 +38,7 @@ export function ConfirmDialog({
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the record from our servers
+            {text ? text : "This action cannot be undone. This will permanently delete the record from the servers"}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

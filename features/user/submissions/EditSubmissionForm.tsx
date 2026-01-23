@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import ButtonLoader from "@/components/ui/button-loader"
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
+import { Card, CardHeader, CardTitle, CardContent, CardFooter, CardDescription } from "@/components/ui/card"
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Controller, useForm } from "react-hook-form"
@@ -13,38 +13,41 @@ import { EditSubmissionFormProps, formSchema } from "./submission.types"
 import { useEffect } from "react"
 import { useSubmissionById, useSubmissionByUserId, useUpdateSubmission } from "./submission.hooks"
 import { useCategories } from "@/features/admin/categories/category.hooks"
+import { SubmissionFormSkeleton } from "./Skeleton"
+import { AlertError } from "@/components/ui/alert-error"
 
 const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProps) => {
 
     const { data, isLoading, error} = useSubmissionById(submissionId)
     const updateMutation = useUpdateSubmission(submissionId, onSuccess)
-      
-    if (isLoading) return <p>Loading...</p>
-    if (error instanceof Error) return <p>{error.message}</p>
-
     const {data: categories, isLoading: categoriesLoading, error: categoriesError} = useCategories()
 
-    if (categoriesLoading) return <p>Loading categories...</p>
-    if (categoriesError instanceof Error) return <p>{categoriesError.message}</p>
-    if (!categories || categories.length === 0) return <p>No categories</p>
-      
-
-  const form = useForm<z.infer<typeof formSchema>>({
+    const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { categoryId: "",
       title: "",
       abstract: "",
-      keywords: []},
+      keywords: [],
+      
+    },
     })
 
     useEffect(() => {
         if (data) form.reset({ 
           title: data.title,
           abstract: data.abstract,
-          keywords: data.keywords,   
+          keywords: data.keywords,
+          categoryId: data.categoryId._id 
         })
     }, [data, form])
-  
+      
+    if (isLoading) return <SubmissionFormSkeleton/>
+    if (error instanceof Error) return <AlertError message={error.message}/>
+
+    if (categoriesLoading) return <p>Loading categories...</p>
+    if (categoriesError instanceof Error) return <AlertError message={categoriesError.message}/>
+    if (!categories || categories.length === 0) return <p>No categories</p>
+      
   return (
     <Card className="w-full border-0 shadow-none">
       <CardHeader>
@@ -59,13 +62,13 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
                         <FieldLabel htmlFor="edit-submission-title-label">
-                          Title
+                          Enter Research Title
                         </FieldLabel>
                         <Input
                             {...field}
                             id="edit-submission-title-value"
                             aria-invalid={fieldState.invalid}
-                            placeholder="Research title"
+                            placeholder="A Study on Cyber Security Threat Detection"
                             autoComplete="off"
                         />
                         {fieldState.invalid && (
@@ -80,13 +83,15 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
                         <FieldLabel htmlFor="edit-submission-abstract-title">
-                          Title
+                          Enter Research Abstract
                         </FieldLabel>
                         <Textarea
                             {...field}
                             id="edit-submission-abstract-value"
-                            aria-invalid={fieldState.invalid}
-                            placeholder="Research Abstract"
+                            aria-invalid={fieldState.invalid}                        
+                            placeholder="This study explores modern cyber security threat detection techniques including anomaly detection and 
+                            machine learning approaches. The research evaluates effectiveness, scalability, and accuracy across simulated environments.
+                            Keywords: cyber security, threat detection"
                             autoComplete="off"
                         />
                         {fieldState.invalid && (
@@ -100,7 +105,7 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
                   control={form.control}
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
-                      <FieldLabel>Keywords</FieldLabel>
+                      <FieldLabel>Enter Keywords</FieldLabel>
                       <KeywordsInput
                         value={field.value}
                         onChange={field.onChange}
@@ -116,14 +121,12 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
                   control={form.control}
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
-                      <FieldLabel>Research Paper (PDF)</FieldLabel>
-
-                      <Input
-                        type="file"
-                        accept=".pdf"
-                        onChange={(e) => field.onChange(e.target.files?.[0])}
-                      />
-
+                      <FieldLabel>Upload Research Paper</FieldLabel>
+                        <Input
+                          type="file"
+                          accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                          onChange={(e) => field.onChange(e.target.files?.[0])}
+                        />
                       {fieldState.invalid && (
                         <FieldError errors={[fieldState.error]} />
                       )}
@@ -135,10 +138,10 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel>Research Category</FieldLabel>
+                    <FieldLabel>Select Research Category</FieldLabel>
                       <Select onValueChange={field.onChange} value={field.value}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select research category" />
+                          <SelectValue placeholder="Select a category"/>
                         </SelectTrigger>
                         <SelectContent>
                           {categories?.map((category) => (
@@ -157,7 +160,7 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
         </CardContent>
         <CardFooter>
             <Field orientation="horizontal">
-                <Button type="button" variant="outline" onClick={() => form.reset()}>
+                <Button type="button" variant="outline" onClick={() => form.reset()} disabled={updateMutation.isPending}>
                     Cancel
                 </Button>
                 <Button type="submit" form="edit-submission" disabled={updateMutation.isPending}>

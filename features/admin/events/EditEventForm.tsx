@@ -11,6 +11,8 @@ import { useEventById, useUpdateEvent } from "./event.hooks"
 import { Textarea } from "@/components/ui/textarea"
 import { DatePicker } from "@/components/ui/date-picker"
 import { useEffect } from "react"
+import { EventFormSkeleton } from "./Skeleton"
+import { AlertError } from "@/components/ui/alert-error"
 
 const EditEventForm = ({ eventId, onSuccess } : EditEventFormProps) => {
 
@@ -31,8 +33,8 @@ const EditEventForm = ({ eventId, onSuccess } : EditEventFormProps) => {
         }
       }, [data, form])
 
-    if (isLoading) return <p>Loading...</p>
-    if (error instanceof Error) return <p>{error.message}</p>
+    if (isLoading) return <EventFormSkeleton/>
+    if (error instanceof Error) return <AlertError message={error.message}/>
 
   return (
     <Card className="w-full border-0 shadow-none">

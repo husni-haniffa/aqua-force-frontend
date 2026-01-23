@@ -3,7 +3,8 @@ import {
     submissionUnderReview,
     submissionApproved,
     submissionRejected,
-    publishSubmission
+    publishSubmission,
+    deleteSubmission
 } from "@/api/submission"
 
 export {
@@ -11,5 +12,6 @@ export {
     submissionUnderReview,
     submissionApproved,
     submissionRejected,
-    publishSubmission
+    publishSubmission,
+    deleteSubmission
 }

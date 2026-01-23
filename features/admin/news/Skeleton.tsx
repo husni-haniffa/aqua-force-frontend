@@ -63,6 +63,10 @@ export const NewsFormSkeleton = () => {
             <Skeleton className="h-4 w-36" />
             <Skeleton className="h-24 w-full" />
           </div>
+
+          <div className="space-y-2">
+            <Skeleton className="h-36 w-full" />
+          </div>
           
           <div className="space-y-2">
             <Skeleton className="h-4 w-24" />

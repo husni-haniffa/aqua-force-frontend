@@ -44,7 +44,7 @@ const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
                         <FieldLabel htmlFor="create-submission-title-label">
-                          Title
+                          Enter Research Title
                         </FieldLabel>
                         <Input
                             {...field}
@@ -65,13 +65,15 @@ const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
                         <FieldLabel htmlFor="create-submission-abstract-title">
-                          Title
+                          Enter Research Submission
                         </FieldLabel>
                         <Textarea
                             {...field}
                             id="create-submission-abstract-value"
                             aria-invalid={fieldState.invalid}
-                            placeholder="Research Abstract"
+                            placeholder="This study explores modern cyber security threat detection techniques including anomaly detection and 
+                            machine learning approaches. The research evaluates effectiveness, scalability, and accuracy across simulated environments.
+                            Keywords: cyber security, threat detection"
                             autoComplete="off"
                         />
                         {fieldState.invalid && (
@@ -85,7 +87,7 @@ const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
                   control={form.control}
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
-                      <FieldLabel>Keywords</FieldLabel>
+                      <FieldLabel>Enter Keywords</FieldLabel>
                       <KeywordsInput
                         value={field.value}
                         onChange={field.onChange}
@@ -101,14 +103,12 @@ const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
                   control={form.control}
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
-                      <FieldLabel>Research Paper (PDF)</FieldLabel>
-
-                      <Input
-                        type="file"
-                        accept=".pdf"
-                        onChange={(e) => field.onChange(e.target.files?.[0])}
-                      />
-
+                      <FieldLabel>Upload Research Paper</FieldLabel>
+                        <Input
+                          type="file"
+                          accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                          onChange={(e) => field.onChange(e.target.files?.[0])}
+                        />
                       {fieldState.invalid && (
                         <FieldError errors={[fieldState.error]} />
                       )}
@@ -120,22 +120,19 @@ const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel>Research Category</FieldLabel>
-
-                    <Select onValueChange={field.onChange} value={field.value}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select research category" />
-                      </SelectTrigger>
-
-                      <SelectContent>
-                        {data?.map((category) => (
-                          <SelectItem key={category._id} value={category._id}>
-                            {category.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-
+                    <FieldLabel>Select Research Category</FieldLabel>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a category" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {data?.map((category) => (
+                            <SelectItem key={category._id} value={category._id}>
+                              {category.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                   </Field>
                 )}
@@ -145,7 +142,7 @@ const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
         </CardContent>
         <CardFooter>
             <Field orientation="horizontal">
-                <Button type="button" variant="outline" onClick={() => form.reset()}>
+                <Button type="button" variant="outline" onClick={() => form.reset()} disabled={createMutation.isPending}>
                     Cancel
                 </Button>
                 <Button type="submit" form="create-submission" disabled={createMutation.isPending}>

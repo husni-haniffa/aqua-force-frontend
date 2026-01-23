@@ -5,6 +5,10 @@ import ButtonLoader from '@/components/ui/button-loader'
 import { useDeleteNews, useNews } from './news.hooks'
 import { Button } from '@/components/ui/button'
 import EditNewsForm from './EditNewsForm'
+import { ConfirmDialog } from '@/components/ui/confirm-dialog'
+import { NewsTableSkeleton } from './Skeleton'
+import Link from 'next/link'
+import { AlertError } from '@/components/ui/alert-error'
 
 const NewsTable = ({ search }: { search: string }) => {
 
@@ -14,8 +18,8 @@ const NewsTable = ({ search }: { search: string }) => {
     const { data, isLoading, error } = useNews()
     const deleteMutation = useDeleteNews(setDeletingId)
 
-    if (isLoading) return <p>Loading...</p>
-    if (error instanceof Error) return <p>{error.message}</p>
+    if (isLoading) return <NewsTableSkeleton/>
+    if (error instanceof Error) return <AlertError message={error.message}/>
     if (!data || data.length === 0) return <p>No news</p>
     
     const filtered = data?.filter((news) =>
@@ -29,7 +33,6 @@ const NewsTable = ({ search }: { search: string }) => {
         <TableHeader>
             <TableRow>
                 <TableHead>Title</TableHead>
-                <TableHead>Content</TableHead>
                 <TableHead>Created At</TableHead>
                 <TableHead>Updated At</TableHead>
                 <TableHead>Edit</TableHead>
@@ -40,7 +43,6 @@ const NewsTable = ({ search }: { search: string }) => {
             {filtered?.map((news) => (
                 <TableRow key={news._id}>
                     <TableCell>{news.title}</TableCell>
-                    <TableCell>{news.content}</TableCell>
                     <TableCell>{news.createdAt}</TableCell>
                     <TableCell>{news.updatedAt}</TableCell>
                     <TableCell>
@@ -57,16 +59,14 @@ const NewsTable = ({ search }: { search: string }) => {
                         </Dialog>
                     </TableCell>
                     <TableCell>
-                        <Button
-                            variant="destructive"
-                            onClick={() => deleteMutation.mutate(news._id)}
-                            disabled={deletingId === news._id}
-                        >
-                            {deletingId === news._id
-                            ? <ButtonLoader text="Deleting" />
-                            : "Delete"}
-                        </Button>
-                    </TableCell>
+              <ConfirmDialog
+                onConfirm={() => deleteMutation.mutate(news._id)}
+                disabled={deletingId === news._id}
+                triggerText={
+                  deletingId === news._id ? <ButtonLoader text="Deleting" /> : "Delete"
+                }
+              />
+            </TableCell>
                 </TableRow>
             ))}
         </TableBody>
