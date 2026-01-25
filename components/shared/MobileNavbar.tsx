@@ -36,7 +36,7 @@ const MobileNavbar = () => {
             transition={{ duration: 0.2 }}
             className="absolute top-16 left-0 right-0 z-40 border-b border-border"
           >
-            <div className="container py-4 space-y-2"> 
+            <div className="container py-4 space-y-2 bg-slate-50"> 
               {navLinks.map((link) => (
                 <Link
                   key={link.name}

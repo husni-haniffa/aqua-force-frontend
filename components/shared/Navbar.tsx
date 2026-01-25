@@ -15,19 +15,19 @@ const Navbar = () => {
     const isAdmin = useCheckRole('admin')
     
   return (
-    <nav className='fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-border '>
+    <nav className='fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-border bg-slate-50'>
         <div className='container'>
             <div className='flex items-center justify-between h-16'>          
                 <Link href={"/"} className='flex items-center gap-2 group'>
-                    <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center transition-transform group-hover:scale-105">
-                        <Brain className="w-5 h-5 text-primary-foreground" />
+                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                        <Brain className="w-9 h-9 text-blue-600" />
                     </div>
                     <div className="flex flex-col">
-                        <span className="font-bold text-lg leading-tight text-foreground">
+                        <span className="font-bold text-lg leading-tight text-blue-600">
                             AquaForce
                         </span>
-                        <span className="text-xs text-muted-foreground hidden sm:block">
-                            TOGETHER. FUTURE. LIFE
+                        <span className="text-xs hidden sm:block ">
+                            Together, Future, Life
                         </span>
                     </div>
                 </Link>
@@ -38,8 +38,8 @@ const Navbar = () => {
                             href={link.href}
                             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                             pathname === link.href
-                                ? "bg-secondary text-primary"
-                                : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+                               ? "bg-slate-200"
+                                : "hover:font-semibold hover:bg-slate-200"
                             }`}
                         >
                             {link.name}
@@ -48,9 +48,9 @@ const Navbar = () => {
                     <SignedIn>
                         <Link href="/user/submissions"
                             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                            pathname === "/submissions"
-                                ? "bg-secondary text-primary"
-                                : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+                            pathname === "/user/submissions"
+                                ? "bg-slate-200"
+                                : "hover:font-semibold hover:bg-slate-200"
                             }`}
                         >
                             Submissions
@@ -58,12 +58,16 @@ const Navbar = () => {
                     </SignedIn>
                 </div>
                 <div className='hidden lg:flex items-center gap-6'>
-                    {isAdmin && <Link href="/admin">Admin</Link>}
+                    {isAdmin && 
+                        <Link href="/admin" className='text-blue-600 font-semibold'>
+                            Admin
+                        </Link>
+                    }
                     <SignedIn>
                         <UserButton/>
                     </SignedIn>
                     <SignedOut>
-                        <Button asChild>
+                        <Button asChild className='font-semibold'>
                             <Link href={"/sign-in"}>Sign In</Link>
                         </Button>
                     </SignedOut>
