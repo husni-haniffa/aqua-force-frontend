@@ -47,7 +47,7 @@ export function useCreateCategory(onSuccess?: () => void) {
             queryClient.invalidateQueries({ queryKey: ["categories"] })
             onSuccess?.()
         },
-        onError: (err: any) => {
+        onError: (err: Error) => {
             toast.error(err.message ?? "Create failed")
         },
     })
@@ -74,7 +74,7 @@ export function useUpdateCategory(
             })
             onSuccess?.()
         },
-        onError: (err: any) => {
+        onError: (err: Error) => {
             toast.error(err.message ?? "Update failed")
         },
     })
@@ -98,7 +98,7 @@ export function useDeleteCategory(
             toast.success("Category deleted")
             queryClient.invalidateQueries({ queryKey: ["categories"] })
         },
-        onError: (err: any) => {
+        onError: (err: Error) => {
             toast.error(err.message ?? "Delete failed")
         },
     })

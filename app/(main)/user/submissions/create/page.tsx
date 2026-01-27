@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const CreateSubmissionPage = () => {
   return (
-    <div className='container py-24 flex flex-col gap-6'>
+    <div className='container py-16 flex flex-col gap-6'>
       <div>
         <Link href={'/user/submissions'}>
           <Button variant={'secondary'}>

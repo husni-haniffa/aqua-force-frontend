@@ -42,7 +42,7 @@ export function useCreateNews(onSuccess?: () => void) {
             queryClient.invalidateQueries({ queryKey: ["news"] })
             onSuccess?.()
         },
-        onError: (err: any) => {
+        onError: (err: Error) => {
             toast.error(err.message ?? "Create failed")
         },
     })
@@ -70,7 +70,7 @@ export function useUpdateNews(newsId: string, onSuccess?: () => void) {
             queryClient.invalidateQueries({ queryKey: ["news", newsId] })
             onSuccess?.()
         },
-        onError: (err: any) => {
+        onError: (err: Error) => {
             toast.error(err.message ?? "Update failed")
         },
     })
@@ -94,7 +94,7 @@ export function useDeleteNews(
             toast.success("News deleted")
             queryClient.invalidateQueries({ queryKey: ["news"] })
         },
-        onError: (err: any) => {
+        onError: (err: Error) => {
             toast.error(err.message ?? "Delete failed")
         },
     })

@@ -31,7 +31,7 @@ export function useSubmissionUnderReview() {
             queryClient.invalidateQueries({ queryKey: ["submissions"] })
           
         },
-        onError: (err: any) => {
+        onError: (err: Error) => {
             toast.error(err.message ?? "Update failed")
         },
 
@@ -52,7 +52,7 @@ export function useSubmissionApproved() {
             queryClient.invalidateQueries({ queryKey: ["submissions"] })
             
         },
-        onError: (err: any) => {
+        onError: (err: Error) => {
             toast.error(err.message ?? "Update failed")
         },
     })
@@ -72,7 +72,7 @@ export function useSubmissionReject() {
             queryClient.invalidateQueries({ queryKey: ["submissions"] })
             
         },
-        onError: (err: any) => {
+        onError: (err: Error) => {
             toast.error(err.message ?? "Update failed")
         },
     })
@@ -98,7 +98,7 @@ export function usePublishSubmission() {
             toast.success("Submission published")
             queryClient.invalidateQueries({ queryKey: ["submissions"] })
         },
-        onError: (err: any) => {
+        onError: (err: Error) => {
             toast.error(err.message ?? "Publish failed")
         },
     })
@@ -122,7 +122,7 @@ export function useDeleteSubmission(
             toast.success("Submission deleted")
             queryClient.invalidateQueries({ queryKey: ["submissions"] })
         },
-        onError: (err: any) => {
+        onError: (err: Error) => {
             toast.error(err.message ?? "Delete failed")
         },
     })

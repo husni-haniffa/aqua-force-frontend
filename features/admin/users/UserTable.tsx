@@ -12,18 +12,18 @@ const UserTable = ({ search }: { search: string }) => {
     const { data, isLoading, error } = useFetchUsers()
     const [editingId, setEditingId] = useState<string | null>(null)
     const [removingId, setRemovingId] = useState<string | null>(null)
-    const [isSearchingUsers, setIsSearchingUsers] = useState(false)
+    const [debouncedSearch, setDebouncedSearch] = useState(search);
     const updateMutation = useUpdateRoleToAdmin(setEditingId)
     const removeMutation = useRemoveRoleFromAdmin(setRemovingId)
 
     useEffect(() => {
-        if (!search) return
-        setIsSearchingUsers(true)
         const timer = setTimeout(() => {
-        setIsSearchingUsers(false)
+        setDebouncedSearch(search)
         }, 300) 
         return () => clearTimeout(timer)
-        }, [search])
+    }, [search])
+
+    const isSearchingUsers = search !== debouncedSearch;
     
     if (isLoading || isSearchingUsers) return <UserTableSkeleton/>
     if (error instanceof Error) return <AlertError message={error.message}/>

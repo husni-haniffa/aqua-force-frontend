@@ -13,21 +13,18 @@ const EventTable = ({ search }: { search: string }) => {
 
     const [editingId, setEditingId] = useState<string | null>(null)
     const [deletingId, setDeletingId] = useState<string | null>(null)
-    const [isSearchingEvent, setIsSearchingEvent] = useState(false)
-
+    const [debouncedSearch, setDebouncedSearch] = useState(search);
     const { data, isLoading, error } = useEvents()
     const deleteMutation = useDeleteEvent(setDeletingId)
 
     useEffect(() => {
-      if (!search) return
-      setIsSearchingEvent(true)
       const timer = setTimeout(() => {
-        setIsSearchingEvent(false)
+        setDebouncedSearch(search)
       }, 300) 
-
       return () => clearTimeout(timer)
     }, [search])
 
+    const isSearchingEvent = search !== debouncedSearch;
 
     if (isLoading || isSearchingEvent) return <EventTableSkeleton/>
     if (error instanceof Error) return <AlertError message={error.message}/>

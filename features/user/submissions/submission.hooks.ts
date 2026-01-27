@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
 import { useAuth, useUser } from "@clerk/nextjs"
-import { CreateSubmissionInput, EditSubmissionInput, formSchema } from "./submission.types"
+import { CreateSubmissionInput, EditSubmissionInput } from "./submission.types"
 import { fetchSubmissionByUserId, createSubmission, updateSubmission, fetchSubmissionById} from "./submission.api"
 
 export function useSubmissionByUserId() {
@@ -59,7 +59,7 @@ export function useCreateSubmission(onSuccess?: () => void) {
             queryClient.invalidateQueries({ queryKey: ["submissions"] })
             onSuccess?.()
         },
-        onError: (err: any) => {
+        onError: (err: Error) => {
             toast.error(err.message ?? "Create failed")
         },
     })
@@ -93,7 +93,7 @@ export function useUpdateSubmission(submissionId: string, onSuccess?: () => void
             queryClient.invalidateQueries({ queryKey: ["submissions"] })
             onSuccess?.()
         },
-        onError: (err: any) => {
+        onError: (err: Error) => {
             toast.error(err.message ?? "Create failed")
         },
     })

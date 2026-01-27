@@ -8,7 +8,7 @@ const UserSubmissions = () => {
   const [search, setSearch] = useState('')
   
   return (
-    <div className='container py-24 flex flex-col gap-6'>
+    <div className='container py-16 flex flex-col gap-6'>
       <div>
         <h1 className='font-bold text-3xl text-slate-800'>
           My Submissions

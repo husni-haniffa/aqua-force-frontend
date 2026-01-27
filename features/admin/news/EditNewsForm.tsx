@@ -93,7 +93,7 @@ const EditNewsForm = ({ newsId, onSuccess } : EditNewsFormProps) => {
                             <div>
                                 {data?.imageUrl && (
                                     <Image
-                                        src={`${data.imageUrl}?t=${Date.now()}`}
+                                        src={data.imageUrl}
                                         alt="current news post"
                                         width={500}
                                         height={500}
