@@ -11,18 +11,18 @@ import { AlertError } from '@/components/ui/alert-error'
 const NewsTable = ({ search }: { search: string }) => {
 
   const [deletingId, setDeletingId] = useState<string | null>(null)
-  const [isSearchingNews, setIsSearchingNews] = useState(false)
+  const [debouncedSearch, setDebouncedSearch] = useState(search);
   const { data, isLoading, error } = useNews()
   const deleteMutation = useDeleteNews(setDeletingId)
 
   useEffect(() => {
-    if (!search) return
-    setIsSearchingNews(true)
     const timer = setTimeout(() => {
-      setIsSearchingNews(false)
+      setDebouncedSearch(search)
     }, 300) 
     return () => clearTimeout(timer)
   }, [search])
+
+  const isSearchingNews = search !== debouncedSearch;
 
   if (isLoading || isSearchingNews) return <NewsTableSkeleton/>
   if (error instanceof Error) return <AlertError message={error.message}/>

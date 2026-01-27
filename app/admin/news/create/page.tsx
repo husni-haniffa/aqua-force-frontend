@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const CreateNewsPage = () => {
   return (
-    <div className='container py-24 flex flex-col gap-6'>
+    <div className='flex flex-col gap-6'>
       <div>
         <Link href={'/admin/news'}>
           <Button variant={'secondary'}>

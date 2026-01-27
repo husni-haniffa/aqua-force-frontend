@@ -16,27 +16,27 @@ const SubmissionTable = ({ search }: { search: string }) => {
 
   const { data, isLoading, error } = useSubmissions()
   const [deletingId, setDeletingId] = useState<string | null>(null)
-  const [isSearchingSubmission, setIsSearchingSubmission] = useState(false)
+  const [debouncedSearch, setDebouncedSearch] = useState(search);
   const deleteMutation = useDeleteSubmission(setDeletingId)
 
   useEffect(() => {
-    if (!search) return
-    setIsSearchingSubmission(true)
-    const timer = setTimeout(() => {
-      setIsSearchingSubmission(false)
-    }, 300) 
-    return () => clearTimeout(timer)
-  }, [search])
+      const timer = setTimeout(() => {
+        setDebouncedSearch(search)
+      }, 300) 
+      return () => clearTimeout(timer)
+    }, [search])
 
-    const filtered = data?.filter((submission) =>
-        submission.title.toLowerCase().includes(search.toLowerCase())
-    )
+  const isSearchingSubmission = search !== debouncedSearch;
 
-    if (isLoading || isSearchingSubmission) return <SubmissionTableSkeleton/>
-    if (error instanceof Error) return <AlertError message={error.message}/>
-    if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No submissions, create one</p>
+  const filtered = data?.filter((submission) =>
+      submission.title.toLowerCase().includes(search.toLowerCase())
+  )
 
-    if (!filtered?.length) return <p className='flex items-center justify-center text-base'>No submission found</p>
+  if (isLoading || isSearchingSubmission) return <SubmissionTableSkeleton/>
+  if (error instanceof Error) return <AlertError message={error.message}/>
+  if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No submissions, create one</p>
+
+  if (!filtered?.length) return <p className='flex items-center justify-center text-base'>No submission found</p>
 
   return (
     <div className='bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden '>

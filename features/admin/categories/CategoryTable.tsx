@@ -13,20 +13,18 @@ const CategoryTable = ({ search }: { search: string }) => {
 
     const [editingId, setEditingId] = useState<string | null>(null)
     const [deletingId, setDeletingId] = useState<string | null>(null)
-    const [isSearchingCategory, setIsSearchingCategory] = useState(false)
-
     const { data, isLoading, error } = useCategories()
     const deleteMutation = useDeleteCategory(setDeletingId)
+    const [debouncedSearch, setDebouncedSearch] = useState(search);
 
     useEffect(() => {
-      if (!search) return
-      setIsSearchingCategory(true)
       const timer = setTimeout(() => {
-        setIsSearchingCategory(false)
+        setDebouncedSearch(search)
       }, 300) 
       return () => clearTimeout(timer)
     }, [search])
 
+    const isSearchingCategory = search !== debouncedSearch;
    
     if (isLoading || isSearchingCategory) return <CategoryTableSkeleton/>
     if (error instanceof Error) return <AlertError message={error.message}/>

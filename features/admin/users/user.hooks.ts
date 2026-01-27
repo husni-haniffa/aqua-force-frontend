@@ -34,7 +34,7 @@ export function useUpdateRoleToAdmin(setDeletingId: (id: string | null) => void)
                 queryKey: ["users"],
             })
         },
-        onError: (err: any) => {
+        onError: (err: Error) => {
             toast.error(err.message ?? "Update failed")
         },
     })
@@ -58,7 +58,7 @@ export function useRemoveRoleFromAdmin(setRemovingId: (id: string | null) => voi
                 queryKey: ["users"],
             })
         },
-        onError: (err: any) => {
+        onError: (err: Error) => {
             toast.error(err.message ?? "Update failed")
         },
     })

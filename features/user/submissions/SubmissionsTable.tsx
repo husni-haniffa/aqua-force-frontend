@@ -1,4 +1,5 @@
-import { useState } from 'react'
+"use client"
+import { useEffect, useState } from 'react'
 import { useSubmissionByUserId } from './submission.hooks'
 import { Button } from '@/components/ui/button'
 import { Download } from 'lucide-react'
@@ -11,8 +12,18 @@ import StatusBadge from '@/components/ui/status-badge'
 const SubmissionsTable = ({ search }: { search: string }) => {
 
     const { data, isLoading, error } = useSubmissionByUserId()
-        
-    if (isLoading) return <SubmissionTableSkeleton/>
+    const [debouncedSearch, setDebouncedSearch] = useState(search);
+
+    useEffect(() => {
+          const timer = setTimeout(() => {
+            setDebouncedSearch(search)
+          }, 300) 
+          return () => clearTimeout(timer)
+        }, [search])
+    
+    const isSearchingSubmission = search !== debouncedSearch;
+    
+    if (isLoading || isSearchingSubmission) return <SubmissionTableSkeleton/>
     if (error instanceof Error) return <AlertError message={error.message}/>
     if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No Submissions</p>
         

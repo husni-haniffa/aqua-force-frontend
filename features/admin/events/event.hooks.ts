@@ -35,7 +35,7 @@ export function useCreateEvent(onSuccess?: () => void) {
             queryClient.invalidateQueries({ queryKey: ["events"] })
             onSuccess?.()
         },
-        onError: (err: any) => {
+        onError: (err: Error) => {
             toast.error(err.message ?? "Create failed")
         },
     })
@@ -62,7 +62,7 @@ export function useUpdateEvent(
             })
             onSuccess?.()
         },
-        onError: (err: any) => {
+        onError: (err: Error) => {
             toast.error(err.message ?? "Update failed")
         },
     })
@@ -86,7 +86,7 @@ export function useDeleteEvent(
             toast.success("Event deleted")
             queryClient.invalidateQueries({ queryKey: ["events"] })
         },
-        onError: (err: any) => {
+        onError: (err: Error) => {
             toast.error(err.message ?? "Delete failed")
         },
     })
