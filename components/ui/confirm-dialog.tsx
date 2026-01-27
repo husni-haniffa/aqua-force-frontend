@@ -16,7 +16,7 @@ interface ConfirmDialogProps {
   text?: string
   onConfirm: () => void
   triggerText?: string | JSX.Element
-  triggerVariant?: "default" | "destructive" | "outline"
+  triggerVariant?: "default" | "destructive" | "outline" | "add"
   disabled?: boolean
 }
 

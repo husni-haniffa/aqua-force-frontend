@@ -9,8 +9,8 @@ const Page = () => {
 
   return (
     <div>
-      <header>
-        Welcome back, {!isLoaded ? <UserNameSkeleton/> : user?.firstName}
+      <header className="text-3xl lg:text-4xl text-slate-800">
+        Welcome back, {!isLoaded ? <UserNameSkeleton/> : <span className="font-bold">{user?.firstName}!</span>}
       </header>
     </div>
   )

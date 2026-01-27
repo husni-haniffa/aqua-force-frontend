@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 export const UserTableSkeleton = () => {
     return (
     <div className='bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden'>
-                  <Table>
+        <Table>
             <TableHeader>
                 <TableRow>
                     <TableHead>First Name</TableHead>
@@ -40,7 +40,6 @@ export const UserTableSkeleton = () => {
                 ))}
             </TableBody>
         </Table>
-        </div>
-      
+    </div>  
     );
 };

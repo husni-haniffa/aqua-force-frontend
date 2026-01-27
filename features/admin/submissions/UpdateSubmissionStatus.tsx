@@ -56,7 +56,7 @@ const UpdateSubmissionStatus: React.FC<UpdateSubmissionStatusProps> = ({
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button className="bg-yellow-500 hover:bg-yellow-500 font-semibold" disabled={currentStatus === "ACCEPTED" || currentStatus === "REJECTED"} size={'sm'}>
+        <Button variant={'updateStatus'} disabled={currentStatus === "ACCEPTED" || currentStatus === "REJECTED"} size={'sm'}>
           Status
         </Button>
       </AlertDialogTrigger>
@@ -82,16 +82,9 @@ const UpdateSubmissionStatus: React.FC<UpdateSubmissionStatusProps> = ({
               <RadioGroupItem
                 value={item.value}
                 id={item.value}
-                disabled={
-    isLoading ||
-
-    // PENDING → only UNDER_REVIEW allowed
-    (currentStatus === "PENDING" && item.value !== "UNDER_REVIEW") ||
-
-    // UNDER_REVIEW → only APPROVED or REJECTED allowed
-    (currentStatus === "UNDER_REVIEW" &&
-      item.value === "PENDING")
-  }
+                disabled={isLoading ||
+                  (currentStatus === "PENDING" && item.value !== "UNDER_REVIEW") ||
+                  (currentStatus === "UNDER_REVIEW" && item.value === "PENDING")}
               />
               <Label htmlFor={item.value}>
                 {item.label}
@@ -105,9 +98,7 @@ const UpdateSubmissionStatus: React.FC<UpdateSubmissionStatusProps> = ({
           </AlertDialogCancel>
           <AlertDialogAction
             onClick={handleConfirm}
-            disabled={
-              isLoading || status === currentStatus
-            }
+            disabled={isLoading || status === currentStatus}
             className="bg-green-600 hover:bg-green-600"
           >
             {isLoading ? <ButtonLoader text="Updating" /> : "Update"}

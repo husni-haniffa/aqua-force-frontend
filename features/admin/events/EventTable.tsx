@@ -19,26 +19,25 @@ const EventTable = ({ search }: { search: string }) => {
     const deleteMutation = useDeleteEvent(setDeletingId)
 
     useEffect(() => {
-  if (!search) return
+      if (!search) return
+      setIsSearchingEvent(true)
+      const timer = setTimeout(() => {
+        setIsSearchingEvent(false)
+      }, 300) 
 
-  setIsSearchingEvent(true)
-  const timer = setTimeout(() => {
-    setIsSearchingEvent(false)
-  }, 300) // debounce duration (UX sweet spot)
-
-  return () => clearTimeout(timer)
-}, [search])
+      return () => clearTimeout(timer)
+    }, [search])
 
 
-   if (isLoading || isSearchingEvent) return <EventTableSkeleton/>
+    if (isLoading || isSearchingEvent) return <EventTableSkeleton/>
     if (error instanceof Error) return <AlertError message={error.message}/>
-    if (!data || data.length === 0) return <p>No events, create one</p>
+    if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No events, create one</p>
     
     const filtered = data?.filter((event) =>
         event.title.toLowerCase().includes(search.toLowerCase())
     )
 
-    if (!filtered?.length) return <div>No events found</div>
+    if (!filtered?.length) return <p className='flex items-center justify-center text-base'>No events found</p>
     
   return (
     <div className='bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden'>
@@ -62,27 +61,27 @@ const EventTable = ({ search }: { search: string }) => {
                     <TableCell>{event.title}</TableCell>
                     <TableCell>{event.description}</TableCell>
                    <TableCell>
-  {new Date(event.eventDate).toLocaleDateString("en-GB", {
-    year: "numeric",
-    month: "short",
-    day: "2-digit",
-  })}
-</TableCell>
-<TableCell>
-  {(() => {
-    const [hour, minute] = event.eventTime.split(":").map(Number)
-    const period = hour >= 12 ? "PM" : "AM"
-    const hour12 = hour % 12 === 0 ? 12 : hour % 12
-    return `${hour12}:${minute.toString().padStart(2, "0")} ${period}`
-  })()}
-</TableCell>
+                      {new Date(event.eventDate).toLocaleDateString("en-GB", {
+                        year: "numeric",
+                        month: "short",
+                        day: "2-digit",
+                      })}
+                    </TableCell>
+                    <TableCell>
+                      {(() => {
+                        const [hour, minute] = event.eventTime.split(":").map(Number)
+                        const period = hour >= 12 ? "PM" : "AM"
+                        const hour12 = hour % 12 === 0 ? 12 : hour % 12
+                        return `${hour12}:${minute.toString().padStart(2, "0")} ${period}`
+                      })()}
+                    </TableCell>
                     <TableCell>{event.location}</TableCell>
                     <TableCell>{event.createdAt}</TableCell>
                     <TableCell>{event.updatedAt}</TableCell>
                     <TableCell>
                         <Dialog open={editingId === event._id} onOpenChange={(open) => setEditingId(open ? event._id : null)}>
                             <DialogTrigger asChild>
-                                <Button disabled={deletingId === event._id} size={'sm'}>Edit</Button>
+                                <Button disabled={deletingId === event._id} size={'sm'} variant={'edit'}>Edit</Button>
                             </DialogTrigger>
                             <DialogHeader className='sr-only'>
                                 <DialogTitle></DialogTitle>
@@ -93,14 +92,14 @@ const EventTable = ({ search }: { search: string }) => {
                         </Dialog>
                     </TableCell>
                     <TableCell>
-                                  <ConfirmDialog
-                                    onConfirm={() => deleteMutation.mutate(event._id)}
-                                    disabled={deletingId === event._id}
-                                    triggerText={
-                                      deletingId === event._id ? <ButtonLoader text="Deleting" /> : "Delete"
-                                    }
-                                  />
-                                </TableCell>
+                      <ConfirmDialog
+                        onConfirm={() => deleteMutation.mutate(event._id)}
+                        disabled={deletingId === event._id}
+                        triggerText={
+                          deletingId === event._id ? <ButtonLoader text="Deleting" /> : "Delete"
+                        }
+                      />
+                    </TableCell>
                 </TableRow>
             ))}
         </TableBody>

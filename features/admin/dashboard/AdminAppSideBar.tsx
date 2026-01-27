@@ -15,6 +15,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 export function AdminAppSideBar() {
+  
   const pathname = usePathname()
   
   return (
@@ -54,7 +55,7 @@ export function AdminAppSideBar() {
                       <SidebarMenuButton 
                         asChild 
                         isActive={isActive}
-                        className={isActive ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white hover:from-blue-600 hover:to-cyan-600 shadow-md shadow-blue-500/20" : ""}
+                        className={isActive ? "bg-linear-to-r from-blue-500 to-cyan-500 text-white hover:from-blue-600 hover:to-cyan-600 shadow-md shadow-blue-500/20" : ""}
                       >
                         <Link href={item.url} className="flex items-center gap-3 px-3 py-2.5">
                           <item.icon className="w-5 h-5" />

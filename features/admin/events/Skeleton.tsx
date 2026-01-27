@@ -68,19 +68,17 @@ export const EventFormSkeleton = () => {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          {/* Title field */}
+    
           <div className="space-y-2">
             <Skeleton className="h-4 w-32" />
             <Skeleton className="h-10 w-full" />
           </div>
-          
-          {/* Description field */}
+      
           <div className="space-y-2">
             <Skeleton className="h-4 w-40" />
             <Skeleton className="h-24 w-full" />
           </div>
           
-          {/* Date and Time fields */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Skeleton className="h-4 w-28" />
@@ -92,7 +90,6 @@ export const EventFormSkeleton = () => {
             </div>
           </div>
           
-          {/* Location field */}
           <div className="space-y-2">
             <Skeleton className="h-4 w-36" />
             <Skeleton className="h-10 w-full" />

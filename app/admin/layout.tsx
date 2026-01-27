@@ -17,13 +17,11 @@ export default function AdminLayout({
 
   const { isLoaded, user} = useUser()
 
- 
   return (
     <SidebarProvider>
       <AdminAppSideBar />
-      <SidebarInset className="bg-gradient-to-br from-slate-50 to-blue-50">
+      <SidebarInset className="bg-linear-to-br from-slate-50 to-blue-50">
         
-        {/* Header */}
         <header className="sticky top-0 z-10 h-16 border-b bg-white/80 backdrop-blur-sm">
           <div className="container flex h-full items-center justify-between px-6">
             <SidebarTrigger />
@@ -41,7 +39,6 @@ export default function AdminLayout({
           </div>
         </header>
 
-        {/* Main Content */}
         <main className="container py-8 px-6">
           {children}
         </main>

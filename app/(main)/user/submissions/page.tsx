@@ -1,4 +1,3 @@
-
 import UserSubmissions from '@/features/user/submissions/UserSubmissions'
 
 const Page = () => {

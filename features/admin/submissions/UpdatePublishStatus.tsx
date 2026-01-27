@@ -26,7 +26,7 @@ const UpdatePublishStatus = ({id, defaultVisibility = "PUBLIC"}: UpdatePublishSt
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button size={'sm'}>Publish</Button>
+        <Button size={'sm'} variant={'publish'}>Publish</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

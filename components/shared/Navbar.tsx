@@ -32,32 +32,31 @@ const Navbar = () => {
                           </div>
                         </Link>
                 <div className='hidden lg:flex items-center gap-1'>
-    {navLinks.map((link) => (
-        <Link
-            key={link.name}
-            href={link.href}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                pathname === link.href
-                    ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-md shadow-blue-500/20"
-                    : "hover:bg-gradient-to-r hover:from-blue-500 hover:to-cyan-500 hover:text-white hover:font-bold hover:shadow-md hover:shadow-blue-500/20"
-            }`}
-        >
-            {link.name}
-        </Link>
-    ))}
-    <SignedIn>
-        <Link 
-            href="/user/submissions"
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                pathname === "/user/submissions"
-                    ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-md shadow-blue-500/20"
-                    : "hover:bg-gradient-to-r hover:from-blue-500 hover:to-cyan-500 hover:text-white hover:font-bold hover:shadow-md hover:shadow-blue-500/20"
-            }`}
-        >
-            Submissions
-        </Link>
-    </SignedIn>
-</div>
+                    {navLinks.map((link) => (
+                        <Link
+                            key={link.name}
+                            href={link.href}
+                            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                                pathname === link.href
+                                    ? "bg-linear-to-r from-blue-500 to-cyan-500 text-white shadow-md shadow-blue-500/20"
+                                    : "hover:bg-linear-to-r hover:from-blue-500 hover:to-cyan-500 hover:text-white hover:font-bold hover:shadow-md hover:shadow-blue-500/20"
+                            }`}>
+                            {link.name}
+                        </Link>
+                    ))}
+                    <SignedIn>
+                        <Link 
+                            href="/user/submissions"
+                            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                                pathname === "/user/submissions"
+                                    ? "bg-linear-to-r from-blue-500 to-cyan-500 text-white shadow-md shadow-blue-500/20"
+                                    : "hover:bg-linear-to-r hover:from-blue-500 hover:to-cyan-500 hover:text-white hover:font-bold hover:shadow-md hover:shadow-blue-500/20"
+                            }`}
+                        >
+                            Submissions
+                        </Link>
+                    </SignedIn>
+                </div>
                 <div className='hidden lg:flex items-center gap-6'>
                     {isAdmin && 
                         <Link href="/admin" className='text-blue-600 font-semibold'>
