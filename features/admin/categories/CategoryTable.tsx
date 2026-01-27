@@ -1,6 +1,6 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useCategories, useDeleteCategory } from './category.hooks'
 import { Button } from '@/components/ui/button'
 import EditCategoryForm from './EditCategoryForm'
@@ -13,11 +13,26 @@ const CategoryTable = ({ search }: { search: string }) => {
 
     const [editingId, setEditingId] = useState<string | null>(null)
     const [deletingId, setDeletingId] = useState<string | null>(null)
+     const [isSearchingCategory, setIsSearchingCategory] = useState(false)
+
 
     const { data, isLoading, error } = useCategories()
     const deleteMutation = useDeleteCategory(setDeletingId)
 
-    if (isLoading) return <CategoryTableSkeleton/>
+    
+        useEffect(() => {
+      if (!search) return
+    
+      setIsSearchingCategory(true)
+      const timer = setTimeout(() => {
+        setIsSearchingCategory(false)
+      }, 300) // debounce duration (UX sweet spot)
+    
+      return () => clearTimeout(timer)
+    }, [search])
+
+   
+      if (isLoading || isSearchingCategory) return <CategoryTableSkeleton/>
     if (error instanceof Error) return <AlertError message={error.message}/>
     if (!data || data.length === 0) return <p>No categories, create one</p>
     
@@ -28,12 +43,13 @@ const CategoryTable = ({ search }: { search: string }) => {
     if (!filtered?.length) return <div>No categories found</div>
     
   return (
-    <Table>
+    <div className='bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden'>
+        <Table>
         <TableHeader>
             <TableRow>
                 <TableHead>Name</TableHead>
-                <TableHead>Created At</TableHead>
-                <TableHead>Updated At</TableHead>
+                <TableHead>Created</TableHead>
+                <TableHead>Updated</TableHead>
                 <TableHead>Edit</TableHead>
                 <TableHead>Delete</TableHead>
             </TableRow>
@@ -47,7 +63,7 @@ const CategoryTable = ({ search }: { search: string }) => {
                     <TableCell>
                         <Dialog open={editingId === category._id} onOpenChange={(open) => setEditingId(open ? category._id : null)}>
                             <DialogTrigger asChild>
-                                <Button disabled={deletingId === category._id}>Edit</Button>
+                                <Button disabled={deletingId === category._id} size={'sm'}>Edit</Button>
                             </DialogTrigger>
                             <DialogHeader className='sr-only'>
                                 <DialogTitle></DialogTitle>
@@ -70,6 +86,8 @@ const CategoryTable = ({ search }: { search: string }) => {
             ))}
         </TableBody>
     </Table>
+    </div>
+    
   )
 }
 

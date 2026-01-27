@@ -4,7 +4,8 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 export const EventTableSkeleton = () => {
   return (
-    <Table>
+    <div className='bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden'>
+      <Table>
       <TableHeader>
         <TableRow>
           <TableHead>Title</TableHead>
@@ -52,6 +53,8 @@ export const EventTableSkeleton = () => {
         ))}
       </TableBody>
     </Table>
+    </div>
+    
   )
 }
 

@@ -1,13 +1,9 @@
-import { useState } from 'react'
 import { Input } from '@/components/ui/input'
 import { Search } from 'lucide-react'
 
-const UsersHeader = ({ onSearch }: { onSearch: (value: string) => void }) => {
-
-  
-
-    return (
-    <div className="flex justify-center ">
+const SubmissionsHeader = ({ onSearch }: { onSearch: (value: string) => void }) => {
+  return (
+    <div className="flex justify-center">
       <div className="relative w-full max-w-md">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
        <Input
@@ -20,4 +16,4 @@ const UsersHeader = ({ onSearch }: { onSearch: (value: string) => void }) => {
   )
 }
 
-export default UsersHeader
+export default SubmissionsHeader

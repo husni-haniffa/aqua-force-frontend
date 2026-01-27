@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label"
 import { useSubmissionApproved, useSubmissionReject, useSubmissionUnderReview } from "./submission.hooks"
 import ButtonLoader from "@/components/ui/button-loader"
 
-type Status = | "PENDING" | "UNDER_REVIEW" | "APPROVED" | "REJECTED"
+type Status = | "PENDING" | "UNDER_REVIEW"  | "REJECTED"| "ACCEPTED"
 
 type UpdateSubmissionStatusProps = {
   id: string
@@ -16,8 +16,8 @@ type UpdateSubmissionStatusProps = {
 const statusOptions = [
   { label: "Pending", value: "PENDING" },
   { label: "Under Review", value: "UNDER_REVIEW" },
-  { label: "Approved", value: "APPROVED" },
   { label: "Rejected", value: "REJECTED" },
+  { label: "Accepted", value: "ACCEPTED" },
 ] as const
 
 const UpdateSubmissionStatus: React.FC<UpdateSubmissionStatusProps> = ({
@@ -41,12 +41,13 @@ const UpdateSubmissionStatus: React.FC<UpdateSubmissionStatusProps> = ({
       case "UNDER_REVIEW":
         underReviewMutation.mutate(id, { onSuccess })
         break
-      case "APPROVED":
-        approvedMutation.mutate(id, { onSuccess })
-        break
-      case "REJECTED":
+          case "REJECTED":
         rejectedMutation.mutate(id, { onSuccess })
         break
+      case "ACCEPTED":
+        approvedMutation.mutate(id, { onSuccess })
+        break
+    
       default:
         break
     }
@@ -55,14 +56,14 @@ const UpdateSubmissionStatus: React.FC<UpdateSubmissionStatusProps> = ({
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button variant="secondary">
-          Update Status
+        <Button className="bg-yellow-500 hover:bg-yellow-500 font-semibold" disabled={currentStatus === "ACCEPTED" || currentStatus === "REJECTED"} size={'sm'}>
+          Status
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            Update Submission Status
+            Status
           </AlertDialogTitle>
         </AlertDialogHeader>
         <RadioGroup
@@ -81,7 +82,16 @@ const UpdateSubmissionStatus: React.FC<UpdateSubmissionStatusProps> = ({
               <RadioGroupItem
                 value={item.value}
                 id={item.value}
-                disabled={isLoading}
+                disabled={
+    isLoading ||
+
+    // PENDING → only UNDER_REVIEW allowed
+    (currentStatus === "PENDING" && item.value !== "UNDER_REVIEW") ||
+
+    // UNDER_REVIEW → only APPROVED or REJECTED allowed
+    (currentStatus === "UNDER_REVIEW" &&
+      item.value === "PENDING")
+  }
               />
               <Label htmlFor={item.value}>
                 {item.label}
@@ -98,6 +108,7 @@ const UpdateSubmissionStatus: React.FC<UpdateSubmissionStatusProps> = ({
             disabled={
               isLoading || status === currentStatus
             }
+            className="bg-green-600 hover:bg-green-600"
           >
             {isLoading ? <ButtonLoader text="Updating" /> : "Update"}
           </AlertDialogAction>

@@ -1,5 +1,5 @@
 import z from "zod"
-
+type Status = 'PENDING' | 'UNDER_REVIEW' | 'REJECTED' | 'ACCEPTED'
 export interface UserSubmissionResponse {
     _id: string
     userId: string
@@ -12,7 +12,7 @@ export interface UserSubmissionResponse {
     abstract: string
     keywords: string[]
     fileUrl: string
-    status: string
+    status: Status
     isPublished: boolean
     createdAt: string
     updatedAt: string

@@ -1,6 +1,6 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ButtonLoader from '@/components/ui/button-loader'
 import { useDeleteNews, useNews } from './news.hooks'
 import { Button } from '@/components/ui/button'
@@ -14,13 +14,24 @@ const NewsTable = ({ search }: { search: string }) => {
 
     const [editingId, setEditingId] = useState<string | null>(null)
     const [deletingId, setDeletingId] = useState<string | null>(null)
-
+        const [isSearchingNews, setIsSearchingNews] = useState(false)
     const { data, isLoading, error } = useNews()
     const deleteMutation = useDeleteNews(setDeletingId)
 
-    if (isLoading) return <NewsTableSkeleton/>
+        useEffect(() => {
+          if (!search) return
+        
+          setIsSearchingNews(true)
+          const timer = setTimeout(() => {
+            setIsSearchingNews(false)
+          }, 300) // debounce duration (UX sweet spot)
+        
+          return () => clearTimeout(timer)
+        }, [search])
+
+    if (isLoading || isSearchingNews) return <NewsTableSkeleton/>
     if (error instanceof Error) return <AlertError message={error.message}/>
-    if (!data || data.length === 0) return <p>No news</p>
+    if (!data || data.length === 0) return <p>No news, create one</p>
     
     const filtered = data?.filter((news) =>
         news.title.toLowerCase().includes(search.toLowerCase())
@@ -29,12 +40,13 @@ const NewsTable = ({ search }: { search: string }) => {
     if (!filtered?.length) return <div>No news found</div>
     
   return (
-    <Table>
+    <div className='bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden'>
+        <Table>
         <TableHeader>
             <TableRow>
                 <TableHead>Title</TableHead>
-                <TableHead>Created At</TableHead>
-                <TableHead>Updated At</TableHead>
+                <TableHead>Created</TableHead>
+                <TableHead>Updated</TableHead>
                 <TableHead>Edit</TableHead>
                 <TableHead>Delete</TableHead>
             </TableRow>
@@ -48,7 +60,7 @@ const NewsTable = ({ search }: { search: string }) => {
                     <TableCell>
                         <Dialog open={editingId === news._id} onOpenChange={(open) => setEditingId(open ? news._id : null)}>
                             <DialogTrigger asChild>
-                                <Button  disabled={deletingId === news._id}>Edit</Button>
+                                <Button  disabled={deletingId === news._id} size={'sm'}>Edit</Button>
                             </DialogTrigger>
                             <DialogHeader className='sr-only'>
                                 <DialogTitle></DialogTitle>
@@ -71,6 +83,8 @@ const NewsTable = ({ search }: { search: string }) => {
             ))}
         </TableBody>
     </Table>
+    </div>
+    
   )
 }
 

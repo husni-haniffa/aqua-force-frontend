@@ -1,7 +1,7 @@
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 
 import ButtonLoader from '@/components/ui/button-loader'
@@ -16,10 +16,24 @@ const UserTable = ({ search }: { search: string }) => {
     const { data, isLoading, error } = useFetchUsers()
     const [editingId, setEditingId] = useState<string | null>(null)
     const [removingId, setRemovingId] = useState<string | null>(null)
+         const [isSearchingUsers, setIsSearchingUsers] = useState(false)
     const updateMutation = useUpdateRoleToAdmin(setEditingId)
     const removeMutation = useRemoveRoleFromAdmin(setRemovingId)
+
     
-    if (isLoading) return <UserTableSkeleton/>
+            useEffect(() => {
+          if (!search) return
+        
+          setIsSearchingUsers(true)
+          const timer = setTimeout(() => {
+            setIsSearchingUsers(false)
+          }, 300) // debounce duration (UX sweet spot)
+        
+          return () => clearTimeout(timer)
+        }, [search])
+    
+    
+    if (isLoading || isSearchingUsers) return <UserTableSkeleton/>
     if (error instanceof Error) return <AlertError message={error.message}/>
     if (!data || data.length === 0) return <p>No users, create one</p>
 
@@ -27,10 +41,11 @@ const UserTable = ({ search }: { search: string }) => {
         users.emailAddress.toLowerCase().includes(search.toLowerCase())
     )
 
-    if (!filtered?.length) return <div>No categories found</div>
+    if (!filtered?.length) return <div>No user found</div>
         
   return (
-     <Table>
+    <div className='bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden'>
+         <Table>
         <TableHeader>
             <TableRow>
                 <TableHead>First Name</TableHead>
@@ -38,7 +53,8 @@ const UserTable = ({ search }: { search: string }) => {
                 <TableHead>Email Address</TableHead>
                 <TableHead>Phone Number</TableHead>
                 <TableHead>Role</TableHead>
-                <TableHead>Actions</TableHead>
+                <TableHead>Grant Admin</TableHead>
+                <TableHead>Revoke Admin</TableHead>
             </TableRow>
         </TableHeader>
         <TableBody>
@@ -49,30 +65,37 @@ const UserTable = ({ search }: { search: string }) => {
                    <TableCell>{user.emailAddress}</TableCell>
                    <TableCell>{user.phoneNumber}</TableCell>
                    <TableCell>{user.role}</TableCell>
-                   <TableCell className='flex items-center gap-3'>
+                   <TableCell>
                         <ConfirmDialog
                             onConfirm={() => updateMutation.mutate(user.userId)}
                             text='This action will provide full access to all administrator privileges.'
-                            disabled={editingId === user.userId}
+                            disabled={editingId === user.userId || user.role=== 'admin' || removingId === user.userId}
                             triggerText={
-                                editingId === user.userId ? <ButtonLoader text='Updating'/> : "Make Admin"
+                                editingId === user.userId ? <ButtonLoader text='Updating'/> : "Grant"
                             }
                             triggerVariant='destructive'
                         />
-                          <ConfirmDialog
+                         
+                    </TableCell>
+                     <TableCell>
+ <ConfirmDialog
                             onConfirm={() => removeMutation.mutate(user.userId)}
                             text='This action will remove full access to all administrator privileges.'
-                            disabled={removingId === user.userId}
+                            disabled={removingId === user.userId || editingId === user.userId}
                             triggerText={
-                                editingId === user.userId ? <ButtonLoader text='Updating'/> : "Remove Admin"
+                                editingId === user.userId ? <ButtonLoader text='Updating'/> : "Revoke"
                             }
-                            triggerVariant='destructive'
+                            triggerVariant='default'
                         />
                     </TableCell>
+                   
+                  
                 </TableRow>
             ))}
         </TableBody>
     </Table>
+    </div>
+    
   )
 }
 

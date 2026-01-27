@@ -1,5 +1,6 @@
 
-type Status = 'PENDING' | 'UNDER_REVIEW' | 'APPROVED' | 'REJECTED'
+type Status = 'PENDING' | 'UNDER_REVIEW' | 'REJECTED' | 'ACCEPTED' 
+
 export interface SubmissionResponse {
     _id: string
     userId: string

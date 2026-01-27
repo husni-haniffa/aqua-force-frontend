@@ -42,25 +42,26 @@ const MobileNavbar = () => {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                    pathname === link.href
-                      ? "bg-secondary text-primary"
-                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
-                  }`}
-                >
-                  {link.name}
+                  className={`block px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                pathname === link.href
+                    ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-md shadow-blue-500/20"
+                    : "hover:bg-gradient-to-r hover:from-blue-500 hover:to-cyan-500 hover:text-white hover:font-bold hover:shadow-md hover:shadow-blue-500/20"
+            }`}
+        >
+            {link.name}
                 </Link>
               ))}
               <SignedIn>
-                <Link href="/my-submissions"
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    pathname === "/my-submissions"
-                        ? "bg-secondary text-primary"
-                        : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
-                    }`}
-                >
-                    My Submissions
-                </Link>
+              <Link 
+                         href="/user/submissions"
+                         className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                             pathname === "/user/submissions"
+                                 ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-md shadow-blue-500/20"
+                                 : "hover:bg-gradient-to-r hover:from-blue-500 hover:to-cyan-500 hover:text-white hover:font-bold hover:shadow-md hover:shadow-blue-500/20"
+                         }`}
+                     >
+                         Submissions
+                     </Link>
               </SignedIn>
               <div className="pt-6 px-4 flex flex-col gap-2">
                 <SignedIn>

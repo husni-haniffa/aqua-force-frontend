@@ -1,31 +1,51 @@
 "use client"
+import { Label } from "@/components/ui/label"
 import {
   SidebarProvider,
   SidebarInset,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { AdminAppSideBar } from "@/features/admin/dashboard/AdminAppSideBar"
-import { SignedIn, UserButton } from "@clerk/nextjs"
+import { UserInfoSkeleton } from "@/features/admin/dashboard/Skeleton"
+import { SignedIn, UserButton, useUser } from "@clerk/nextjs"
 
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+
+  const { isLoaded, user} = useUser()
+
+ 
   return (
     <SidebarProvider>
       <AdminAppSideBar />
-      <SidebarInset>
-        <header className="flex h-14 items-center gap-4 border-b bg-background px-6">
-          <SidebarTrigger />
-          <div className="flex-1" />
-        <SignedIn>
-          <UserButton/>
-        </SignedIn>
+      <SidebarInset className="bg-gradient-to-br from-slate-50 to-blue-50">
+        
+        {/* Header */}
+        <header className="sticky top-0 z-10 h-16 border-b bg-white/80 backdrop-blur-sm">
+          <div className="container flex h-full items-center justify-between px-6">
+            <SidebarTrigger />
+
+            <div className="flex items-center gap-4">
+              <div className="flex flex-col items-end gap-0.5">
+                <Label className="text-sm font-semibold">{!isLoaded ? <UserInfoSkeleton/> : user?.fullName}</Label>
+                <Label className="text-xs text-muted-foreground">Administrator</Label>
+              </div>
+
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+            </div>
+          </div>
         </header>
-        <main className="flex-1 p-6">
+
+        {/* Main Content */}
+        <main className="container py-8 px-6">
           {children}
         </main>
+        
       </SidebarInset>
     </SidebarProvider>
   )

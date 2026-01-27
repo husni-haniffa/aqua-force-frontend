@@ -1,6 +1,6 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import ButtonLoader from '@/components/ui/button-loader'
 import { useDeleteEvent, useEvents } from './event.hooks'
@@ -13,13 +13,26 @@ const EventTable = ({ search }: { search: string }) => {
 
     const [editingId, setEditingId] = useState<string | null>(null)
     const [deletingId, setDeletingId] = useState<string | null>(null)
+    const [isSearchingEvent, setIsSearchingEvent] = useState(false)
 
     const { data, isLoading, error } = useEvents()
     const deleteMutation = useDeleteEvent(setDeletingId)
 
-    if (isLoading) return <EventTableSkeleton/>
+    useEffect(() => {
+  if (!search) return
+
+  setIsSearchingEvent(true)
+  const timer = setTimeout(() => {
+    setIsSearchingEvent(false)
+  }, 300) // debounce duration (UX sweet spot)
+
+  return () => clearTimeout(timer)
+}, [search])
+
+
+   if (isLoading || isSearchingEvent) return <EventTableSkeleton/>
     if (error instanceof Error) return <AlertError message={error.message}/>
-    if (!data || data.length === 0) return <p>No Events</p>
+    if (!data || data.length === 0) return <p>No events, create one</p>
     
     const filtered = data?.filter((event) =>
         event.title.toLowerCase().includes(search.toLowerCase())
@@ -28,7 +41,8 @@ const EventTable = ({ search }: { search: string }) => {
     if (!filtered?.length) return <div>No events found</div>
     
   return (
-    <Table>
+    <div className='bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden'>
+      <Table>
         <TableHeader>
             <TableRow>
                 <TableHead>Title</TableHead>
@@ -36,8 +50,8 @@ const EventTable = ({ search }: { search: string }) => {
                 <TableHead>Date</TableHead>
                 <TableHead>Time</TableHead>
                 <TableHead>Location</TableHead>
-                <TableHead>Created At</TableHead>
-                <TableHead>Updated At</TableHead>
+                <TableHead>Created</TableHead>
+                <TableHead>Updated</TableHead>
                 <TableHead>Edit</TableHead>
                 <TableHead>Delete</TableHead>
             </TableRow>
@@ -68,7 +82,7 @@ const EventTable = ({ search }: { search: string }) => {
                     <TableCell>
                         <Dialog open={editingId === event._id} onOpenChange={(open) => setEditingId(open ? event._id : null)}>
                             <DialogTrigger asChild>
-                                <Button disabled={deletingId === event._id}>Edit</Button>
+                                <Button disabled={deletingId === event._id} size={'sm'}>Edit</Button>
                             </DialogTrigger>
                             <DialogHeader className='sr-only'>
                                 <DialogTitle></DialogTitle>
@@ -91,6 +105,8 @@ const EventTable = ({ search }: { search: string }) => {
             ))}
         </TableBody>
     </Table>
+    </div>
+    
   )
 }
 

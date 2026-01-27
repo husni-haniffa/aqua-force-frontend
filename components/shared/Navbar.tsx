@@ -18,45 +18,46 @@ const Navbar = () => {
     <nav className='fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-border bg-slate-50'>
         <div className='container'>
             <div className='flex items-center justify-between h-16'>          
-                <Link href={"/"} className='flex items-center gap-2 group'>
-                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                        <Brain className="w-9 h-9 text-blue-600" />
-                    </div>
-                    <div className="flex flex-col">
-                        <span className="font-bold text-lg leading-tight text-blue-600">
-                            AquaForce
-                        </span>
-                        <span className="text-xs hidden sm:block ">
-                            Together, Future, Life
-                        </span>
-                    </div>
-                </Link>
+                  <Link href={"/"} className='flex items-center gap-3 group'>
+                          <div className="w-10 h-10 rounded-xl bg-linear-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:scale-105 transition-transform">
+                            <Brain className="w-6 h-6 text-white" />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="font-bold text-lg leading-tight bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                              AquaForce
+                            </span>
+                            <span className="text-xs text-slate-500">
+                              Together, Future, Life
+                            </span>
+                          </div>
+                        </Link>
                 <div className='hidden lg:flex items-center gap-1'>
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.href}
-                            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                            pathname === link.href
-                               ? "bg-slate-200"
-                                : "hover:font-semibold hover:bg-slate-200"
-                            }`}
-                        >
-                            {link.name}
-                        </Link>
-                    ))}
-                    <SignedIn>
-                        <Link href="/user/submissions"
-                            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                            pathname === "/user/submissions"
-                                ? "bg-slate-200"
-                                : "hover:font-semibold hover:bg-slate-200"
-                            }`}
-                        >
-                            Submissions
-                        </Link>
-                    </SignedIn>
-                </div>
+    {navLinks.map((link) => (
+        <Link
+            key={link.name}
+            href={link.href}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                pathname === link.href
+                    ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-md shadow-blue-500/20"
+                    : "hover:bg-gradient-to-r hover:from-blue-500 hover:to-cyan-500 hover:text-white hover:font-bold hover:shadow-md hover:shadow-blue-500/20"
+            }`}
+        >
+            {link.name}
+        </Link>
+    ))}
+    <SignedIn>
+        <Link 
+            href="/user/submissions"
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                pathname === "/user/submissions"
+                    ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-md shadow-blue-500/20"
+                    : "hover:bg-gradient-to-r hover:from-blue-500 hover:to-cyan-500 hover:text-white hover:font-bold hover:shadow-md hover:shadow-blue-500/20"
+            }`}
+        >
+            Submissions
+        </Link>
+    </SignedIn>
+</div>
                 <div className='hidden lg:flex items-center gap-6'>
                     {isAdmin && 
                         <Link href="/admin" className='text-blue-600 font-semibold'>

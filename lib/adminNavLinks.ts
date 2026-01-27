@@ -1,4 +1,12 @@
-import { Home, Layers, Newspaper, Calendar, Inbox } from "lucide-react"
+import {
+    Home,
+    LayoutDashboard,
+    Layers,
+    Newspaper,
+    CalendarDays,
+    FileText,
+    Users
+} from "lucide-react"
 
 export const adminNavLinks = [
     {
@@ -7,6 +15,11 @@ export const adminNavLinks = [
             {
                 title: "Overview",
                 url: "/admin",
+                icon: LayoutDashboard,
+            },
+            {
+                title: "Home",
+                url: "/",
                 icon: Home,
             },
         ],
@@ -20,15 +33,16 @@ export const adminNavLinks = [
                 icon: Layers,
             },
             {
+                title: "Events",
+                url: "/admin/events",
+                icon: CalendarDays,
+            },
+            {
                 title: "News",
                 url: "/admin/news",
                 icon: Newspaper,
             },
-            {
-                title: "Events",
-                url: "/admin/events",
-                icon: Calendar,
-            },
+           
         ],
     },
     {
@@ -37,7 +51,7 @@ export const adminNavLinks = [
             {
                 title: "Submissions",
                 url: "/admin/submissions",
-                icon: Inbox,
+                icon: FileText,
             },
         ],
     },
@@ -48,7 +62,7 @@ export const adminNavLinks = [
             {
                 title: "Users",
                 url: "/admin/users",
-                icon: Inbox,
+                icon: Users,
             },
         ],
     },

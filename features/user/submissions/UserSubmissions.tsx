@@ -9,7 +9,11 @@ const UserSubmissions = () => {
   const [search, setSearch] = useState('')
   
   return (
-    <div className='flex flex-col gap-9'>
+ <div className='container py-24 flex flex-col gap-6'>
+      <div>
+        <h1 className='font-bold text-3xl text-slate-800'>Users</h1>
+        <p className='text-sm text-slate-600 mt-1'>Manage and organize your content categories</p>
+      </div>
       <SubmissionHeader onSearch={setSearch}/>
       <SubmissionsTable search={search}/>
     </div>
