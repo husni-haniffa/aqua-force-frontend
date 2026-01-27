@@ -16,7 +16,7 @@ interface ConfirmDialogProps {
   text?: string
   onConfirm: () => void
   triggerText?: string | JSX.Element
-  triggerVariant?: "default" | "destructive" | "outline"
+  triggerVariant?: "default" | "destructive" | "outline" | "add"
   disabled?: boolean
 }
 
@@ -30,20 +30,20 @@ export function ConfirmDialog({
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant={triggerVariant} disabled={disabled}>
+        <Button variant={triggerVariant} disabled={disabled} size={'sm'}>
           {triggerText}
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
+          <AlertDialogDescription className="text-black text-base">
             {text ? text : "This action cannot be undone. This will permanently delete the record from the servers"}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={disabled}>Cancel</AlertDialogCancel>
-          <AlertDialogAction disabled={disabled} onClick={onConfirm}>
+          <AlertDialogCancel disabled={disabled} >Cancel</AlertDialogCancel>
+          <AlertDialogAction disabled={disabled} onClick={onConfirm} className="bg-green-600 hover:bg-green-600">
             Confirm
           </AlertDialogAction>
         </AlertDialogFooter>

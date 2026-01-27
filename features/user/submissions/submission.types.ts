@@ -1,5 +1,7 @@
 import z from "zod"
 
+type Status = 'PENDING' | 'UNDER_REVIEW' | 'REJECTED' | 'ACCEPTED'
+
 export interface UserSubmissionResponse {
     _id: string
     userId: string
@@ -12,7 +14,7 @@ export interface UserSubmissionResponse {
     abstract: string
     keywords: string[]
     fileUrl: string
-    status: string
+    status: Status
     isPublished: boolean
     createdAt: string
     updatedAt: string
@@ -26,7 +28,9 @@ export interface EditSubmissionFormProps extends CreateSubmissionFormProps {
     submissionId: string
 }
 
-export const formSchema = z.object({
+export const formSchema = (mode: "create" | "edit") =>
+
+z.object({
     categoryId: z.string().min(1, "Category is required"),
 
     title: z
@@ -56,7 +60,8 @@ export const formSchema = z.object({
         .min(1, "At least one keyword is required")
         .max(5, "No more than 5 keywords allowed"),
 
-    file: z
+    file:
+        mode === "create"? z
         .instanceof(File)
         .refine(
             (file) =>
@@ -65,8 +70,25 @@ export const formSchema = z.object({
                     "application/msword",
                     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                 ].includes(file.type),
-            {
-                message: "Only PDF, DOC, or DOCX files are allowed",
-            }
+            { message: "Only PDF, DOC, or DOCX files are allowed" }
+        )
+        : z
+        .instanceof(File)
+        .optional()
+        .refine(
+            (file) =>
+                !file ||
+                [
+                    "application/pdf",
+                    "application/msword",
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                ].includes(file.type),
+            { message: "Only PDF, DOC, or DOCX files are allowed" }
         ),
 });
+
+export const createSubmissionSchema = formSchema("create")
+export const editSubmissionSchema = formSchema("edit")
+
+export type CreateSubmissionInput = z.infer<typeof createSubmissionSchema>
+export type EditSubmissionInput = z.infer<typeof editSubmissionSchema>

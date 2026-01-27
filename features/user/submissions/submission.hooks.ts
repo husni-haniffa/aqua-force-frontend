@@ -1,10 +1,8 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
 import { useAuth, useUser } from "@clerk/nextjs"
-import * as z from "zod"
-import { formSchema } from "./submission.types"
+import { CreateSubmissionInput, EditSubmissionInput, formSchema } from "./submission.types"
 import { fetchSubmissionByUserId, createSubmission, updateSubmission, fetchSubmissionById} from "./submission.api"
-
 
 export function useSubmissionByUserId() {
     const { getToken, userId } = useAuth()
@@ -39,7 +37,7 @@ export function useCreateSubmission(onSuccess?: () => void) {
     const queryClient = useQueryClient()
 
     return useMutation({
-        mutationFn: async (data: z.infer<typeof formSchema>) => {
+        mutationFn: async (data: CreateSubmissionInput) => {
             const token = await getToken()
             if (!token) throw new Error("Not authenticated")
             if (!userId) throw new Error("User not signed in")
@@ -51,7 +49,9 @@ export function useCreateSubmission(onSuccess?: () => void) {
             formData.append("title", data.title)
             formData.append("abstract", data.abstract)
             formData.append("keywords", JSON.stringify(data.keywords))
-            formData.append("file", data.file)
+            if (data.file) {
+                formData.append("file", data.file)
+            }
             return createSubmission(formData, token)
         },
         onSuccess: () => {
@@ -71,7 +71,7 @@ export function useUpdateSubmission(submissionId: string, onSuccess?: () => void
     const queryClient = useQueryClient()
 
     return useMutation({
-        mutationFn: async (data: z.infer<typeof formSchema>) => {
+        mutationFn: async (data: EditSubmissionInput) => {
             const token = await getToken()
             if (!token) throw new Error("Not authenticated")
             if (!userId) throw new Error("User not signed in")
@@ -83,7 +83,9 @@ export function useUpdateSubmission(submissionId: string, onSuccess?: () => void
             formData.append("title", data.title)
             formData.append("abstract", data.abstract)
             formData.append("keywords", JSON.stringify(data.keywords))
-            formData.append("file", data.file)
+            if (data.file) {
+                formData.append("file", data.file)
+            }
             return updateSubmission(submissionId, formData, token)
         },
         onSuccess: () => {

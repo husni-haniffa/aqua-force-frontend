@@ -4,18 +4,19 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 export const NewsTableSkeleton = () => {
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Title</TableHead>
-          <TableHead>Content</TableHead>
-          <TableHead>Created At</TableHead>
-          <TableHead>Updated At</TableHead>
-          <TableHead>Edit</TableHead>
-          <TableHead>Delete</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
+    <div className='bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden'>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Title</TableHead>
+            <TableHead>Content</TableHead>
+            <TableHead>Created At</TableHead>
+            <TableHead>Updated At</TableHead>
+            <TableHead>Edit</TableHead>
+            <TableHead>Delete</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
         {[...Array(5)].map((_, index) => (
           <TableRow key={index}>
             <TableCell>
@@ -38,8 +39,10 @@ export const NewsTableSkeleton = () => {
             </TableCell>
           </TableRow>
         ))}
-      </TableBody>
-    </Table>
+        </TableBody>
+      </Table>
+    </div>
+    
   )
 }
 

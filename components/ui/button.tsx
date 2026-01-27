@@ -9,7 +9,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default: "bg-blue-600 text-white hover:bg-blue-600",
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
@@ -19,6 +19,14 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
+        // these variants used for app color pallete
+        add: "bg-green-600 text-white hover:bg-green-700",               
+        edit: "bg-slate-700 text-white hover:bg-slate-800",             
+        cancel: "bg-gray-300 text-gray-900 hover:bg-gray-400",          
+        publish: "bg-green-700 text-white hover:bg-green-800",          
+        updateStatus: "bg-indigo-600 text-white hover:bg-indigo-700",  
+        delete: "bg-red-600 text-white hover:bg-red-700",               
+        view: "bg-white border border-gray-300 text-gray-900 hover:bg-gray-50" 
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

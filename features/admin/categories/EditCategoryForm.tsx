@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import ButtonLoader from "@/components/ui/button-loader"
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
+import { Card, CardHeader, CardTitle, CardContent, CardFooter, CardDescription } from "@/components/ui/card"
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Controller, useForm } from "react-hook-form"
@@ -33,6 +33,7 @@ const EditCategoryForm = ({ categoryId, onSuccess }: EditCategoryFormProps) => {
     <Card className="w-full border-0 shadow-none">
       <CardHeader>
         <CardTitle>Edit Category</CardTitle>
+        <CardDescription>Update category details</CardDescription>
       </CardHeader>
         <CardContent>
           <form id="edit-category" onSubmit={form.handleSubmit(v => updateMutation.mutate(v))}>
@@ -66,7 +67,7 @@ const EditCategoryForm = ({ categoryId, onSuccess }: EditCategoryFormProps) => {
                 <Button type="button" variant="outline" onClick={() => form.reset()} disabled={updateMutation.isPending}>
                     Cancel
                 </Button>
-                <Button type="submit" form="edit-category" disabled={updateMutation.isPending}>
+                <Button type="submit" form="edit-category" disabled={updateMutation.isPending} variant={'add'}>
                   {updateMutation.isPending ? <ButtonLoader text="Updating" /> : "Update"}
                 </Button>
             </Field>

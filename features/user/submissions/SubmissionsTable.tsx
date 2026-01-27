@@ -1,44 +1,40 @@
 import { useState } from 'react'
 import { useSubmissionByUserId } from './submission.hooks'
-import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from "@/components/ui/card"
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { ArrowDown } from 'lucide-react'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import EditSubmissionForm from './EditSubmissionForm'
+import { Download } from 'lucide-react'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import Link from 'next/link'
 import { AlertError } from '@/components/ui/alert-error'
 import { SubmissionTableSkeleton } from './Skeleton'
+import StatusBadge from '@/components/ui/status-badge'
 
 const SubmissionsTable = ({ search }: { search: string }) => {
 
-    const [editingId, setEditingId] = useState<string | null>(null)
     const { data, isLoading, error } = useSubmissionByUserId()
         
     if (isLoading) return <SubmissionTableSkeleton/>
     if (error instanceof Error) return <AlertError message={error.message}/>
-    if (!data || data.length === 0) return <p>No Submissions</p>
+    if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No Submissions</p>
         
     const filtered = data?.filter((submission) =>
         submission.title.toLowerCase().includes(search.toLowerCase())
     )
 
-    if (!filtered?.length) return <div>No submissions found</div>
-
+    if (!filtered?.length) return <p className='flex items-center justify-center text-base'>No submission found</p>
 
   return (
-     <Table>
+    <div className='bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden'>
+         <Table>
         <TableHeader>
             <TableRow>
                 <TableHead>Title</TableHead>
                 <TableHead>Category</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>File</TableHead>
-                <TableHead>Created At</TableHead>
-                <TableHead>Updated At</TableHead>
+                <TableHead>Created</TableHead>
+                <TableHead>Updated</TableHead>
                 <TableHead>Edit</TableHead>
-                <TableHead>Published</TableHead>
+                <TableHead>Live</TableHead>
             </TableRow>
         </TableHeader>
         <TableBody>
@@ -46,30 +42,28 @@ const SubmissionsTable = ({ search }: { search: string }) => {
                 <TableRow key={submission._id}>
                     <TableCell>{submission.title}</TableCell>
                     <TableCell>{submission.categoryId.name}</TableCell>
-                    <TableCell>{submission.status}</TableCell>
+                    <TableCell> <StatusBadge status={submission.status}/></TableCell>
                     <TableCell>
-                        <Link href={submission.fileUrl} target='_blank'>Download</Link>
+                        <Link href={submission.fileUrl} target='_blank'>
+                            <Download/>
+                        </Link>
                     </TableCell>
                     <TableCell>{submission.createdAt}</TableCell>
                     <TableCell>{submission.updatedAt}</TableCell>
                      <TableCell>
-                        <Dialog open={editingId === submission._id} onOpenChange={(open) => setEditingId(open ? submission._id : null)}>
-                            <DialogTrigger asChild>
-                                <Button  disabled={editingId === submission._id}>Edit</Button>
-                            </DialogTrigger>
-                            <DialogHeader className='sr-only'>
-                                <DialogTitle></DialogTitle>
-                            </DialogHeader>
-                            <DialogContent>
-                                <EditSubmissionForm submissionId={submission._id} onSuccess={() => setEditingId(null)} />
-                            </DialogContent>
-                        </Dialog>
+                        <Link href={`/user/submissions/${submission._id}/edit`}>
+                            <Button size="sm" variant={'edit'}>
+                                Edit
+                            </Button>
+                        </Link>
                     </TableCell>
                     <TableCell>{submission.isPublished ? "Yes" : "No"}</TableCell>
                 </TableRow>
             ))}
         </TableBody>
     </Table>
+    </div>
+    
   )
 }
 

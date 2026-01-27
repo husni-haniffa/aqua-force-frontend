@@ -3,7 +3,8 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 export const SubmissionTableSkeleton = () => {
   return (
-    <Table>
+    <div className='bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden'>
+      <Table>
       <TableHeader>
         <TableRow>
           <TableHead>Submitted By</TableHead>
@@ -63,6 +64,8 @@ export const SubmissionTableSkeleton = () => {
         ))}
       </TableBody>
     </Table>
+    </div>
+    
   )
 }
 

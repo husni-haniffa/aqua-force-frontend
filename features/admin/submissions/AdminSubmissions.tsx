@@ -1,12 +1,18 @@
 "use client"
-import SubmissionHeader from '@/features/user/submissions/SubmissionHeader'
+import SubmissionHeader from './SubmissionHeader'
 import SubmissionTable from './SubmissionTable'
 import { useState } from 'react'
 
 const AdminSubmissions = () => {
+
   const [search, setSearch] = useState('')
+
   return (
-    <div className='flex flex-col gap-9'>
+      <div className='flex flex-col gap-6'>
+      <div>
+        <h1 className='font-bold text-3xl text-slate-800'>Research Submissions</h1>
+        <p className='text-sm text-slate-600 mt-1'>Review and manage submitted research papers</p>
+      </div>
         <SubmissionHeader onSearch={setSearch}/>
         <SubmissionTable search={search}/>
     </div>

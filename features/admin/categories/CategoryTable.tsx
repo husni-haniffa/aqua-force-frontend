@@ -1,6 +1,6 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useCategories, useDeleteCategory } from './category.hooks'
 import { Button } from '@/components/ui/button'
 import EditCategoryForm from './EditCategoryForm'
@@ -13,27 +13,39 @@ const CategoryTable = ({ search }: { search: string }) => {
 
     const [editingId, setEditingId] = useState<string | null>(null)
     const [deletingId, setDeletingId] = useState<string | null>(null)
+    const [isSearchingCategory, setIsSearchingCategory] = useState(false)
 
     const { data, isLoading, error } = useCategories()
     const deleteMutation = useDeleteCategory(setDeletingId)
 
-    if (isLoading) return <CategoryTableSkeleton/>
+    useEffect(() => {
+      if (!search) return
+      setIsSearchingCategory(true)
+      const timer = setTimeout(() => {
+        setIsSearchingCategory(false)
+      }, 300) 
+      return () => clearTimeout(timer)
+    }, [search])
+
+   
+    if (isLoading || isSearchingCategory) return <CategoryTableSkeleton/>
     if (error instanceof Error) return <AlertError message={error.message}/>
-    if (!data || data.length === 0) return <p>No categories, create one</p>
+    if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No categories, create one</p>
     
     const filtered = data?.filter((category) =>
         category.name.toLowerCase().includes(search.toLowerCase())
     )
 
-    if (!filtered?.length) return <div>No categories found</div>
+    if (!filtered?.length) return <p className='flex items-center justify-center text-base'>No categories found</p>
     
   return (
-    <Table>
+    <div className='bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden'>
+        <Table>
         <TableHeader>
             <TableRow>
                 <TableHead>Name</TableHead>
-                <TableHead>Created At</TableHead>
-                <TableHead>Updated At</TableHead>
+                <TableHead>Created</TableHead>
+                <TableHead>Updated</TableHead>
                 <TableHead>Edit</TableHead>
                 <TableHead>Delete</TableHead>
             </TableRow>
@@ -47,7 +59,7 @@ const CategoryTable = ({ search }: { search: string }) => {
                     <TableCell>
                         <Dialog open={editingId === category._id} onOpenChange={(open) => setEditingId(open ? category._id : null)}>
                             <DialogTrigger asChild>
-                                <Button disabled={deletingId === category._id}>Edit</Button>
+                                <Button disabled={deletingId === category._id} size={'sm'} variant={'edit'}>Edit</Button>
                             </DialogTrigger>
                             <DialogHeader className='sr-only'>
                                 <DialogTitle></DialogTitle>
@@ -58,18 +70,20 @@ const CategoryTable = ({ search }: { search: string }) => {
                         </Dialog>
                     </TableCell>
                     <TableCell>
-              <ConfirmDialog
-                onConfirm={() => deleteMutation.mutate(category._id)}
-                disabled={deletingId === category._id}
-                triggerText={
-                  deletingId === category._id ? <ButtonLoader text="Deleting" /> : "Delete"
-                }
-              />
-            </TableCell>
+                        <ConfirmDialog
+                            onConfirm={() => deleteMutation.mutate(category._id)}
+                            disabled={deletingId === category._id}
+                            triggerText={
+                            deletingId === category._id ? <ButtonLoader text="Deleting" /> : "Delete"
+                            }
+                        />
+                    </TableCell>
                 </TableRow>
             ))}
         </TableBody>
     </Table>
+    </div>
+    
   )
 }
 

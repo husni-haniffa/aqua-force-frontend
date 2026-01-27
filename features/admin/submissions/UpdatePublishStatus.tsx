@@ -26,12 +26,12 @@ const UpdatePublishStatus = ({id, defaultVisibility = "PUBLIC"}: UpdatePublishSt
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button variant="outline">Publish</Button>
+        <Button size={'sm'} variant={'publish'}>Publish</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-             Publish Settings
+            Access To
           </AlertDialogTitle>
         </AlertDialogHeader>
         <div className="space-y-4">
@@ -52,7 +52,7 @@ const UpdatePublishStatus = ({id, defaultVisibility = "PUBLIC"}: UpdatePublishSt
         </div>
         <AlertDialogFooter>
           <AlertDialogCancel  disabled={publishMutation.isPending}>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleConfirm} disabled={publishMutation.isPending}>
+          <AlertDialogAction onClick={handleConfirm} disabled={publishMutation.isPending}  className="bg-green-600 hover:bg-green-600">
             {publishMutation.isPending ? <ButtonLoader text="Publishing"/> : "Publish"}
           </AlertDialogAction>
         </AlertDialogFooter>

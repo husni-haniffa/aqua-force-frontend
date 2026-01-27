@@ -13,7 +13,7 @@ import { EditSubmissionFormProps, formSchema } from "./submission.types"
 import { useEffect } from "react"
 import { useSubmissionById, useSubmissionByUserId, useUpdateSubmission } from "./submission.hooks"
 import { useCategories } from "@/features/admin/categories/category.hooks"
-import { SubmissionFormSkeleton } from "./Skeleton"
+import { SelectSkeleton, SubmissionFormSkeleton } from "./Skeleton"
 import { AlertError } from "@/components/ui/alert-error"
 
 const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProps) => {
@@ -22,8 +22,8 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
     const updateMutation = useUpdateSubmission(submissionId, onSuccess)
     const {data: categories, isLoading: categoriesLoading, error: categoriesError} = useCategories()
 
-    const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<ReturnType<typeof formSchema>>>({
+    resolver: zodResolver(formSchema("edit")),
     defaultValues: { categoryId: "",
       title: "",
       abstract: "",
@@ -37,21 +37,22 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
           title: data.title,
           abstract: data.abstract,
           keywords: data.keywords,
-          categoryId: data.categoryId._id 
+          categoryId: data.categoryId._id,
+          file: undefined
         })
     }, [data, form])
       
     if (isLoading) return <SubmissionFormSkeleton/>
     if (error instanceof Error) return <AlertError message={error.message}/>
 
-    if (categoriesLoading) return <p>Loading categories...</p>
     if (categoriesError instanceof Error) return <AlertError message={categoriesError.message}/>
-    if (!categories || categories.length === 0) return <p>No categories</p>
+    if (!categories || categories.length === 0) return <p  className='flex items-center justify-center text-base'>No categories</p>
       
   return (
     <Card className="w-full border-0 shadow-none">
       <CardHeader>
-        <CardTitle>Research Submission</CardTitle>
+        <CardTitle>Edit Submission</CardTitle>
+        <CardDescription>Update your submission details before final review</CardDescription>
       </CardHeader>
         <CardContent>
           <form id="edit-submission" onSubmit={form.handleSubmit(v => updateMutation.mutate(v))}>
@@ -121,7 +122,7 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
                   control={form.control}
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
-                      <FieldLabel>Upload Research Paper</FieldLabel>
+                      <FieldLabel>Replace Research Paper</FieldLabel>
                         <Input
                           type="file"
                           accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
@@ -139,6 +140,7 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
                     <FieldLabel>Select Research Category</FieldLabel>
+                    {categoriesLoading ? <SelectSkeleton/> :     
                       <Select onValueChange={field.onChange} value={field.value}>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a category"/>
@@ -151,6 +153,7 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
                           ))}
                         </SelectContent>
                       </Select>
+                    }
                     {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                   </Field>
                 )}
@@ -163,8 +166,8 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
                 <Button type="button" variant="outline" onClick={() => form.reset()} disabled={updateMutation.isPending}>
                     Cancel
                 </Button>
-                <Button type="submit" form="edit-submission" disabled={updateMutation.isPending}>
-                    {updateMutation.isPending ? <ButtonLoader text="Submitting"/> : 'Submit'}
+                <Button type="submit" form="edit-submission" disabled={updateMutation.isPending} variant={"add"}>
+                    {updateMutation.isPending ? <ButtonLoader text="Updating"/> : 'Update'}
                 </Button>
             </Field>
         </CardFooter>
