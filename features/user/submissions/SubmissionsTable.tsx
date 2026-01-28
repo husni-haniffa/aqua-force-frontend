@@ -62,11 +62,17 @@ const SubmissionsTable = ({ search }: { search: string }) => {
                     <TableCell>{submission.createdAt}</TableCell>
                     <TableCell>{submission.updatedAt}</TableCell>
                      <TableCell>
-                        <Link href={`/user/submissions/${submission._id}/edit`}>
-                            <Button size="sm" variant={'edit'}>
+                        {submission.status === 'PENDING' ? (
+                            <Link href={`/user/submissions/${submission._id}/edit`}>
+                                <Button size="sm" variant="edit">
+                                Edit
+                                </Button>
+                            </Link>
+                            ) : (
+                            <Button size="sm" variant="edit" disabled>
                                 Edit
                             </Button>
-                        </Link>
+                        )}
                     </TableCell>
                     <TableCell>{submission.isPublished ? "Yes" : "No"}</TableCell>
                 </TableRow>
