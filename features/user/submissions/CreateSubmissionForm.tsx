@@ -14,8 +14,11 @@ import { useCreateSubmission } from "./submission.hooks"
 import { useCategories } from "@/features/admin/categories/category.hooks"
 import { SelectSkeleton } from "./Skeleton"
 import { AlertError } from "@/components/ui/alert-error"
+import { useRouter } from "next/navigation"
 
 const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
+
+  const router = useRouter()
 
   const form = useForm<z.infer<ReturnType<typeof formSchema>>>({
     resolver: zodResolver(formSchema("create")),
@@ -25,7 +28,12 @@ const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
       keywords: [] },
     })
       
-    const createMutation = useCreateSubmission(onSuccess)
+    const createMutation = useCreateSubmission(() => {
+      form.reset()
+      router.push("/user/submissions")
+      onSuccess?.()
+    })
+
     const { data, isLoading, error } = useCategories()
 
     if (error instanceof Error) return <AlertError message={error.message}/>
@@ -107,6 +115,7 @@ const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
                     <Field data-invalid={fieldState.invalid}>
                       <FieldLabel>Upload Research Paper</FieldLabel>
                         <Input
+                          key={field.value ? "file-set" : "file-empty"}
                           type="file"
                           accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                           onChange={(e) => field.onChange(e.target.files?.[0])}

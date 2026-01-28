@@ -7,6 +7,9 @@ import { ConfirmDialog } from '@/components/ui/confirm-dialog'
 import { NewsTableSkeleton } from './Skeleton'
 import Link from 'next/link'
 import { AlertError } from '@/components/ui/alert-error'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import NewsView from './NewsView'
+import { View } from 'lucide-react'
 
 const NewsTable = ({ search }: { search: string }) => {
 
@@ -40,7 +43,7 @@ const NewsTable = ({ search }: { search: string }) => {
           <TableHeader>
               <TableRow>
                   <TableHead>Title</TableHead>
-                  <TableHead>Created</TableHead>
+                  <TableHead>View</TableHead>
                   <TableHead>Updated</TableHead>
                   <TableHead>Edit</TableHead>
                   <TableHead>Delete</TableHead>
@@ -50,7 +53,21 @@ const NewsTable = ({ search }: { search: string }) => {
             {filtered?.map((news) => (
                 <TableRow key={news._id}>
                     <TableCell>{news.title}</TableCell>
-                    <TableCell>{news.createdAt}</TableCell>
+                    <TableCell>
+                      <Dialog>
+                        <DialogTrigger asChild>
+                            <Button size={'icon'} variant={'secondary'}>
+                              <View/>
+                            </Button>
+                        </DialogTrigger>
+                        <DialogHeader className='sr-only'>
+                            <DialogTitle></DialogTitle>
+                        </DialogHeader>
+                        <DialogContent>
+                            <NewsView news={news}/>
+                        </DialogContent>
+                      </Dialog>
+                    </TableCell>
                     <TableCell>{news.updatedAt}</TableCell>
                     <TableCell>
                       <Link href={`/admin/news/${news._id}/edit`}>
