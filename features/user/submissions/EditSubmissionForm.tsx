@@ -15,12 +15,20 @@ import { useSubmissionById, useUpdateSubmission } from "./submission.hooks"
 import { useCategories } from "@/features/admin/categories/category.hooks"
 import { SelectSkeleton, SubmissionFormSkeleton } from "./Skeleton"
 import { AlertError } from "@/components/ui/alert-error"
+import { useRouter } from "next/navigation"
 
 const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProps) => {
 
+    const router = useRouter()
+
     const { data, isLoading, error} = useSubmissionById(submissionId)
-    const updateMutation = useUpdateSubmission(submissionId, onSuccess)
     const {data: categories, isLoading: categoriesLoading, error: categoriesError} = useCategories()
+
+    const updateMutation = useUpdateSubmission(submissionId, () => {
+          form.reset()
+          router.push("/user/submissions")
+          onSuccess?.()
+    })
 
     const form = useForm<z.infer<ReturnType<typeof formSchema>>>({
     resolver: zodResolver(formSchema("edit")),

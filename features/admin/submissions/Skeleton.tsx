@@ -8,14 +8,12 @@ export const SubmissionTableSkeleton = () => {
       <TableHeader>
         <TableRow>
               <TableHead>Author</TableHead>
-              <TableHead>Title</TableHead>
-              <TableHead>Category</TableHead>
+              <TableHead>View</TableHead>
               <TableHead>File</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Update</TableHead>
               <TableHead>Live</TableHead>
               <TableHead>Access</TableHead>
-              <TableHead>Created</TableHead>
               <TableHead>Updated</TableHead> 
               <TableHead>Publish</TableHead>
               <TableHead>Delete</TableHead>
@@ -25,37 +23,34 @@ export const SubmissionTableSkeleton = () => {
         {[...Array(5)].map((_, index) => (
           <TableRow key={index}>
             <TableCell>
-              <Skeleton className="h-5 w-32" />
-            </TableCell>
-            <TableCell>
-              <Skeleton className="h-5 w-48" />
-            </TableCell>
-            <TableCell>
-              <Skeleton className="h-5 w-64" />
-            </TableCell>
-            <TableCell>
               <Skeleton className="h-5 w-20" />
             </TableCell>
             <TableCell>
-              <Skeleton className="h-5 w-24" />
+              <Skeleton className="h-4 w-8" />
             </TableCell>
             <TableCell>
-              <Skeleton className="h-9 w-28" />
+              <Skeleton className="h-4 w-8" />
             </TableCell>
             <TableCell>
-              <Skeleton className="h-5 w-12" />
+              <Skeleton className="h-5 w-15" />
             </TableCell>
             <TableCell>
-              <Skeleton className="h-5 w-20" />
+              <Skeleton className="h-10 w-20" />
             </TableCell>
             <TableCell>
-              <Skeleton className="h-5 w-24" />
+              <Skeleton className="h-4 w-8" />
             </TableCell>
             <TableCell>
-              <Skeleton className="h-5 w-24" />
+              <Skeleton className="h-5 w-15" />
             </TableCell>
             <TableCell>
-              <Skeleton className="h-9 w-20" />
+              <Skeleton className="h-5 w-18" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="h-10 w-15" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="h-10 w-15" />
             </TableCell>
           </TableRow>
         ))}

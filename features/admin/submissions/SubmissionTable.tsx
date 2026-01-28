@@ -10,7 +10,10 @@ import ButtonLoader from "@/components/ui/button-loader"
 import { SubmissionTableSkeleton } from "./Skeleton"
 import { AlertError } from "@/components/ui/alert-error"
 import StatusBadge from "@/components/ui/status-badge"
-import { Download } from "lucide-react"
+import { Download, View } from "lucide-react"
+import SubmissionView from "./SubmissionView"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { Button } from "@/components/ui/button"
 
 const SubmissionTable = ({ search }: { search: string }) => {
 
@@ -44,14 +47,12 @@ const SubmissionTable = ({ search }: { search: string }) => {
         <TableHeader>
           <TableRow>
             <TableHead>Author</TableHead>
-            <TableHead>Title</TableHead>
-            <TableHead>Category</TableHead>
+            <TableHead>View</TableHead>
             <TableHead>File</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Update</TableHead>
             <TableHead>Live</TableHead>
             <TableHead>Access</TableHead>
-            <TableHead>Created</TableHead>
             <TableHead>Updated</TableHead> 
             <TableHead>Publish</TableHead>
             <TableHead>Delete</TableHead>
@@ -61,8 +62,21 @@ const SubmissionTable = ({ search }: { search: string }) => {
           {filtered.map((submission) => (
             <TableRow key={submission._id}>
               <TableCell>{submission.userName}</TableCell>
-              <TableCell>{submission.title}</TableCell>
-              <TableCell>{submission.categoryId.name}</TableCell>
+              <TableCell>
+                <Dialog>
+                  <DialogTrigger asChild>
+                      <Button size={'icon'} variant={'secondary'}>
+                        <View/>
+                      </Button>
+                  </DialogTrigger>
+                  <DialogHeader className='sr-only'>
+                      <DialogTitle></DialogTitle>
+                  </DialogHeader>
+                  <DialogContent>
+                      <SubmissionView submission={submission}/>
+                  </DialogContent>
+                </Dialog>
+              </TableCell>
               <TableCell>
                 <Link href={submission.fileUrl} target="_blank"><Download /></Link>
               </TableCell>
@@ -74,7 +88,6 @@ const SubmissionTable = ({ search }: { search: string }) => {
               </TableCell>
               <TableCell>{submission.isPublished === true ? "Yes" : "No"}</TableCell>
               <TableCell>{submission.accessLevel}</TableCell>
-              <TableCell>{submission.createdAt}</TableCell>
               <TableCell>{submission.updatedAt}</TableCell>
               <TableCell>
                 <UpdatePublishStatus id={submission._id} />

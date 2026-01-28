@@ -68,10 +68,10 @@ export const SubmissionTableSkeleton = () => {
             <TableHead>Category</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>File</TableHead>
-            <TableHead>Created At</TableHead>
-            <TableHead>Updated At</TableHead>
+            <TableHead>Created</TableHead>
+            <TableHead>Updated</TableHead>
             <TableHead>Edit</TableHead>
-            <TableHead>Published</TableHead>
+            <TableHead>Live</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -87,7 +87,7 @@ export const SubmissionTableSkeleton = () => {
               <Skeleton className="h-6 w-24" /> 
             </TableCell>
             <TableCell>
-              <Skeleton className="h-9 w-20" /> 
+              <Skeleton className="h-5 w-15" /> 
             </TableCell>
             <TableCell>
               <Skeleton className="h-5 w-28" /> 
