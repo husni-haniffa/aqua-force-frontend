@@ -9,7 +9,6 @@ export const EventTableSkeleton = () => {
       <TableHeader>
         <TableRow>
           <TableHead>Title</TableHead>
-          <TableHead>Description</TableHead>
           <TableHead>Date</TableHead>
           <TableHead>Time</TableHead>
           <TableHead>Location</TableHead>
@@ -24,9 +23,6 @@ export const EventTableSkeleton = () => {
           <TableRow key={index}>
             <TableCell>
               <Skeleton className="h-5 w-40" />
-            </TableCell>
-            <TableCell>
-              <Skeleton className="h-5 w-48" />
             </TableCell>
             <TableCell>
               <Skeleton className="h-5 w-24" />

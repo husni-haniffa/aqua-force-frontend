@@ -42,7 +42,6 @@ const EventTable = ({ search }: { search: string }) => {
         <TableHeader>
             <TableRow>
                 <TableHead>Title</TableHead>
-                <TableHead>Description</TableHead>
                 <TableHead>Date</TableHead>
                 <TableHead>Time</TableHead>
                 <TableHead>Location</TableHead>
@@ -56,7 +55,6 @@ const EventTable = ({ search }: { search: string }) => {
             {filtered?.map((event) => (
                 <TableRow key={event._id}>
                     <TableCell>{event.title}</TableCell>
-                    <TableCell>{event.description}</TableCell>
                    <TableCell>
                       {new Date(event.eventDate).toLocaleDateString("en-GB", {
                         year: "numeric",
