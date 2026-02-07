@@ -7,11 +7,11 @@ const NotFound = () => {
     const router = useRouter()
   return (
     <div className='min-h-screen flex justify-center items-center'>
-        <div className='flex flex-col gap-9'>
+        <div className='container flex flex-col gap-9'>
             <header className='text-center font-bold text-6xl'>404</header>
             <header className='text-center font-semibold text-3xl'>Page Not Found</header>
             <p className='text-center'>Sorry, the page you are looking for could not be found</p>
-            <Button size={'lg'} onClick={() => router.push('/')}>
+            <Button onClick={() => router.push('/')}>
                 <ArrowLeft/>
                 Return Home
             </Button>

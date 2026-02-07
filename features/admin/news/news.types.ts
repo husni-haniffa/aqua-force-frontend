@@ -7,7 +7,7 @@ export interface NewsResponse {
     imageUrl?: string
     imagePath?: string
     createdAt: string
-    updatedAt: string
+    updatedAt: Date
 }
 
 export interface CreateNewsFormProps {
@@ -22,8 +22,8 @@ export const formSchema = z.object({
     title: z
         .string()
         .trim()
-        .min(25, "Title must be at least 25 characters")
-        .max(50, "Title must not exceed 50 characters"),
+        .min(50, "Title must be at least 50 characters")
+        .max(100, "Title must not exceed 100 characters"),
 
     content: z
         .string()
