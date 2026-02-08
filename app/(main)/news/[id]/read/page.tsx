@@ -11,9 +11,9 @@ const ReadNewsPage = ({params} : PageProps) => {
 
     const {id} = use(params);
     return (
-         <div className="container py-24">
-        <ReadNews id={id}/>
-    </div>
+        <div className="bg-white">
+            <ReadNews id={id}/>
+        </div>
     )
    
 }

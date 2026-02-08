@@ -13,7 +13,7 @@ const ReadPublishedPaper = ({params} : PageProps) => {
     const {id} = use(params);
 
     return (
-        <div className="container py-8 md:py-16">
+        <div className="bg-white">
             <ReadPublication id={id}/>
         </div>
     )

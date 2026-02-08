@@ -29,10 +29,10 @@ const NewsCard = () => {
                             )}  
                             <div className="px-2 py-2"> 
                                 <header>
-                                    <h1 className="text-lg xl:text-xl font-bold mb-3">{news.title}</h1>
+                                    <h1 className="text-lg xl:text-xl font-bold mb-3 text-slate-800">{news.title}</h1>
                                 </header>
                                 <div>
-                                    <p className="text-xs xl:text-sm">{news.content}</p>
+                                    <p className="text-xs xl:text-sm text-slate-600">{news.content}</p>
                                 </div>
 
                                 <div className="flex justify-between items-center border-t border-slate-200 pt-3">
@@ -41,7 +41,7 @@ const NewsCard = () => {
                                       
                                     </h6>
                                     <Link 
-                                href={`/publications/${news._id}/read`}
+                                href={`/news/${news._id}/read`}
                                 className='text-xs xl:text-sm flex items-center text-blue-500 gap-2'
                             >
                                 Read More

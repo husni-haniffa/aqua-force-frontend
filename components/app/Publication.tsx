@@ -77,7 +77,7 @@ const Publication = () => {
                         
                     
                         <div className="flex justify-between items-center">
-                            <h6 className='text-xs xl:text-sm text-slate-600'>
+                            <h6 className='text-xs xl:text-sm text-slate-950'>
                                 {formateDate(publication.updatedAt)}
                             </h6>
                             <Link 
