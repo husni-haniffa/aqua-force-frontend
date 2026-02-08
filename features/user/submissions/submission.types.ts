@@ -36,8 +36,8 @@ z.object({
     title: z
         .string()
         .trim()
-        .min(5, "Title must be at least 5 characters")
-        .max(50, "Title must not exceed 50 characters")
+        .min(50, "Title must be at least 50 characters")
+        .max(100, "Title must not exceed 100 characters")
         .regex(
             /^[A-Za-z0-9\s:,\-()./]+$/,
             "Title contains invalid characters"
@@ -46,7 +46,7 @@ z.object({
     abstract: z
         .string()
         .trim()
-        .min(500, "Abstract must be at least 500 characters")
+        .min(250, "Abstract must be at least 250 characters")
         .max(1000, "Abstract must not exceed 1000 characters"),
 
     keywords: z

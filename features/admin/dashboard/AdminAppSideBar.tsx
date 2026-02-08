@@ -21,18 +21,13 @@ export function AdminAppSideBar() {
   return (
     <Sidebar>
       <SidebarHeader className="border-b h-16 px-4">
-        <Link href={"/"} className='flex items-center gap-3 group'>
-          <div className="w-10 h-10 rounded-xl bg-linear-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:scale-105 transition-transform">
-            <Brain className="w-6 h-6 text-white" />
-          </div>
-          <div className="flex flex-col">
+        <Link href={"/"} className='flex items-center py-3'>
+         
+       
             <span className="font-bold text-lg leading-tight bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-              AquaForce
+              Research Minds Net
             </span>
-            <span className="text-xs text-slate-500">
-              Together, Future, Life
-            </span>
-          </div>
+  
         </Link>
       </SidebarHeader>
       
