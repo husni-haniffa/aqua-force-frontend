@@ -7,7 +7,7 @@ type ButtonLoaderProps = {
 const ButtonLoader = ({ text }: ButtonLoaderProps) => {
   return (
     <span className="flex items-center gap-3">
-      <Loader className="animate-spin text-muted-foreground" />
+      <Loader className="animate-spin text-white" />
       {text}
     </span>
   )
