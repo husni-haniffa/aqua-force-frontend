@@ -67,8 +67,9 @@ const ReadPublication =  ({id} : {id: string}) => {
                     <div className="flex justify-end">
                       
                         <Button asChild>
-                            <Link href={''}>Download</Link>
-                        </Button>                        
+                            <Link href={data?.filePath || ''} target='_blank'>Download</Link>
+                        </Button>
+                                              
                     </div>
                 </div>
             </article>

@@ -66,7 +66,6 @@ export const ReadPublicationSkeleton = () => {
                         
                         {/* Title skeleton - 2 lines */}
                         <Skeleton className="h-7 md:h-8 w-full mb-3" />
-                        <Skeleton className="h-7 md:h-8 w-4/5 mb-6" />
                         
                         <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
                             {/* Author skeleton */}
@@ -99,11 +98,6 @@ export const ReadPublicationSkeleton = () => {
                         <div className="space-y-2">
                             <Skeleton className="h-4 w-full" />
                             <Skeleton className="h-4 w-full" />
-                            <Skeleton className="h-4 w-full" />
-                            <Skeleton className="h-4 w-full" />
-                            <Skeleton className="h-4 w-5/6" />
-                            <Skeleton className="h-4 w-full" />
-                            <Skeleton className="h-4 w-4/5" />
                         </div>
                     </section>
                         

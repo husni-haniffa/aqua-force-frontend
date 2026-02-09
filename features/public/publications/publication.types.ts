@@ -9,7 +9,7 @@ export interface PublicationResponse {
     title: string
     abstract: string
     keywords: Array<string>
-    fileUrl: string
+    filePath: string
     accessLevel: string
     updatedAt: Date
 }
