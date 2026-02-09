@@ -4,11 +4,13 @@ import Link from "next/link"
 import { useNews } from "./news.hooks"
 import { Calendar, ArrowRight } from "lucide-react"
 import { formateDate } from "@/lib/format"
+import { NewsCardsSkeleton } from "./Skeleton"
+import { AlertError } from "@/components/ui/alert-error"
 
 const NewsCard = () => {
     const { data, isLoading, error } = useNews()
-    if(isLoading) return <p className="text-center py-8">Loading news...</p>
-    if(error instanceof Error) return <p className="text-center py-8 text-red-500">Error loading news</p>
+    if(isLoading) return <NewsCardsSkeleton/>
+    if(error instanceof Error) return <AlertError message={error.message}/>
   return (
     
         <div>

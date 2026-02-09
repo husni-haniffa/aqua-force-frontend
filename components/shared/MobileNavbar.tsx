@@ -7,11 +7,13 @@ import Link from "next/link";
 import { navLinks } from "@/lib/navLinks";
 import { usePathname } from "next/navigation";
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { useCheckRole } from "@/utils/checkRole";
 
 const MobileNavbar = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname()
+  const isAdmin = useCheckRole('admin')
     
   return (
     <div className="lg:hidden">
@@ -63,6 +65,14 @@ const MobileNavbar = () => {
                 </Link>
               </SignedIn>
               <div className="pt-6 px-4 flex flex-col gap-3 sm:gap-4">
+                {isAdmin && 
+                        <Button asChild className='bg-blue-950 hover:bg-blue-900'>
+                            <Link href="/admin" className='font-semibold'>
+                                Admin
+                            </Link>
+                        </Button>
+                        
+                    }
                 <SignedIn>
                   <div className="flex items-center justify-center bg-slate-200 rounded-lg py-1.5">
                     <UserButton/>

@@ -1,5 +1,5 @@
 import React from 'react'
-import MemberCard from '@/features/public/member/MemberCard'
+import MemberCard from '@/features/public/waitlist/WaitlistCard'
 
 const Membership = () => {
   return (

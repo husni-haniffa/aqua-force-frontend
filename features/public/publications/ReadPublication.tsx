@@ -6,18 +6,12 @@ import { FileText, User, Tag, ArrowLeft, Calendar, ExternalLink, Download } from
 import { Button } from '@/components/ui/button'
 import { formateDate } from '@/lib/format'
 import { AlertError } from '@/components/ui/alert-error'
+import { ReadPublicationSkeleton } from './Skeleton'
 
 const ReadPublication =  ({id} : {id: string}) => {
 
     const { data, isLoading, error } = usePublicationById(id)
-    if(isLoading) return (
-        <div className="container py-12">
-            <div className="text-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
-                <p className="text-slate-600">Loading publication...</p>
-            </div>
-        </div>
-    )
+    if(isLoading) return <ReadPublicationSkeleton/>
     if(error instanceof Error) return <AlertError message={error.message}/>
   return (
     <div className='pt-16 xl:pt-24 pb-16 xl:pb-24'>

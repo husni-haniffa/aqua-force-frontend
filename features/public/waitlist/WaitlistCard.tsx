@@ -5,7 +5,7 @@ import MembershipForm from './MembershipForm'
 import { SignedIn, SignedOut } from '@clerk/nextjs'
 import { Users, ArrowRight, CheckCircle } from 'lucide-react'
 
-const MemberCard = () => {
+const WaitlistCard = () => {
   return (
     <div className='bg-slate-950'>
          <div className='container py-16 xl:py-24'>
@@ -21,12 +21,22 @@ const MemberCard = () => {
                        Be the first to access exclusive features, and accelerate your academic career with Research Minds Net membership.
                     </p>
                 </header>
-                <div className='flex justify-center items-center xl:justify-start mb-9'>
-                    <Button asChild>
-                        <Link href={'/'}>
-                            Join the Waitlist
-                        </Link>
-                    </Button>
+                <div className='hidden xl:flex justify-center items-center xl:justify-start mb-9'>
+                    <SignedIn>
+                        <Button asChild>
+                            <Link href={'/membership'} className='font-semibold'>
+                                Join the Waitlist
+                            </Link>
+                        </Button>
+                    </SignedIn>
+                    <SignedOut>
+                        <Button asChild>
+                            <Link href="/sign-in?redirect_url=/membership" className='font-semibold'>
+                                Join the Waitlist
+                            </Link>
+                        </Button>
+                    </SignedOut>
+                  
                 </div>
               
             </div>
@@ -59,10 +69,27 @@ const MemberCard = () => {
             </div>
 
         </div>
+        <div className='flex justify-center items-center xl:justify-start pt-9 xl:hidden'>
+                    <SignedIn>
+                        <Button asChild className='w-full'>
+                            <Link href={'/membership'} className='font-semibold'>
+                                Join the Waitlist
+                            </Link>
+                        </Button>
+                    </SignedIn>
+                    <SignedOut>
+                        <Button asChild className='w-full'>
+                            <Link href="/sign-in?redirect_url=/membership" className='font-semibold'>
+                                Join the Waitlist
+                            </Link>
+                        </Button>
+                    </SignedOut>
+                  
+                </div>
     </div>
     </div>
    
   )
 }
 
-export default MemberCard
+export default WaitlistCard

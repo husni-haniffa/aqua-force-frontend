@@ -50,9 +50,12 @@ const Navbar = () => {
                 </div>
                 <div className='hidden lg:flex items-center gap-6'>
                     {isAdmin && 
-                        <Link href="/admin" className='text-slate-800 text-base font-semibold'>
-                            <ShieldUser />
-                        </Link>
+                        <Button asChild className='bg-blue-950 hover:bg-blue-900'>
+                            <Link href="/admin" className='font-semibold'>
+                                Admin
+                            </Link>
+                        </Button>
+                        
                     }
                     <SignedIn>
                         <UserButton/>

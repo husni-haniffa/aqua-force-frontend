@@ -6,18 +6,12 @@ import { Label } from '@/components/ui/label'
 import Link from 'next/link'
 import { Calendar, ArrowLeft, User, ArrowRight } from 'lucide-react'
 import { formateDate } from '@/lib/format'
+import { NewsArticleSkeleton } from './Skeleton'
 
 const ReadNews = ({ id }: { id: string }) => {
   const { data, isLoading, error } = useNewsById(id)
 
-  if (isLoading) return (
-    <div className="container py-12">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-slate-800 mx-auto mb-4"></div>
-        <p className="text-slate-600">Loading article...</p>
-      </div>
-    </div>
-  )
+  if (isLoading) return <NewsArticleSkeleton/>
   if (error instanceof Error) return <AlertError message={error.message} />
 
   return (

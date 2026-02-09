@@ -4,12 +4,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useEvents } from '@/features/admin/events/event.hooks'
 import { formateDate, formateTime } from '@/lib/format'
 import { Bell, Calendar, Clock, MapPin } from 'lucide-react'
+import { EventCardsSkeleton } from './Skeleton'
+import { AlertError } from '@/components/ui/alert-error'
 
 const EventCard = () => {
 
     const { data, isLoading, error} = useEvents()
-    if(isLoading) return <p className="text-center py-8">Loading events...</p>
-    if(error instanceof Error) return <p className="text-center py-8 text-red-500">Error loading events</p>
+    if(isLoading) return <EventCardsSkeleton/>
+    if(error instanceof Error) return <AlertError message={error.message}/>
 
     const handleAddToCalendar = (event: any) => {
   try {
@@ -69,36 +71,36 @@ const EventCard = () => {
                                <h1 className='text-slate-800 text-lg xl:text-xl font-bold'>{event.title}</h1>
                            </header>
                            <div className='space-y-3'>
-      {/* Date */}
-      <div className='flex items-center gap-3 text-slate-600 hover:text-slate-900 transition-colors'>
-        <div className='bg-blue-50 p-2 rounded-lg'>
-          <Calendar className='w-4 h-4 text-blue-600'/>
-        </div>
-        <span className='text-sm font-medium'>
-          {formateDate(event.eventDate)}
-        </span>
-      </div>
+                              {/* Date */}
+                              <div className='flex items-center gap-3 text-slate-600 hover:text-slate-900 transition-colors'>
+                                <div className='bg-blue-50 p-2 rounded-lg'>
+                                  <Calendar className='w-4 h-4 text-blue-600'/>
+                                </div>
+                                <span className='text-sm font-medium'>
+                                  {formateDate(event.eventDate)}
+                                </span>
+                              </div>
       
-      {/* Time */}
-      <div className='flex items-center gap-3 text-slate-600 hover:text-slate-900 transition-colors'>
-        <div className='bg-amber-50 p-2 rounded-lg'>
-          <Clock className='w-4 h-4 text-amber-600'/>
-        </div>
-        <span className='text-sm font-medium'>
-          {formateTime(event.eventTime)}
-        </span>
-      </div>
+                              {/* Time */}
+                              <div className='flex items-center gap-3 text-slate-600 hover:text-slate-900 transition-colors'>
+                                <div className='bg-amber-50 p-2 rounded-lg'>
+                                  <Clock className='w-4 h-4 text-amber-600'/>
+                                </div>
+                                <span className='text-sm font-medium'>
+                                  {formateTime(event.eventTime)}
+                                </span>
+                              </div>
       
-      {/* Location */}
-      <div className='flex items-center gap-3 text-slate-600 hover:text-slate-900 transition-colors'>
-        <div className='bg-red-50 p-2 rounded-lg'>
-          <MapPin className='w-4 h-4 text-red-600'/>
-        </div>
-        <span className='text-sm font-medium'>
-          {event.location}
-        </span>
-      </div>
-    </div>
+                              {/* Location */}
+                              <div className='flex items-center gap-3 text-slate-600 hover:text-slate-900 transition-colors'>
+                                <div className='bg-red-50 p-2 rounded-lg'>
+                                  <MapPin className='w-4 h-4 text-red-600'/>
+                                </div>
+                                <span className='text-sm font-medium'>
+                                  {event.location}
+                                </span>
+                              </div>
+                            </div>
         <div className='mt-5 pt-4 border-t border-slate-100'>
       <button 
         onClick={() => handleAddToCalendar(event)}

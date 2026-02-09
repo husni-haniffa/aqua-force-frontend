@@ -52,3 +52,69 @@ export function PublicationCardSkeleton() {
     </div>
   )
 }
+
+export const ReadPublicationSkeleton = () => {
+    return (
+        <div className='pt-16 xl:pt-24 pb-16 xl:pb-24'>
+            <div className='container'>
+                <article>  
+                    <header className="mb-8">            
+                        <div className="mb-4">
+                            {/* Category badge skeleton */}
+                            <Skeleton className='h-6 w-24 rounded-md' />                     
+                        </div>               
+                        
+                        {/* Title skeleton - 2 lines */}
+                        <Skeleton className="h-7 md:h-8 w-full mb-3" />
+                        <Skeleton className="h-7 md:h-8 w-4/5 mb-6" />
+                        
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
+                            {/* Author skeleton */}
+                            <div className="flex items-center gap-2">
+                                <Skeleton className="w-4 h-4 rounded-full" />
+                                <Skeleton className="h-4 w-32" />
+                            </div>
+                        </div>                               
+                        
+                        {/* Keywords skeleton */}
+                        <div className="flex flex-wrap gap-2 mb-6">
+                            <Skeleton className="h-7 w-20 rounded-md" />
+                            <Skeleton className="h-7 w-24 rounded-md" />
+                            <Skeleton className="h-7 w-28 rounded-md" />
+                            <Skeleton className="h-7 w-16 rounded-md" />
+                        </div>
+                        
+                        <div>
+                            {/* Published date skeleton */}
+                            <Skeleton className="h-4 w-40" />
+                        </div>
+                          
+                    </header>
+                       
+                    <section className="mb-6">
+                        {/* Abstract heading skeleton */}
+                        <Skeleton className="h-6 md:h-7 w-32 mb-4" />
+                        
+                        {/* Abstract content skeleton - multiple lines */}
+                        <div className="space-y-2">
+                            <Skeleton className="h-4 w-full" />
+                            <Skeleton className="h-4 w-full" />
+                            <Skeleton className="h-4 w-full" />
+                            <Skeleton className="h-4 w-full" />
+                            <Skeleton className="h-4 w-5/6" />
+                            <Skeleton className="h-4 w-full" />
+                            <Skeleton className="h-4 w-4/5" />
+                        </div>
+                    </section>
+                        
+                    <div className="pt-6 border-t border-slate-200">
+                        <div className="flex justify-end">
+                            {/* Download button skeleton */}
+                            <Skeleton className="h-10 w-28 rounded-md" />                       
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    );
+};
