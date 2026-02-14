@@ -4,7 +4,7 @@ const HowWeSupport = () => {
   return (
     <div className='container pt-16 xl:pt-24'>
        <header className='flex flex-col items-center justify-center gap-3 mb-12 text-center'>
-            <h6 className='text-sm md:text-base text-slate-600'>OUR GOAL</h6>
+            <h6 className='text-sm md:text-base text-blue-500'>OUR GOAL</h6>
             <h1 className='text-2xl md:text-3xl xl:text-4xl font-bold text-slate-800'>
                 How We Support You
             </h1>
@@ -42,7 +42,7 @@ const HowWeSupport = () => {
             key={index} 
             className="flex items-start gap-2 text-xs sm:text-sm text-slate-700"
           >
-            <span className="text-emerald-500 mt-0.5 flex-shrink-0 font-bold">✓</span>
+            <span className="text-emerald-500 mt-0.5 shrink-0 font-bold">✓</span>
             <span className="leading-relaxed">{feature}</span>
           </li>
         ))}

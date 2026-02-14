@@ -20,11 +20,11 @@ export function AdminAppSideBar() {
   
   return (
     <Sidebar>
-      <SidebarHeader className="border-b h-16 px-4">
-        <Link href={"/"} className='flex items-center py-3'>
+      <SidebarHeader className="border-b h-16 px-4 pt-4">
+        <Link href={"/"} className='px-2 w-fit py-1 flex justify-center items-center rounded-md bg-blue-100'>
          
        
-            <span className="font-bold text-lg leading-tight bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+            <span className="font-bold text-lg leading-tight bg-blue-500 bg-clip-text text-transparent">
               Research Minds Net
             </span>
   
@@ -34,7 +34,7 @@ export function AdminAppSideBar() {
       <SidebarContent className="py-4 px-2">
         {adminNavLinks.map((group) => (
           <SidebarGroup key={group.label} className="mb-6">
-            <SidebarGroupLabel className="text-sm font-semibold text-slate-400 uppercase tracking-wider px-3 mb-3">
+            <SidebarGroupLabel className="text-sm font-semibold text-blue-500 uppercase tracking-wider px-3 mb-3">
               {group.label}
             </SidebarGroupLabel>
             <SidebarGroupContent>

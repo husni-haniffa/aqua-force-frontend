@@ -11,16 +11,19 @@ const Hero = () => {
                 <div className='flex flex-col justify-between gap-9'>
 
                     <header className='flex flex-col gap-3'>
-                        <h6 className='text-sm md:text-base text-slate-600'>RESEARCH TOGETHER. FUTURE. LIFE</h6>
+                        <h6 className='text-sm md:text-base text-blue-500'>RESEARCH TOGETHER. FUTURE. LIFE</h6>
                         <h1 className='text-2xl md:text-3xl xl:text-4xl font-bold text-slate-800'>
                             Built for collaboration across our academic community
                         </h1>
+                    </header>
+
+                    <div>
                         <p className='max-w-2xl xl:max-w-3xl text-sm md:text-base text-slate-600'>
                             Created for our university’s students, researchers, and academics, 
                             Research Minds Net supports interdisciplinary collaboration, knowledge sharing, 
                             and research development within a single connected platform.
                         </p>
-                    </header>
+                    </div>
 
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
                         {researchServices.map((service) => (

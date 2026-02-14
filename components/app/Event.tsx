@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { AlertError } from '../ui/alert-error'
 import { formateDate, formateTime } from '@/lib/format'
 import { EventCardsSkeleton } from '@/features/public/events/Skeleton'
+import { Button } from '../ui/button'
 
 const Event = () => {
 
@@ -62,7 +63,7 @@ const Event = () => {
     <section className='pt-16 xl:pt-24'>
 
         <header className='flex flex-col items-center justify-center gap-3 mb-12 text-center'>
-            <h6 className='text-sm md:text-base text-slate-600'>MARK YOUR CALENDER</h6>
+            <h6 className='text-sm md:text-base text-blue-500'>MARK YOUR CALENDER</h6>
             <h1 className='text-2xl md:text-3xl xl:text-4xl font-bold text-slate-800'>
                 Upcoming Events
             </h1>
@@ -126,6 +127,13 @@ const Event = () => {
             ))}
         </div>
         
+        <div className='flex justify-center pt-12'>
+            <Button asChild>
+                <Link href={'/events'}>
+                    Explore More Events <ArrowRight/>
+                </Link>
+            </Button>
+        </div>
         
         
     </section>

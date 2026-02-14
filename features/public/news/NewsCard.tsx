@@ -13,7 +13,7 @@ const NewsCard = () => {
     if(error instanceof Error) return <AlertError message={error.message}/>
   return (
     
-        <div>
+        <div className="container">
             <div className="columns-1 md:columns-2 gap-9 space-y-9">
                 {data?.map((news) => (
                     <div key={news._id} className='bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group'>

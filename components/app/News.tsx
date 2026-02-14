@@ -4,24 +4,26 @@ import { useNews } from "@/features/public/news/news.hooks"
 import { ArrowRight, Calendar } from "lucide-react"
 import { AlertError } from "../ui/alert-error"
 import { formateDate } from "@/lib/format"
+import { Button } from "../ui/button"
+import { NewsCardsSkeleton } from "@/features/public/news/Skeleton"
 
 const News = () => {
 
     const { data, isLoading, error } = useNews()
-    if(isLoading) return <p>loading</p>
+    if(isLoading) return <NewsCardsSkeleton/>
     if(error instanceof Error) return <AlertError message={error.message}/>
 
   return (
     <section className='pt-16 xl:pt-24'>
 
         <header className='flex flex-col items-center justify-center gap-3 mb-12 text-center'>
-            <h6 className='text-sm md:text-base text-slate-600'>STAY UPDATED</h6>
+            <h6 className='text-sm md:text-base text-blue-500'>STAY UPDATED</h6>
             <h1 className='text-2xl md:text-3xl xl:text-4xl font-bold text-slate-800'>
                 Latest News
             </h1>
         </header>
 
-        <div>
+        
             <div className="columns-1 md:columns-2 gap-9 space-y-9">
                 {data?.slice(0,6).map((news) => (
                     <div key={news._id} className='bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group'>
@@ -63,6 +65,12 @@ const News = () => {
                     </div>
                 ))}
             </div>
+        <div className='flex justify-center pt-12'>
+            <Button asChild>
+                <Link href={'/news'}>
+                    Explore More News <ArrowRight/>
+                </Link>
+            </Button>
         </div>
         
        

@@ -12,14 +12,14 @@ const Footer = () => {
     const pathname = usePathname()
 
   return (
-    <footer className='bg-slate-100 py-8 sm:py-10 md:py-12'>
+    <footer className='bg-white py-8 sm:py-10 md:py-12'>
         <div className='container'>
             <div className='flex flex-col lg:flex-row gap-8 lg:gap-12'>
 
            
                 <div className='flex flex-col gap-4 lg:flex-1'>
-                    <Link href={"/"}>
-                        <span className="font-bold text-lg sm:text-xl lg:text-2xl leading-tight bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                    <Link href={"/"} className='bg-blue-100 px-2 py-1 rounded-lg w-fit'>
+                        <span className="font-bold text-lg sm:text-xl lg:text-2xl leading-tight bg-blue-500 bg-clip-text text-transparent">
                             Research Minds Net
                         </span>
                     </Link>

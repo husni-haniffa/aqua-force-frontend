@@ -1,21 +1,47 @@
 "use client"
 import { usePublications } from './publication.hooks'
 import Link from 'next/link'
-import { User, Tag, ArrowRight } from 'lucide-react'
+import { User, Tag, ArrowRight, Search } from 'lucide-react'
 import { formateDate } from '@/lib/format'
 import { PublicationCardSkeleton } from './Skeleton'
 import { AlertError } from '@/components/ui/alert-error'
+import { Input } from '@/components/ui/input'
+import { useEffect, useState } from 'react'
 
-const PublicationCard = () => {
+const PublicationCard = ({ search }: { search: string }) => {
+
+    const [debouncedSearch, setDebouncedSearch] = useState(search);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+        setDebouncedSearch(search)
+        }, 300) 
+        return () => clearTimeout(timer)
+    }, [search])
+
+        const isSearchingPublication = search !== debouncedSearch;
 
     const { data, isLoading, error } = usePublications()
-    if(isLoading) return <PublicationCardSkeleton/>
+    if(isLoading || isSearchingPublication ) return <PublicationCardSkeleton/>
     if(error instanceof Error) return <AlertError message={error.message}/>
+        if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No publications, create one</p>
+
+    const filtered = data?.filter((publication) => 
+        publication.title.toLowerCase().includes(search.toLowerCase()) || publication.categoryId.name.toLowerCase().includes(search.toLowerCase())
+    )
+
+    if (!filtered?.length) return <p className='flex items-center justify-center text-base'>No publication found</p>
 
   return (
-   <div className="grid grid-cols-1 xl:grid-cols-2 gap-9">
+  
 
-            {data?.map((publication) => (
+        
+
+ 
+        
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-9">
+
+            {filtered?.map((publication) => (
 
                 <div key={publication._id} className="bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group">
 
@@ -83,6 +109,9 @@ const PublicationCard = () => {
             ))}
 
         </div>
+        
+   
+   
   )
 }
 

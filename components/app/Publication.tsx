@@ -5,6 +5,7 @@ import { usePublications } from '@/features/public/publications/publication.hook
 import { AlertError } from '../ui/alert-error'
 import { PublicationCardSkeleton } from '@/features/public/publications/Skeleton'
 import { formateDate } from '@/lib/format'
+import { Button } from '../ui/button'
 
 const Publication = () => {
 
@@ -16,7 +17,7 @@ const Publication = () => {
     <section className='pt-16 xl:pt-24'>
 
         <header className='flex flex-col items-center justify-center gap-3 mb-12 text-center'>
-            <h6 className='text-sm md:text-base text-slate-600'>LATEST RESEARCH</h6>
+            <h6 className='text-sm md:text-base text-blue-500'>LATEST RESEARCH</h6>
             <h1 className='text-2xl md:text-3xl xl:text-4xl font-bold text-slate-800'>
                 Featured Publications
             </h1>
@@ -94,6 +95,14 @@ const Publication = () => {
                 </div>
             ))}
 
+        </div>
+
+        <div className='flex justify-center pt-12'>
+            <Button asChild>
+                <Link href={'/publications'}>
+                    Explore More Publications <ArrowRight/>
+                </Link>
+            </Button>
         </div>
         
     </section>

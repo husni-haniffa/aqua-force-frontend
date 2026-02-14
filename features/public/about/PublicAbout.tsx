@@ -1,5 +1,5 @@
 
-import Membership from '@/components/app/Membership'
+import Membership from '@/components/app/Waitlist'
 import Hero from './Hero'
 import HowWeSupport from './HowWeSupport'
 
