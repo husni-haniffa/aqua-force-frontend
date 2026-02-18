@@ -1,11 +1,10 @@
 "use client"
 import { usePublications } from './publication.hooks'
 import Link from 'next/link'
-import { User, Tag, ArrowRight, Search } from 'lucide-react'
+import { User, ArrowRight } from 'lucide-react'
 import { formateDate } from '@/lib/format'
 import { PublicationCardSkeleton } from './Skeleton'
 import { AlertError } from '@/components/ui/alert-error'
-import { Input } from '@/components/ui/input'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { container, item } from '@/lib/animation'

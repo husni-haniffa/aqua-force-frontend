@@ -1,6 +1,4 @@
 "use client"
-
-import ReadNews from "@/features/public/news/ReadNews"
 import ReadPublication from "@/features/public/publications/ReadPublication"
 import { use } from "react"
 

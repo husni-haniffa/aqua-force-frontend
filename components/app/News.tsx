@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useNews } from "@/features/public/news/news.hooks"
-import { ArrowRight, Calendar } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { AlertError } from "../ui/alert-error"
 import { formateDate } from "@/lib/format"
 import { Button } from "../ui/button"

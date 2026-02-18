@@ -19,6 +19,15 @@ import { useRouter } from "next/navigation"
 
 const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProps) => {
 
+   const form = useForm<z.infer<ReturnType<typeof formSchema>>>({
+    resolver: zodResolver(formSchema("edit")),
+    defaultValues: { categoryId: "",
+      title: "",
+      abstract: "",
+      keywords: [],
+      
+    },
+    })
     const router = useRouter()
 
     const { data, isLoading, error} = useSubmissionById(submissionId)
@@ -30,15 +39,7 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
           onSuccess?.()
     })
 
-    const form = useForm<z.infer<ReturnType<typeof formSchema>>>({
-    resolver: zodResolver(formSchema("edit")),
-    defaultValues: { categoryId: "",
-      title: "",
-      abstract: "",
-      keywords: [],
-      
-    },
-    })
+   
 
     useEffect(() => {
         if (data) form.reset({ 

@@ -2,14 +2,12 @@
 import { navLinks } from '@/lib/navLinks'
 import { SignedIn } from '@clerk/nextjs'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { Label } from '../ui/label'
 import { socialMedia } from '@/lib/socialMedia'
 import { contactInfo } from '@/lib/company'
 
 const Footer = () => {
 
-    const pathname = usePathname()
 
   return (
     <footer className='bg-white py-8 sm:py-10 md:py-12'>

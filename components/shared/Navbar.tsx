@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import MobileNavbar from './MobileNavbar'
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { useCheckRole } from '@/utils/checkRole'
-import { ShieldUser } from 'lucide-react'
+
 
 const Navbar = () => {
     
