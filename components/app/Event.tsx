@@ -1,5 +1,4 @@
 "use client"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useEvents } from '@/features/admin/events/event.hooks'
 import { Calendar, Clock, MapPin, ArrowRight, Bell } from 'lucide-react'
 import Link from 'next/link'
@@ -9,13 +8,14 @@ import { EventCardsSkeleton } from '@/features/public/events/Skeleton'
 import { Button } from '../ui/button'
 import { motion } from 'framer-motion'
 import { container, item } from '@/lib/animation'
+import { EventResponse } from '@/features/admin/events/event.types'
 
 const Event = () => {
 
     const { data, isLoading, error} = useEvents()
     if(isLoading) return <EventCardsSkeleton/>
     if(error instanceof Error) return <AlertError message={error.message}/>
-        const handleAddToCalendar = (event: any) => {
+        const handleAddToCalendar = (event: EventResponse) => {
   try {
     // eventDate is already an ISO string, so parse it directly
     const eventDate = new Date(event.eventDate);

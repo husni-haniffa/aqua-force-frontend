@@ -1,6 +1,5 @@
 "use client"
 import NewsCard from './NewsCard'
-import { Newspaper } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const PublicNews = () => {

@@ -1,4 +1,4 @@
-import { Card,CardHeader, CardTitle, CardDescription, CardContent, CardFooter} from '@/components/ui/card'
+import { Card,CardHeader, CardTitle, CardContent, CardFooter} from '@/components/ui/card'
 import { NewsResponse } from './news.types'
 
 const NewsView = ({news} : {news: NewsResponse})  => {

@@ -1,9 +1,7 @@
 "use client"
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import MembershipForm from './MembershipForm'
 import { SignedIn, SignedOut } from '@clerk/nextjs'
-import { Users, ArrowRight, CheckCircle } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { researchFeatures } from '@/lib/company'
 import { container, item } from '@/lib/animation'
