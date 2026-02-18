@@ -22,8 +22,8 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: "AquaForce",
-  description: "Together. Future. Life",
+  title: "Research Minds Net",
+  description: "Where researchers connect, ideas grow, and innovation begins.",
 };
 
 

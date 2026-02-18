@@ -1,3 +1,4 @@
+import Footer from "@/components/shared/Footer";
 import Navbar from "@/components/shared/Navbar";
 
 export default function MainLayout({
@@ -11,6 +12,7 @@ export default function MainLayout({
       <main className="flex grow flex-col pt-16 bg-slate-50"> 
         {children}
       </main>
+      <Footer/>
     </div>
   );
 }

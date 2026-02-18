@@ -7,24 +7,26 @@ import Link from "next/link";
 import { navLinks } from "@/lib/navLinks";
 import { usePathname } from "next/navigation";
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { useCheckRole } from "@/utils/checkRole";
 
 const MobileNavbar = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname()
+  const isAdmin = useCheckRole('admin')
     
   return (
     <div className="lg:hidden">
         <Button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-lg"
+            className="lg:hidden p-2 sm:p-3 rounded-lg bg-slate-100 hover:bg-slate-200 transition-colors"
             aria-label="Toggle menu"
-            variant={"secondary"}
+            variant="secondary"
           >
             {isOpen ? (
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5 sm:w-6 sm:h-6 text-slate-800" />
             ) : (
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-slate-800" />
             )}
         </Button>
         <AnimatePresence>
@@ -36,38 +38,52 @@ const MobileNavbar = () => {
             transition={{ duration: 0.2 }}
             className="absolute top-16 left-0 right-0 z-40 border-b border-border"
           >
-            <div className="container py-4 space-y-2 bg-slate-50"> 
+            <div className="container py-4 px-4 sm:px-6 space-y-3 sm:space-y-4 bg-white"> 
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className={`block px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  pathname === link.href
-                    ? "bg-linear-to-r from-blue-500 to-cyan-500 text-white shadow-md shadow-blue-500/20"
-                    : "hover:bg-linear-to-r hover:from-blue-500 hover:to-cyan-500 hover:text-white hover:font-bold hover:shadow-md hover:shadow-blue-500/20"
-                  }`}>
+                  className={`block px-4 py-3 rounded-lg text-sm sm:text-base font-medium transition-colors ${
+                      pathname === link.href
+                          ? "bg-linear-to-r from-blue-500 to-cyan-500 text-white shadow-md shadow-blue-500/20"
+                          : "text-slate-800 hover:bg-linear-to-r hover:from-blue-500 hover:to-cyan-500 hover:text-white hover:font-bold hover:shadow-md hover:shadow-blue-500/20"
+                  }`}
+                >
                       {link.name}
                   </Link>
               ))}
               <SignedIn>
                 <Link 
                   href="/user/submissions"
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`block px-4 py-3 rounded-lg text-sm sm:text-base font-medium transition-colors ${
                       pathname === "/user/submissions"
                           ? "bg-linear-to-r from-blue-500 to-cyan-500 text-white shadow-md shadow-blue-500/20"
-                          : "hover:bg-linear-to-r hover:from-blue-500 hover:to-cyan-500 hover:text-white hover:font-bold hover:shadow-md hover:shadow-blue-500/20"
+                          : "text-slate-800 hover:bg-linear-to-r hover:from-blue-500 hover:to-cyan-500 hover:text-white hover:font-bold hover:shadow-md hover:shadow-blue-500/20"
                   }`}>
                   Submissions
                 </Link>
               </SignedIn>
-              <div className="pt-6 px-4 flex flex-col gap-2">
+              <div className="pt-6 px-4 flex flex-col gap-3 sm:gap-4">
+                {isAdmin && 
+                        <Button asChild className='bg-blue-500'>
+                            <Link href="/admin" className='font-semibold'>
+                                Admin
+                            </Link>
+                        </Button>
+                        
+                    }
                 <SignedIn>
-                  <UserButton/>
+                  <div className="flex items-center justify-center bg-blue-50 rounded-lg py-1.5">
+                    <UserButton/>
+                  </div>
                 </SignedIn>
                 <SignedOut>
-                  <Button asChild>
-                    <Link href={"/sign-in"}>Sign In</Link>
+                  <Button 
+                    asChild
+                    className='font-semibold'
+                  >
+                    <Link href={"/sign-in"} className="text-white">Sign In</Link>
                   </Button>
                 </SignedOut>
               </div>

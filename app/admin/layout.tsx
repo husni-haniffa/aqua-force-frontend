@@ -20,9 +20,9 @@ export default function AdminLayout({
   return (
     <SidebarProvider>
       <AdminAppSideBar />
-      <SidebarInset className="bg-linear-to-br from-slate-50 to-blue-50">
+      <SidebarInset className="bg-slate-50">
         
-        <header className="sticky top-0 z-10 h-16 border-b bg-white/80 backdrop-blur-sm">
+        <header className="sticky top-0 z-10 h-16 border-b">
           <div className="container flex h-full items-center justify-between px-6">
             <SidebarTrigger />
 

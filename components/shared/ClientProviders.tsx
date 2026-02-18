@@ -5,7 +5,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ReactNode, useState } from "react";
 
 export default function ClientProviders({ children }: { children: ReactNode }) {
-  // Ensure QueryClient is stable on client
+
   const [queryClient] = useState(() => new QueryClient());
 
   return (

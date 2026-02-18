@@ -20,26 +20,21 @@ export function AdminAppSideBar() {
   
   return (
     <Sidebar>
-      <SidebarHeader className="border-b h-16 px-4">
-        <Link href={"/"} className='flex items-center gap-3 group'>
-          <div className="w-10 h-10 rounded-xl bg-linear-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:scale-105 transition-transform">
-            <Brain className="w-6 h-6 text-white" />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-bold text-lg leading-tight bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-              AquaForce
+      <SidebarHeader className="border-b h-16 px-4 pt-4">
+        <Link href={"/"} className='px-2 w-fit py-1 flex justify-center items-center rounded-md bg-blue-100'>
+         
+       
+            <span className="font-bold text-lg leading-tight bg-blue-500 bg-clip-text text-transparent">
+              Research Minds Net
             </span>
-            <span className="text-xs text-slate-500">
-              Together, Future, Life
-            </span>
-          </div>
+  
         </Link>
       </SidebarHeader>
       
       <SidebarContent className="py-4 px-2">
         {adminNavLinks.map((group) => (
           <SidebarGroup key={group.label} className="mb-6">
-            <SidebarGroupLabel className="text-sm font-semibold text-slate-400 uppercase tracking-wider px-3 mb-3">
+            <SidebarGroupLabel className="text-sm font-semibold text-blue-500 uppercase tracking-wider px-3 mb-3">
               {group.label}
             </SidebarGroupLabel>
             <SidebarGroupContent>

@@ -1,12 +1,4 @@
-import {
-    Home,
-    LayoutDashboard,
-    Layers,
-    Newspaper,
-    CalendarDays,
-    FileText,
-    Users
-} from "lucide-react"
+import { Home, LayoutDashboard, Layers, Newspaper, CalendarDays, FileText, Users, ClipboardList } from "lucide-react"
 
 export const adminNavLinks = [
     {
@@ -63,6 +55,11 @@ export const adminNavLinks = [
                 title: "Users",
                 url: "/admin/users",
                 icon: Users,
+            },
+            {
+                title: "Waitlist",
+                url: "/admin/waitlist",
+                icon: ClipboardList,
             },
         ],
     },
