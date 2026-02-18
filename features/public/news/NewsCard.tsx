@@ -6,6 +6,8 @@ import { Calendar, ArrowRight } from "lucide-react"
 import { formateDate } from "@/lib/format"
 import { NewsCardsSkeleton } from "./Skeleton"
 import { AlertError } from "@/components/ui/alert-error"
+import { motion } from "framer-motion"
+import { container, item } from "@/lib/animation"
 
 const NewsCard = () => {
     const { data, isLoading, error } = useNews()
@@ -14,9 +16,15 @@ const NewsCard = () => {
   return (
     
         <div className="container">
-            <div className="columns-1 md:columns-2 gap-9 space-y-9">
+            <motion.div className="columns-1 md:columns-2 gap-9 space-y-9"
+               variants={container}
+                                 initial="hidden"
+                                 animate="visible"
+                                 >
                 {data?.map((news) => (
-                    <div key={news._id} className='bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group'>
+                    <motion.div key={news._id} 
+                    variants={item}
+                    className='bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group'>
                         <div>
                             {news.imageUrl && (
                                 <div className="relative w-full h-50">
@@ -53,9 +61,9 @@ const NewsCard = () => {
                             </div>                    
                             
                         </div>
-                    </div>
+                    </motion.div>
                 ))}
-            </div>
+            </motion.div>
         </div>
   )
 }

@@ -7,6 +7,8 @@ import { PublicationCardSkeleton } from './Skeleton'
 import { AlertError } from '@/components/ui/alert-error'
 import { Input } from '@/components/ui/input'
 import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
+import { container, item } from '@/lib/animation'
 
 const PublicationCard = ({ search }: { search: string }) => {
 
@@ -39,11 +41,17 @@ const PublicationCard = ({ search }: { search: string }) => {
 
  
         
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-9">
+        <motion.div className="grid grid-cols-1 xl:grid-cols-2 gap-9"
+           variants={container}
+                             initial="hidden"
+                             animate="visible"
+                              >
 
             {filtered?.map((publication) => (
 
-                <div key={publication._id} className="bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group">
+                <motion.div key={publication._id} 
+                variants={item}
+                className="bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group">
 
                     <div className="px-4 py-4">
                         
@@ -105,10 +113,10 @@ const PublicationCard = ({ search }: { search: string }) => {
                         
                     </div>
 
-                </div>
+                </motion.div>
             ))}
 
-        </div>
+        </motion.div>
         
    
    

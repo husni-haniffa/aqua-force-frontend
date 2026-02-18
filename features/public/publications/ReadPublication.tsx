@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { formateDate } from '@/lib/format'
 import { AlertError } from '@/components/ui/alert-error'
 import { ReadPublicationSkeleton } from './Skeleton'
+import { motion } from 'framer-motion'
 
 const ReadPublication =  ({id} : {id: string}) => {
 
@@ -16,7 +17,11 @@ const ReadPublication =  ({id} : {id: string}) => {
   return (
     <div className='pt-16 xl:pt-24 pb-16 xl:pb-24'>
         <div className='container'>
-            <article >  
+            <motion.article 
+            initial={{opacity:0, x: -40}}
+            animate={{opacity:1, x:0}}
+            transition={{duration: 0.8, ease: "easeInOut"}}
+            >  
                 <header className="mb-8">            
                     <div className="mb-4">
                         <span className='text-xs bg-green-50 text-green-700 px-2 py-1 rounded-md'>
@@ -64,7 +69,9 @@ const ReadPublication =  ({id} : {id: string}) => {
                 </section>
                     
                 <div className="pt-6 border-t border-slate-200">
-                    <div className="flex justify-end">
+                    <div className="flex justify-end"
+                    
+                >
                       
                         <Button asChild>
                             <Link href={data?.filePath || ''} target='_blank'>Download</Link>
@@ -72,7 +79,7 @@ const ReadPublication =  ({id} : {id: string}) => {
                                               
                     </div>
                 </div>
-            </article>
+            </motion.article>
         </div>
     </div>
   )

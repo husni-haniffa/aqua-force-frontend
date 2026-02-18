@@ -6,7 +6,8 @@ import { formateDate, formateTime } from '@/lib/format'
 import { Bell, Calendar, Clock, MapPin } from 'lucide-react'
 import { EventCardsSkeleton } from './Skeleton'
 import { AlertError } from '@/components/ui/alert-error'
-
+import { motion } from 'framer-motion'
+import { container, item } from '@/lib/animation'
 const EventCard = () => {
 
     const { data, isLoading, error} = useEvents()
@@ -59,9 +60,15 @@ const EventCard = () => {
   }
 };
   return (
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-9'>
+      <motion.div className='grid grid-cols-1 md:grid-cols-3 gap-9'
+         variants={container}
+                           initial="hidden"
+                           animate="visible"
+                            >
                {data?.map((event) => (
-                   <div key={event._id} className='bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group  h-fit'>
+                   <motion.div key={event._id} 
+                   variants={item}
+                   className='bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group  h-fit'>
    
                        <div className='px-4 py-4'>
                            <header className='flex flex-col mb-4'>
@@ -101,6 +108,7 @@ const EventCard = () => {
                                 </span>
                               </div>
                             </div>
+                            
         <div className='mt-5 pt-4 border-t border-slate-100'>
       <button 
         onClick={() => handleAddToCalendar(event)}
@@ -115,9 +123,9 @@ const EventCard = () => {
                        </div>
                        
    
-                   </div>
+                   </motion.div>
                ))}
-           </div>
+           </motion.div>
   )
 }
 

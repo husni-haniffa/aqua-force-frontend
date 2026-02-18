@@ -1,18 +1,35 @@
 import { Input } from '@/components/ui/input'
 import { Search } from 'lucide-react'
 import React from 'react'
+import { motion } from 'framer-motion'
 
 const PublicationHeader = ({ onSearch }: { onSearch: (value: string) => void }) => {
   return (
  <div className='flex flex-col justify-center items-center'>
        <header className='flex flex-col items-center justify-center gap-3 mb-12 text-center'>
-            <h6 className='text-sm md:text-base text-blue-500'>LATEST RESEARCH</h6>
-            <h1 className='text-2xl md:text-3xl xl:text-4xl font-bold text-slate-800'>
+            <motion.h6 className='text-sm md:text-base text-blue-500'
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                viewport={{ once: false, amount: 0.3 }}
+            >
+                LATEST RESEARCH
+            </motion.h6>
+            <motion.h1 className='text-2xl md:text-3xl xl:text-4xl font-bold text-slate-800'
+                initial={{ opacity: 0, y: -40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: "easeOut"  }}
+                viewport={{ once: false, amount: 0.3 }}
+            >
                 Featured Publications
-            </h1>
-            <p className='max-w-2xl xl:max-w-3xl text-sm md:text-base text-slate-600'>
+            </motion.h1>
+            <motion.p className='max-w-2xl xl:max-w-3xl text-sm md:text-base text-slate-600'
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: "easeOut"  }}
+                viewport={{ once: false, amount: 0.3 }}>
                 Discover innovative research conducted by students across diverse academic disciplines
-            </p>
+            </motion.p>
              
         </header>
 
