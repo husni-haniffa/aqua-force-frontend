@@ -4,6 +4,7 @@ import { SignedIn, SignedOut } from "@clerk/nextjs"
 import { ArrowRight, Award } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { motion } from 'framer-motion'
 
 const Hero = () => {
   return (
@@ -24,45 +25,82 @@ const Hero = () => {
 
             <div className="max-w-6xl mx-auto">
 
-                <span className="flex items-center gap-2 px-4 py-2 rounded-full border border-amber-600 text-amber-400 text-sm mb-6 w-fit">
+                <motion.span 
+                    className="flex items-center gap-2 px-4 py-2 rounded-full border border-amber-600 text-amber-400 text-sm mb-6 w-fit"
+                    initial={{ opacity: 0, x: -40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut"  }}
+                    viewport={{ once: false, amount: 0.3 }}
+                >
                     <Award className="w-5 h-5 text-amber-600" strokeWidth={'2px'}/>
                     Trusted by Leading Institutions
-                </span>
+                </motion.span>
 
-                <header className="text-white text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+                <motion.header 
+                    className="text-white text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight"
+                    initial={{ opacity: 0, y: -40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, ease: "easeOut"  }}
+                    viewport={{ once: false, amount: 0.3 }}
+                >
                    A place for minds to connect, ideas to grow, and research to create {" "}
                     <span className="text-sky-400">real-world impact.</span>
-                </header>
+                </motion.header>
 
-                <p className="text-white/90 text-sm md:text-base lg:text-lg max-w-3xl mb-8">
+                <motion.p 
+                    className="text-white/90 text-sm md:text-base lg:text-lg max-w-3xl mb-8"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, ease: "easeOut"  }}
+                    viewport={{ once: false, amount: 0.3 }}
+                >
                   A shared digital space for our university’s academic community to publish research, explore publications, and collaborate across disciplines — supporting learning, discovery, and real-world solutions.
-                </p>
+                </motion.p>
 
                 <div className="flex flex-col sm:flex-row gap-6">
 
-                    <SignedIn>
-                        <Button className="font-semibold" asChild>                     
-                            <Link href={'/user/submissions'}>
-                                Submit Your Paper 
-                                <ArrowRight/>
-                            </Link>                   
-                        </Button>
-                    </SignedIn>
+                    <motion.div
+                        initial={{ opacity: 0, x: -40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ type: "spring", stiffness: 300}}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale:1 }}
+                        viewport={{ once: false, amount: 0.3 }}
+                    >
+                        <SignedIn>
+                            <Button className="font-semibold" asChild>                     
+                                <Link href={'/user/submissions'}>
+                                    Submit Your Paper 
+                                    <ArrowRight/>
+                                </Link>                   
+                            </Button>
+                        </SignedIn>
 
-                    <SignedOut>
-                        <Button className="font-semibold" asChild>
-                            <Link href={'/sign-in'}>
-                                Submit Your Paper 
-                                <ArrowRight/>
-                            </Link>                   
+                        <SignedOut>
+                            <Button className="font-semibold" asChild>
+                                <Link href={'/sign-in'}>
+                                    Submit Your Paper 
+                                    <ArrowRight/>
+                                </Link>                   
+                            </Button>
+                        </SignedOut>
+                    </motion.div>
+                   
+                    <motion.div
+                        initial={{ opacity: 0, x: 40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                         transition={{ type: "spring", stiffness: 300}}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale:1 }}
+                        viewport={{ once: false, amount: 0.3 }}
+                    >
+                        <Button variant={'outline'} asChild>
+                            <Link href={'/publications'}>
+                                Explore Publications
+                            </Link>
                         </Button>
-                    </SignedOut>
-
-                    <Button variant={'outline'} asChild>
-                        <Link href={'/publications'}>
-                            Explore Publications
-                        </Link>
-                    </Button>
+                    </motion.div>
+                   
 
                 </div>
 

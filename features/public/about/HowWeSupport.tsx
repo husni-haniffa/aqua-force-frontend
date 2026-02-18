@@ -1,21 +1,38 @@
+"use client"
 import { howWeSupport } from "@/lib/about"
+import { container, item } from "@/lib/animation"
+import { motion } from 'framer-motion'
 
 const HowWeSupport = () => {
   return (
     <div className='container pt-16 xl:pt-24'>
        <header className='flex flex-col items-center justify-center gap-3 mb-12 text-center'>
-            <h6 className='text-sm md:text-base text-slate-600'>OUR GOAL</h6>
-            <h1 className='text-2xl md:text-3xl xl:text-4xl font-bold text-slate-800'>
+            <motion.h6 className='text-sm md:text-base text-blue-500'
+             initial={{opacity:0, x:-40}}
+                        whileInView={{opacity:1, x:0}}
+                        transition={{duration:1, ease:"easeInOut"}}>OUR GOAL</motion.h6>
+            <motion.h1 className='text-2xl md:text-3xl xl:text-4xl font-bold text-slate-800'
+             initial={{opacity:0, y:-40}}
+                        whileInView={{opacity:1, y:0}}
+                        transition={{duration:1, ease:"easeInOut"}}>
                 How We Support You
-            </h1>
-            <p className='max-w-2xl xl:max-w-3xl text-sm md:text-base text-slate-600'>
+            </motion.h1>
+            <motion.p className='max-w-2xl xl:max-w-3xl text-sm md:text-base text-slate-600'
+             initial={{opacity:0, y:-40}}
+                        whileInView={{opacity:1, y:0}}
+                        transition={{duration:1, ease:"easeInOut"}}>
                We provide comprehensive support across the entire research lifecycle
-            </p>     
+            </motion.p>     
         </header>
         <div>
-  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+  <motion.div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6"
+     variants={container}
+                       initial="hidden"
+                       whileInView="visible"
+                        viewport={{ once: false, amount: 0.3 }}>
   {howWeSupport.map((support) => (
-    <div 
+    <motion.div 
+    variants={item}
       key={support.title} 
       className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 p-4 sm:p-6 border border-slate-200"
     >
@@ -42,14 +59,14 @@ const HowWeSupport = () => {
             key={index} 
             className="flex items-start gap-2 text-xs sm:text-sm text-slate-700"
           >
-            <span className="text-emerald-500 mt-0.5 flex-shrink-0 font-bold">✓</span>
+            <span className="text-emerald-500 mt-0.5 shrink-0 font-bold">✓</span>
             <span className="leading-relaxed">{feature}</span>
           </li>
         ))}
       </ul>
-    </div>
+    </motion.div>
   ))}
-</div>
+</motion.div>
         </div>
     </div>
   )

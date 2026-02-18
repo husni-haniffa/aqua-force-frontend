@@ -14,11 +14,11 @@ const Navbar = () => {
     const isAdmin = useCheckRole('admin')
     
   return (
-    <nav className='fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-border bg-slate-50'>
+    <nav className='fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-border bg-white'>
         <div className='container'>
             <div className='flex items-center justify-between h-16'>          
-                  <Link href={"/"}>                       
-                    <span className="font-bold text-lg sm:text-xl lg:text-2xl leading-tight bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                  <Link href={"/"} className='bg-blue-100 px-2 py-1 rounded-lg'>                       
+                    <span className="font-bold text-lg sm:text-xl lg:text-2xl leading-tight bg-blue-500 bg-clip-text text-transparent">
                         Research Minds Net
                     </span> 
                 </Link>
@@ -50,9 +50,12 @@ const Navbar = () => {
                 </div>
                 <div className='hidden lg:flex items-center gap-6'>
                     {isAdmin && 
-                        <Link href="/admin" className='text-slate-800 text-base font-semibold'>
-                            <ShieldUser />
-                        </Link>
+                        <Button asChild className='bg-blue-950 hover:bg-blue-900'>
+                            <Link href="/admin" className='font-semibold'>
+                                Admin
+                            </Link>
+                        </Button>
+                        
                     }
                     <SignedIn>
                         <UserButton/>

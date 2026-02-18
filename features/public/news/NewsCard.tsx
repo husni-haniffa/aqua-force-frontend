@@ -4,17 +4,27 @@ import Link from "next/link"
 import { useNews } from "./news.hooks"
 import { Calendar, ArrowRight } from "lucide-react"
 import { formateDate } from "@/lib/format"
+import { NewsCardsSkeleton } from "./Skeleton"
+import { AlertError } from "@/components/ui/alert-error"
+import { motion } from "framer-motion"
+import { container, item } from "@/lib/animation"
 
 const NewsCard = () => {
     const { data, isLoading, error } = useNews()
-    if(isLoading) return <p className="text-center py-8">Loading news...</p>
-    if(error instanceof Error) return <p className="text-center py-8 text-red-500">Error loading news</p>
+    if(isLoading) return <NewsCardsSkeleton/>
+    if(error instanceof Error) return <AlertError message={error.message}/>
   return (
     
-        <div>
-            <div className="columns-1 md:columns-2 gap-9 space-y-9">
+        <div className="container">
+            <motion.div className="columns-1 md:columns-2 gap-9 space-y-9"
+               variants={container}
+                                 initial="hidden"
+                                 animate="visible"
+                                 >
                 {data?.map((news) => (
-                    <div key={news._id} className='bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group'>
+                    <motion.div key={news._id} 
+                    variants={item}
+                    className='bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group'>
                         <div>
                             {news.imageUrl && (
                                 <div className="relative w-full h-50">
@@ -51,9 +61,9 @@ const NewsCard = () => {
                             </div>                    
                             
                         </div>
-                    </div>
+                    </motion.div>
                 ))}
-            </div>
+            </motion.div>
         </div>
   )
 }

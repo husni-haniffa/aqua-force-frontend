@@ -12,10 +12,10 @@ export const UserInfoSkeleton = () => {
 export const UserNameSkeleton = () => {
     return (
         <div>
-        <header>
-            Welcome back, <Skeleton className="h-15 w-35"/>
-        </header>
-    </div>
+            <header>
+                Welcome back, <Skeleton className="h-15 w-35"/>
+            </header>
+        </div>
     )
     
 }

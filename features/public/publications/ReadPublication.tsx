@@ -6,23 +6,22 @@ import { FileText, User, Tag, ArrowLeft, Calendar, ExternalLink, Download } from
 import { Button } from '@/components/ui/button'
 import { formateDate } from '@/lib/format'
 import { AlertError } from '@/components/ui/alert-error'
+import { ReadPublicationSkeleton } from './Skeleton'
+import { motion } from 'framer-motion'
 
 const ReadPublication =  ({id} : {id: string}) => {
 
     const { data, isLoading, error } = usePublicationById(id)
-    if(isLoading) return (
-        <div className="container py-12">
-            <div className="text-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
-                <p className="text-slate-600">Loading publication...</p>
-            </div>
-        </div>
-    )
+    if(isLoading) return <ReadPublicationSkeleton/>
     if(error instanceof Error) return <AlertError message={error.message}/>
   return (
     <div className='pt-16 xl:pt-24 pb-16 xl:pb-24'>
         <div className='container'>
-            <article >  
+            <motion.article 
+            initial={{opacity:0, x: -40}}
+            animate={{opacity:1, x:0}}
+            transition={{duration: 0.8, ease: "easeInOut"}}
+            >  
                 <header className="mb-8">            
                     <div className="mb-4">
                         <span className='text-xs bg-green-50 text-green-700 px-2 py-1 rounded-md'>
@@ -70,14 +69,17 @@ const ReadPublication =  ({id} : {id: string}) => {
                 </section>
                     
                 <div className="pt-6 border-t border-slate-200">
-                    <div className="flex justify-end">
+                    <div className="flex justify-end"
+                    
+                >
                       
                         <Button asChild>
-                            <Link href={''}>Download</Link>
-                        </Button>                        
+                            <Link href={data?.filePath || ''} target='_blank'>Download</Link>
+                        </Button>
+                                              
                     </div>
                 </div>
-            </article>
+            </motion.article>
         </div>
     </div>
   )
