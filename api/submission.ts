@@ -89,3 +89,18 @@ export const deleteSubmission = async (id: string, token: string) => {
     }
     return result
 }
+
+export const addSocialMediaLinksasync = async(id: string, token: string) => {
+    const response = await fetch(`${BASE_URL}/submissions/add-social-media-links/${id}`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`
+        },
+    })
+    const result = await response.json()
+    if (!response.ok) {
+        throw new Error(result.message || "Failed to add social media links")
+    }
+    return result
+}

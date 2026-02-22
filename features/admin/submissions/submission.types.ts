@@ -1,3 +1,4 @@
+import z from "zod"
 
 type Status = 'PENDING' | 'UNDER_REVIEW' | 'REJECTED' | 'ACCEPTED' 
 
@@ -18,3 +19,25 @@ export interface SubmissionResponse {
     createdAt: string
     updatedAt: string
 }
+
+export const formSchema = z.object({
+    youtube: z
+        .string()
+        .optional(),
+
+    facebook: z
+        .string()
+        .optional(),
+        
+    instagram: z
+        .string()
+        .optional(),
+
+    twitter: z
+        .string()
+        .optional(),
+    
+    linkedin: z
+        .string()
+        .optional(),
+});

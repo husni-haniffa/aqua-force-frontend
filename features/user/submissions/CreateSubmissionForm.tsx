@@ -15,6 +15,7 @@ import { useCategories } from "@/features/admin/categories/category.hooks"
 import { SelectSkeleton } from "./Skeleton"
 import { AlertError } from "@/components/ui/alert-error"
 import { useRouter } from "next/navigation"
+import { useResearchTypes } from "@/features/admin/research-types/research-type.hooks"
 
 const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
 
@@ -34,6 +35,8 @@ const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
       onSuccess?.()
     })
 
+    const { data: researchTypes, isLoading: researchTypesLoading, error: researchTypesError } = useResearchTypes()
+
     const { data, isLoading, error } = useCategories()
 
     if (error instanceof Error) return <AlertError message={error.message}/>
@@ -48,6 +51,30 @@ const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
         <CardContent>
           <form id="create-submission" onSubmit={form.handleSubmit((v) => createMutation.mutate(v))}>
             <FieldGroup>
+              <Controller
+                name="researchTypeId"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldLabel>Select Research Type</FieldLabel>
+                     {researchTypesLoading ? <SelectSkeleton/> : 
+                        <Select onValueChange={field.onChange} value={field.value}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a Research Type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {researchTypes?.map((researchType) => (
+                            <SelectItem key={researchType._id} value={researchType._id}>
+                              {researchType.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                     }                  
+                    {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                  </Field>
+                )}
+              />
                 <Controller
                   name="title"
                   control={form.control}

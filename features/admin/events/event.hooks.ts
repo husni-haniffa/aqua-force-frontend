@@ -28,7 +28,16 @@ export function useCreateEvent(onSuccess?: () => void) {
         mutationFn: async (data: z.infer<typeof formSchema>) => {
             const token = await getToken()
             if (!token) throw new Error("Not authenticated")
-            return createEvent(data, token)
+            const formData = new FormData()
+            if (data.file) {
+                formData.append("file", data.file)
+            }
+            formData.append("title", data.title)
+            formData.append("description", data.description)
+            formData.append("eventDate", data.eventDate.toDateString())
+            formData.append("eventTime", data.eventTime)
+            formData.append("location", data.location)
+            return createEvent(formData, token)
         },
         onSuccess: () => {
             toast.success("Event created")
@@ -52,7 +61,16 @@ export function useUpdateEvent(
         mutationFn: async (data: z.infer<typeof formSchema>) => {
             const token = await getToken()
             if (!token) throw new Error("Not authenticated")
-            return updateEvent({ id: eventId, data, token })
+            const formData = new FormData()
+            if (data.file) {
+                formData.append("file", data.file)
+            }
+            formData.append("title", data.title)
+            formData.append("description", data.description)
+            formData.append("eventDate", data.eventDate.toDateString())
+            formData.append("eventTime", data.eventTime)
+            formData.append("location", data.location)
+            return updateEvent({ id: eventId, formData, token })
         },
         onSuccess: () => {
             toast.success("Event updated")

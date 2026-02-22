@@ -127,3 +127,7 @@ export function useDeleteSubmission(
         },
     })
 }
+
+export function useAddSocialMediaLinks() {
+    
+}

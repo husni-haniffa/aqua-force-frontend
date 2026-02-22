@@ -13,6 +13,7 @@ import { DatePicker } from "@/components/ui/date-picker"
 import { useEffect } from "react"
 import { EventFormSkeleton } from "./Skeleton"
 import { AlertError } from "@/components/ui/alert-error"
+import Image from "next/image"
 
 const EditEventForm = ({ eventId, onSuccess } : EditEventFormProps) => {
 
@@ -28,7 +29,7 @@ const EditEventForm = ({ eventId, onSuccess } : EditEventFormProps) => {
         if (data) {
             form.reset({ title: data.title, description: data.description,
                 eventDate: new Date(data.eventDate),eventTime: data.eventTime,
-                location: data.location,
+                location: data.location, file: undefined
             })
         }
       }, [data, form])
@@ -152,7 +153,33 @@ const EditEventForm = ({ eventId, onSuccess } : EditEventFormProps) => {
                                 )}
                             </Field>
                         )}
-                    />     
+                    />
+                    <Controller
+                                            name="file"
+                                            control={form.control}
+                                            render={({ field }) => (
+                                            <Field>
+                                                <FieldLabel>
+                                                    Replace Flyer Post
+                                                </FieldLabel>
+                                                <div>
+                                                    {data?.imageUrl && (
+                                                        <Image
+                                                            src={data.imageUrl}
+                                                            alt="current event post"
+                                                            width={500}
+                                                            height={500}
+                                                        />
+                                                    )}
+                                                </div>
+                                                <Input
+                                                    type="file"
+                                                    accept="image/jpeg,image/png,image/jpg"
+                                                    onChange={(e) => field.onChange(e.target.files?.[0])}
+                                                />
+                                                </Field>
+                                            )}
+                                        />  
                 </FieldGroup>
             </form>
         </CardContent>

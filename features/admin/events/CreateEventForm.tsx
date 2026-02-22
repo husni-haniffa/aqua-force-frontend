@@ -136,7 +136,26 @@ const CreateEventForm = ({ onSuccess } : CreateEventFormProps) => {
                                 )}
                             </Field>
                         )}
-                    />     
+                    />  
+                    <Controller
+                        name="file"
+                        control={form.control}
+                        render={({ field, fieldState }) => (
+                            <Field data-invalid={fieldState.invalid}>
+                            <FieldLabel>
+                                Event Flyer Post
+                            </FieldLabel>
+                            <Input
+                                type="file"
+                                accept="image/jpeg,image/png,image/jpg"
+                                onChange={(e) => field.onChange(e.target.files?.[0])}
+                            />
+                            {fieldState.invalid && (
+                                <FieldError errors={[fieldState.error]} />
+                            )}
+                            </Field>
+                        )}
+                />   
                 </FieldGroup>
             </form>
         </CardContent>

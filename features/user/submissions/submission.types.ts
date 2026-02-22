@@ -6,6 +6,10 @@ export interface UserSubmissionResponse {
     _id: string
     userId: string
     userName: string
+    researchTypeId: {
+        _id: string
+        name: string
+    }
     categoryId: {
         _id: string
         name: string
@@ -32,6 +36,8 @@ export const formSchema = (mode: "create" | "edit") =>
 
 z.object({
     categoryId: z.string().min(1, "Category is required"),
+
+    researchTypeId: z.string().min(1, "Research Type is required"),
 
     title: z
         .string()

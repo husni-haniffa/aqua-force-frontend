@@ -16,6 +16,7 @@ import { useCategories } from "@/features/admin/categories/category.hooks"
 import { SelectSkeleton, SubmissionFormSkeleton } from "./Skeleton"
 import { AlertError } from "@/components/ui/alert-error"
 import { useRouter } from "next/navigation"
+import { useResearchTypes } from "@/features/admin/research-types/research-type.hooks"
 
 const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProps) => {
 
@@ -23,6 +24,7 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
 
     const { data, isLoading, error} = useSubmissionById(submissionId)
     const {data: categories, isLoading: categoriesLoading, error: categoriesError} = useCategories()
+    const { data: researchTypes, isLoading: researchTypesLoading, error: researchTypesError } = useResearchTypes()
 
     const updateMutation = useUpdateSubmission(submissionId, () => {
           form.reset()
@@ -33,6 +35,7 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
     const form = useForm<z.infer<ReturnType<typeof formSchema>>>({
     resolver: zodResolver(formSchema("edit")),
     defaultValues: { categoryId: "",
+      researchTypeId: "",
       title: "",
       abstract: "",
       keywords: [],
@@ -46,13 +49,15 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
           abstract: data.abstract,
           keywords: data.keywords,
           categoryId: data.categoryId._id,
+          researchTypeId: data.researchTypeId._id,
           file: undefined
         })
     }, [data, form])
       
     if (isLoading) return <SubmissionFormSkeleton/>
     if (error instanceof Error) return <AlertError message={error.message}/>
-
+     
+    
     if (categoriesError instanceof Error) return <AlertError message={categoriesError.message}/>
     if (!categories || categories.length === 0) return <p  className='flex items-center justify-center text-base'>No categories</p>
       
@@ -65,6 +70,30 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
         <CardContent>
           <form id="edit-submission" onSubmit={form.handleSubmit(v => updateMutation.mutate(v))}>
             <FieldGroup>
+               <Controller
+                name="researchTypeId"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldLabel>Select Research Type</FieldLabel>
+                     {researchTypesLoading ? <SelectSkeleton/> : 
+                        <Select onValueChange={field.onChange} value={field.value}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a Research Type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {researchTypes?.map((researchType) => (
+                            <SelectItem key={researchType._id} value={researchType._id}>
+                              {researchType.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                     }                  
+                    {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                  </Field>
+                )}
+              />
                 <Controller
                   name="title"
                   control={form.control}

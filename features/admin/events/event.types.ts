@@ -1,12 +1,6 @@
 import z from "zod"
 
-export interface EventRequest {
-    title: string
-    description: string
-    eventDate: Date  
-    eventTime: string  
-    location: string
-}
+
 
 export interface EventResponse {
     _id: string
@@ -15,6 +9,8 @@ export interface EventResponse {
     eventDate: Date
     eventTime: string
     location: string
+    imageUrl: string
+    imagePath: string
     createdAt: string
     updatedAt: string
 }
@@ -63,5 +59,17 @@ export const formSchema = z.object({
             /^[A-Za-z0-9 ,.-]+$/,
             "Location contains invalid characters"
         ),
+
+    file: z
+            .instanceof(File)
+           
+            .refine(
+                (file) =>
+                    !file ||
+                    ["image/jpeg", "image/jpg", "image/png"].includes(file.type),
+                {
+                    message: "Only JPG, JPEG, or PNG files are allowed",
+                }
+            ),
 });
 

@@ -10,6 +10,7 @@ import { AlertError } from '@/components/ui/alert-error'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import NewsView from './NewsView'
 import { View } from 'lucide-react'
+import { formateDate } from '@/lib/format'
 
 const NewsTable = ({ search }: { search: string }) => {
 
@@ -68,7 +69,7 @@ const NewsTable = ({ search }: { search: string }) => {
                         </DialogContent>
                       </Dialog>
                     </TableCell>
-                    <TableCell>{news.updatedAt}</TableCell>
+                    <TableCell>{formateDate(news.updatedAt)}</TableCell>
                     <TableCell>
                       <Link href={`/admin/news/${news._id}/edit`}>
                         <Button size="sm" variant={'edit'}>
