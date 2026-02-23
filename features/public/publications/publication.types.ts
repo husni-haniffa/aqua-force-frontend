@@ -11,5 +11,12 @@ export interface PublicationResponse {
     keywords: Array<string>
     filePath: string
     accessLevel: string
+    socialMediaLinks?: {
+        youtube?: string
+        facebook?: string
+        instagram?: string
+        twitter?: string
+        linkedin?: string
+    }
     updatedAt: Date
 }

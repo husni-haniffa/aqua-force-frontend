@@ -16,6 +16,12 @@ export interface SubmissionResponse {
     status: Status
     isPublished: boolean
     accessLevel: string
+    socialMediaLinks?: {
+        youtube?: string
+        facebook?: string
+        instagram?: string
+        linkedin?: string
+    }
     createdAt: string
     updatedAt: string
 }
@@ -23,21 +29,25 @@ export interface SubmissionResponse {
 export const formSchema = z.object({
     youtube: z
         .string()
-        .optional(),
+        .url("Please enter a valid YouTube URL")
+        .optional()
+        .or(z.literal("")),
 
     facebook: z
         .string()
-        .optional(),
-        
+        .url("Please enter a valid Facebook URL")
+        .optional()
+        .or(z.literal("")),
+
     instagram: z
         .string()
-        .optional(),
+        .url("Please enter a valid Instagram URL")
+        .optional()
+        .or(z.literal("")),
 
-    twitter: z
-        .string()
-        .optional(),
-    
     linkedin: z
         .string()
-        .optional(),
+        .url("Please enter a valid LinkedIn URL")
+        .optional()
+        .or(z.literal("")),
 });

@@ -1,6 +1,6 @@
 import { useAuth } from "@clerk/nextjs"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { fetchSubmissions, submissionApproved, submissionRejected, submissionUnderReview, publishSubmission, deleteSubmission } from "./submission.api"
+import { fetchSubmissions, submissionApproved, submissionRejected, submissionUnderReview, publishSubmission, deleteSubmission, addSocialMediaLinks, updateSocialMediaLinks } from "./submission.api"
 import { toast } from "sonner"
 
 
@@ -129,5 +129,63 @@ export function useDeleteSubmission(
 }
 
 export function useAddSocialMediaLinks() {
+    const { getToken } = useAuth()
+    const queryClient = useQueryClient()
     
+    return useMutation({
+        mutationFn: async ({
+            submissionId,
+            socialMediaLinks
+        }: {
+            submissionId: string
+            socialMediaLinks: {
+                youtube?: string
+                facebook?: string
+                instagram?: string
+                linkedin?: string
+            }
+        }) => {
+            const token = await getToken()
+            if (!token) throw new Error("Not authenticated")
+            return addSocialMediaLinks(submissionId, socialMediaLinks, token)
+        },
+        onSuccess: () => {
+            toast.success("Social media links added successfully")
+            queryClient.invalidateQueries({ queryKey: ["submissions"] })
+        },
+        onError: (err: Error) => {
+            toast.error(err.message ?? "Failed to add social media links")
+        },
+    })
+}
+
+export function useUpdateSocialMediaLinks() {
+    const { getToken } = useAuth()
+    const queryClient = useQueryClient()
+    
+    return useMutation({
+        mutationFn: async ({
+            submissionId,
+            socialMediaLinks
+        }: {
+            submissionId: string
+            socialMediaLinks: {
+                youtube?: string
+                facebook?: string
+                instagram?: string
+                linkedin?: string
+            }
+        }) => {
+            const token = await getToken()
+            if (!token) throw new Error("Not authenticated")
+            return updateSocialMediaLinks(submissionId, socialMediaLinks, token)
+        },
+        onSuccess: () => {
+            toast.success("Social media links updated successfully")
+            queryClient.invalidateQueries({ queryKey: ["submissions"] })
+        },
+        onError: (err: Error) => {
+            toast.error(err.message ?? "Failed to update social media links")
+        },
+    })
 }

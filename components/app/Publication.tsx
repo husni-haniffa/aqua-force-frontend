@@ -1,6 +1,6 @@
 "use client"
 import Link from 'next/link'
-import { User, ArrowRight } from 'lucide-react'
+import { User, ArrowRight, Youtube, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react'
 import { usePublications } from '@/features/public/publications/publication.hooks'
 import { AlertError } from '../ui/alert-error'
 import { PublicationCardSkeleton } from '@/features/public/publications/Skeleton'
@@ -99,6 +99,69 @@ const Publication = () => {
                                 ))}
                             </div>
                         </div>
+                        
+                    
+                        {publication.socialMediaLinks && (
+                            <div className="mb-8">
+                                <div className="flex items-center gap-3">
+                                    {publication.socialMediaLinks.youtube && (
+                                        <Link 
+                                            href={publication.socialMediaLinks.youtube} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="flex items-center gap-1 text-red-600 hover:text-red-700 transition-colors"
+                                            title="YouTube"
+                                        >
+                                            <Youtube className="w-4 h-4" />
+                                        </Link>
+                                    )}
+                                    {publication.socialMediaLinks.facebook && (
+                                        <Link 
+                                            href={publication.socialMediaLinks.facebook} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="flex items-center gap-1 text-blue-600 hover:text-blue-700 transition-colors"
+                                            title="Facebook"
+                                        >
+                                            <Facebook className="w-4 h-4" />
+                                        </Link>
+                                    )}
+                                    {publication.socialMediaLinks.instagram && (
+                                        <Link 
+                                            href={publication.socialMediaLinks.instagram} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="flex items-center gap-1 text-pink-600 hover:text-pink-700 transition-colors"
+                                            title="Instagram"
+                                        >
+                                            <Instagram className="w-4 h-4" />
+                                        </Link>
+                                    )}
+                                    {publication.socialMediaLinks.twitter && (
+                                        <Link 
+                                            href={publication.socialMediaLinks.twitter} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="flex items-center gap-1 text-sky-600 hover:text-sky-700 transition-colors"
+                                            title="Twitter"
+                                        >
+                                            <Twitter className="w-4 h-4" />
+                                        </Link>
+                                    )}
+                                    {publication.socialMediaLinks.linkedin && (
+                                        <Link 
+                                            href={publication.socialMediaLinks.linkedin} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="flex items-center gap-1 text-blue-700 hover:text-blue-800 transition-colors"
+                                            title="LinkedIn"
+                                        >
+                                            <Linkedin className="w-4 h-4" />
+                                        </Link>
+                                    )}
+                                </div>
+                            </div>
+                        )}
                         
                     
                         <div className="flex justify-between items-center">
