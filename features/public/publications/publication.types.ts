@@ -2,6 +2,10 @@ export interface PublicationResponse {
     _id: string
     userId: string
     userName: string
+    researchTypeId: {
+        _id: string
+        name: string
+    }
     categoryId: {
         _id: string
         name: string

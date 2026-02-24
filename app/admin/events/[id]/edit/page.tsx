@@ -4,6 +4,7 @@ import EditEventForm from "@/features/admin/events/EditEventForm"
 import EditNewsForm from "@/features/admin/news/EditNewsForm"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { use } from "react"
 
 interface PageProps {
@@ -13,7 +14,7 @@ interface PageProps {
 const EditEventPage = ({ params }: PageProps) => {
 
   const { id } = use(params)
-
+  const router = useRouter()
   return (
     <div className="flex flex-col gap-6">
       <div>
@@ -24,7 +25,7 @@ const EditEventPage = ({ params }: PageProps) => {
           </Button>
         </Link>
       </div>
-      <EditEventForm eventId={id} />
+      <EditEventForm eventId={id} onSuccess={() => router.push('/admin/events')}/>
     </div>
   )
 }

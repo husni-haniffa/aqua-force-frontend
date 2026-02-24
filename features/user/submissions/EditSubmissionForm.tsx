@@ -9,7 +9,7 @@ import z from "zod"
 import { Textarea } from "@/components/ui/textarea"
 import { KeywordsInput } from "@/components/ui/keywords-input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { EditSubmissionFormProps, formSchema } from "./submission.types"
+import { editFormSchema, EditFormSchema, EditSubmissionFormProps, formSchema } from "./submission.types"
 import { useEffect } from "react"
 import { useSubmissionById, useUpdateSubmission } from "./submission.hooks"
 import { useCategories } from "@/features/admin/categories/category.hooks"
@@ -32,8 +32,8 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
           onSuccess?.()
     })
 
-    const form = useForm<z.infer<ReturnType<typeof formSchema>>>({
-    resolver: zodResolver(formSchema("edit")),
+    const form = useForm<EditFormSchema>({
+    resolver: zodResolver(editFormSchema),
     defaultValues: { categoryId: "",
       researchTypeId: "",
       title: "",
@@ -50,7 +50,6 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
           keywords: data.keywords,
           categoryId: data.categoryId._id,
           researchTypeId: data.researchTypeId._id,
-          file: undefined
         })
     }, [data, form])
       

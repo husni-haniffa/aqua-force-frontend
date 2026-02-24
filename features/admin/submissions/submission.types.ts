@@ -6,6 +6,10 @@ export interface SubmissionResponse {
     _id: string
     userId: string
     userName: string
+    researchTypeId: {
+        _id: string
+        name: string
+    }
     categoryId: {
         _id: string
         name: string

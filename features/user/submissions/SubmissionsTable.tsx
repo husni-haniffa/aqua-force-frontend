@@ -39,6 +39,7 @@ const SubmissionsTable = ({ search }: { search: string }) => {
         <TableHeader>
             <TableRow>
                 <TableHead>Title</TableHead>
+                <TableHead>Research</TableHead>
                 <TableHead>Category</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>File</TableHead>
@@ -51,7 +52,8 @@ const SubmissionsTable = ({ search }: { search: string }) => {
         <TableBody>
             {filtered?.map((submission) => (
                 <TableRow key={submission._id}>
-                    <TableCell>{submission.title}</TableCell>
+                    <TableCell>{submission.title.slice(0,25)}...</TableCell>
+                    <TableCell>{submission.researchTypeId.name}</TableCell>
                     <TableCell>{submission.categoryId.name}</TableCell>
                     <TableCell> <StatusBadge status={submission.status}/></TableCell>
                     <TableCell>

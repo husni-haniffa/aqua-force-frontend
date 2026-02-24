@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import EditNewsForm from "@/features/admin/news/EditNewsForm"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { use } from "react"
 
 interface PageProps {
@@ -12,6 +13,7 @@ interface PageProps {
 const EditNewsPage = ({ params }: PageProps) => {
 
   const { id } = use(params)
+  const router = useRouter()
 
   return (
     <div className="flex flex-col gap-6">
@@ -23,7 +25,7 @@ const EditNewsPage = ({ params }: PageProps) => {
           </Button>
         </Link>
       </div>
-      <EditNewsForm newsId={id} />
+      <EditNewsForm newsId={id} onSuccess={() => router.push('/admin/news')} />
     </div>
   )
 }

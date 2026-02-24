@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button"
 import ButtonLoader from "@/components/ui/button-loader"
 import { Card, CardHeader, CardTitle, CardContent, CardFooter, CardDescription } from "@/components/ui/card"
@@ -15,7 +16,7 @@ const CreateEventForm = ({ onSuccess } : CreateEventFormProps) => {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: { title: "", description: "", eventDate: new Date(), eventTime: "10:30", location: "" },
+        defaultValues: { title: "", description: "", eventDate: new Date(), eventTime: "10:30", location: "", file: undefined},
     })
     
     const createMutation = useCreateEvent(onSuccess)

@@ -3,7 +3,7 @@ import { toast } from "sonner"
 import { useAuth } from "@clerk/nextjs"
 import { fetchEvents, fetchEventById, createEvent, updateEvent, deleteEvent } from "./event.api"
 import * as z from "zod"
-import { EventResponse, formSchema } from "./event.types"
+import { EditFormSchema, EventResponse, formSchema } from "./event.types"
 
 export function useEvents() {
     return useQuery({
@@ -58,7 +58,7 @@ export function useUpdateEvent(
     const queryClient = useQueryClient()
 
     return useMutation({
-        mutationFn: async (data: z.infer<typeof formSchema>) => {
+        mutationFn: async (data: EditFormSchema) => {
             const token = await getToken()
             if (!token) throw new Error("Not authenticated")
             const formData = new FormData()

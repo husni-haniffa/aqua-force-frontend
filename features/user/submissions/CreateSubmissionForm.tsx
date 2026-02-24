@@ -21,8 +21,8 @@ const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
 
   const router = useRouter()
 
-  const form = useForm<z.infer<ReturnType<typeof formSchema>>>({
-    resolver: zodResolver(formSchema("create")),
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
     defaultValues: { categoryId: "",
       title: "",
       abstract: "",

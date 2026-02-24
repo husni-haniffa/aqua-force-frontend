@@ -1,8 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
 import { useAuth, useUser } from "@clerk/nextjs"
-import { CreateSubmissionInput, EditSubmissionInput } from "./submission.types"
+import { EditFormSchema, formSchema } from "./submission.types"
 import { fetchSubmissionByUserId, createSubmission, updateSubmission, fetchSubmissionById} from "./submission.api"
+import z from "zod"
 
 export function useSubmissionByUserId() {
     const { getToken, userId } = useAuth()
@@ -37,7 +38,7 @@ export function useCreateSubmission(onSuccess?: () => void) {
     const queryClient = useQueryClient()
 
     return useMutation({
-        mutationFn: async (data: CreateSubmissionInput) => {
+        mutationFn: async (data: z.infer<typeof formSchema>) => {
             const token = await getToken()
             if (!token) throw new Error("Not authenticated")
             if (!userId) throw new Error("User not signed in")
@@ -45,6 +46,7 @@ export function useCreateSubmission(onSuccess?: () => void) {
             const formData = new FormData()    
             formData.append("userId", userId)
             formData.append("userName", user.fullName)
+            formData.append("researchTypeId", data.researchTypeId)
             formData.append("categoryId", data.categoryId)
             formData.append("title", data.title)
             formData.append("abstract", data.abstract)
@@ -71,7 +73,7 @@ export function useUpdateSubmission(submissionId: string, onSuccess?: () => void
     const queryClient = useQueryClient()
 
     return useMutation({
-        mutationFn: async (data: EditSubmissionInput) => {
+        mutationFn: async (data: EditFormSchema) => {
             const token = await getToken()
             if (!token) throw new Error("Not authenticated")
             if (!userId) throw new Error("User not signed in")
@@ -79,6 +81,7 @@ export function useUpdateSubmission(submissionId: string, onSuccess?: () => void
             const formData = new FormData()
             formData.append("userId", userId)
             formData.append("userName", user.fullName)
+            formData.append("researchTypeId", data.researchTypeId)
             formData.append("categoryId", data.categoryId)
             formData.append("title", data.title)
             formData.append("abstract", data.abstract)

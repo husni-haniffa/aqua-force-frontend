@@ -132,7 +132,7 @@ const SubmissionTable = ({ search }: { search: string }) => {
               </TableCell>
               <TableCell>{submission.updatedAt}</TableCell>
               <TableCell>
-                <UpdatePublishStatus id={submission._id} />
+                <UpdatePublishStatus id={submission._id} live={submission.isPublished === true ? "Yes" : "No"} currentStatus={submission.status}/>
               </TableCell>
               <TableCell>
                 <ConfirmDialog
