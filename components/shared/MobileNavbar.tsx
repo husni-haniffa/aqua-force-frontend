@@ -75,7 +75,7 @@ const MobileNavbar = () => {
                     }
                     <SignedOut>
                         <Button asChild className='font-semibold' variant={'secondary'}>
-                            <Link href={"/sign-in?redirect_url=/submissions"}>Submit Your Paper</Link>
+                            <Link href={"/sign-in?redirect_url=/user/submissions"}>Submit Your Paper</Link>
                         </Button>
                     </SignedOut>
                 <SignedIn>
