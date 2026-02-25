@@ -59,7 +59,7 @@ const News = () => {
                                     <h1 className="text-lg xl:text-xl font-bold mb-3 text-slate-800">{news.title}</h1>
                                 </header>
                                 <div className="pb-3">
-                                    <p className="text-xs xl:text-sm text-slate-600">{news.content}</p>
+                                    <p className="text-xs xl:text-sm text-slate-600">{news.content.slice(0,5000)}</p>
                                 </div>
                                 <div className="flex justify-between items-center border-t border-slate-100 pt-3">
                                     <h6 className='text-xs xl:text-sm text-slate-950'>

@@ -1,4 +1,3 @@
-
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
 import { useSubmissions, useDeleteSubmission} from "./submission.hooks"
 import UpdatePublishStatus from "./UpdatePublishStatus"
@@ -10,15 +9,19 @@ import ButtonLoader from "@/components/ui/button-loader"
 import { SubmissionTableSkeleton } from "./Skeleton"
 import { AlertError } from "@/components/ui/alert-error"
 import StatusBadge from "@/components/ui/status-badge"
-import { Download, View } from "lucide-react"
+import { Download, View, Plus, Edit } from "lucide-react"
 import SubmissionView from "./SubmissionView"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Button } from "@/components/ui/button"
+import AddSocialMediaLinks from "./AddSocialMediaLinks"
+import EditSocialMediaLinks from "./EditSocialMediaLinks"
 
 const SubmissionTable = ({ search }: { search: string }) => {
 
   const { data, isLoading, error } = useSubmissions()
   const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [addingSocialMediaId, setAddingSocialMediaId] = useState<string | null>(null)
+  const [editingSocialMediaId, setEditingSocialMediaId] = useState<string | null>(null)
   const [debouncedSearch, setDebouncedSearch] = useState(search);
   const deleteMutation = useDeleteSubmission(setDeletingId)
 
@@ -53,6 +56,7 @@ const SubmissionTable = ({ search }: { search: string }) => {
             <TableHead>Update</TableHead>
             <TableHead>Live</TableHead>
             <TableHead>Access</TableHead>
+            <TableHead>Social Media</TableHead>
             <TableHead>Updated</TableHead> 
             <TableHead>Publish</TableHead>
             <TableHead>Delete</TableHead>
@@ -88,9 +92,47 @@ const SubmissionTable = ({ search }: { search: string }) => {
               </TableCell>
               <TableCell>{submission.isPublished === true ? "Yes" : "No"}</TableCell>
               <TableCell>{submission.accessLevel}</TableCell>
+              <TableCell>
+                <div className="flex gap-2">
+                  <Dialog open={addingSocialMediaId === submission._id} onOpenChange={(open) => setAddingSocialMediaId(open ? submission._id : null)}>
+                    <DialogTrigger asChild>
+                      <Button disabled={deletingId === submission._id} size={'sm'} variant={'add'}>
+                        <Plus className="w-4 h-4" />
+                      </Button>
+                    </DialogTrigger>
+                    <DialogHeader className='sr-only'>
+                      <DialogTitle>Add Social Media Links</DialogTitle>
+                    </DialogHeader>
+                    <DialogContent className="max-w-2xl">
+                      <AddSocialMediaLinks 
+                        submissionId={submission._id} 
+                        onSuccess={() => setAddingSocialMediaId(null)} 
+                      />
+                    </DialogContent>
+                  </Dialog>
+                  
+                  <Dialog open={editingSocialMediaId === submission._id} onOpenChange={(open) => setEditingSocialMediaId(open ? submission._id : null)}>
+                    <DialogTrigger asChild>
+                      <Button disabled={deletingId === submission._id} size={'sm'} variant={'edit'}>
+                        <Edit/>
+                      </Button>
+                    </DialogTrigger>
+                    <DialogHeader className='sr-only'>
+                      <DialogTitle>Edit Social Media Links</DialogTitle>
+                    </DialogHeader>
+                    <DialogContent className="max-w-2xl">
+                      <EditSocialMediaLinks 
+                        submissionId={submission._id} 
+                        initialData={submission.socialMediaLinks}
+                        onSuccess={() => setEditingSocialMediaId(null)} 
+                      />
+                    </DialogContent>
+                  </Dialog>
+                </div>
+              </TableCell>
               <TableCell>{submission.updatedAt}</TableCell>
               <TableCell>
-                <UpdatePublishStatus id={submission._id} />
+                <UpdatePublishStatus id={submission._id} live={submission.isPublished === true ? "Yes" : "No"} currentStatus={submission.status}/>
               </TableCell>
               <TableCell>
                 <ConfirmDialog

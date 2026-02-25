@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export const EventCardsSkeleton = () => {
     return (
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-9'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-9 pt-12 xl:pt-24 pb-16 xl:pb-24'>
             {[...Array(6)].map((_, index) => (
                 <div key={index} className='bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden'>
                     <div className='px-4 py-4'>

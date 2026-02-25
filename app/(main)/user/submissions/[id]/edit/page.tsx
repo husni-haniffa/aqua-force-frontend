@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import EditSubmissionForm from "@/features/user/submissions/EditSubmissionForm"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { use } from "react"
 
 interface PageProps {
@@ -13,7 +14,7 @@ interface PageProps {
 const EditSubmissionPage = ({ params }: PageProps) => {
 
   const {id} = use(params)
-
+const router = useRouter()
   return (
     <div className="container py-16 flex flex-col gap-6">
       <div>
@@ -30,7 +31,7 @@ const EditSubmissionPage = ({ params }: PageProps) => {
           Any uploaded files will be overwritten. Please review carefully before submitting.
         </Badge>
       </div>
-      <EditSubmissionForm submissionId={id} />
+      <EditSubmissionForm submissionId={id} onSuccess={() => router.push('/user/submissions')}/>
     </div>
   )
 }

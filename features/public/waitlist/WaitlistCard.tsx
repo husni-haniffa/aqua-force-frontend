@@ -61,7 +61,7 @@ const WaitlistCard = () => {
 
           <SignedOut>
             <Button asChild>
-              <Link href="/sign-in?redirect_url=/membership" className="font-semibold">
+              <Link href="/sign-in?redirect_url=/waitlist" className="font-semibold">
                 Join the Waitlist
               </Link>
             </Button>
@@ -130,7 +130,7 @@ const WaitlistCard = () => {
 
       <SignedOut>
         <Button asChild className="w-full sm:w-auto">
-          <Link href="/sign-in?redirect_url=/membership" className="font-semibold">
+          <Link href="/sign-in?redirect_url=/waitlist" className="font-semibold">
             Join the Waitlist
           </Link>
         </Button>

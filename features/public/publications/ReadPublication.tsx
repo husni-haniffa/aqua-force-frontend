@@ -35,7 +35,7 @@ const ReadPublication =  ({id} : {id: string}) => {
                         <div className="flex items-center gap-2">
                             <User className="w-4 h-4" />
                             <span className="text-sm font-medium">
-                                {data?.userName}
+                                {data?.userName} <span className='ml-6 font-bold text-amber-600'>{data?.researchTypeId.name}</span>
                             </span>
                         </div>
                     </div>                               
@@ -62,7 +62,7 @@ const ReadPublication =  ({id} : {id: string}) => {
                         Abstract
                     </h2>
                     <div>
-                        <p className="text-slate-700 text-sm md:text-base leading-relaxed">
+                        <p className="text-slate-700 text-xs lg:text-base leading-relaxed">
                             {data?.abstract}
                         </p>
                     </div>

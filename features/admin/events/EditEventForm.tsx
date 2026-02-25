@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button"
 import ButtonLoader from "@/components/ui/button-loader"
 import { Card, CardHeader, CardTitle, CardContent, CardFooter, CardDescription } from "@/components/ui/card"
@@ -6,19 +7,21 @@ import { Input } from "@/components/ui/input"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import z from "zod"
-import { EditEventFormProps, formSchema } from "./event.types"
+import { EditEventFormProps, editFormSchema, EditFormSchema, formSchema } from "./event.types"
 import { useEventById, useUpdateEvent } from "./event.hooks"
 import { Textarea } from "@/components/ui/textarea"
 import { DatePicker } from "@/components/ui/date-picker"
+
 import { useEffect } from "react"
 import { EventFormSkeleton } from "./Skeleton"
 import { AlertError } from "@/components/ui/alert-error"
+import Image from "next/image"
 
 const EditEventForm = ({ eventId, onSuccess } : EditEventFormProps) => {
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: { title: "", description: "", eventDate: new Date(), eventTime: "10:30", location: "" },
+    const form = useForm<EditFormSchema>({
+        resolver: zodResolver(editFormSchema),
+        defaultValues: { title: "", description: "", eventDate: new Date(), eventTime: "10:30", location: "", file: undefined},
     })
     
     const { data, isLoading, error} = useEventById(eventId)
@@ -28,7 +31,7 @@ const EditEventForm = ({ eventId, onSuccess } : EditEventFormProps) => {
         if (data) {
             form.reset({ title: data.title, description: data.description,
                 eventDate: new Date(data.eventDate),eventTime: data.eventTime,
-                location: data.location,
+                location: data.location, file: undefined
             })
         }
       }, [data, form])
@@ -152,7 +155,33 @@ const EditEventForm = ({ eventId, onSuccess } : EditEventFormProps) => {
                                 )}
                             </Field>
                         )}
-                    />     
+                    />
+                    <Controller
+                        name="file"
+                        control={form.control}
+                        render={({ field }) => (
+                        <Field>
+                            <FieldLabel>
+                                Replace Flyer Post
+                            </FieldLabel>
+                            <div>
+                                {data?.imageUrl && (
+                                    <Image
+                                        src={`${data.imageUrl}?v=${data.updatedAt}`}
+                                        alt="current event post"
+                                        width={500}
+                                        height={500}
+                                    />
+                                )}
+                            </div>
+                            <Input
+                                type="file"
+                                accept="image/jpeg,image/png,image/jpg"
+                                onChange={(e) => field.onChange(e.target.files?.[0])}
+                            />
+                            </Field>
+                        )}
+                    />  
                 </FieldGroup>
             </form>
         </CardContent>

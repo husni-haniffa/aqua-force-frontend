@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button"
 import ButtonLoader from "@/components/ui/button-loader"
 import { Card, CardHeader, CardTitle, CardContent, CardFooter, CardDescription } from "@/components/ui/card"
@@ -15,7 +16,7 @@ const CreateEventForm = ({ onSuccess } : CreateEventFormProps) => {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: { title: "", description: "", eventDate: new Date(), eventTime: "10:30", location: "" },
+        defaultValues: { title: "", description: "", eventDate: new Date(), eventTime: "10:30", location: "", file: undefined},
     })
     
     const createMutation = useCreateEvent(onSuccess)
@@ -136,7 +137,26 @@ const CreateEventForm = ({ onSuccess } : CreateEventFormProps) => {
                                 )}
                             </Field>
                         )}
-                    />     
+                    />  
+                    <Controller
+                        name="file"
+                        control={form.control}
+                        render={({ field, fieldState }) => (
+                            <Field data-invalid={fieldState.invalid}>
+                            <FieldLabel>
+                                Event Flyer Post
+                            </FieldLabel>
+                            <Input
+                                type="file"
+                                accept="image/jpeg,image/png,image/jpg"
+                                onChange={(e) => field.onChange(e.target.files?.[0])}
+                            />
+                            {fieldState.invalid && (
+                                <FieldError errors={[fieldState.error]} />
+                            )}
+                            </Field>
+                        )}
+                />   
                 </FieldGroup>
             </form>
         </CardContent>

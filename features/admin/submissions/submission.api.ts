@@ -4,7 +4,9 @@ import {
     submissionApproved,
     submissionRejected,
     publishSubmission,
-    deleteSubmission
+    deleteSubmission,
+    addSocialMediaLinks,
+    updateSocialMediaLinks
 } from "@/api/submission"
 
 export {
@@ -13,5 +15,7 @@ export {
     submissionApproved,
     submissionRejected,
     publishSubmission,
-    deleteSubmission
+    deleteSubmission,
+    addSocialMediaLinks,
+    updateSocialMediaLinks
 }
