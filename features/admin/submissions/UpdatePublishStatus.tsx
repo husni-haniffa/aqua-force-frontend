@@ -9,9 +9,11 @@ import ButtonLoader from "@/components/ui/button-loader"
 type UpdatePublishStatusProps = {
   id: string
   defaultVisibility?: "PUBLIC" | "MEMBERS"
+  live: "Yes" | "No"
+  currentStatus: string
 }
 
-const UpdatePublishStatus = ({id, defaultVisibility = "PUBLIC"}: UpdatePublishStatusProps) => {
+const UpdatePublishStatus = ({id, defaultVisibility = "PUBLIC", live, currentStatus}: UpdatePublishStatusProps) => {
 
   const [visibility, setVisibility] = React.useState<"PUBLIC" | "MEMBERS">(defaultVisibility)
   const [open, setOpen] = React.useState(false)
@@ -26,7 +28,7 @@ const UpdatePublishStatus = ({id, defaultVisibility = "PUBLIC"}: UpdatePublishSt
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button size={'sm'} variant={'publish'}>Publish</Button>
+        <Button size={'sm'} variant={'publish'} disabled={live === 'Yes' || currentStatus === "REJECTED"}>Publish</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

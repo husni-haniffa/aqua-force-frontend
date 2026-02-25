@@ -2,6 +2,10 @@ export interface PublicationResponse {
     _id: string
     userId: string
     userName: string
+    researchTypeId: {
+        _id: string
+        name: string
+    }
     categoryId: {
         _id: string
         name: string
@@ -11,5 +15,12 @@ export interface PublicationResponse {
     keywords: Array<string>
     filePath: string
     accessLevel: string
+    socialMediaLinks?: {
+        youtube?: string
+        facebook?: string
+        instagram?: string
+        twitter?: string
+        linkedin?: string
+    }
     updatedAt: Date
 }

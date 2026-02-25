@@ -3,7 +3,7 @@ import { toast } from "sonner"
 import { useAuth } from "@clerk/nextjs"
 import { fetchEvents, fetchEventById, createEvent, updateEvent, deleteEvent } from "./event.api"
 import * as z from "zod"
-import { EventResponse, formSchema } from "./event.types"
+import { EditFormSchema, EventResponse, formSchema } from "./event.types"
 
 export function useEvents() {
     return useQuery({
@@ -28,7 +28,16 @@ export function useCreateEvent(onSuccess?: () => void) {
         mutationFn: async (data: z.infer<typeof formSchema>) => {
             const token = await getToken()
             if (!token) throw new Error("Not authenticated")
-            return createEvent(data, token)
+            const formData = new FormData()
+            if (data.file) {
+                formData.append("file", data.file)
+            }
+            formData.append("title", data.title)
+            formData.append("description", data.description)
+            formData.append("eventDate", data.eventDate.toDateString())
+            formData.append("eventTime", data.eventTime)
+            formData.append("location", data.location)
+            return createEvent(formData, token)
         },
         onSuccess: () => {
             toast.success("Event created")
@@ -49,10 +58,19 @@ export function useUpdateEvent(
     const queryClient = useQueryClient()
 
     return useMutation({
-        mutationFn: async (data: z.infer<typeof formSchema>) => {
+        mutationFn: async (data: EditFormSchema) => {
             const token = await getToken()
             if (!token) throw new Error("Not authenticated")
-            return updateEvent({ id: eventId, data, token })
+            const formData = new FormData()
+            if (data.file) {
+                formData.append("file", data.file)
+            }
+            formData.append("title", data.title)
+            formData.append("description", data.description)
+            formData.append("eventDate", data.eventDate.toDateString())
+            formData.append("eventTime", data.eventTime)
+            formData.append("location", data.location)
+            return updateEvent({ id: eventId, formData, token })
         },
         onSuccess: () => {
             toast.success("Event updated")

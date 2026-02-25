@@ -1,5 +1,6 @@
 "use client"
 import { Button } from "@/components/ui/button"
+import EditEventForm from "@/features/admin/events/EditEventForm"
 import EditNewsForm from "@/features/admin/news/EditNewsForm"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
@@ -10,24 +11,23 @@ interface PageProps {
   params: Promise<{ id: string }>
 }
 
-const EditNewsPage = ({ params }: PageProps) => {
+const EditEventPage = ({ params }: PageProps) => {
 
   const { id } = use(params)
   const router = useRouter()
-
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <Link href={'/admin/news'}>
+        <Link href={'/admin/events'}>
           <Button variant={'secondary'}>
             <ArrowLeft/>
             Go Back
           </Button>
         </Link>
       </div>
-      <EditNewsForm newsId={id} onSuccess={() => router.push('/admin/news')} />
+      <EditEventForm eventId={id} onSuccess={() => router.push('/admin/events')}/>
     </div>
   )
 }
 
-export default EditNewsPage
+export default EditEventPage

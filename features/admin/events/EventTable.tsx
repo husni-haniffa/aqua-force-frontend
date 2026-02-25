@@ -10,6 +10,7 @@ import { AlertError } from '@/components/ui/alert-error'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import EventView from './EventView'
 import { View } from 'lucide-react'
+import Link from 'next/link'
 
 const EventTable = ({ search }: { search: string }) => {
 
@@ -71,17 +72,11 @@ const EventTable = ({ search }: { search: string }) => {
                   </TableCell>                  
                   <TableCell>{event.updatedAt}</TableCell>
                   <TableCell>
-                      <Dialog open={editingId === event._id} onOpenChange={(open) => setEditingId(open ? event._id : null)}>
-                          <DialogTrigger asChild>
-                              <Button disabled={deletingId === event._id} size={'sm'} variant={'edit'}>Edit</Button>
-                          </DialogTrigger>
-                          <DialogHeader className='sr-only'>
-                              <DialogTitle></DialogTitle>
-                          </DialogHeader>
-                          <DialogContent>
-                              <EditEventForm eventId={event._id} onSuccess={() => setEditingId(null)} />
-                          </DialogContent>
-                      </Dialog>
+                      <Link href={`/admin/events/${event._id}/edit`}>
+                        <Button size="sm" variant={'edit'}>
+                            Edit
+                        </Button>
+                    </Link>
                   </TableCell>
                   <TableCell>
                     <ConfirmDialog

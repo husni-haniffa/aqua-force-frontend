@@ -1,5 +1,5 @@
 
-import { EventRequest, EventResponse } from "@/features/admin/events/event.types";
+import {  EventResponse } from "@/features/admin/events/event.types";
 import { BASE_URL } from "@/types/api";
 
 export const fetchEvents = async (): Promise<EventResponse[]> => {
@@ -20,14 +20,13 @@ export const fetchEventById = async (id: string): Promise<EventResponse> => {
     return result.data
 }
 
-export const createEvent = async (data: EventRequest, token: string) => {
+export const createEvent = async (formData: FormData, token: string) => {
     const response = await fetch(`${BASE_URL}/events`, {
         method: 'POST',
         headers: { 
-            'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(data)
+        body: formData
     })
     const result = await response.json()
     if (!response.ok) {
@@ -36,14 +35,13 @@ export const createEvent = async (data: EventRequest, token: string) => {
     return result
 }
 
-export const updateEvent = async ({id, data, token}: {id: string, data: EventRequest, token: string}): Promise<EventResponse> => {
+export const updateEvent = async ({ id, formData, token }: { id: string, formData: FormData, token: string }) => {
     const response = await fetch(`${BASE_URL}/events/${id}`, {
         method: "PUT",
         headers: { 
-            "Content-Type": "application/json" ,
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(data),
+        body: formData,
     })
     const result = await response.json()
     if (!response.ok) {

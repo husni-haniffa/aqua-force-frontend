@@ -1,4 +1,4 @@
-import { Home, LayoutDashboard, Layers, Newspaper, CalendarDays, FileText, Users, ClipboardList } from "lucide-react"
+import { Home, LayoutDashboard, Layers, Newspaper, CalendarDays, FileText, Users, ClipboardList, BookOpenCheck } from "lucide-react"
 
 export const adminNavLinks = [
     {
@@ -40,6 +40,11 @@ export const adminNavLinks = [
     {
         label: "RESEARCH",
         items: [
+            {
+                title: "Research Types",
+                url: "/admin/research-types",
+                icon: BookOpenCheck,
+            },
             {
                 title: "Submissions",
                 url: "/admin/submissions",

@@ -22,7 +22,7 @@ const Footer = () => {
                         </span>
                     </Link>
 
-                    <p className='text-slate-600 text-sm sm:text-base leading-relaxed max-w-xl'>
+                    <p className='text-slate-600 text-xs lg:text-base leading-relaxed max-w-xl'>
 A place for minds to connect, ideas to grow, and research to create real-world impact.                   </p>
                     
                     <div className='flex flex-row gap-3 sm:gap-4'>
@@ -89,12 +89,9 @@ A place for minds to connect, ideas to grow, and research to create real-world i
                     <Label className='text-slate-500 text-xs sm:text-sm'>
                         &copy; {new Date().getFullYear()} Research Minds Net. All rights reserved
                     </Label>
-                    <div className='flex gap-4 sm:gap-6'>
-                        <Link href="/privacy" className="text-slate-500 hover:text-slate-800 transition-colors text-xs sm:text-sm">
+                    <div>
+                        <Link href="/Policy Note.pdf" className="text-slate-500 hover:text-slate-800 transition-colors text-xs sm:text-sm" target='_blank'  rel="noopener noreferrer">
                             Privacy Policy
-                        </Link>
-                        <Link href="/terms" className="text-slate-500 hover:text-slate-800 transition-colors text-xs sm:text-sm">
-                            Terms of Service
                         </Link>
                     </div>
                 </div>

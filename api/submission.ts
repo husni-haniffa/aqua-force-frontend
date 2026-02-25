@@ -89,3 +89,45 @@ export const deleteSubmission = async (id: string, token: string) => {
     }
     return result
 }
+
+export const addSocialMediaLinks = async (id: string, socialMediaLinks: {
+    youtube?: string;
+    facebook?: string;
+    instagram?: string;
+    linkedin?: string;
+}, token: string) => {
+    const response = await fetch(`${BASE_URL}/submissions/add-social-media-links/${id}`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ socialMediaLinks })
+    })
+    const result = await response.json()
+    if (!response.ok) {
+        throw new Error(result.message || "Failed to add social media links")
+    }
+    return result
+}
+
+export const updateSocialMediaLinks = async (id: string, socialMediaLinks: {
+    youtube?: string;
+    facebook?: string;
+    instagram?: string;
+    linkedin?: string;
+}, token: string) => {
+    const response = await fetch(`${BASE_URL}/submissions/update-social-media-links/${id}`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ socialMediaLinks })
+    })
+    const result = await response.json()
+    if (!response.ok) {
+        throw new Error(result.message || "Failed to update social media links")
+    }
+    return result
+}

@@ -6,6 +6,10 @@ export interface UserSubmissionResponse {
     _id: string
     userId: string
     userName: string
+    researchTypeId: {
+        _id: string
+        name: string
+    }
     categoryId: {
         _id: string
         name: string
@@ -28,16 +32,16 @@ export interface EditSubmissionFormProps extends CreateSubmissionFormProps {
     submissionId: string
 }
 
-export const formSchema = (mode: "create" | "edit") =>
-
-z.object({
+export const formSchema = z.object({
     categoryId: z.string().min(1, "Category is required"),
+
+    researchTypeId: z.string().min(1, "Research Type is required"),
 
     title: z
         .string()
         .trim()
         .min(50, "Title must be at least 50 characters")
-        .max(100, "Title must not exceed 100 characters")
+        .max(200, "Title must not exceed 200 characters")
         .regex(
             /^[A-Za-z0-9\s:,\-()./]+$/,
             "Title contains invalid characters"
@@ -46,8 +50,8 @@ z.object({
     abstract: z
         .string()
         .trim()
-        .min(250, "Abstract must be at least 250 characters")
-        .max(1000, "Abstract must not exceed 1000 characters"),
+        .min(1000, "Abstract must be at least 1,000 characters")
+        .max(10000, "Abstract must not exceed 10,000 characters"),
 
     keywords: z
         .array(
@@ -60,8 +64,7 @@ z.object({
         .min(1, "At least one keyword is required")
         .max(5, "No more than 5 keywords allowed"),
 
-    file:
-        mode === "create"? z
+    file: z
         .instanceof(File)
         .refine(
             (file) =>
@@ -72,23 +75,26 @@ z.object({
                 ].includes(file.type),
             { message: "Only PDF, DOC, or DOCX files are allowed" }
         )
-        : z
-        .instanceof(File)
-        .optional()
-        .refine(
-            (file) =>
-                !file ||
-                [
-                    "application/pdf",
-                    "application/msword",
-                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                ].includes(file.type),
-            { message: "Only PDF, DOC, or DOCX files are allowed" }
-        ),
+
+        
 });
 
-export const createSubmissionSchema = formSchema("create")
-export const editSubmissionSchema = formSchema("edit")
+export const editFormSchema = formSchema.extend({
+    file: z
+        .instanceof(File)
+        .refine(
+            (file) =>
+                    [
+                        "application/pdf",
+                        "application/msword",
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    ].includes(file.type),
+                { message: "Only PDF, DOC, or DOCX files are allowed" }
+            )
+        .optional()
 
-export type CreateSubmissionInput = z.infer<typeof createSubmissionSchema>
-export type EditSubmissionInput = z.infer<typeof editSubmissionSchema>
+})
+
+
+
+export type EditFormSchema = z.infer<typeof editFormSchema>
