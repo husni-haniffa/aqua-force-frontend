@@ -24,7 +24,7 @@ const Footer = () => {
                         </span>
                     </Link>
 
-                    <p className='text-slate-600 text-sm sm:text-base leading-relaxed max-w-xl'>
+                    <p className='text-slate-600 text-xs lg:text-base leading-relaxed max-w-xl'>
 A place for minds to connect, ideas to grow, and research to create real-world impact.                   </p>
                     
                     <div className='flex flex-row gap-3 sm:gap-4'>

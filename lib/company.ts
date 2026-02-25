@@ -3,12 +3,12 @@ import { CheckCircle, Lock, Users, FlaskConical } from "lucide-react"
 export const contactInfo = [
     {
         id: 1,
-        label: "011 5854 072",
+        label: "077 1234 567",
         href: ""
     },
     {
         id: 2,
-        label: "researchmindsnet.com",
+        label: "researchmindsnet@gmail.com",
         href: ""
     },
     {

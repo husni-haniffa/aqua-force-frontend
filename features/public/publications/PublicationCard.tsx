@@ -27,20 +27,20 @@ const PublicationCard = ({ search }: { search: string }) => {
 
     const { data, isLoading, error } = usePublications()
      const { data: researchTypes, isLoading: researchTypesLoading, error: researchTypesError } = useResearchTypes()
+       const filtered = data?.filter((publication) => {
+    const matchesSearch = publication.title.toLowerCase().includes(search.toLowerCase()) || 
+        publication.categoryId.name.toLowerCase().includes(search.toLowerCase())
+    
+    const matchesType = !selectedType || publication.researchTypeId._id === selectedType
+    
+    return matchesSearch && matchesType
+})
     if(isLoading || isSearchingPublication ) return <PublicationCardSkeleton/>
     if(error instanceof Error) return <AlertError message={error.message}/>
         if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No publications, create one</p>
 
-   const filtered = data?.filter((publication) => {
-    const matchesSearch = publication.title.toLowerCase().includes(search.toLowerCase()) || 
-        publication.categoryId.name.toLowerCase().includes(search.toLowerCase())
-    
-    const matchesType = !selectedType || publication.categoryId._id === selectedType
-    
-    return matchesSearch && matchesType
-})
+ 
 
-    if (!filtered?.length) return <p className='flex items-center justify-center text-base'>No publication found</p>
 
   return (
   
@@ -51,7 +51,7 @@ const PublicationCard = ({ search }: { search: string }) => {
        <div className='flex items-center gap-2 flex-wrap mb-6'>
     <button
         onClick={() => setSelectedType(null)}
-        className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200
+        className={`px-4 py-1.5 rounded-full text-xs lg:text-sm  transition-all duration-200
             ${!selectedType 
                 ? 'bg-indigo-600 text-white shadow-sm' 
                 : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -63,7 +63,7 @@ const PublicationCard = ({ search }: { search: string }) => {
         <button
             key={researchType._id}
             onClick={() => setSelectedType(researchType._id)}
-            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200
+            className={`px-4 py-1.5 rounded-full text-xs lg:text-sm transition-all duration-200
                 ${selectedType === researchType._id 
                     ? 'bg-indigo-600 text-white shadow-sm' 
                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -72,19 +72,21 @@ const PublicationCard = ({ search }: { search: string }) => {
             {researchType.name}
         </button>
     ))}
-</div>
-        <motion.div className="grid grid-cols-1 xl:grid-cols-2 gap-9"
-           variants={container}
-                             initial="hidden"
-                             animate="visible"
-                              >
+</div>  
+
+        {filtered?.length === 0 ? (
+            <div className='flex items-center justify-center font-semibold text-lg'>
+                No publications, create one
+            </div>
+        ) : (
+             <div className="grid grid-cols-1 xl:grid-cols-2 gap-9">
 
             
 
             {filtered?.map((publication) => (
 
-                <motion.div key={publication._id} 
-                variants={item}
+                <div key={publication._id} 
+            
                 className="bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group">
 
                     <div className="px-4 py-4">
@@ -106,7 +108,7 @@ const PublicationCard = ({ search }: { search: string }) => {
                         <div className="flex items-center gap-1 mb-4">
                             <User className="w-3 h-3 sm:w-4 sm:h-4 text-slate-900" />
                             <span className="text-slate-900 text-xs xl:text-sm">
-                                {publication.userName}
+                                {publication.userName} <span className='ml-6 font-bold text-amber-600'>{publication.researchTypeId.name}</span>
                             </span>
                         </div>
                         
@@ -209,10 +211,12 @@ const PublicationCard = ({ search }: { search: string }) => {
                         
                     </div>
 
-                </motion.div>
+                </div>
             ))}
 
-        </motion.div>
+        </div>
+        )}
+       
     </div>
  
         
