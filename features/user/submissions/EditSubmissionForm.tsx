@@ -20,9 +20,10 @@ import { useResearchTypes } from "@/features/admin/research-types/research-type.
 
 const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProps) => {
 
-   const form = useForm<z.infer<ReturnType<typeof formSchema>>>({
-    resolver: zodResolver(formSchema("edit")),
+  const form = useForm<EditFormSchema>({
+    resolver: zodResolver(editFormSchema),
     defaultValues: { categoryId: "",
+      researchTypeId: "",
       title: "",
       abstract: "",
       keywords: [],
@@ -41,16 +42,7 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
           onSuccess?.()
     })
 
-    const form = useForm<EditFormSchema>({
-    resolver: zodResolver(editFormSchema),
-    defaultValues: { categoryId: "",
-      researchTypeId: "",
-      title: "",
-      abstract: "",
-      keywords: [],
-      
-    },
-    })
+    
 
     useEffect(() => {
         if (data) form.reset({ 
