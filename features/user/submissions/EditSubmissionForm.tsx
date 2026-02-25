@@ -20,6 +20,15 @@ import { useResearchTypes } from "@/features/admin/research-types/research-type.
 
 const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProps) => {
 
+   const form = useForm<z.infer<ReturnType<typeof formSchema>>>({
+    resolver: zodResolver(formSchema("edit")),
+    defaultValues: { categoryId: "",
+      title: "",
+      abstract: "",
+      keywords: [],
+      
+    },
+    })
     const router = useRouter()
 
     const { data, isLoading, error} = useSubmissionById(submissionId)

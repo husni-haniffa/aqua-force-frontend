@@ -10,7 +10,6 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { adminNavLinks } from "@/lib/adminNavLinks"
-import { Brain } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 

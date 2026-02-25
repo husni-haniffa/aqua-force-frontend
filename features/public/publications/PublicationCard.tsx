@@ -5,7 +5,6 @@ import { User, Tag, ArrowRight, Search, Youtube, Facebook, Instagram, Twitter, L
 import { formateDate } from '@/lib/format'
 import { PublicationCardSkeleton } from './Skeleton'
 import { AlertError } from '@/components/ui/alert-error'
-import { Input } from '@/components/ui/input'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { container, item } from '@/lib/animation'

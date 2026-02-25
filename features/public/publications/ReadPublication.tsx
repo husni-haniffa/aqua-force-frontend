@@ -1,8 +1,7 @@
 "use client"
-import { Label } from '@/components/ui/label'
 import { usePublicationById } from './publication.hooks'
 import Link from 'next/link'
-import { FileText, User, Tag, ArrowLeft, Calendar, ExternalLink, Download } from 'lucide-react'
+import { User} from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { formateDate } from '@/lib/format'
 import { AlertError } from '@/components/ui/alert-error'
