@@ -23,6 +23,10 @@ export const SubmissionFormSkeleton = () => {
             <Skeleton className="h-32 w-full" />
           </div>
           
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-48" />
+            <Skeleton className="h-32 w-full" />
+          </div>
        
           <div className="space-y-2">
             <Skeleton className="h-4 w-32" />
@@ -65,6 +69,7 @@ export const SubmissionTableSkeleton = () => {
       <TableHeader>
         <TableRow>
             <TableHead>Title</TableHead>
+            <TableHead>Research</TableHead>
             <TableHead>Category</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>File</TableHead>
@@ -79,6 +84,9 @@ export const SubmissionTableSkeleton = () => {
           <TableRow key={index}>
             <TableCell>
               <Skeleton className="h-5 w-48" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="h-5 w-32" />
             </TableCell>
             <TableCell>
               <Skeleton className="h-5 w-32" />

@@ -73,8 +73,13 @@ const MobileNavbar = () => {
                         </Button>
                         
                     }
+                    <SignedOut>
+                        <Button asChild className='font-semibold' variant={'secondary'}>
+                            <Link href={"/sign-in?redirect_url=/submissions"}>Submit Your Paper</Link>
+                        </Button>
+                    </SignedOut>
                 <SignedIn>
-                  <div className="flex items-center justify-center bg-blue-50 rounded-lg py-1.5">
+                  <div className="flex items-center justify-center bg-blue-50 rounded-lg">
                     <UserButton/>
                   </div>
                 </SignedIn>

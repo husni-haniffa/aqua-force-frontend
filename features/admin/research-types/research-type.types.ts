@@ -1,22 +1,22 @@
 import z from "zod"
 
-export interface CategoryRequest {
+export interface ResearchTypeRequest {
     name: string
 }
 
-export interface CategoryResponse {
+export interface ResearchTypeResponse {
     _id: string
     name: string
     createdAt: string
     updatedAt: string
 }
 
-export interface CreateCategoryFormProps {
+export interface CreateResearchTypeFormProps {
     onSuccess?: () => void
 }
 
-export interface EditCategoryFormProps extends CreateCategoryFormProps {
-    categoryId: string
+export interface EditResearchTypeFormProps extends CreateResearchTypeFormProps {
+    researchTypeId: string
 }
 
 export const formSchema = z.object({

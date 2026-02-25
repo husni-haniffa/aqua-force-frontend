@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button"
 import ButtonLoader from "@/components/ui/button-loader"
 import { Card, CardHeader, CardTitle, CardContent, CardFooter, CardDescription } from "@/components/ui/card"

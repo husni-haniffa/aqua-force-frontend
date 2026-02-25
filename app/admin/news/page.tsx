@@ -1,3 +1,4 @@
+
 import AdminNews from '@/features/admin/news/AdminNews'
 
 const Page = () => {

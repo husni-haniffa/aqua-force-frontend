@@ -3,11 +3,12 @@
 import { useEvents } from '@/features/admin/events/event.hooks'
 import { formateDate, formateTime } from '@/lib/format'
 import { Bell, Calendar, Clock, MapPin } from 'lucide-react'
+import Image from 'next/image'
 import { EventCardsSkeleton } from './Skeleton'
 import { AlertError } from '@/components/ui/alert-error'
 import { motion } from 'framer-motion'
 import { container, item } from '@/lib/animation'
-import { EventResponse } from '@/features/admin/events/event.types'
+
 const EventCard = () => {
 
     const { data, isLoading, error} = useEvents()
@@ -71,11 +72,25 @@ const EventCard = () => {
                    className='bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group  h-fit'>
    
                        <div className='px-4 py-4'>
-                           <header className='flex flex-col mb-4'>
+                           {/* Event Image */}
+                           {event.imageUrl && (
+                               <div className='relative overflow-hidden rounded-lg -mx-4 -mt-4'>
+                                   <Image 
+                                       src={event.imageUrl} 
+                                       alt={event.title}
+                                       width={800}
+                                       height={200}
+                                       className='w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105'
+                                       priority={false}
+                                   />
+                               </div>
+                           )}
+                           
+                           <header className='flex flex-col mb-4 mt-4'>
                                <span className='text-xs bg-green-50 text-green-700 px-2 py-1 rounded-md w-fit mb-3'>
-                                   {event.title.slice(0,6)}
+                                   {event.title}
                                </span>       
-                               <h1 className='text-slate-800 text-lg xl:text-xl font-bold'>{event.title}</h1>
+                               <h1 className='text-slate-800 text-lg xl:text-xl font-bold'>{event.description}</h1>
                            </header>
                            <div className='space-y-3'>
                               {/* Date */}

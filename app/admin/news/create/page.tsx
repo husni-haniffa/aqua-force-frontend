@@ -3,8 +3,10 @@ import { Button } from '@/components/ui/button'
 import CreateNewsForm from '@/features/admin/news/CreateNewsForm'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from "next/navigation"
 
 const CreateNewsPage = () => {
+  const router = useRouter()
   return (
     <div className='flex flex-col gap-6'>
       <div>
@@ -15,7 +17,7 @@ const CreateNewsPage = () => {
           </Button>
         </Link>
       </div>
-      <CreateNewsForm/>
+      <CreateNewsForm onSuccess={() => router.push('/admin/news')}/>
     </div>
   )
 }
