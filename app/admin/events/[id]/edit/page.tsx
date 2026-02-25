@@ -1,7 +1,6 @@
 "use client"
 import { Button } from "@/components/ui/button"
 import EditEventForm from "@/features/admin/events/EditEventForm"
-import EditNewsForm from "@/features/admin/news/EditNewsForm"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"

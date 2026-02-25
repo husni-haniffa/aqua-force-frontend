@@ -1,13 +1,11 @@
 "use client"
 import { usePublications } from './publication.hooks'
 import Link from 'next/link'
-import { User, Tag, ArrowRight, Search, Youtube, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react'
+import { User, ArrowRight, Youtube, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react'
 import { formateDate } from '@/lib/format'
 import { PublicationCardSkeleton } from './Skeleton'
 import { AlertError } from '@/components/ui/alert-error'
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
-import { container, item } from '@/lib/animation'
 import { useResearchTypes } from '@/features/admin/research-types/research-type.hooks'
 
 const PublicationCard = ({ search }: { search: string }) => {
