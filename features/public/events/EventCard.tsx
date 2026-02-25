@@ -8,6 +8,7 @@ import { EventCardsSkeleton } from './Skeleton'
 import { AlertError } from '@/components/ui/alert-error'
 import { motion } from 'framer-motion'
 import { container, item } from '@/lib/animation'
+import { EventResponse } from '@/features/admin/events/event.types'
 
 const EventCard = () => {
 
