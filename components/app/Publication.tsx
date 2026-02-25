@@ -1,6 +1,6 @@
 "use client"
 import Link from 'next/link'
-import { User, ArrowRight, Youtube, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react'
+import { User, ArrowRight, Youtube, Facebook, Instagram, Linkedin } from 'lucide-react'
 import { usePublications } from '@/features/public/publications/publication.hooks'
 import { AlertError } from '../ui/alert-error'
 import { PublicationCardSkeleton } from '@/features/public/publications/Skeleton'
