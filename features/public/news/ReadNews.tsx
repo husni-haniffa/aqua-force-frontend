@@ -1,4 +1,3 @@
-import React from 'react'
 import { useNewsById } from './news.hooks'
 import { AlertError } from '@/components/ui/alert-error'
 import Image from 'next/image'
@@ -7,6 +6,7 @@ import { ArrowRight } from 'lucide-react'
 import { formateDate } from '@/lib/format'
 import { NewsArticleSkeleton } from './Skeleton'
 import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
 
 const ReadNews = ({ id }: { id: string }) => {
 
@@ -38,13 +38,15 @@ const ReadNews = ({ id }: { id: string }) => {
                 </div>
                 <div className='border-t'>
                     <div className='mt-6 flex items-center justify-between'>
-                        <Label className='text-slate-800 text-xs xl:text-sm'>{data?.updatedAt && formateDate(data.updatedAt)}</Label>
+                        <Label className='text-slate-800 text-xs xl:text-sm'>
+                            {data?.updatedAt && formateDate(data.updatedAt)}
+                        </Label>
                         <Button asChild variant={'outline'} className='border-none'>
-      <Link href={`/news/${data?._id}/read`} className='text-blue-500'>
-        Read More News
-        <ArrowRight />
-      </Link>
-    </Button>
+                            <Link href={`/news/${data?._id}/read`} className='text-blue-500'>
+                                Read More News
+                                <ArrowRight />
+                            </Link>
+                        </Button>
                     </div>
                 </div>
             </article>

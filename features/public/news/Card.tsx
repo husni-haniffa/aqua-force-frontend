@@ -14,23 +14,27 @@ interface NewsCardProps {
 }
 
 const Card = ({news, variants} : NewsCardProps) => {
+
   return (
+
     <motion.div
-    key={news._id}
-                        className='bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group'>
+        key={news._id}
+        className='bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group'
+    >
 
     
         {news.imageUrl && (
-                                        <div className="relative w-full h-50">
-                                            <Image
-                                                src={news.imageUrl}
-                                                alt="news-post"
-                                                fill
-                                                priority
-                                                className="object-cover"
-                                            />
-                                        </div>
-                                    )}  
+            <div className="relative w-full h-50">
+                <Image
+                    src={news.imageUrl}
+                    alt="news-post"
+                    fill
+                    priority
+                    className="object-cover"
+                />
+            </div>
+        )}  
+        
         <div className='px-4 py-2'>
             <div className='flex flex-col gap-4 mb-6 mt-3'>
                 <h1 className='text-lg xl:text-xl font-bold text-slate-800'>{news.title}</h1>

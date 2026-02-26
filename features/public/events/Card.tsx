@@ -1,15 +1,13 @@
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
-import { EventResponse } from "@/features/admin/events/event.types"
 import { formateDate, formateTime } from "@/lib/format"
-import { motion, Variant } from "framer-motion"
+import { motion } from "framer-motion"
 import { Bell, Calendar, Clock, MapPin } from "lucide-react"
 import Image from "next/image"
 import { EventCardProps, handleAddToCalendar } from "./event.types"
 
-
-
 const Card = ({event, variants} : EventCardProps) => {
+    
   return (
     <motion.div 
         key={event._id}

@@ -2,8 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import React from 'react'
-import { PublicationCardProps, PublicationResponse } from './publication.types'
+import { PublicationCardProps } from './publication.types'
 import { formateDate } from '@/lib/format'
 import SocialLinks from './SocialLinks'
 import { motion } from "framer-motion"
@@ -11,8 +10,9 @@ import { motion } from "framer-motion"
 
 const Card = ({ publication, variants }: PublicationCardProps) => {
   return (
-    <motion.div key={publication._id} 
-        className='bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group'>
+    <motion.div 
+      key={publication._id} 
+      className='bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group'>
             <div className='px-4 py-4'>
                 <div className='flex items-center justify-between mb-6'>
                     <div className='bg-green-100 px-2 py-1 rounded-md'>
@@ -48,42 +48,36 @@ const Card = ({ publication, variants }: PublicationCardProps) => {
                     </div>
                 </div>
 
-                <div className='border-t pt-6 space-y-4'>
-  
-  {/* Keywords */}
-  <div className='flex flex-wrap gap-2'>
-    {publication.keywords.map((keyword, index) => (
-      <div className='bg-slate-200 w-fit px-1 py-0.5 xl:px-2 xl:py-1 rounded-md' key={index}>
-        <span className='text-slate-600 text-xs xl:text-sm'>{keyword}</span>
-      </div>
-    ))}
-  </div>
+                <div className='border-t pt-6 space-y-4'> 
+                  {/* Keywords */}
+                  <div className='flex flex-wrap gap-2'>
+                    {publication.keywords.map((keyword, index) => (
+                      <div className='bg-slate-200 w-fit px-1 py-0.5 xl:px-2 xl:py-1 rounded-md' key={index}>
+                        <span className='text-slate-600 text-xs xl:text-sm'>{keyword}</span>
+                      </div>
+                    ))}
+                  </div>
 
-  {/* Social Links + CTA */}
-  <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4'>
-    
-    {publication.socialMediaLinks && (
-      <SocialLinks links={publication.socialMediaLinks} />
-    )}
-
-    <Button 
-  asChild 
-  variant="outline" 
-  className="border-none w-full sm:w-auto"
->
-  <Link 
-    href={`/publications/${publication._id}/read`} 
-    className="text-blue-500 flex items-center justify-center sm:justify-start gap-2 w-full"
-  >
-    <span>Read Full Publication</span>
-    <ArrowRight className="w-4 h-4" />
-  </Link>
-</Button>
-
-  </div>
-
-</div>
-        </div>  
+                  {/* Social Links + CTA */}
+                  <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4'>             
+                    {publication.socialMediaLinks && (
+                      <SocialLinks links={publication.socialMediaLinks} />
+                    )}
+                    <Button 
+                      asChild 
+                      variant="outline" 
+                      className="border-none w-full sm:w-auto">
+                      <Link 
+                        href={`/publications/${publication._id}/read`} 
+                        className="text-blue-500 flex items-center justify-center sm:justify-start gap-2 w-full"
+                      >
+                        <span>Read Full Publication</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+            </div>  
     </motion.div>
   )
 }
