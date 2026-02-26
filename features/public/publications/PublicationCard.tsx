@@ -5,6 +5,7 @@ import { AlertError } from '@/components/ui/alert-error'
 import { useEffect, useState } from 'react'
 import { useResearchTypes } from '@/features/admin/research-types/research-type.hooks'
 import Card from './Card'
+import { Skeleton } from '@/components/ui/skeleton'
 
 const PublicationCard = ({ search }: { search: string }) => {
 
@@ -33,37 +34,47 @@ const PublicationCard = ({ search }: { search: string }) => {
 
     if(isLoading || isSearchingPublication ) return <PublicationCardSkeleton/>
     if(error instanceof Error) return <AlertError message={error.message}/>
+    if (researchTypesError instanceof Error) return <AlertError message={researchTypesError.message}/>
     if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No publications, create one</p>
 
   return (
     
     <div>
 
-       <div className='flex items-center gap-2 flex-wrap mb-6'>
-        <button
-            onClick={() => setSelectedType(null)}
-            className={`px-4 py-1.5 rounded-full text-xs lg:text-sm  transition-all duration-200
-                ${!selectedType 
-                    ? 'bg-indigo-600 text-white shadow-sm' 
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                }`}
-        >
-            All
-        </button>
-        
-        {researchTypes?.map((researchType) => (
+        <div className='flex items-center gap-2 flex-wrap mb-6'>
             <button
-                key={researchType._id}
-                onClick={() => setSelectedType(researchType._id)}
-                className={`px-4 py-1.5 rounded-full text-xs lg:text-sm transition-all duration-200
-                    ${selectedType === researchType._id 
+                onClick={() => setSelectedType(null)}
+                className={`px-4 py-1.5 rounded-full text-xs lg:text-sm  transition-all duration-200
+                    ${!selectedType 
                         ? 'bg-indigo-600 text-white shadow-sm' 
                         : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                     }`}
             >
-                {researchType.name}
+                All
             </button>
-        ))}
+            
+            {researchTypesLoading ? (
+                <Skeleton
+                    className="h-7 w-14 rounded-full"
+                />
+            ) : (
+                <div>
+                    {researchTypes?.map((researchType) => (
+                        <button
+                            key={researchType._id}
+                            onClick={() => setSelectedType(researchType._id)}
+                            className={`px-4 py-1.5 rounded-full text-xs lg:text-sm transition-all duration-200
+                                ${selectedType === researchType._id 
+                                    ? 'bg-indigo-600 text-white shadow-sm' 
+                                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                                }`}
+                        >
+                            {researchType.name}
+                        </button>
+                    ))}
+                </div>
+            )}
+       
         </div>  
 
         {filtered?.length === 0 ? (

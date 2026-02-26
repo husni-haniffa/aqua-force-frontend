@@ -8,7 +8,7 @@ import SocialLinks from './SocialLinks'
 import { motion } from "framer-motion"
 
 
-const Card = ({ publication, variants }: PublicationCardProps) => {
+const Card = ({ publication }: PublicationCardProps) => {
   return (
     <motion.div 
       key={publication._id} 
