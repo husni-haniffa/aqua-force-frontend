@@ -14,7 +14,6 @@ const Footer = () => {
         <div className='container'>
             <div className='flex flex-col lg:flex-row gap-8 lg:gap-12'>
 
-           
                 <div className='flex flex-col gap-4 lg:flex-1'>
                     <Link href={"/"} className='bg-blue-100 px-2 py-1 rounded-lg w-fit'>
                         <span className="font-bold text-lg sm:text-xl lg:text-2xl leading-tight bg-blue-500 bg-clip-text text-transparent">
@@ -23,7 +22,8 @@ const Footer = () => {
                     </Link>
 
                     <p className='text-slate-600 text-xs lg:text-base leading-relaxed max-w-xl'>
-A place for minds to connect, ideas to grow, and research to create real-world impact.                   </p>
+                        A place for minds to connect, ideas to grow, and research to create real-world impact.                   
+                    </p>
                     
                     <div className='flex flex-row gap-3 sm:gap-4'>
                         {socialMedia.map((social) => (

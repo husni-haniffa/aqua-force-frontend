@@ -1,3 +1,5 @@
+import { Variant } from "framer-motion"
+
 export interface PublicationResponse {
     _id: string
     userId: string
@@ -23,4 +25,9 @@ export interface PublicationResponse {
         linkedin?: string
     }
     updatedAt: Date
+}
+
+export interface PublicationCardProps {
+    publication: PublicationResponse
+    variants?: Variant
 }
