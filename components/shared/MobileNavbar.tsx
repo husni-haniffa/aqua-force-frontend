@@ -29,6 +29,7 @@ const MobileNavbar = () => {
               <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-slate-800" />
             )}
         </Button>
+        
         <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -75,7 +76,7 @@ const MobileNavbar = () => {
                     }
                     <SignedOut>
                         <Button asChild className='font-semibold' variant={'secondary'}>
-                            <Link href={"/sign-in?redirect_url=/submissions"}>Submit Your Paper</Link>
+                            <Link href={"/sign-in?redirect_url=/user/submissions"}>Submit Your Paper</Link>
                         </Button>
                     </SignedOut>
                 <SignedIn>

@@ -7,7 +7,6 @@ import MobileNavbar from './MobileNavbar'
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { useCheckRole } from '@/utils/checkRole'
 
-
 const Navbar = () => {
     
     const pathname = usePathname()
@@ -59,7 +58,7 @@ const Navbar = () => {
                     }
                     <SignedOut>
                         <Button asChild className='font-semibold' variant={'secondary'}>
-                            <Link href={"/sign-in?redirect_url=/submissions"}>Submit Your Paper</Link>
+                            <Link href={"/sign-in?redirect_url=/user/submissions"}>Submit Your Paper</Link>
                         </Button>
                     </SignedOut>
                     <SignedIn>

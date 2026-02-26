@@ -7,8 +7,9 @@ import Link from "next/link"
 import { motion } from 'framer-motion'
 
 const Hero = () => {
+
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section className="relative min-h-screen flex items-start md:items-center overflow-hidden pt-20 sm:pt-24 md:pt-0">
 
         <div className="absolute inset-0 z-0">
             <Image 
@@ -26,7 +27,7 @@ const Hero = () => {
             <div className="max-w-6xl mx-auto">
 
                 <motion.span 
-                    className="flex items-center gap-2 px-4 py-2 rounded-full border border-amber-600 text-amber-400 text-sm mb-6 w-fit"
+                    className="flex items-center gap-2 px-4 py-2 rounded-full border border-amber-600 text-amber-400 text-xs xl:text-sm mb-6 w-fit"
                     initial={{ opacity: 0, x: -40 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut"  }}
@@ -48,7 +49,7 @@ const Hero = () => {
                 </motion.header>
 
                 <motion.p 
-                    className="text-white/90 text-sm md:text-base lg:text-lg max-w-3xl mb-8"
+                    className="text-white/90 text-sm xl:text-lg max-w-3xl mb-8"
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, ease: "easeOut"  }}
@@ -57,7 +58,7 @@ const Hero = () => {
                   A shared digital space for our university’s academic community to publish research, explore publications, and collaborate across disciplines — supporting learning, discovery, and real-world solutions.
                 </motion.p>
 
-                <div className="flex flex-col sm:flex-row gap-6">
+                <div className="flex flex-col md:flex-row gap-6">
 
                     <motion.div
                         initial={{ opacity: 0, x: -40 }}
@@ -68,7 +69,7 @@ const Hero = () => {
                         viewport={{ once: false, amount: 0.3 }}
                     >
                         <SignedIn>
-                            <Button className="font-semibold" asChild>                     
+                            <Button className="font-semibold w-full" asChild>                     
                                 <Link href={'/user/submissions'}>
                                     Submit Your Paper 
                                     <ArrowRight/>
@@ -77,7 +78,7 @@ const Hero = () => {
                         </SignedIn>
 
                         <SignedOut>
-                            <Button className="font-semibold" asChild>
+                            <Button className="font-semibold w-full" asChild>
                                 <Link href={'/sign-in'}>
                                     Submit Your Paper 
                                     <ArrowRight/>
@@ -89,18 +90,17 @@ const Hero = () => {
                     <motion.div
                         initial={{ opacity: 0, x: 40 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                         transition={{ type: "spring", stiffness: 300}}
+                        transition={{ type: "spring", stiffness: 300}}
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale:1 }}
                         viewport={{ once: false, amount: 0.3 }}
                     >
-                        <Button variant={'outline'} asChild>
+                        <Button variant={'outline'} asChild className="w-full">
                             <Link href={'/publications'}>
                                 Explore Publications
                             </Link>
                         </Button>
                     </motion.div>
-                   
 
                 </div>
 
