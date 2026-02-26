@@ -7,6 +7,9 @@ import { NewsCardsSkeleton } from "./Skeleton"
 import { AlertError } from "@/components/ui/alert-error"
 import { motion } from "framer-motion"
 import { container, item } from "@/lib/animation"
+import Card from "./Card"
+
+
 
 const NewsCard = () => {
     const { data, isLoading, error } = useNews()
@@ -21,46 +24,7 @@ const NewsCard = () => {
                                  animate="visible"
                                  >
                 {data?.map((news) => (
-                    <motion.div key={news._id} 
-                    variants={item}
-                    className='bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group'>
-                        <div>
-                            {news.imageUrl && (
-                                <div className="relative w-full h-50">
-                                    <Image
-                                        src={news.imageUrl}
-                                        alt="news-post"
-                                        fill
-                                        priority
-                                        className="object-cover"
-                                    />
-                                </div>
-                            )}  
-                            <div className="px-2 py-2"> 
-                                <header>
-                                    <h1 className="text-lg xl:text-xl font-bold mb-3 text-slate-800">{news.title}</h1>
-                                </header>
-                                <div>
-                                    <p className="text-xs xl:text-sm text-slate-600">{news.content}</p>
-                                </div>
-
-                                <div className="flex justify-between items-center border-t border-slate-200 pt-3">
-                                    <h6 className='text-xs xl:text-sm text-slate-600'>
-                                        {formateDate(news.updatedAt)}
-                                      
-                                    </h6>
-                                    <Link 
-                                href={`/news/${news._id}/read`}
-                                className='text-xs xl:text-sm flex items-center text-blue-500 gap-2'
-                            >
-                                Read More
-                                <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
-                            </Link>
-                                </div>
-                            </div>                    
-                            
-                        </div>
-                    </motion.div>
+                   <Card news={news} key={news._id} variants={item}/>
                 ))}
             </motion.div>
         </div>

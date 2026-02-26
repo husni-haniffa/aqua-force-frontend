@@ -8,6 +8,7 @@ import { Button } from "../ui/button"
 import { NewsCardsSkeleton } from "@/features/public/news/Skeleton"
 import { motion } from "framer-motion"
 import { container, item } from "@/lib/animation"
+import Card from "@/features/public/news/Card"
 const News = () => {
 
     const { data, isLoading, error } = useNews()
@@ -38,46 +39,7 @@ const News = () => {
                                         viewport={{ once: false, amount: 0.1 }}
                                        >
                 {data?.slice(0,6).map((news) => (
-                    <motion.div key={news._id} 
-                    variants={item}
-                    
-                    className='bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group'>
-                        <div>
-                            {news.imageUrl && (
-                                <div className="relative w-full h-50">
-                                    <Image
-                                        src={news.imageUrl}
-                                        alt="news-post"
-                                        fill
-                                        priority
-                                        className="object-cover"
-                                    />
-                                </div>
-                            )}  
-                            <div className="px-2 py-4"> 
-                                <header>
-                                    <h1 className="text-lg xl:text-xl font-bold mb-3 text-slate-800">{news.title}</h1>
-                                </header>
-                                <div className="pb-3">
-                                    <p className="text-xs xl:text-sm text-slate-600">{news.content.slice(0,5000)}</p>
-                                </div>
-                                <div className="flex justify-between items-center border-t border-slate-100 pt-3">
-                                    <h6 className='text-xs xl:text-sm text-slate-950'>
-                                        {formateDate(news.updatedAt)}
-                                      
-                                    </h6>
-                                    <Link 
-                                        href={`/news/${news._id}/read`}
-                                        className='text-xs xl:text-sm flex items-center text-blue-500 gap-2'
-                                    >
-                                        Read More
-                                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
-                                    </Link>
-                                </div>
-                            </div>                    
-                            
-                        </div>
-                    </motion.div>
+                    <Card news={news} key={news._id} variants={item}/>
                 ))}
             </motion.div>
         <motion.div className='flex justify-center pt-12'  initial={{ opacity: 0, x: -40 }}

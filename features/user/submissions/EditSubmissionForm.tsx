@@ -67,7 +67,6 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
      
     
     if (categoriesError instanceof Error) return <AlertError message={categoriesError.message}/>
-    if (!categories || categories.length === 0) return <p  className='flex items-center justify-center text-base'>No categories</p>
       
   return (
     <Card className="w-full border-0 shadow-none">

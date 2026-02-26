@@ -40,7 +40,6 @@ const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
     const { data, isLoading, error } = useCategories()
 
     if (error instanceof Error) return <AlertError message={error.message}/>
-    if (!data || data.length === 0) return <p className='flex items-center justify-center text-base'>No categories</p>
 
   return (
     <Card className="w-full border-0 shadow-none">

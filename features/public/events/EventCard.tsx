@@ -8,6 +8,7 @@ import { EventCardsSkeleton } from './Skeleton'
 import { AlertError } from '@/components/ui/alert-error'
 import { motion } from 'framer-motion'
 import { container, item } from '@/lib/animation'
+import Card from './Card'
 
 const EventCard = () => {
 
@@ -67,78 +68,7 @@ const EventCard = () => {
                            animate="visible"
                             >
                {data?.map((event) => (
-                   <motion.div key={event._id} 
-                   variants={item}
-                   className='bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group  h-fit'>
-   
-                       <div className='px-4 py-4'>
-                           {/* Event Image */}
-                           {event.imageUrl && (
-                               <div className='relative overflow-hidden rounded-lg -mx-4 -mt-4'>
-                                   <Image 
-                                       src={event.imageUrl} 
-                                       alt={event.title}
-                                       width={800}
-                                       height={200}
-                                       className='w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105'
-                                       priority={false}
-                                   />
-                               </div>
-                           )}
-                           
-                           <header className='flex flex-col mb-4 mt-4'>
-                               <span className='text-xs bg-green-50 text-green-700 px-2 py-1 rounded-md w-fit mb-3'>
-                                   {event.title}
-                               </span>       
-                               <h1 className='text-slate-800 text-lg xl:text-xl font-bold'>{event.description}</h1>
-                           </header>
-                           <div className='space-y-3'>
-                              {/* Date */}
-                              <div className='flex items-center gap-3 text-slate-600 hover:text-slate-900 transition-colors'>
-                                <div className='bg-blue-50 p-2 rounded-lg'>
-                                  <Calendar className='w-4 h-4 text-blue-600'/>
-                                </div>
-                                <span className='text-sm font-medium'>
-                                  {formateDate(event.eventDate)}
-                                </span>
-                              </div>
-      
-                              {/* Time */}
-                              <div className='flex items-center gap-3 text-slate-600 hover:text-slate-900 transition-colors'>
-                                <div className='bg-amber-50 p-2 rounded-lg'>
-                                  <Clock className='w-4 h-4 text-amber-600'/>
-                                </div>
-                                <span className='text-sm font-medium'>
-                                  {formateTime(event.eventTime)}
-                                </span>
-                              </div>
-      
-                              {/* Location */}
-                              <div className='flex items-center gap-3 text-slate-600 hover:text-slate-900 transition-colors'>
-                                <div className='bg-red-50 p-2 rounded-lg'>
-                                  <MapPin className='w-4 h-4 text-red-600'/>
-                                </div>
-                                <span className='text-sm font-medium'>
-                                  {event.location}
-                                </span>
-                              </div>
-                            </div>
-                            
-        <div className='mt-5 pt-4 border-t border-slate-100'>
-      <button 
-        onClick={() => handleAddToCalendar(event)}
-        className='w-full bg-blue-50 hover:bg-blue-100 text-blue-700 font-medium py-2.5 px-4 rounded-lg transition-all duration-200 text-sm flex items-center justify-center gap-2 group/btn'
-      >
-        <Bell className='w-4 h-4 group-hover/btn:animate-pulse' />
-        Add to Calendar
-      </button>
-    </div>
-
-                          
-                       </div>
-                       
-   
-                   </motion.div>
+                  <Card event={event} variants={item} key={event._id}/>
                ))}
            </motion.div>
   )
