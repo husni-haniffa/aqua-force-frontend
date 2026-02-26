@@ -16,7 +16,7 @@ const Event = () => {
     const { data, isLoading, error} = useEvents()
     if(isLoading) return <EventCardsSkeleton/>
     if(error instanceof Error) return <AlertError message={error.message}/>
-        const handleAddToCalendar = (event: any) => {
+        const handleAddToCalendar = (event: EventResponse) => {
   try {
     // eventDate is already an ISO string, so parse it directly
     const eventDate = new Date(event.eventDate);

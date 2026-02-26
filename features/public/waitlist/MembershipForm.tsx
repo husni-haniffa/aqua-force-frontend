@@ -23,17 +23,13 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { formSchema } from "./waitlist.types"
-import { useRouter } from "next/navigation"
 import { useCreateWaitlist } from "./waitlist,hooks"
 import ButtonLoader from "@/components/ui/button-loader"
 
 
 const MembershipForm = () => {
-   
-  const { user, isLoaded } = useUser()
-  if (!isLoaded) return null
-  
-  const form = useForm<z.infer<typeof formSchema>>({
+
+   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       userId: "",
@@ -43,20 +39,21 @@ const MembershipForm = () => {
       phoneNumber: "",
     },
   })
+   
+  const { user, isLoaded } = useUser()
 
-  useEffect(() => {
-    if (isLoaded && user) {
-      form.setValue("userId", user.id)
-      form.setValue("firstName", user.firstName || "")
-      form.setValue("lastName", user.lastName || "")
-      form.setValue("email",user.primaryEmailAddress?.emailAddress || ""
-      )
-    }
-  }, [isLoaded, user, form])
+const createMutation = useCreateWaitlist()
 
- 
+useEffect(() => {
+  if (isLoaded && user) {
+    form.setValue("userId", user.id)
+    form.setValue("firstName", user.firstName || "")
+    form.setValue("lastName", user.lastName || "")
+    form.setValue("email", user.primaryEmailAddress?.emailAddress || "")
+  }
+}, [isLoaded, user, form])
 
-  const createMutation = useCreateWaitlist()
+if (!isLoaded) return null 
   
   return (
     <Card>

@@ -1,6 +1,5 @@
 "use client"
 import EventCard from './EventCard'
-import { Calendar, MapPin } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 
