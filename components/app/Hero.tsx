@@ -7,8 +7,10 @@ import Link from "next/link"
 import { motion } from 'framer-motion'
 
 const Hero = () => {
+
   return (
-<section className="relative min-h-screen flex items-start md:items-center overflow-hidden pt-20 sm:pt-24 md:pt-0">
+    <section className="relative min-h-screen flex items-start md:items-center overflow-hidden pt-20 sm:pt-24 md:pt-0">
+
         <div className="absolute inset-0 z-0">
             <Image 
                 src={'/hero-research.jpg'} 
@@ -88,7 +90,7 @@ const Hero = () => {
                     <motion.div
                         initial={{ opacity: 0, x: 40 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                         transition={{ type: "spring", stiffness: 300}}
+                        transition={{ type: "spring", stiffness: 300}}
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale:1 }}
                         viewport={{ once: false, amount: 0.3 }}
@@ -99,7 +101,6 @@ const Hero = () => {
                             </Link>
                         </Button>
                     </motion.div>
-                   
 
                 </div>
 

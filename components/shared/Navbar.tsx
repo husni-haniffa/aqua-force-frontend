@@ -7,7 +7,6 @@ import MobileNavbar from './MobileNavbar'
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { useCheckRole } from '@/utils/checkRole'
 
-
 const Navbar = () => {
     
     const pathname = usePathname()

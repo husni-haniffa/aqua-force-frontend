@@ -29,6 +29,7 @@ const MobileNavbar = () => {
               <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-slate-800" />
             )}
         </Button>
+        
         <AnimatePresence>
         {isOpen && (
           <motion.div
