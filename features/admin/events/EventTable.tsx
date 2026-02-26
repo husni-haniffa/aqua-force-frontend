@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import ButtonLoader from '@/components/ui/button-loader'
 import { useDeleteEvent, useEvents } from './event.hooks'
-import EditEventForm from './EditEventForm'
 import { ConfirmDialog } from '@/components/ui/confirm-dialog'
 import { EventTableSkeleton } from './Skeleton'
 import { AlertError } from '@/components/ui/alert-error'
@@ -14,7 +13,6 @@ import Link from 'next/link'
 
 const EventTable = ({ search }: { search: string }) => {
 
-    const [editingId, setEditingId] = useState<string | null>(null)
     const [deletingId, setDeletingId] = useState<string | null>(null)
     const [debouncedSearch, setDebouncedSearch] = useState(search);
     const { data, isLoading, error } = useEvents()
