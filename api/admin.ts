@@ -1,4 +1,4 @@
-import { AdminOverview } from "@/features/admin/overview/overview.types";
+import { AdminOverviewResponse } from "@/features/admin/overview/overview.types";
 import { UserResponse } from "@/features/admin/users/user.types";
 import { BASE_URL } from "@/types/api";
 
@@ -43,7 +43,7 @@ export const removeRoleFromAdmin = async (id: string, token: string) => {
     return result
 }
 
-export const fetchAdminOverview = async (token: string): Promise<AdminOverview> => {
+export const fetchAdminOverview = async (token: string): Promise<AdminOverviewResponse> => {
     const response = await fetch(`${BASE_URL}/admin/dashboard/overview`, {
         headers: {
             'Authorization': `Bearer ${token}`
