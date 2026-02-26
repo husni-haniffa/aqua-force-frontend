@@ -1,6 +1,6 @@
 import { CheckCircle, ClipboardList, FileSearch, LucideIcon, Users } from "lucide-react"
 
-export interface OverviewData {
+export interface AdminOverviewResponse {
     users: number
     waitlist: number
     underReview: number
@@ -18,7 +18,7 @@ export interface StatCard {
 }
 
 
-export const Cards = (data: OverviewData | undefined): StatCard[] => [
+export const Cards = (data: AdminOverviewResponse | undefined): StatCard[] => [
     {
         label: 'Joined Users',
         description: 'Users who have signed in to the platform',

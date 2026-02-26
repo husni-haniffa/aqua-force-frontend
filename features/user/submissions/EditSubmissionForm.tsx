@@ -5,11 +5,10 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field
 import { Input } from "@/components/ui/input"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import z from "zod"
 import { Textarea } from "@/components/ui/textarea"
 import { KeywordsInput } from "@/components/ui/keywords-input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { editFormSchema, EditFormSchema, EditSubmissionFormProps, formSchema } from "./submission.types"
+import { editFormSchema, EditFormSchema, EditSubmissionFormProps } from "./submission.types"
 import { useEffect } from "react"
 import { useSubmissionById, useUpdateSubmission } from "./submission.hooks"
 import { useCategories } from "@/features/admin/categories/category.hooks"
@@ -30,6 +29,7 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
       
     },
     })
+
     const router = useRouter()
 
     const { data, isLoading, error} = useSubmissionById(submissionId)
@@ -41,8 +41,6 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
           router.push("/user/submissions")
           onSuccess?.()
     })
-
-    
 
     useEffect(() => {
         if (data) form.reset({ 
@@ -57,7 +55,7 @@ const EditSubmissionForm = ({ submissionId, onSuccess } : EditSubmissionFormProp
     if (isLoading) return <SubmissionFormSkeleton/>
     if (error instanceof Error) return <AlertError message={error.message}/>
      
-    
+    if (researchTypesError instanceof Error) return <AlertError message={researchTypesError.message}/>
     if (categoriesError instanceof Error) return <AlertError message={categoriesError.message}/>
       
   return (

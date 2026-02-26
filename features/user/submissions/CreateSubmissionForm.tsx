@@ -39,6 +39,7 @@ const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
 
     const { data, isLoading, error } = useCategories()
 
+    if (researchTypesError instanceof Error) return <AlertError message={researchTypesError.message}/>
     if (error instanceof Error) return <AlertError message={error.message}/>
 
   return (

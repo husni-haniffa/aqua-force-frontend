@@ -6,7 +6,7 @@ import { Bell, Calendar, Clock, MapPin } from "lucide-react"
 import Image from "next/image"
 import { EventCardProps, handleAddToCalendar } from "./event.types"
 
-const Card = ({event, variants} : EventCardProps) => {
+const Card = ({event} : EventCardProps) => {
     
   return (
     <motion.div 

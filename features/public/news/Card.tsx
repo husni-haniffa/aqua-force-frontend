@@ -13,7 +13,7 @@ interface NewsCardProps {
     variants?: Variant
 }
 
-const Card = ({news, variants} : NewsCardProps) => {
+const Card = ({news} : NewsCardProps) => {
 
   return (
 
