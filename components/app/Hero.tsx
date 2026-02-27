@@ -9,8 +9,7 @@ import { motion } from 'framer-motion'
 const Hero = () => {
 
   return (
-    <section className="relative min-h-screen flex items-start md:items-center overflow-hidden pt-20 sm:pt-24 md:pt-0">
-
+    <section className=" relative min-h-fit md:min-h-screen flex flex-col justify-center overflow-hidden pt-16">
         <div className="absolute inset-0 z-0">
             <Image 
                 src={'/hero-research.jpg'} 
@@ -58,7 +57,7 @@ const Hero = () => {
                   A shared digital space for our university’s academic community to publish research, explore publications, and collaborate across disciplines — supporting learning, discovery, and real-world solutions.
                 </motion.p>
 
-                <div className="flex flex-col md:flex-row gap-6">
+                <div className="flex flex-col gap-4 sm:gap-5 md:flex-row md:gap-6 mt-4 mb-16">
 
                     <motion.div
                         initial={{ opacity: 0, x: -40 }}
@@ -69,7 +68,7 @@ const Hero = () => {
                         viewport={{ once: false, amount: 0.3 }}
                     >
                         <SignedIn>
-                            <Button className="font-semibold w-full" asChild>                     
+                            <Button className="w-full md:w-auto font-semibold" asChild>                     
                                 <Link href={'/user/submissions'}>
                                     Submit Your Paper 
                                     <ArrowRight/>
@@ -78,7 +77,7 @@ const Hero = () => {
                         </SignedIn>
 
                         <SignedOut>
-                            <Button className="font-semibold w-full" asChild>
+                            <Button className="w-full md:w-auto font-semibold" asChild>
                                 <Link href={'/sign-in'}>
                                     Submit Your Paper 
                                     <ArrowRight/>
@@ -95,7 +94,7 @@ const Hero = () => {
                         whileTap={{ scale:1 }}
                         viewport={{ once: false, amount: 0.3 }}
                     >
-                        <Button variant={'outline'} asChild className="w-full">
+                        <Button variant={'outline'} asChild className="w-full md:w-auto font-semibold">
                             <Link href={'/publications'}>
                                 Explore Publications
                             </Link>

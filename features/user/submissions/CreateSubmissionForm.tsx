@@ -60,11 +60,11 @@ const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
                      {researchTypesLoading ? <SelectSkeleton/> : 
                         <Select onValueChange={field.onChange} value={field.value}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a Research Type" />
+                          <SelectValue placeholder="Select a Research Type" className="text-xs xl:text-sm" />
                         </SelectTrigger>
                         <SelectContent>
                           {researchTypes?.map((researchType) => (
-                            <SelectItem key={researchType._id} value={researchType._id}>
+                            <SelectItem key={researchType._id} value={researchType._id} className="text-xs xl:text-sm">
                               {researchType.name}
                             </SelectItem>
                           ))}
@@ -89,6 +89,7 @@ const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
                             aria-invalid={fieldState.invalid}
                             placeholder="Research title"
                             autoComplete="off"
+                            className="text-xs xl:text-sm"
                         />
                         {fieldState.invalid && (
                             <FieldError errors={[fieldState.error]} />
@@ -112,6 +113,7 @@ const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
                             machine learning approaches. The research evaluates effectiveness, scalability, and accuracy across simulated environments.
                             Keywords: cyber security, threat detection"
                             autoComplete="off"
+                            className="text-xs xl:text-sm"
                         />
                         {fieldState.invalid && (
                             <FieldError errors={[fieldState.error]} />
@@ -146,6 +148,7 @@ const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
                           type="file"
                           accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                           onChange={(e) => field.onChange(e.target.files?.[0])}
+                          className="text-xs xl:text-sm"
                         />
                       {fieldState.invalid && (
                         <FieldError errors={[fieldState.error]} />
@@ -162,11 +165,11 @@ const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
                      {isLoading ? <SelectSkeleton/> : 
                         <Select onValueChange={field.onChange} value={field.value}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a category" />
+                          <SelectValue placeholder="Select a category" className="text-xs xl:text-sm" />
                         </SelectTrigger>
                         <SelectContent>
                           {data?.map((category) => (
-                            <SelectItem key={category._id} value={category._id}>
+                            <SelectItem key={category._id} value={category._id} className="text-xs xl:text-sm">
                               {category.name}
                             </SelectItem>
                           ))}
@@ -181,7 +184,7 @@ const CreateSubmissionForm = ({ onSuccess } : CreateSubmissionFormProps) => {
           </form>
         </CardContent>
         <CardFooter>
-            <Field orientation="horizontal">
+            <Field orientation={'responsive'}>
                 <Button type="button" variant="outline" onClick={() => form.reset()} disabled={createMutation.isPending}>
                     Cancel
                 </Button>

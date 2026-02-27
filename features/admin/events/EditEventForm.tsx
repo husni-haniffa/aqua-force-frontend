@@ -61,6 +61,7 @@ const EditEventForm = ({ eventId, onSuccess } : EditEventFormProps) => {
                                     aria-invalid={fieldState.invalid}
                                     placeholder="Data Science Workshop"
                                     autoComplete="off"
+                                    className="text-xs xl:text-sm"
                                 />
                                 {fieldState.invalid && (
                                     <FieldError errors={[fieldState.error]} />
@@ -82,6 +83,7 @@ const EditEventForm = ({ eventId, onSuccess } : EditEventFormProps) => {
                                     aria-invalid={fieldState.invalid}
                                     placeholder="This workshop covers applied data science concepts and tools."
                                     autoComplete="off"
+                                    className="text-xs xl:text-sm"
                                 />
                                 {fieldState.invalid && (
                                     <FieldError errors={[fieldState.error]} />
@@ -125,7 +127,7 @@ const EditEventForm = ({ eventId, onSuccess } : EditEventFormProps) => {
                                     id="edit-event-time-value"
                                     aria-invalid={fieldState.invalid}
                                     autoComplete="off"
-                                    className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+                                    className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none text-xs xl:text-sm"
                                 />
                                 {fieldState.invalid && (
                                 <FieldError errors={[fieldState.error]} />
@@ -148,6 +150,7 @@ const EditEventForm = ({ eventId, onSuccess } : EditEventFormProps) => {
                                     aria-invalid={fieldState.invalid}
                                     placeholder="University of Moratuwa"
                                     autoComplete="off"
+                                    className="text-xs xl:text-sm"
                                 />
                                 {fieldState.invalid && (
                                     <FieldError errors={[fieldState.error]} />

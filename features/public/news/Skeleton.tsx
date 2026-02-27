@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export const NewsCardsSkeleton = () => {
     return (
-    <div className="columns-1 md:columns-2 gap-9 space-y-9 pt-12 xl:pt-24 pb-16 xl:pb-24">
+    <div className="container columns-1 md:columns-2 gap-9 space-y-9 pt-12 xl:pt-24 pb-16 xl:pb-24">
       {Array.from({ length: 6 }).map((_, index) => (
         <div
           key={index}

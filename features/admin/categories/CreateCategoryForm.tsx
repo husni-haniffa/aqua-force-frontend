@@ -41,6 +41,7 @@ const CreateCategoryForm = ({ onSuccess } : CreateCategoryFormProps) => {
                                     aria-invalid={fieldState.invalid}
                                     placeholder="Computer Science"
                                     autoComplete="off"
+                                    className="text-xs xl:text-sm"
                                 />
                                 {fieldState.invalid && (
                                     <FieldError errors={[fieldState.error]} />
