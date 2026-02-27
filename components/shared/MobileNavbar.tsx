@@ -67,7 +67,7 @@ const MobileNavbar = () => {
               </SignedIn>
               <div className="pt-6 px-4 flex flex-col gap-3 sm:gap-4">
                 {isAdmin && 
-                        <Button asChild className='bg-blue-500'>
+                        <Button asChild className='bg-blue-600 hover:bg-blue-500'>
                             <Link href="/admin" className='font-semibold'>
                                 Admin
                             </Link>
@@ -80,7 +80,7 @@ const MobileNavbar = () => {
                         </Button>
                     </SignedOut>
                 <SignedIn>
-                  <div className="flex items-center justify-center bg-blue-50 rounded-lg">
+                  <div className="flex items-center justify-center bg-blue-50 rounded-lg py-1">
                     <UserButton/>
                   </div>
                 </SignedIn>

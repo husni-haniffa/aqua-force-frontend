@@ -52,7 +52,7 @@ const Card = ({ publication }: PublicationCardProps) => {
                   {/* Keywords */}
                   <div className='flex flex-wrap gap-2'>
                     {publication.keywords.map((keyword, index) => (
-                      <div className='bg-slate-200 w-fit px-1 py-0.5 xl:px-2 xl:py-1 rounded-md' key={index}>
+                      <div className='bg-slate-200 w-fit px-2 py-1 rounded-md' key={index}>
                         <span className='text-slate-600 text-xs xl:text-sm'>{keyword}</span>
                       </div>
                     ))}

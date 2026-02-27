@@ -5,11 +5,11 @@ const NewsView = ({news} : {news: NewsResponse})  => {
   return (
     <Card className='w-w-full border-0 shadow-none' key={news._id}>
         <CardHeader>
-            <CardTitle className='text-slate-800'>
+            <CardTitle className='text-slate-800 text-lg'>
                 {news.title}
             </CardTitle>
         </CardHeader>
-        <CardContent className='text-slate-600'>
+        <CardContent className='text-slate-600 leading-relaxed text-xs'>
             {news.content}
         </CardContent>
         <CardFooter className='text-sm'>

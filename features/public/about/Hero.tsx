@@ -8,7 +8,7 @@ const Hero = () => {
     
   return (
     <div className='bg-white'>
-        <div className='container pt-16 pb-16'>
+        <div className='container pt-6 xl:pt-12 pb-16'>
 
             <div className='grid grid-cols-1 md:grid-cols-2 gap-9'>
 
@@ -35,7 +35,7 @@ const Hero = () => {
 
                     <div>
                         <motion.p 
-                            className='max-w-2xl xl:max-w-3xl text-sm md:text-base text-slate-600'
+                            className='max-w-2xl xl:max-w-3xl text-sm md:text-base text-slate-600 leading-relaxed'
                             initial={{opacity:0, y:-40}}
                             whileInView={{opacity:1, y:0}}
                             transition={{duration:1, ease:"easeInOut"}}
