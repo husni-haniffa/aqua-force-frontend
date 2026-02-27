@@ -27,7 +27,7 @@ const EventHeader = ({ onSearch }: { onSearch: (value: string) => void }) => {
       </div>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button size={'lg'}variant={'add'}>Add Event</Button>
+          <Button variant={'add'}>Add Event</Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader className="sr-only">

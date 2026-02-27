@@ -15,7 +15,7 @@ const ReadNews = ({ id }: { id: string }) => {
   if (error instanceof Error) return <AlertError message={error.message} />
 
   return (
-    <div className='container pt-16 xl:pt-24 pb-16 xl:pb-24'>
+    <div className='container pt-6 xl:pt-12 pb-16 xl:pb-24'>
 
         {isLoading ? (
             <NewsArticleSkeleton/>
@@ -42,7 +42,7 @@ const ReadNews = ({ id }: { id: string }) => {
                             {data?.updatedAt && formateDate(data.updatedAt)}
                         </Label>
                         <Button asChild variant={'outline'} className='border-none'>
-                            <Link href={`/news/${data?._id}/read`} className='text-blue-500'>
+                            <Link href={`/news`} className='text-blue-500'>
                                 Read More News
                                 <ArrowRight />
                             </Link>

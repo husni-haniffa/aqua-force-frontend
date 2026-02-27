@@ -54,6 +54,7 @@ const EditNewsForm = ({ newsId, onSuccess } : EditNewsFormProps) => {
                                     aria-invalid={fieldState.invalid}
                                     placeholder="Call for Papers: International Conference on AI 2026"
                                     autoComplete="off"
+                                    className="text-xs xl:text-sm"
                                 />
                                 {fieldState.invalid && (
                                     <FieldError errors={[fieldState.error]} />
@@ -75,6 +76,7 @@ const EditNewsForm = ({ newsId, onSuccess } : EditNewsFormProps) => {
                                 aria-invalid={fieldState.invalid}
                                 placeholder="Researchers are invited to submit original papers for the upcoming International Conference on Artificial Intelligence 2026. Selected papers will be published in indexed proceedings."
                                 autoComplete="off"
+                                className="text-xs xl:text-sm"
                             />
                             {fieldState.invalid && (
                                 <FieldError errors={[fieldState.error]} />
