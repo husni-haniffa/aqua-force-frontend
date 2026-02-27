@@ -8,15 +8,7 @@ import { useRouter } from 'next/navigation'
 const CreateSubmissionPage = () => {
   const router = useRouter()
   return (
-    <div className='container py-16 flex flex-col gap-6'>
-      <div>
-        <Link href={'/user/submissions'}>
-          <Button variant={'secondary'}>
-            <ArrowLeft/>
-            Go Back
-          </Button>
-        </Link>
-      </div>
+    <div className='container pt-6 xl:pt-12 pb-16 xl:pb-24 flex flex-col gap-6'>
       <CreateSubmissionForm onSuccess={() => router.push('/user/submissions')}/>
     </div>
   )

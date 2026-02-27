@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 const PublicEvents = () => {
   return (
-    <section className='container pt-12 xl:pt-24 pb-16 xl:pb-24'>
+    <section className='container pt-6 xl:pt-12 pb-16 xl:pb-24'>
           <header className='flex flex-col items-center justify-center gap-3 mb-12 text-center'>
             <motion.h6 
               className='text-sm md:text-base text-blue-500' 

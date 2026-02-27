@@ -44,6 +44,7 @@ const CreateEventForm = ({ onSuccess } : CreateEventFormProps) => {
                                     aria-invalid={fieldState.invalid}
                                     placeholder="Data Science Workshop"
                                     autoComplete="off"
+                                    className="text-xs xl:text-sm"
                                 />
                                 {fieldState.invalid && (
                                     <FieldError errors={[fieldState.error]} />
@@ -65,6 +66,7 @@ const CreateEventForm = ({ onSuccess } : CreateEventFormProps) => {
                                     aria-invalid={fieldState.invalid}
                                     placeholder="This workshop covers applied data science concepts and tools."
                                     autoComplete="off"
+                                    className="text-xs xl:text-sm"
                                 />
                                 {fieldState.invalid && (
                                     <FieldError errors={[fieldState.error]} />
@@ -109,6 +111,7 @@ const CreateEventForm = ({ onSuccess } : CreateEventFormProps) => {
                                     aria-invalid={fieldState.invalid}
                                     autoComplete="off"
                                     className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+                                    
                                 />
                                 {fieldState.invalid && (
                                 <FieldError errors={[fieldState.error]} />
@@ -131,6 +134,7 @@ const CreateEventForm = ({ onSuccess } : CreateEventFormProps) => {
                                     aria-invalid={fieldState.invalid}
                                     placeholder="University of Moratuwa"
                                     autoComplete="off"
+                                    className="text-xs xl:text-sm"
                                 />
                                 {fieldState.invalid && (
                                     <FieldError errors={[fieldState.error]} />

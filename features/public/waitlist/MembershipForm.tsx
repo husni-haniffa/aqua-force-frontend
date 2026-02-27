@@ -124,7 +124,7 @@ if (!isLoaded) return null
                     className="text-xs xl:text-sm"
                   />
                   {fieldState.invalid && (
-                    <FieldError errors={[fieldState.error]} />
+                    <FieldError errors={[fieldState.error]}/>
                   )}
                 </Field>
               )}

@@ -43,6 +43,7 @@ const CreateNewsForm = ({ onSuccess } : CreateNewsFormProps) => {
                                     aria-invalid={fieldState.invalid}
                                     placeholder="University Launches New Artificial Intelligence Research Center"
                                     autoComplete="off"
+                                    className="text-xs xl:text-sm"
                                 />
                                 {fieldState.invalid && (
                                     <FieldError errors={[fieldState.error]} />
@@ -64,6 +65,7 @@ const CreateNewsForm = ({ onSuccess } : CreateNewsFormProps) => {
                                 aria-invalid={fieldState.invalid}
                                 placeholder="The university has launched a new AI research center focusing on innovation, collaboration, and real-world applications across multiple departments."
                                 autoComplete="off"
+                                className="text-xs xl:text-sm"
                             />
                             {fieldState.invalid && (
                                 <FieldError errors={[fieldState.error]} />

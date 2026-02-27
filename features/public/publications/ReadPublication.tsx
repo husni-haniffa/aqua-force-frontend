@@ -17,7 +17,7 @@ const ReadPublication =  ({id} : {id: string}) => {
     if(error instanceof Error) return <AlertError message={error.message}/>
 
   return (
-    <div className='pt-16 xl:pt-24 pb-16 xl:pb-24'>
+    <div className='pt-6 xl:pt-12 pb-16 xl:pb-24'>
         <div className='container'>
             <motion.article 
                 initial={{opacity:0, x: -40}}
@@ -79,7 +79,7 @@ const ReadPublication =  ({id} : {id: string}) => {
                             {data?.socialMediaLinks && (
                                 <SocialLinks links={data?.socialMediaLinks} />
                             )}
-                            <Button asChild className='flex justify-end'>                      
+                            <Button asChild className='w-full xl:w-auto'>                      
                                 <Link href={data?.filePath || ''} target='_blank'>
                                     <Download/>
                                     Download

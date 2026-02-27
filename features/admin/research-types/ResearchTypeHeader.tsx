@@ -27,7 +27,7 @@ const ResearchTypeHeader = ({ onSearch }: { onSearch: (value: string) => void })
       </div>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button size={'lg'} variant={'add'}>
+          <Button variant={'add'}>
             Add Research Type
           </Button>
         </DialogTrigger>

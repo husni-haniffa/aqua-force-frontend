@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 const PublicNews = () => {
   return (
-    <section className='pt-16 xl:pt-24'>
+    <section className='pt-6 xl:pt-12 pb-16 xl:pb-24'>
         <header className='flex flex-col items-center justify-center gap-3 mb-12 text-center'>
               <motion.h6 
                 className='text-sm md:text-base text-blue-500' 

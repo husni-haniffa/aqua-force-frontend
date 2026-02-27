@@ -49,7 +49,7 @@ const Navbar = () => {
                 </div>
                 <div className='hidden lg:flex items-center gap-6'>
                     {isAdmin && 
-                        <Button asChild className='bg-blue-950 hover:bg-blue-900'>
+                        <Button asChild className='bg-blue-600 hover:bg-blue-500'>
                             <Link href="/admin" className='font-semibold'>
                                 Admin
                             </Link>

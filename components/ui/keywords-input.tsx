@@ -49,7 +49,7 @@ export const KeywordsInput = ({
     <div className="relative">
       <Input
         type="text"
-        className="w-full px-3 py-2 pr-10 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        className="w-full px-3 py-2 pr-10 text-xs xl:text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         placeholder={value.length === 0 ? placeholder : ""}
         value={input}
         onChange={handleInputChange}
