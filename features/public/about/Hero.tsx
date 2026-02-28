@@ -7,79 +7,85 @@ import { container, item } from '@/lib/animation'
 const Hero = () => {
     
   return (
-    <div className='bg-white'>
-        <div className='container pt-6 xl:pt-12 pb-16'>
+    
+   <section className="container relative py-16 overflow-hidden">
 
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-9'>
+  <div className="absolute top-0 left-0 w-1/2 h-full bg-slate-50 rounded-r-3xl -z-10" />
 
-                <div className='flex flex-col justify-between gap-9'>
+  <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 xl:gap-20 items-center">
 
-                    <header className='flex flex-col gap-3'>
-                        <motion.h6 
-                            className='text-sm md:text-base text-blue-500'
-                            initial={{opacity:0, x:-40}}
-                            whileInView={{opacity:1, x:0}}
-                            transition={{duration:1, ease:"easeInOut"}}
-                            viewport={{ once: false, amount: 0.3 }}>
-                            RESEARCH TOGETHER. FUTURE. LIFE
-                        </motion.h6>
-                        <motion.h1 
-                            className='text-2xl md:text-3xl xl:text-4xl font-bold text-slate-800'
-                            initial={{opacity:0, y:-40}}
-                            whileInView={{opacity:1, y:0}}
-                            transition={{duration:1, ease:"easeInOut"}}
-                            viewport={{ once: false, amount: 0.3 }}>
-                            Built for collaboration across our academic community
-                        </motion.h1>
-                    </header>
+    {/* ── LEFT: Content ── */}
+    <div className="flex flex-col gap-8">
 
-                    <div>
-                        <motion.p 
-                            className='max-w-2xl xl:max-w-3xl text-sm md:text-base text-slate-600 leading-relaxed'
-                            initial={{opacity:0, y:-40}}
-                            whileInView={{opacity:1, y:0}}
-                            transition={{duration:1, ease:"easeInOut"}}
-                            viewport={{ once: false, amount: 0.3 }}>
-                            Created for our university’s students, researchers, and academics, 
-                            Research Minds Net supports interdisciplinary collaboration, knowledge sharing, 
-                            and research development within a single connected platform.
-                        </motion.p>
-                    </div>
+      <motion.p
+        className="text-xs font-semibold tracking-widest text-blue-500 uppercase"
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: false, amount: 0.3 }}>
+        Research · Future · Life
+      </motion.p>
 
-                    <motion.div 
-                        className='grid grid-cols-1 md:grid-cols-2 gap-3'
-                        variants={container}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: false, amount: 0.3 }}>
-                        {researchServices.map((service) => (
-                            <motion.div 
-                            className='flex items-center gap-3 bg-slate-200 px-4 py-2 rounded-lg shadow' 
-                            key={service.label} 
-                            variants={item}
-                            >
-                                {<service.icon className={service.ui}/>}
-                                <span className='text-xs xl:text-sm text-slate-950'>{service.label}</span>
-                            </motion.div>
-                        ))}                     
-                    </motion.div>
+      <motion.h2
+        className="text-3xl md:text-4xl xl:text-5xl font-bold text-slate-800 leading-tight"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.1 }}
+        viewport={{ once: false, amount: 0.3 }}>
+        Built for collaboration across our{" "}
+        <span className="text-blue-500">academic community</span>
+      </motion.h2>
 
-                </div>
+      <motion.p
+        className="text-sm md:text-base text-slate-500 leading-relaxed max-w-lg"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.2 }}
+        viewport={{ once: false, amount: 0.3 }}>
+        Created for our university's students, researchers, and academics,
+        Research Minds Net supports interdisciplinary collaboration, knowledge
+        sharing, and research development within a single connected platform.
+      </motion.p>
 
-               <div className="w-full h-full relative min-h-50 md:min-h-75 xl:min-h-100">
-                    <Image
-                        src="/research-team.png"
-                        alt="about-us-hero-image"
-                        fill
-                        className="object-contain md:object-cover rounded-lg"
-                        priority
-                    />
-                </div>
+      <div className="w-12 h-px bg-blue-300" />
 
+      <motion.div
+        className="grid grid-cols-2 gap-3"
+        variants={container}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}>
+        {researchServices.map((service) => (
+          <motion.div
+            key={service.label}
+            className="flex items-center gap-3 bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all duration-200 px-4 py-3 rounded-xl"
+            variants={item}>
+            <div className="p-2 bg-blue-50 rounded-lg shrink-0">
+              <service.icon className={service.ui} />
             </div>
+            <span className="text-xs xl:text-sm font-medium text-slate-700">
+              {service.label}
+            </span>
+          </motion.div>
+        ))}
+      </motion.div>
 
-        </div> 
     </div>
+
+    {/* ── RIGHT: Image ── */}
+    <div className="relative w-full aspect-[4/3] lg:aspect-[3/4] xl:aspect-[4/3]">
+      <Image
+        src="/research-team.png"
+        alt="Research collaboration"
+        fill
+        className="object-cover rounded-2xl shadow-xl"
+        priority
+      />
+    
+    </div>
+
+  </div>
+</section>
   )
 }
 

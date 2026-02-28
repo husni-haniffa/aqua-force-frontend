@@ -20,14 +20,11 @@ export function AdminAppSideBar() {
   return (
     <Sidebar>
       <SidebarHeader className="border-b h-16 px-4 pt-4">
-        <Link href={"/"} className='px-2 w-fit py-1 flex justify-center items-center rounded-md bg-blue-100'>
-         
-       
-            <span className="font-bold text-lg leading-tight bg-blue-500 bg-clip-text text-transparent">
-              Research Minds Net
+        <Link href="/" className="px-2">
+            <span className="font-bold text-lg sm:text-xl text-slate-900">
+              Research<span className="text-blue-500"> Minds Net</span>
             </span>
-  
-        </Link>
+          </Link>
       </SidebarHeader>
       
       <SidebarContent className="py-4 px-2">

@@ -10,94 +10,97 @@ const Footer = () => {
 
 
   return (
-    <footer className='bg-slate-50 py-8 sm:py-10 md:py-12 border-t'>
-        <div className='container'>
-            <div className='flex flex-col lg:flex-row gap-8 lg:gap-12'>
+    <footer className="bg-slate-900 border-t border-slate-800 pt-16 pb-8">
+  <div className="container">
 
-                <div className='flex flex-col gap-4 lg:flex-1'>
-                    <Link href={"/"} className='bg-blue-100 px-2 py-1 rounded-lg w-fit'>
-                        <span className="font-bold text-lg sm:text-xl lg:text-2xl leading-tight bg-blue-500 bg-clip-text text-transparent">
-                            Research Minds Net
-                        </span>
-                    </Link>
+    <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 mb-16">
 
-                    <p className='text-slate-600 text-xs lg:text-base leading-relaxed max-w-xl'>
-                        A place for minds to connect, ideas to grow, and research to create real-world impact.                   
-                    </p>
-                    
-                    <div className='flex flex-row gap-3 sm:gap-4'>
-                        {socialMedia.map((social) => (
-                            <Link 
-                                key={social.id} 
-                                href={social.href}
-                            >
-                                <social.icon size={20} className="sm:w-6 sm:h-6" />
-                            </Link>
-                        ))}
-                    </div>
-                </div>
+      {/* Brand column */}
+      <div className="flex flex-col gap-5 lg:max-w-xs">
+        <Link href="/" className="w-fit">
+          <span className="font-bold text-xl text-white">
+            Research<span className="text-blue-500"> Minds Net</span>
+          </span>
+        </Link>
 
-                <div className='grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-24 lg:flex'>
-                
-                    <div className='flex flex-col gap-4'>
-                        <header className='text-slate-800 font-bold text-base sm:text-lg lg:text-xl mb-3'>
-                            Contact
-                        </header>
-                        <div className='flex flex-col gap-3'>
-                            {contactInfo.map((contact) => (
-                                <Link 
-                                    key={contact.id} 
-                                    href={contact.href}
-                                    className="text-slate-600 hover:text-slate-800 transition-colors text-sm sm:text-base"
-                                >
-                                    {contact.label}
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
+        <p className="text-sm text-slate-400 leading-relaxed">
+          A place for minds to connect, ideas to grow, and research to create real-world impact.
+        </p>
 
-                    <div className='flex flex-col gap-4'>
-                        <header className='text-slate-800 font-bold text-base sm:text-lg lg:text-xl mb-3'>
-                            Company
-                        </header>
-                        <div className='flex flex-col gap-3'>
-                            {navLinks.map((link) => (
-                                <Link
-                                    key={link.name}
-                                    href={link.href}
-                                    className="text-slate-600 hover:text-slate-800 transition-colors text-sm sm:text-base"
-                                >
-                                    {link.name}
-                                </Link>
-                            ))}
-                            <SignedIn>
-                                <Link 
-                                    href="/user/submissions"
-                                    className="text-slate-600 hover:text-slate-800 transition-colors text-sm sm:text-base"
-                                >
-                                    Submissions
-                                </Link>
-                            </SignedIn>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div className='border-t border-slate-300 mt-8 sm:mt-12 pt-6 sm:pt-8'>
-                <div className='flex flex-col sm:flex-row justify-between items-center gap-4'>
-                    <Label className='text-slate-500 text-xs sm:text-sm'>
-                        &copy; {new Date().getFullYear()} Research Minds Net. All rights reserved
-                    </Label>
-                    <div>
-                        <Link href="/Policy Note.pdf" className="text-slate-500 hover:text-slate-800 transition-colors text-xs sm:text-sm" target='_blank'  rel="noopener noreferrer">
-                            Privacy Policy
-                        </Link>
-                    </div>
-                </div>
-            </div>
+        {/* Social icons */}
+        <div className="flex items-center gap-3 mt-1">
+          {socialMedia.map((social) => (
+            <Link
+              key={social.id}
+              href={social.href}
+              className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-all duration-200">
+              <social.icon size={15} />
+            </Link>
+          ))}
         </div>
-    </footer>
+      </div>
+
+      {/* Links columns */}
+      <div className="grid grid-cols-1 md:grid-cols-2  gap-10 lg:gap-20 lg:ml-auto">
+
+        <div className="flex flex-col gap-4">
+          <p className="text-xs font-semibold tracking-widest text-slate-500 uppercase">
+            Contact
+          </p>
+          <div className="flex flex-col gap-3">
+            {contactInfo.map((contact) => (
+              <Link
+                key={contact.id}
+                href={contact.href}
+                className="text-sm text-slate-400 hover:text-white transition-colors duration-200">
+                {contact.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          <p className="text-xs font-semibold tracking-widest text-slate-500 uppercase">
+            Company
+          </p>
+          <div className="flex flex-col gap-3">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-sm text-slate-400 hover:text-white transition-colors duration-200">
+                {link.name}
+              </Link>
+            ))}
+            <SignedIn>
+              <Link
+                href="/user/submissions"
+                className="text-sm text-slate-400 hover:text-white transition-colors duration-200">
+                Submissions
+              </Link>
+            </SignedIn>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    {/* Bottom bar */}
+    <div className="border-t border-slate-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <span className="text-xs text-slate-500">
+        &copy; {new Date().getFullYear()} Research Minds Net. All rights reserved.
+      </span>
+      <Link
+        href="/Policy Note.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-xs text-slate-500 hover:text-white transition-colors duration-200">
+        Privacy Policy
+      </Link>
+    </div>
+
+  </div>
+</footer>
   )
 }
 

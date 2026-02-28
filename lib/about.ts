@@ -98,3 +98,27 @@ export const researchServices = [
         ui: "text-pink-500 w-5 h-5" 
     }
 ];
+
+export const founders = [
+    {
+        name: "E P D N Thilakarathne",
+        image: "/founders/Thilakarathna.jpg",
+        email: "epdarshananuwan@gmail.com",
+        phone: "+94 71 3320 561",
+        role: "Co Founder",
+    },
+    {
+        name: "K P U T Egodauyana",
+        image: "/founders/Egodauyana.png",
+        email: "udithathejan@gmail.com",
+        phone: "+94 71 2687 197",
+        role: "Co Founder",
+    },
+    {
+        name: "W G I T Gunathilaka",
+        image: "/founders/Gunathilaka.jpg",
+        email: "mrinduniltharaka@gmail.com",
+        phone: "+94 71 3135 128",
+        role: "Co Founder",
+    }
+]

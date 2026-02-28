@@ -10,89 +10,94 @@ import { motion } from 'framer-motion'
 import SocialLinks from './SocialLinks'
 import { Label } from '@/components/ui/label'
 
-const ReadPublication =  ({id} : {id: string}) => {
-
-    const { data, isLoading, error } = usePublicationById(id)
-    if(isLoading) return <ReadPublicationSkeleton/>
-    if(error instanceof Error) return <AlertError message={error.message}/>
+// ReadPublication
+const ReadPublication = ({ id }: { id: string }) => {
+  const { data, isLoading, error } = usePublicationById(id)
+  if (isLoading) return <ReadPublicationSkeleton />
+  if (error instanceof Error) return <AlertError message={error.message} />
 
   return (
-    <div className='pt-6 xl:pt-12 pb-16 xl:pb-24'>
-        <div className='container'>
-            <motion.article 
-                initial={{opacity:0, x: -40}}
-                animate={{opacity:1, x:0}}
-                transition={{duration: 0.8, ease: "easeInOut"}}
-            >  
+    <section className="container pt-10 xl:pt-16 pb-16 xl:pb-24">
+      <motion.article
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="flex flex-col gap-8">
 
-                <div>
-                    <div className='flex items-center justify-between mb-6'>
-                        <div className='bg-green-100 px-2 py-1 rounded-md'>
-                            <Label className='text-xs xl:text-sm text-green-500'>
-                                {data?.categoryId.name}
-                            </Label>
-                        </div>
-                        <div>
-                            <Label className='text-xs xl:text-sm'>                            
-                                Published on {data?.updatedAt ? formateDate(data.updatedAt) : 'N/A'}
-                            </Label>
-                        </div>
-                    </div>
-                    <div className='flex flex-col gap-6 mb-6'>
-                        <div>
-                            <h1 className='text-lg xl:text-xl font-bold'>
-                                {data?.title}
-                            </h1>
-                        </div>
-                        <div className='flex items-center gap-9'>
-                            <div className='flex items-center gap-3'>
-                                <span className='bg-blue-100 rounded-full px-2 py-1'>
-                                    <Label className='text-xs xl:text-sm font-semibold text-blue-600'>{data?.userName.charAt(0)}</Label>
-                                </span>
-                                <Label className='text-slate-800'>{data?.userName}</Label>
-                            </div>
-                        </div>
-                        <div>
-                            <Label className='text-slate-800 font-semibold text-xs xl:text-sm'>{data?.researchTypeId.name}</Label>
-                        </div>
-                        <div className='flex flex-col gap-4'>
-                            <h1 className='font-bold text-slate-800 text-lg xl:text-xl'>Abstract</h1>
-                            <p className='text-slate-600 text-xs xl:text-sm leading-relaxed'>
-                                {data?.abstract}            
-                            </p>
-                        </div>
-                    </div>
-
-                    <div className='border-t pt-6 space-y-4'>
-    
-                        {/* Keywords */}
-                        <div className='flex flex-wrap gap-2'>
-                            {data?.keywords.map((keyword, index) => (
-                            <div className='bg-slate-200 w-fit px-2 py-1 rounded-md' key={index}>
-                                <span className='text-slate-600 text-xs xl:text-sm'>{keyword}</span>
-                            </div>
-                            ))}
-                        </div>
-
-                        {/* Social Links + CTA */}
-                        <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4'>                  
-                            {data?.socialMediaLinks && (
-                                <SocialLinks links={data?.socialMediaLinks} />
-                            )}
-                            <Button asChild className='w-full xl:w-auto'>                      
-                                <Link href={data?.filePath || ''} target='_blank'>
-                                    <Download/>
-                                    Download
-                                </Link>
-                            </Button>                
-                        </div>
-
-                    </div>
-                    
-                </div>
-            </motion.article>
+        {/* Top meta row */}
+        <div className="flex items-center justify-between">
+          <div className="bg-green-50 border border-green-100 px-3 py-1 rounded-full">
+            <span className="text-xs font-semibold text-green-600">
+              {data?.categoryId.name}
+            </span>
+          </div>
+          <span className="text-xs text-slate-400">
+            Published on {data?.updatedAt ? formateDate(data.updatedAt) : "N/A"}
+          </span>
         </div>
-    </div>
+
+        {/* Title */}
+        <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold text-slate-900 leading-tight">
+          {data?.title}
+        </h1>
+
+        {/* Author + research type */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0">
+              <span className="text-sm font-bold text-blue-600">
+                {data?.userName.charAt(0)}
+              </span>
+            </div>
+            <span className="text-sm font-medium text-slate-700">
+              {data?.userName}
+            </span>
+          </div>
+          <span className="text-xs font-semibold text-slate-400 bg-slate-50 border border-slate-100 px-2.5 py-1 rounded-full">
+            {data?.researchTypeId.name}
+          </span>
+        </div>
+
+        <div className="h-px bg-slate-100" />
+
+        {/* Abstract */}
+        <div className="flex flex-col gap-3">
+          <h2 className="text-lg font-bold text-slate-800">Abstract</h2>
+          <p className="text-sm text-slate-500 leading-relaxed">
+            {data?.abstract}
+          </p>
+        </div>
+
+        <div className="h-px bg-slate-100" />
+
+        {/* Keywords */}
+        <div className="flex flex-wrap gap-1.5">
+          {data?.keywords.map((keyword, index) => (
+            <span
+              key={index}
+              className="bg-slate-50 border border-slate-200 text-slate-500 text-xs px-2.5 py-1 rounded-full">
+              {keyword}
+            </span>
+          ))}
+        </div>
+
+        <div className="h-px bg-slate-100" />
+
+        {/* Footer: social links + download */}
+        <div className="flex items-center justify-between gap-4">
+          {data?.socialMediaLinks && (
+            <SocialLinks links={data.socialMediaLinks} />
+          )}
+          <Button asChild className="ml-auto shrink-0">
+            <Link href={data?.filePath || ""} target="_blank" className="flex items-center gap-1.5 font-semibold">
+              <Download className="w-4 h-4" />
+              Download Paper
+            </Link>
+          </Button>
+        </div>
+
+      </motion.article>
+    </section>
   )
 }
 
