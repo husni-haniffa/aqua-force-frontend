@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 const MeetTheTeam = () => {
   return (
-    <section className="container pt-16 xl:pt-24 pb-16">
+    <section className="container pt-6 xl:pt-12 pb-12">
 
   {/* Header */}
   <header className="flex flex-col items-center gap-3 mb-16 text-center">

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 
 const HowWeSupport = () => {
   return (
-    <section className="container pt-16 xl:pt-24 pb-16">
+    <section className="container pt-6 xl:pt-12 pb-12">
 
   {/* Header */}
   <header className="flex flex-col items-center gap-3 mb-16 text-center">
@@ -50,7 +50,7 @@ const HowWeSupport = () => {
         className="group relative flex flex-col gap-5 bg-white border border-slate-100 rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 overflow-hidden">
 
         {/* Subtle top accent line */}
-        <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-400 to-blue-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-blue-400 to-blue-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
         {/* Icon + Title */}
         <div className="flex items-center gap-4">
