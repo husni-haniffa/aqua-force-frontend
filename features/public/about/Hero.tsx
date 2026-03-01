@@ -8,7 +8,7 @@ const Hero = () => {
     
   return (
     
-   <section className="container relative py-16 overflow-hidden">
+   <section className="container relative pt-6 xl:pt-12 pb-12  overflow-hidden">
 
   <div className="absolute top-0 left-0 w-1/2 h-full bg-slate-50 rounded-r-3xl -z-10" />
 
