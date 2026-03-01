@@ -58,7 +58,7 @@ className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 
 
       {/* CTAs */}
       <motion.div
-        className="flex flex-col sm:flex-row gap-6 mb-14"
+        className="flex flex-col sm:flex-row gap-6 mb-16"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
