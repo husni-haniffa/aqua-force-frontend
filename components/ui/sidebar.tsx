@@ -244,7 +244,7 @@ function Sidebar({
         <div
           data-sidebar="sidebar"
           data-slot="sidebar-inner"
-          className="bg-slate-50 group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm"
+          className="bg-slate-50 group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm [&.bg-slate-900]:bg-slate-900"
         >
           {children}
         </div>
@@ -387,7 +387,7 @@ function SidebarGroup({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="sidebar-group"
       data-sidebar="group"
-      className={cn("relative flex w-full min-w-0 flex-col p-2 bg-white rounded-lg", className)}
+      className={cn("relative flex w-full min-w-0 flex-col p-2 bg-white rounded-lg [&.bg-slate-800]:bg-slate-800", className)}
       {...props}
     />
   )
@@ -474,11 +474,11 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
 }
 
 const sidebarMenuButtonVariants = cva(
-  "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-hidden ring-sidebar-ring transition-[width,height,padding] font-normal hover:font-semibold hover:bg-slate-100 focus-visible:ring-2 active:bg-slate-100 disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-slate-100 data-[active=true]:font-semibold data-[state=open]:hover:bg-slate-100 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
+  "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-hidden ring-sidebar-ring transition-[width,height,padding] font-normal hover:font-semibold hover:bg-slate-100 focus-visible:ring-2 active:bg-slate-100 disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[state=open]:hover:bg-slate-100 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&.text-white]:text-white [&.hover\:bg-slate-800:hover]:bg-slate-800 [&.bg-blue-600]:bg-blue-600 [&.bg-blue-600.text-white]:text-white [&.bg-blue-600.font-semibold]:font-semibold",
   {
     variants: {
       variant: {
-        default: "hover:bg-slate-100",
+        default: "hover:bg-slate-100 [&.hover\:bg-slate-800:hover]:bg-slate-800",
         outline:
           "bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-slate-100 hover:shadow-[0_0_0_1px_hsl(var(--sidebar-border))]",
       },

@@ -26,7 +26,7 @@ export const Cards = (data: AdminOverviewResponse | undefined): StatCard[] => [
         icon: Users,
         href: '/admin/users',
         cta: 'View Users',
-        gradient: 'from-blue-500 to-cyan-400',
+        gradient: 'from-blue-600 to-blue-400',
     },
     {
         label: 'Waitlist Applicants',
@@ -35,7 +35,7 @@ export const Cards = (data: AdminOverviewResponse | undefined): StatCard[] => [
         icon: ClipboardList,
         href: '/admin/waitlist',
         cta: 'View Waitlist',
-        gradient: 'from-indigo-500 to-blue-400',
+        gradient: 'from-violet-600 to-violet-400',
     },
     {
         label: 'Submissions Under Review',
@@ -44,7 +44,7 @@ export const Cards = (data: AdminOverviewResponse | undefined): StatCard[] => [
         icon: FileSearch,
         href: '/admin/submissions',
         cta: 'Review Submissions',
-        gradient: 'from-sky-500 to-blue-300',
+        gradient: 'from-amber-500 to-amber-400',
     },
     {
         label: 'Published',
@@ -53,6 +53,6 @@ export const Cards = (data: AdminOverviewResponse | undefined): StatCard[] => [
         icon: CheckCircle,
         href: '/admin/publications',
         cta: 'View Publications',
-        gradient: 'from-cyan-500 to-teal-400',
+        gradient: 'from-emerald-600 to-emerald-400',
     },
 ]

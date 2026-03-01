@@ -22,7 +22,7 @@ export default function AdminLayout({
       <AdminAppSideBar />
       <SidebarInset className="bg-slate-50">
         
-        <header className="sticky top-0 z-10 h-16 border-b">
+        <header className="sticky top-0 z-10 h-16 bg-white border-b border-slate-200">
           <div className="container flex h-full items-center justify-between px-6">
             <SidebarTrigger />
 
