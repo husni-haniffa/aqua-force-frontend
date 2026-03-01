@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { PublicationCardProps } from './publication.types'

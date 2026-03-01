@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
 import { formateDate, formateTime } from "@/lib/format"
 import { motion } from "framer-motion"
 import { Bell, Calendar, Clock, MapPin } from "lucide-react"

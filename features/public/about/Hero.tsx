@@ -42,7 +42,7 @@ const Hero = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.2 }}
         viewport={{ once: false, amount: 0.3 }}>
-        Created for our university's students, researchers, and academics,
+        Created for our university&apos;s students, researchers, and academics,
         Research Minds Net supports interdisciplinary collaboration, knowledge
         sharing, and research development within a single connected platform.
       </motion.p>
@@ -73,7 +73,7 @@ const Hero = () => {
     </div>
 
     {/* ── RIGHT: Image ── */}
-    <div className="relative w-full aspect-[4/3] lg:aspect-[3/4] xl:aspect-[4/3]">
+    <div className="relative w-full aspect-4/3 lg:aspect-3/4 xl:aspect-4/3">
       <Image
         src="/research-team.png"
         alt="Research collaboration"

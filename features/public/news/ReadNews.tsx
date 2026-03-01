@@ -6,7 +6,6 @@ import { ArrowRight, Clock } from 'lucide-react'
 import { formateDate } from '@/lib/format'
 import { NewsArticleSkeleton } from './Skeleton'
 import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
 import { motion } from 'framer-motion'
 
 // ReadNews

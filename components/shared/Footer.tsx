@@ -2,7 +2,6 @@
 import { navLinks } from '@/lib/navLinks'
 import { SignedIn } from '@clerk/nextjs'
 import Link from 'next/link'
-import { Label } from '../ui/label'
 import { socialMedia } from '@/lib/socialMedia'
 import { contactInfo } from '@/lib/company'
 

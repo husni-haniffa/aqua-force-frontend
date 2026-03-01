@@ -42,7 +42,7 @@ className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 
         transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
         viewport={{ once: false, amount: 0.3 }}>
  A place for minds to connect, ideas to grow, and research to create{" "}
-  <span className="bg-gradient-to-r from-white to-blue-500 bg-clip-text text-transparent">real-world impact.</span>  </motion.h1>
+  <span className="bg-linear-to-r from-white to-blue-500 bg-clip-text text-transparent">real-world impact.</span>  </motion.h1>
 
       {/* Subheading */}
       <motion.p
@@ -51,7 +51,7 @@ className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
         viewport={{ once: false, amount: 0.3 }}>
-        A shared digital space for our university's academic community to publish
+        A shared digital space for our university&apos;s<s></s> academic community to publish
         research, explore publications, and collaborate across disciplines —
         supporting learning, discovery, and real-world solutions.
       </motion.p>

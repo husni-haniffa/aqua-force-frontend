@@ -1,6 +1,5 @@
 import { motion } from "framer-motion"
 import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
 import { NewsResponse } from '@/features/admin/news/news.types'
 import { formateDate } from '@/lib/format'
 import { Variant } from 'framer-motion'

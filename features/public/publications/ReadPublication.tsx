@@ -8,7 +8,7 @@ import { AlertError } from '@/components/ui/alert-error'
 import { ReadPublicationSkeleton } from './Skeleton'
 import { motion } from 'framer-motion'
 import SocialLinks from './SocialLinks'
-import { Label } from '@/components/ui/label'
+
 
 // ReadPublication
 const ReadPublication = ({ id }: { id: string }) => {
