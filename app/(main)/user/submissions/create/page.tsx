@@ -1,8 +1,5 @@
 "use client"
-import { Button } from '@/components/ui/button'
 import CreateSubmissionForm from '@/features/user/submissions/CreateSubmissionForm'
-import { ArrowLeft } from 'lucide-react'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 const CreateSubmissionPage = () => {
