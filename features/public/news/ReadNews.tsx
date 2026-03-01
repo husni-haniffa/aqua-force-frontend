@@ -16,7 +16,7 @@ const ReadNews = ({ id }: { id: string }) => {
   if (isLoading) return <NewsArticleSkeleton />
 
   return (
-    <section className="container pt-10 xl:pt-16 pb-16 xl:pb-24">
+    <section className="container pt-6 xl:pt-12 pb-16 xl:pb-24">
       <motion.article
         key={data?._id}
         initial={{ opacity: 0, y: 24 }}
@@ -34,7 +34,7 @@ const ReadNews = ({ id }: { id: string }) => {
               priority
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent" />
           </div>
         )}
 

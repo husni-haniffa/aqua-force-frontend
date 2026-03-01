@@ -17,12 +17,12 @@ const ReadPublication = ({ id }: { id: string }) => {
   if (error instanceof Error) return <AlertError message={error.message} />
 
   return (
-    <section className="container pt-10 xl:pt-16 pb-16 xl:pb-24">
+    <section className="container pt-6 xl:pt-12 pb-16 xl:pb-24">
       <motion.article
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="flex flex-col gap-8">
+        className="flex flex-col gap-5">
 
         {/* Top meta row */}
         <div className="flex items-center justify-between">

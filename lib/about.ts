@@ -109,7 +109,7 @@ export const founders = [
     },
     {
         name: "K P U T Egodauyana",
-        image: "/founders/Egodauyana.png",
+        image: "/founders/Egodauyana.jpg",
         email: "udithathejan@gmail.com",
         phone: "+94 71 2687 197",
         role: "Co Founder",

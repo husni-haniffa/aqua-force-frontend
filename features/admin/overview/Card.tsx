@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react'
 
 const Card = ({ label, description, value, icon: Icon, href, cta, gradient }: StatCard) => {
   return (
-    <div className={`relative overflow-hidden bg-gradient-to-br ${gradient} rounded-2xl shadow-md p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}>
+    <div className={`relative overflow-hidden bg-linear-to-br ${gradient} rounded-2xl shadow-md p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}>
 
       {/* Decorative circles */}
       <div className="absolute top-0 right-0 w-36 h-36 bg-white/10 rounded-full -mr-16 -mt-16 pointer-events-none" />
