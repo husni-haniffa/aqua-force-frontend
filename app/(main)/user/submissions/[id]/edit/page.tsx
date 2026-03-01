@@ -1,9 +1,6 @@
 "use client"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import EditSubmissionForm from "@/features/user/submissions/EditSubmissionForm"
-import { ArrowLeft } from "lucide-react"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { use } from "react"
 
