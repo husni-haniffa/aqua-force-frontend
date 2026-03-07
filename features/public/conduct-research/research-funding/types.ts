@@ -61,7 +61,7 @@ export const formSchema = z.object({
         .trim()
         .min(2, "Affiliation required")
         .max(200, "Affiliation too long"),
-    studentType: z
+    degree: z
         .string()
         .trim()
         .min(1, "Student Type required"),

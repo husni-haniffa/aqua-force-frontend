@@ -63,7 +63,7 @@ export const formSchema = z.object({
         .max(200, "Affiliation too long"),
 
 
-    studentType: z
+    degree: z
         .string()
         .trim()
         .min(1, "Student Type required"),
@@ -72,13 +72,11 @@ export const formSchema = z.object({
         .string()
         .min(1, "Category is required"),
 
-    minorResearchIdea: z
+    minorResearchArea: z
         .string()
         .trim()
-        .min(10, "Minor research idea must be at least 10 characters")
+        .min(10, "Minor research area must be at least 10 characters")
         .max(1000, "Too long"),
-
- 
 
     howCanYouContribute: z
         .string()

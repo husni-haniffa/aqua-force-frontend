@@ -12,7 +12,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { useCategories } from "@/features/admin/categories/category.hooks"
 import { AlertError } from "@/components/ui/alert-error"
 import { useRouter } from "next/navigation"
-import { formSchema, ResearchStudentsFormProps, typeofContributions } from "./types"
+import { formSchema, ResearchStudentsFormProps } from "./types"
 import { SelectSkeleton } from "@/features/user/submissions/Skeleton"
 
 
@@ -34,10 +34,10 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
       scholar: "",
       designation: "",
       affiliation: "",
+      degree: "",
       categoryId: "",
-      minorResearchIdea: "",
-      researchIdea: "",
-      howCanYouContribute: ""
+      minorResearchArea: "",
+      whereWouldYouLikeToConductResearch: ""
     },
   })
    
@@ -354,7 +354,7 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
               />
 
               <Controller
-                name="minorResearchIdea"
+                name="minorResearchArea"
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
@@ -380,20 +380,20 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
             
 
               <Controller
-                name="researchIdea"
+                name="whereWouldYouLikeToConductResearch"
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-description">
-                      Research Idea
+                    <FieldLabel htmlFor="where would like to conduct the research-description">
+                      Where would like to conduct the research
                     </FieldLabel>
                     <Textarea
                       {...field}
-                      id="research-idea-description"
+                      id="where would like to conduct the research-description"
                       aria-invalid={fieldState.invalid}
-                      placeholder="Describe your research idea in detail..."
+                      placeholder="In University"
                       autoComplete="off"
-                      className="text-xs xl:text-sm min-h-[120px]"
+                      className="text-xs xl:text-sm min-h-30"
                     />
                     {fieldState.invalid && (
                       <FieldError errors={[fieldState.error]} />
@@ -402,42 +402,7 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
                 )}
               />
 
-              <Controller
-                name="howCanYouContribute"
-                control={form.control}
-                render={({ field, fieldState }) => (
-                  <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-contribution">
-                      How can you contribute?
-                    </FieldLabel>
-                    <Select onValueChange={field.onChange} value={field.value}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select contribution type" className="text-xs xl:text-sm" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {typeofContributions?.map((type) => (
-                            <SelectItem key={type.id} value={type.value} className="text-xs xl:text-sm">
-                              {type.value}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    {field.value === "I can contribute in another way" && (
-                      <Input
-                        {...field}
-                        id="research-idea-contribution-other"
-                        aria-invalid={fieldState.invalid}
-                        placeholder="Please specify how you can contribute..."
-                        autoComplete="off"
-                        className="text-xs xl:text-sm mt-2"
-                      />
-                    )}
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
-                  </Field>
-                )}
-              />
+            
             </FieldGroup>
           </form>
         </CardContent>

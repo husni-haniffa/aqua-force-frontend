@@ -34,7 +34,7 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
       scholar: "",
       designation: "",
       affiliation: "",
-      studentType: "",
+      degree: "",
       categoryId: "",
       minorResearchIdea: "",
       noOfStudents: "",
@@ -161,16 +161,16 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
               />
 
                 <Controller
-                name="studentType"
+                name="degree"
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="Student-type-title">
-                      Student Type
+                    <FieldLabel htmlFor="degree-title">
+                      Degree
                     </FieldLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Student Type" className="text-xs xl:text-sm" />
+                          <SelectValue placeholder="Degree" className="text-xs xl:text-sm" />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectItem key='Bachelor' value='Bachelor' className="text-xs xl:text-sm">
@@ -433,7 +433,7 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
                       aria-invalid={fieldState.invalid}
                       placeholder="Describe your research idea in detail..."
                       autoComplete="off"
-                      className="text-xs xl:text-sm min-h-[120px]"
+                      className="text-xs xl:text-sm min-h-30"
                     />
                     {fieldState.invalid && (
                       <FieldError errors={[fieldState.error]} />

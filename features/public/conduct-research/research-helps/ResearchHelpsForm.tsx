@@ -34,8 +34,9 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
       scholar: "",
       designation: "",
       affiliation: "",
+      degree:"",
       categoryId: "",
-      minorResearchIdea: "",
+      minorResearchArea: "",
       howCanYouContribute: ""
     },
   })
@@ -353,7 +354,7 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
               />
 
               <Controller
-                name="minorResearchIdea"
+                name="minorResearchArea"
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
@@ -377,12 +378,12 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
                 </div>
               
                  <Controller
-                name="studentType"
+                name="degree"
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="Student-type-title">
-                      Student Type
+                    <FieldLabel htmlFor="degree-title">
+                      Degree
                     </FieldLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
                         <SelectTrigger>

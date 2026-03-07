@@ -54,18 +54,13 @@ export const formSchema = z.object({
         .string()
         .trim()
         .min(2, "Designation required")
-        .max(150, "Designation too long"),
+        .max(250, "Designation too long"),
 
     affiliation: z
         .string()
         .trim()
         .min(2, "Affiliation required")
-        .max(200, "Affiliation too long"),
-
-    studentType: z
-        .string()
-        .trim()
-        .min(1, "Student Type required"),
+        .max(250, "Affiliation too long"),
 
     categoryId: z
         .string()
@@ -77,15 +72,39 @@ export const formSchema = z.object({
         .min(10, "Minor research idea must be at least 10 characters")
         .max(1000, "Too long"),
 
-
-    whereWouldYouLikeToConductResearch: z
+    howCanYouContribute: z
         .string()
         .trim()
-        .min(10, "Research location must be at least 10 charactors")
-        .max(2000, "Too long"),
+        .min(10, "Please explain your contribution")
+        .max(1000, "Too long"),
 });
 
-
+export const typeofContributions = [
+    {
+        id: 1,
+        value: "Idea Only"
+    },
+    {
+        id: 2,
+        value: "I can be a co-reseacher"
+    },
+    {
+        id: 3,
+        value: "I can be the main supervisor"
+    },
+    {
+        id: 4,
+        value: "I can be a co-supervisor"
+    },
+    {
+        id: 5,
+        value: "I have full funds"
+    },
+    {
+        id: 6,
+        value: "I can contribute in another way"
+    },
+]
 
 export interface ResearchPlacementsFormProps {
     onSuccess?: () => void
