@@ -6,14 +6,11 @@ import * as z from "zod"
 import { formSchema } from "./category.types"
 
 export function useCategories() {
-    const { getToken } = useAuth()
 
     return useQuery({
         queryKey: ["categories"],
         queryFn: async () => {
-            const token = await getToken()
-            if (!token) throw new Error("Not authenticated")
-            return fetchCategories(token)
+            return fetchCategories()
         },
     })
 }

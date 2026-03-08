@@ -2,7 +2,7 @@
 import { CategoryRequest, CategoryResponse } from "@/features/admin/categories/category.types";
 import { BASE_URL } from "@/types/api";
 
-export const fetchCategories = async (token: string): Promise<CategoryResponse[]> => {
+export const fetchCategories = async (): Promise<CategoryResponse[]> => {
     const response = await fetch(`${BASE_URL}/categories`)
     const result = await response.json()
     if (!response.ok) {

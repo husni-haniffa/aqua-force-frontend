@@ -112,6 +112,24 @@ export const typeofContributions = [
     },
 ]
 
+export interface ResearchIdea {
+    title: string;
+    name: string;
+    mobile: string;
+    whatsapp: string;
+    email: string;
+    linkedin: string;
+    orcid: string;
+    researchgate: string;
+    scholar: string;
+    designation: string;
+    affiliation: string;
+    categoryId: string;
+    minorResearchIdea: string;
+    researchIdea: string;
+    howCanYouContribute: string;
+}
+
 export interface ResearchIdeaFormProps {
     onSuccess?: () => void
 }

@@ -106,6 +106,23 @@ export const typeofContributions = [
     },
 ]
 
+export interface ResearchPlacements {
+    title: string;
+    name: string;
+    mobile: string;
+    whatsapp: string;
+    email: string;
+    linkedin: string;
+    orcid: string;
+    researchgate: string;
+    scholar: string;
+    designation: string;
+    affiliation: string;
+    categoryId: string;
+    minorResearchIdea: string;
+    howCanYouContribute: string;
+}
+
 export interface ResearchPlacementsFormProps {
     onSuccess?: () => void
 }

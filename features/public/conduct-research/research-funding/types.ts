@@ -117,6 +117,25 @@ export const typeofContributions = [
     },
 ]
 
+export interface ResearchFunding {
+    title: string;
+    name: string;
+    mobile: string;
+    whatsapp: string;
+    email: string;
+    linkedin: string;
+    orcid: string;
+    researchgate: string;
+    scholar: string;
+    designation: string;
+    affiliation: string;
+    degree: string;
+    categoryId: string;
+    minorResearchAreaForFunding: string;
+    fundingAmount: string;
+    howCanYouContribute: string;
+}
+
 export interface ResearchFundingFormProps {
     onSuccess?: () => void
 }

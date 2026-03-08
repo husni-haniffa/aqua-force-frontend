@@ -113,6 +113,25 @@ export const typeofContributions = [
     },
 ]
 
+export interface ResearchSupervisor {
+    title: string;
+    name: string;
+    mobile: string;
+    whatsapp: string;
+    email: string;
+    linkedin: string;
+    orcid: string;
+    researchgate: string;
+    scholar: string;
+    designation: string;
+    affiliation: string;
+    degree: string;
+    categoryId: string;
+    minorResearchIdea: string;
+    noOfStudents: string;
+    howCanYouContribute: string;
+}
+
 export interface ResearchSupervisorFormProps {
     onSuccess?: () => void
 }

@@ -84,6 +84,23 @@ export const formSchema = z.object({
         .max(1000, "Too long"),
 });
 
+export interface ResearchStudents {
+    title: string;
+    name: string;
+    mobile: string;
+    whatsapp: string;
+    email: string;
+    linkedin: string;
+    orcid: string;
+    researchgate: string;
+    scholar: string;
+    designation: string;
+    affiliation: string;
+    degree: string;
+    categoryId: string;
+    minorResearchArea: string;
+    whereWouldYouLikeToConductResearch: string;
+}
 
 export interface ResearchStudentsFormProps {
     onSuccess?: () => void
