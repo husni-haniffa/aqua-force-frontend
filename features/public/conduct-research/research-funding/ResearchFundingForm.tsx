@@ -11,14 +11,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { useCategories } from "@/features/admin/categories/category.hooks"
 import { AlertError } from "@/components/ui/alert-error"
-import { useRouter } from "next/navigation"
+import { useCreateResearchFudning } from "./funding.hooks"
 import { formSchema, ResearchFundingFormProps, typeofContributions } from "./types"
 import { SelectSkeleton } from "@/features/user/submissions/Skeleton"
 
 
 const ResearchFundingForm = ({ onSuccess } : ResearchFundingFormProps) => {
-
-  const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -28,10 +26,10 @@ const ResearchFundingForm = ({ onSuccess } : ResearchFundingFormProps) => {
       mobile: "",
       whatsapp: "",
       email: "",
-      linkedin: "",
-      orcid: "",
-      researchgate: "",
-      scholar: "",
+      linkedin: "https://linkedin.com/in/username",
+      orcid: "https://orcid.org/yourid",
+      researchgate: "https://researchgate.net/profile/yourprofile",
+      scholar: "https://scholar.google.com/citations?user=yourid",
       designation: "",
       affiliation: "",
       degree: "",
@@ -41,7 +39,8 @@ const ResearchFundingForm = ({ onSuccess } : ResearchFundingFormProps) => {
       howCanYouContribute: ""
     },
   })
-   
+
+  const createMutation = useCreateResearchFudning(onSuccess)
 
     const { data, isLoading, error } = useCategories()
 
@@ -54,7 +53,7 @@ const ResearchFundingForm = ({ onSuccess } : ResearchFundingFormProps) => {
         <CardDescription>Apply for research funding and grants</CardDescription>
       </CardHeader>
         <CardContent>
-          <form id="research-idea-submission">
+          <form id="research-funding-submission" onSubmit={form.handleSubmit((v) => createMutation.mutate(v))}>
             <FieldGroup>
               {/* Personal Information */}
 
@@ -484,11 +483,11 @@ const ResearchFundingForm = ({ onSuccess } : ResearchFundingFormProps) => {
         </CardContent>
         <CardFooter>
             <Field orientation={'responsive'}>
-                <Button type="button" variant="outline" onClick={() => form.reset()}>
+                <Button type="button" variant="outline" onClick={() => form.reset()} disabled={createMutation.isPending}>
                     Cancel
                 </Button>
-                <Button type="submit" form="research-idea-submission" variant={'add'}>
-                    Submit
+                <Button type="submit" form="research-funding-submission" variant={'add'} disabled={createMutation.isPending}>
+                    {createMutation.isPending ? <ButtonLoader text="Submitting"/> : 'Submit'}
                 </Button>
             </Field>
         </CardFooter>

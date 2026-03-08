@@ -14,6 +14,7 @@ import { AlertError } from "@/components/ui/alert-error"
 import { useRouter } from "next/navigation"
 import { formSchema, ResearchHelpsFormProps, typeofContributions } from "./types"
 import { SelectSkeleton } from "@/features/user/submissions/Skeleton"
+import { useCreateResearchHelps } from "./helps.hooks"
 
 
 const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
@@ -28,10 +29,10 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
       mobile: "",
       whatsapp: "",
       email: "",
-      linkedin: "",
-      orcid: "",
-      researchgate: "",
-      scholar: "",
+      linkedin: "https://linkedin.com/in/username",
+      orcid: "https://orcid.org/yourid",
+      researchgate: "https://researchgate.net/profile/yourprofile",
+      scholar: "https://scholar.google.com/citations?user=yourid",
       designation: "",
       affiliation: "",
       degree:"",
@@ -40,11 +41,12 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
       howCanYouContribute: ""
     },
   })
-   
 
-    const { data, isLoading, error } = useCategories()
+  const createMutation = useCreateResearchHelps(onSuccess)
 
-    if (error instanceof Error) return <AlertError message={error.message}/>
+  const { data, isLoading, error } = useCategories()
+
+  if (error instanceof Error) return <AlertError message={error.message}/>
 
   return (
     <Card className="w-full border-0 shadow-none">
@@ -53,7 +55,7 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
         <CardDescription>Get help and support for your research projects</CardDescription>
       </CardHeader>
         <CardContent>
-          <form id="research-idea-submission">
+          <form id="research-helps-submission" onSubmit={form.handleSubmit((v) => createMutation.mutate(v))}>
             <FieldGroup>
               {/* Personal Information */}
 
@@ -63,7 +65,7 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-title">
+                    <FieldLabel htmlFor="research-helps-title">
                       Title
                     </FieldLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
@@ -91,12 +93,12 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-name">
+                    <FieldLabel htmlFor="research-helps-name">
                       Full Name
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-name"
+                      id="research-helps-name"
                       aria-invalid={fieldState.invalid}
                       placeholder="Enter your full name"
                       autoComplete="name"
@@ -113,12 +115,12 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-designation">
+                    <FieldLabel htmlFor="research-helps-designation">
                       Designation
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-designation"
+                      id="research-helps-designation"
                       aria-invalid={fieldState.invalid}
                       placeholder="Enter your designation"
                       autoComplete="organization-title"
@@ -140,15 +142,38 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-affiliation">
+                    <FieldLabel htmlFor="research-helps-affiliation">
                       Affiliation
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-affiliation"
+                      id="research-helps-affiliation"
                       aria-invalid={fieldState.invalid}
                       placeholder="Enter your institution/organization"
                       autoComplete="organization"
+                      className="text-xs xl:text-sm"
+                    />
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
+                  </Field>
+                )}
+              />
+
+              <Controller
+                name="degree"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldLabel htmlFor="research-helps-degree">
+                      Degree
+                    </FieldLabel>
+                    <Input
+                      {...field}
+                      id="research-helps-degree"
+                      aria-invalid={fieldState.invalid}
+                      placeholder="Enter your degree"
+                      autoComplete="off"
                       className="text-xs xl:text-sm"
                     />
                     {fieldState.invalid && (
@@ -165,12 +190,12 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-mobile">
+                    <FieldLabel htmlFor="research-helps-mobile">
                       Mobile Number
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-mobile"
+                      id="research-helps-mobile"
                       aria-invalid={fieldState.invalid}
                       placeholder="07XXXXXXXX"
                       autoComplete="tel"
@@ -188,12 +213,12 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-whatsapp">
+                    <FieldLabel htmlFor="research-helps-whatsapp">
                       WhatsApp Number
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-whatsapp"
+                      id="research-helps-whatsapp"
                       aria-invalid={fieldState.invalid}
                       placeholder="07XXXXXXXX"
                       autoComplete="tel"
@@ -211,12 +236,12 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-email">
+                    <FieldLabel htmlFor="research-helps-email">
                       Email Address
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-email"
+                      id="research-helps-email"
                       aria-invalid={fieldState.invalid}
                       placeholder="your.email@example.com"
                       autoComplete="email"
@@ -234,12 +259,12 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-linkedin">
+                    <FieldLabel htmlFor="research-helps-linkedin">
                       LinkedIn Profile
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-linkedin"
+                      id="research-helps-linkedin"
                       aria-invalid={fieldState.invalid}
                       placeholder="https://linkedin.com/in/yourprofile"
                       autoComplete="url"
@@ -257,12 +282,12 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-orcid">
+                    <FieldLabel htmlFor="research-helps-orcid">
                       ORCID Profile
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-orcid"
+                      id="research-helps-orcid"
                       aria-invalid={fieldState.invalid}
                       placeholder="https://orcid.org/yourid"
                       autoComplete="url"
@@ -280,12 +305,12 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-researchgate">
+                    <FieldLabel htmlFor="research-helps-researchgate">
                       ResearchGate Profile
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-researchgate"
+                      id="research-helps-researchgate"
                       aria-invalid={fieldState.invalid}
                       placeholder="https://researchgate.net/profile/yourprofile"
                       autoComplete="url"
@@ -303,12 +328,12 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-scholar">
+                    <FieldLabel htmlFor="research-helps-scholar">
                       Google Scholar Profile
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-scholar"
+                      id="research-helps-scholar"
                       aria-invalid={fieldState.invalid}
                       placeholder="https://scholar.google.com/citations?user=yourid"
                       autoComplete="url"
@@ -329,7 +354,7 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-category">
+                    <FieldLabel htmlFor="research-helps-category">
                       Major Research Area
                     </FieldLabel>
                     {isLoading ? (
@@ -358,12 +383,12 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-minor">
+                    <FieldLabel htmlFor="research-helps-minor">
                       Minor Research Area
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-minor"
+                      id="research-helps-minor"
                       aria-invalid={fieldState.invalid}
                       placeholder="Specify your minor research area"
                       autoComplete="off"
@@ -377,52 +402,14 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
               />
                 </div>
               
-                 <Controller
-                name="degree"
-                control={form.control}
-                render={({ field, fieldState }) => (
-                  <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="degree-title">
-                      Degree
-                    </FieldLabel>
-                    <Select onValueChange={field.onChange} value={field.value}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Student Type" className="text-xs xl:text-sm" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem key='Bachelor' value='Bachelor' className="text-xs xl:text-sm">
-                              Bachelor
-                            </SelectItem>
-                             <SelectItem key='Master' value='Master' className="text-xs xl:text-sm">
-                              Master
-                            </SelectItem>
-                             <SelectItem key='MPhil' value='MPhil' className="text-xs xl:text-sm">
-                              MPhil
-                            </SelectItem>
-                             <SelectItem key='PhD' value='PhD' className="text-xs xl:text-sm">
-                              PhD
-                            </SelectItem>
-                               <SelectItem key='PostDoc' value='PostDoc' className="text-xs xl:text-sm">
-                              PostDoc
-                            </SelectItem>
-                        </SelectContent>
-                    </Select>
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
-                  </Field>
-                )}
-              />
             
-
-             
 
               <Controller
                 name="howCanYouContribute"
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-contribution">
+                    <FieldLabel htmlFor="research-helps-contribution">
                       How can you contribute?
                     </FieldLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
@@ -440,7 +427,7 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
                     {field.value === "I can contribute in another way" && (
                       <Input
                         {...field}
-                        id="research-idea-contribution-other"
+                        id="research-helps-contribution-other"
                         aria-invalid={fieldState.invalid}
                         placeholder="Please specify how you can contribute..."
                         autoComplete="off"
@@ -458,11 +445,11 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
         </CardContent>
         <CardFooter>
             <Field orientation={'responsive'}>
-                <Button type="button" variant="outline" onClick={() => form.reset()}>
+                <Button type="button" variant="outline" onClick={() => form.reset()} disabled={createMutation.isPending}>
                     Cancel
                 </Button>
-                <Button type="submit" form="research-idea-submission" variant={'add'}>
-                    Submit
+                <Button type="submit" form="research-helps-submission" variant={'add'} disabled={createMutation.isPending}>
+                    {createMutation.isPending ? <ButtonLoader text="Submitting"/> : 'Submit'}
                 </Button>
             </Field>
         </CardFooter>

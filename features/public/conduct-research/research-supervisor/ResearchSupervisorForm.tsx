@@ -11,14 +11,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { useCategories } from "@/features/admin/categories/category.hooks"
 import { AlertError } from "@/components/ui/alert-error"
-import { useRouter } from "next/navigation"
+import { useCreateResearchSupervisor } from "./supervisor.hooks"
 import { formSchema, ResearchSupervisorFormProps, typeofContributions } from "./types"
 import { SelectSkeleton } from "@/features/user/submissions/Skeleton"
 
 
 const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => {
-
-  const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -28,10 +26,10 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
       mobile: "",
       whatsapp: "",
       email: "",
-      linkedin: "",
-      orcid: "",
-      researchgate: "",
-      scholar: "",
+      linkedin: "https://linkedin.com/in/username",
+      orcid: "https://orcid.org/yourid",
+      researchgate: "https://researchgate.net/profile/yourprofile",
+      scholar: "https://scholar.google.com/citations?user=yourid",
       designation: "",
       affiliation: "",
       degree: "",
@@ -41,6 +39,8 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
       howCanYouContribute: ""
     },
   })
+
+  const createMutation = useCreateResearchSupervisor(onSuccess)
    
 
     const { data, isLoading, error } = useCategories()
@@ -54,7 +54,7 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
         <CardDescription>Find research supervisors for your projects</CardDescription>
       </CardHeader>
         <CardContent>
-          <form id="research-idea-submission">
+          <form id="research-supervisor-submission" onSubmit={form.handleSubmit((v) => createMutation.mutate(v))}>
             <FieldGroup>
               {/* Personal Information */}
 
@@ -483,11 +483,11 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
         </CardContent>
         <CardFooter>
             <Field orientation={'responsive'}>
-                <Button type="button" variant="outline" onClick={() => form.reset()}>
+                <Button type="button" variant="outline" onClick={() => form.reset()} disabled={createMutation.isPending}>
                     Cancel
                 </Button>
-                <Button type="submit" form="research-idea-submission" variant={'add'}>
-                    Submit
+                <Button type="submit" form="research-supervisor-submission" variant={'add'} disabled={createMutation.isPending}>
+                    {createMutation.isPending ? <ButtonLoader text="Submitting"/> : 'Submit'}
                 </Button>
             </Field>
         </CardFooter>
