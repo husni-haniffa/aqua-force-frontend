@@ -80,7 +80,7 @@ export const formSchema = z.object({
     whereWouldYouLikeToConductResearch: z
         .string()
         .trim()
-        .min(10, "This field is required")
+        .min(10, "Research location must be in detail")
         .max(1000, "Too long"),
 });
 

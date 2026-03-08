@@ -39,7 +39,10 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
     },
   })
 
-  const createMutation = useCreateResearchStudents(onSuccess)
+  const createMutation = useCreateResearchStudents(() => {
+    form.reset()
+    onSuccess?.()
+  })
    
 
     const { data, isLoading, error } = useCategories()
@@ -151,6 +154,43 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
                       autoComplete="organization"
                       className="text-xs xl:text-sm"
                     />
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
+                  </Field>
+                )}
+              />
+
+                <Controller
+                name="degree"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldLabel htmlFor="degree-title">
+                      Degree
+                    </FieldLabel>
+                    <Select onValueChange={field.onChange} value={field.value}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Degree" className="text-xs xl:text-sm" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem key='Bachelor' value='Bachelor' className="text-xs xl:text-sm">
+                              Bachelor
+                            </SelectItem>
+                             <SelectItem key='Master' value='Master' className="text-xs xl:text-sm">
+                              Master
+                            </SelectItem>
+                             <SelectItem key='MPhil' value='MPhil' className="text-xs xl:text-sm">
+                              MPhil
+                            </SelectItem>
+                             <SelectItem key='PhD' value='PhD' className="text-xs xl:text-sm">
+                              PhD
+                            </SelectItem>
+                               <SelectItem key='PostDoc' value='PostDoc' className="text-xs xl:text-sm">
+                              PostDoc
+                            </SelectItem>
+                        </SelectContent>
+                    </Select>
                     {fieldState.invalid && (
                       <FieldError errors={[fieldState.error]} />
                     )}
@@ -384,16 +424,16 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="where would like to conduct the research-description">
-                      Where would like to conduct the research
+                    <FieldLabel htmlFor="research-location-description">
+                      Where would like to conduct research
                     </FieldLabel>
-                    <Textarea
+                    <Input
                       {...field}
-                      id="where would like to conduct the research-description"
+                      id="research-location-description"
                       aria-invalid={fieldState.invalid}
                       placeholder="In University"
                       autoComplete="off"
-                      className="text-xs xl:text-sm min-h-30"
+                      className="text-xs xl:text-sm"
                     />
                     {fieldState.invalid && (
                       <FieldError errors={[fieldState.error]} />

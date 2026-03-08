@@ -40,7 +40,10 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
     },
   })
 
-  const createMutation = useCreateResearchSupervisor(onSuccess)
+  const createMutation = useCreateResearchSupervisor(() => {
+    form.reset()
+    onSuccess?.()
+  })
    
 
     const { data, isLoading, error } = useCategories()
@@ -431,9 +434,9 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
                       {...field}
                       id="research-idea-description"
                       aria-invalid={fieldState.invalid}
-                      placeholder="Describe your research idea in detail..."
+                      placeholder="50"
                       autoComplete="off"
-                      className="text-xs xl:text-sm min-h-30"
+                      className="text-xs xl:text-sm "
                     />
                     {fieldState.invalid && (
                       <FieldError errors={[fieldState.error]} />

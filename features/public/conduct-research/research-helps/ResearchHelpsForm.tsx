@@ -42,7 +42,10 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
     },
   })
 
-  const createMutation = useCreateResearchHelps(onSuccess)
+  const createMutation = useCreateResearchHelps(() => {
+    form.reset()
+    onSuccess?.()
+  })
 
   const { data, isLoading, error } = useCategories()
 
@@ -160,22 +163,36 @@ const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
                 )}
               />
 
-              <Controller
+                         <Controller
                 name="degree"
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-helps-degree">
+                    <FieldLabel htmlFor="degree-title">
                       Degree
                     </FieldLabel>
-                    <Input
-                      {...field}
-                      id="research-helps-degree"
-                      aria-invalid={fieldState.invalid}
-                      placeholder="Enter your degree"
-                      autoComplete="off"
-                      className="text-xs xl:text-sm"
-                    />
+                    <Select onValueChange={field.onChange} value={field.value}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Degree" className="text-xs xl:text-sm" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem key='Bachelor' value='Bachelor' className="text-xs xl:text-sm">
+                              Bachelor
+                            </SelectItem>
+                             <SelectItem key='Master' value='Master' className="text-xs xl:text-sm">
+                              Master
+                            </SelectItem>
+                             <SelectItem key='MPhil' value='MPhil' className="text-xs xl:text-sm">
+                              MPhil
+                            </SelectItem>
+                             <SelectItem key='PhD' value='PhD' className="text-xs xl:text-sm">
+                              PhD
+                            </SelectItem>
+                               <SelectItem key='PostDoc' value='PostDoc' className="text-xs xl:text-sm">
+                              PostDoc
+                            </SelectItem>
+                        </SelectContent>
+                    </Select>
                     {fieldState.invalid && (
                       <FieldError errors={[fieldState.error]} />
                     )}

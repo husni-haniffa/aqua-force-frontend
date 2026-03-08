@@ -40,7 +40,10 @@ const ResearchFundingForm = ({ onSuccess } : ResearchFundingFormProps) => {
     },
   })
 
-  const createMutation = useCreateResearchFudning(onSuccess)
+  const createMutation = useCreateResearchFudning(() => {
+    form.reset()
+    onSuccess?.()
+  })
 
     const { data, isLoading, error } = useCategories()
 
@@ -433,7 +436,7 @@ const ResearchFundingForm = ({ onSuccess } : ResearchFundingFormProps) => {
                       aria-invalid={fieldState.invalid}
                       placeholder="Describe your research idea in detail..."
                       autoComplete="off"
-                      className="text-xs xl:text-sm min-h-30"
+                      className="text-xs xl:text-sm"
                     />
                     {fieldState.invalid && (
                       <FieldError errors={[fieldState.error]} />

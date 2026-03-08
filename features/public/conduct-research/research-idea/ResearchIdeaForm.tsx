@@ -39,7 +39,10 @@ const ResearchIdeaForm = ({ onSuccess } : ResearchIdeaFormProps) => {
     },
   })
 
-  const createMutation = useCreateResearchIdea(onSuccess)
+  const createMutation = useCreateResearchIdea(() => {
+    form.reset()
+    onSuccess?.()
+  })
 
     const { data, isLoading, error } = useCategories()
 

@@ -107,19 +107,19 @@ export const typeofContributions = [
         value: "Data Analysis"
     },
     {
-        id: 5,
+        id: 6,
         value: "Data Interpretation"
     },
     {
-        id: 5,
+        id: 7,
         value: "Writing"
     },
     {
-        id: 5,
+        id: 8,
         value: "Publishing"
     },
     {
-        id: 6,
+        id: 9,
         value: "I can contribute in another way"
     },
 ]

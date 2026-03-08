@@ -38,7 +38,10 @@ const ResearchPlacementsForm = ({ onSuccess } : ResearchPlacementsFormProps) => 
     },
   })
 
-  const createMutation = useCreateResearchPlacements(onSuccess)
+  const createMutation = useCreateResearchPlacements(() => {
+    form.reset()
+    onSuccess?.()
+  })
    
 
     const { data, isLoading, error } = useCategories()
