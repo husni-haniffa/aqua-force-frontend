@@ -85,6 +85,7 @@ export const formSchema = z.object({
 });
 
 export interface ResearchStudents {
+    _id: string
     title: string;
     name: string;
     mobile: string;
@@ -97,7 +98,10 @@ export interface ResearchStudents {
     designation: string;
     affiliation: string;
     degree: string;
-    categoryId: string;
+    categoryId: {
+        _id: string
+        name: string
+    }
     minorResearchArea: string;
     whereWouldYouLikeToConductResearch: string;
 }

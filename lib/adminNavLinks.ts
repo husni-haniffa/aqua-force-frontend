@@ -1,4 +1,4 @@
-import { Home, LayoutDashboard, Layers, Newspaper, CalendarDays, FileText, Users, ClipboardList, BookOpenCheck } from "lucide-react"
+import { Home, LayoutDashboard, Layers, Newspaper, CalendarDays, FileText, Users, ClipboardList, BookOpenCheck, GraduationCap, HandCoins, LifeBuoy, Lightbulb, UserCog } from "lucide-react"
 
 export const adminNavLinks = [
     {
@@ -34,22 +34,54 @@ export const adminNavLinks = [
                 url: "/admin/news",
                 icon: Newspaper,
             },
+            {
+                title: "Research Types",
+                url: "/admin/research-types",
+                icon: BookOpenCheck,
+            },
            
         ],
     },
     {
         label: "RESEARCH",
         items: [
-            {
-                title: "Research Types",
-                url: "/admin/research-types",
-                icon: BookOpenCheck,
-            },
+           
             {
                 title: "Submissions",
                 url: "/admin/submissions",
                 icon: FileText,
             },
+            {
+                title: "Research Idea",
+                url: "/admin/conduct-research/research-idea",
+                icon: Lightbulb,
+            },
+            {
+                title: "Research Placements",
+                url: "/admin/conduct-research/research-placement",
+                icon: GraduationCap,
+            },
+            {
+                title: "Research Supervisors",
+                url: "/admin/conduct-research/research-supervisors",
+                icon: UserCog,
+            },
+            {
+                title: "Research Students",
+                url: "/admin/conduct-research/research-students",
+                icon: Users,
+            },
+            {
+                title: "Research Funding",
+                url: "/admin/conduct-research/research-funding",
+                icon: HandCoins,
+            },
+            {
+                title: "Research Helps",
+                url: "/admin/conduct-research/research-helping",
+                icon: LifeBuoy,
+            },
+            
         ],
     },
 

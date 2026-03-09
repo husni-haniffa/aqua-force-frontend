@@ -125,6 +125,7 @@ export const typeofContributions = [
 ]
 
 export interface ResearchHelps {
+    _id: string
     title: string;
     name: string;
     mobile: string;
@@ -137,7 +138,10 @@ export interface ResearchHelps {
     designation: string;
     affiliation: string;
     degree: string;
-    categoryId: string;
+    categoryId: {
+        _id: string
+        name: string
+    }
     minorResearchArea: string;
     howCanYouContribute: string;
 }

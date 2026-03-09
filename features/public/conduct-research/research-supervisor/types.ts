@@ -114,6 +114,7 @@ export const typeofContributions = [
 ]
 
 export interface ResearchSupervisor {
+    _id: string
     title: string;
     name: string;
     mobile: string;
@@ -126,7 +127,10 @@ export interface ResearchSupervisor {
     designation: string;
     affiliation: string;
     degree: string;
-    categoryId: string;
+    categoryId: {
+        _id: string
+        name: string
+    }
     minorResearchIdea: string;
     noOfStudents: string;
     howCanYouContribute: string;

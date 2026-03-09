@@ -107,6 +107,7 @@ export const typeofContributions = [
 ]
 
 export interface ResearchPlacements {
+    _id: string
     title: string;
     name: string;
     mobile: string;
@@ -118,7 +119,10 @@ export interface ResearchPlacements {
     scholar: string;
     designation: string;
     affiliation: string;
-    categoryId: string;
+    categoryId: {
+        _id: string
+        name: string
+    }
     minorResearchIdea: string;
     howCanYouContribute: string;
 }
