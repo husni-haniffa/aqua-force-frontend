@@ -58,12 +58,12 @@ export const adminNavLinks = [
             },
             {
                 title: "Research Placements",
-                url: "/admin/conduct-research/research-placement",
+                url: "/admin/conduct-research/research-placements",
                 icon: GraduationCap,
             },
             {
                 title: "Research Supervisors",
-                url: "/admin/conduct-research/research-supervisors",
+                url: "/admin/conduct-research/research-supervisor",
                 icon: UserCog,
             },
             {
@@ -78,7 +78,7 @@ export const adminNavLinks = [
             },
             {
                 title: "Research Helps",
-                url: "/admin/conduct-research/research-helping",
+                url: "/admin/conduct-research/research-help",
                 icon: LifeBuoy,
             },
             

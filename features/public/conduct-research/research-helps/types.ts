@@ -96,7 +96,7 @@ export const typeofContributions = [
     },
     {
         id: 3,
-        value: "Feild Works"
+        value: "Field Works"
     },
     {
         id: 4,

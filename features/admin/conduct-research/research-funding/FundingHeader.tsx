@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Search } from 'lucide-react'
 import Link from 'next/link'
 
-const IdeaHeader = ({ onSearch }: { onSearch: (value: string) => void }) => {
+const FundingHeader = ({ onSearch }: { onSearch: (value: string) => void }) => {
 
   return (
     <div className="flex items-center justify-between gap-">
@@ -19,4 +19,4 @@ const IdeaHeader = ({ onSearch }: { onSearch: (value: string) => void }) => {
   )
 }
 
-export default IdeaHeader
+export default FundingHeader

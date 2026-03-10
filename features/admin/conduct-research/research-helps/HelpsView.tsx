@@ -1,10 +1,9 @@
-import { ResearchIdea } from '@/features/public/conduct-research/research-idea/types'
+import { ResearchHelps } from '@/features/public/conduct-research/research-helps/types'
 import Link from 'next/link'
-import React from 'react'
 
-const IdeaView = ({data} : {data: ResearchIdea}) => {
+const HelpsView = ({ data }: {data: ResearchHelps}) => {
   return (
-    <div key={data._id}>
+     <div key={data._id}>
             <div>
                 <h6 className='font-bold text-slate-800 text-base'>Contact Info</h6>
                 <div className='mt-1 mb-2'>
@@ -33,12 +32,8 @@ const IdeaView = ({data} : {data: ResearchIdea}) => {
 
             <div>
                 <div className='mt-1 mb-2'>
-                    <h6 className='font-bold text-slate-800 text-base'>Minor Research Idea</h6>
-                    <p className='text-sm leading-relaxed'>{data.minorResearchIdea}</p>
-                </div>
-                <div className='mt-1 mb-2'>
-                    <h6 className='font-bold text-slate-800 text-base'>Research Idea</h6>
-                    <p className='text-sm leading-relaxed'>{data.researchIdea}</p>
+                    <h6 className='font-bold text-slate-800 text-base'>Minor Research Area</h6>
+                    <p className='text-sm leading-relaxed'>{data.minorResearchArea}</p>
                 </div>
             </div>
 
@@ -51,4 +46,4 @@ const IdeaView = ({data} : {data: ResearchIdea}) => {
   )
 }
 
-export default IdeaView
+export default HelpsView

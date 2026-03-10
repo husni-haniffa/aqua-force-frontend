@@ -1,10 +1,10 @@
-import { ResearchIdea } from '@/features/public/conduct-research/research-idea/types'
+import { ResearchPlacements } from '@/features/public/conduct-research/research-placements/types'
 import Link from 'next/link'
-import React from 'react'
 
-const IdeaView = ({data} : {data: ResearchIdea}) => {
+
+const PlacementsView = ({ data }: {data: ResearchPlacements}) => {
   return (
-    <div key={data._id}>
+     <div key={data._id}>
             <div>
                 <h6 className='font-bold text-slate-800 text-base'>Contact Info</h6>
                 <div className='mt-1 mb-2'>
@@ -35,11 +35,7 @@ const IdeaView = ({data} : {data: ResearchIdea}) => {
                 <div className='mt-1 mb-2'>
                     <h6 className='font-bold text-slate-800 text-base'>Minor Research Idea</h6>
                     <p className='text-sm leading-relaxed'>{data.minorResearchIdea}</p>
-                </div>
-                <div className='mt-1 mb-2'>
-                    <h6 className='font-bold text-slate-800 text-base'>Research Idea</h6>
-                    <p className='text-sm leading-relaxed'>{data.researchIdea}</p>
-                </div>
+                </div>           
             </div>
 
             <div className='mt-1'>
@@ -51,4 +47,4 @@ const IdeaView = ({data} : {data: ResearchIdea}) => {
   )
 }
 
-export default IdeaView
+export default PlacementsView

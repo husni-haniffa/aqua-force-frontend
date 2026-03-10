@@ -8,13 +8,13 @@ import { AlertError } from '@/components/ui/alert-error'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { View } from 'lucide-react'
 import { formateDate } from '@/lib/format'
-import { useResearchIdea } from './idea.hooks'
-import IdeaView from './IdeaView'
+import { useResearchPlacements } from './placements.hooks'
+import PlacementsView from './PlacementsView'
 
-const IdeaTable = ({ search }: { search: string }) => {
+const PlacementsTable = ({ search }: { search: string }) => {
 
   const [debouncedSearch, setDebouncedSearch] = useState(search);
-  const { data, isLoading, error } = useResearchIdea()
+  const { data, isLoading, error } = useResearchPlacements()
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -23,18 +23,18 @@ const IdeaTable = ({ search }: { search: string }) => {
     return () => clearTimeout(timer)
   }, [search])
 
-  const isSearchingNews = search !== debouncedSearch;
+  const isSearchingPlacements = search !== debouncedSearch;
 
-  if (isLoading || isSearchingNews) return <p>Applications Loading</p>
+  if (isLoading || isSearchingPlacements) return <p>Applications Loading</p>
   if (error instanceof Error) return <AlertError message={error.message}/>
   if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No applications submitted yet</p>
-    
-  const filtered = data?.filter((idea) =>
-      idea.name.toLowerCase().includes(search.toLowerCase())
+  
+  const filtered = data?.filter((placement) =>
+      placement.name.toLowerCase().includes(search.toLowerCase())
   )
 
   if (!filtered?.length) return <p className='flex items-center justify-center text-base'>Application not found</p>
-    
+  
   return (
     <div className='bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden'>
         <Table>
@@ -50,10 +50,10 @@ const IdeaTable = ({ search }: { search: string }) => {
         <TableBody>
             {filtered?.map((idea) => (
                 <TableRow key={idea._id}>
-                    <TableCell>
-                      <span className='text-xs mr-1 font-bold'>{idea.title}.</span>
-                      {idea.name}
-                    </TableCell>
+                     <TableCell>
+                                          <span className='text-xs mr-1 font-bold'>{idea.title}.</span>
+                                          {idea.name}
+                                        </TableCell>
                     <TableCell>{idea.designation}</TableCell>
                     <TableCell>{idea.affiliation}</TableCell>
                     <TableCell>{idea.categoryId.name}</TableCell>
@@ -68,7 +68,7 @@ const IdeaTable = ({ search }: { search: string }) => {
                             <DialogTitle></DialogTitle>
                         </DialogHeader>
                         <DialogContent>
-                            <IdeaView data={idea}/>
+                            <PlacementsView data={idea}/>
                         </DialogContent>
                       </Dialog>
                     </TableCell>
@@ -81,4 +81,4 @@ const IdeaTable = ({ search }: { search: string }) => {
   )
 }
 
-export default IdeaTable
+export default PlacementsTable

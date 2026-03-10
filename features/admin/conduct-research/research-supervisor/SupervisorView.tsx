@@ -1,8 +1,8 @@
-import { ResearchIdea } from '@/features/public/conduct-research/research-idea/types'
+import { ResearchSupervisor } from '@/features/public/conduct-research/research-supervisor/types'
 import Link from 'next/link'
 import React from 'react'
 
-const IdeaView = ({data} : {data: ResearchIdea}) => {
+const SupervisorView = ({ data }: {data: ResearchSupervisor}) => {
   return (
     <div key={data._id}>
             <div>
@@ -33,12 +33,8 @@ const IdeaView = ({data} : {data: ResearchIdea}) => {
 
             <div>
                 <div className='mt-1 mb-2'>
-                    <h6 className='font-bold text-slate-800 text-base'>Minor Research Idea</h6>
+                    <h6 className='font-bold text-slate-800 text-base'>Minor Research Area</h6>
                     <p className='text-sm leading-relaxed'>{data.minorResearchIdea}</p>
-                </div>
-                <div className='mt-1 mb-2'>
-                    <h6 className='font-bold text-slate-800 text-base'>Research Idea</h6>
-                    <p className='text-sm leading-relaxed'>{data.researchIdea}</p>
                 </div>
             </div>
 
@@ -51,4 +47,4 @@ const IdeaView = ({data} : {data: ResearchIdea}) => {
   )
 }
 
-export default IdeaView
+export default SupervisorView

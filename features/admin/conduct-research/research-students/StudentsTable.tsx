@@ -8,13 +8,13 @@ import { AlertError } from '@/components/ui/alert-error'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { View } from 'lucide-react'
 import { formateDate } from '@/lib/format'
-import { useResearchIdea } from './idea.hooks'
-import IdeaView from './IdeaView'
+import { useResearchStudents } from './students.hooks'
+import StudentsView from './StudentsView'
 
-const IdeaTable = ({ search }: { search: string }) => {
+const StudentsTable = ({ search }: { search: string }) => {
 
   const [debouncedSearch, setDebouncedSearch] = useState(search);
-  const { data, isLoading, error } = useResearchIdea()
+  const { data, isLoading, error } = useResearchStudents()
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -23,24 +23,25 @@ const IdeaTable = ({ search }: { search: string }) => {
     return () => clearTimeout(timer)
   }, [search])
 
-  const isSearchingNews = search !== debouncedSearch;
+  const isSearchingStudent = search !== debouncedSearch;
 
-  if (isLoading || isSearchingNews) return <p>Applications Loading</p>
+  if (isLoading || isSearchingStudent) return <p>Applications Loading</p>
   if (error instanceof Error) return <AlertError message={error.message}/>
   if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No applications submitted yet</p>
-    
-  const filtered = data?.filter((idea) =>
-      idea.name.toLowerCase().includes(search.toLowerCase())
+  
+  const filtered = data?.filter((student) =>
+      student.name.toLowerCase().includes(search.toLowerCase())
   )
 
   if (!filtered?.length) return <p className='flex items-center justify-center text-base'>Application not found</p>
-    
+  
   return (
     <div className='bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden'>
         <Table>
           <TableHeader>
               <TableRow>
                   <TableHead>Name</TableHead>
+                  <TableHead>Degree</TableHead>
                   <TableHead>Designation</TableHead>
                   <TableHead>Affiliation</TableHead>
                   <TableHead>Research Area</TableHead>
@@ -54,6 +55,7 @@ const IdeaTable = ({ search }: { search: string }) => {
                       <span className='text-xs mr-1 font-bold'>{idea.title}.</span>
                       {idea.name}
                     </TableCell>
+                    <TableCell>{idea.degree}</TableCell>
                     <TableCell>{idea.designation}</TableCell>
                     <TableCell>{idea.affiliation}</TableCell>
                     <TableCell>{idea.categoryId.name}</TableCell>
@@ -68,7 +70,7 @@ const IdeaTable = ({ search }: { search: string }) => {
                             <DialogTitle></DialogTitle>
                         </DialogHeader>
                         <DialogContent>
-                            <IdeaView data={idea}/>
+                            <StudentsView data={idea}/>
                         </DialogContent>
                       </Dialog>
                     </TableCell>
@@ -81,4 +83,4 @@ const IdeaTable = ({ search }: { search: string }) => {
   )
 }
 
-export default IdeaTable
+export default StudentsTable

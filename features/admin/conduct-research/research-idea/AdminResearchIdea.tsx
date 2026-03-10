@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import IdeaHeader from './IdeaHeader'
 import IdeaTable from './IdeaTable'
+import IdeaView from './IdeaView'
 
 
 
