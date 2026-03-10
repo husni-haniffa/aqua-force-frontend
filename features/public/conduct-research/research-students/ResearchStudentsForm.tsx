@@ -66,7 +66,7 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-title">
+                    <FieldLabel htmlFor="research-students-title">
                       Title
                     </FieldLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
@@ -94,12 +94,12 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-name">
+                    <FieldLabel htmlFor="research-students-name">
                       Full Name
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-name"
+                      id="research-students-name"
                       aria-invalid={fieldState.invalid}
                       placeholder="Enter your full name"
                       autoComplete="name"
@@ -116,12 +116,12 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-designation">
+                    <FieldLabel htmlFor="research-students-designation">
                       Designation
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-designation"
+                      id="research-students-designation"
                       aria-invalid={fieldState.invalid}
                       placeholder="Enter your designation"
                       autoComplete="organization-title"
@@ -143,12 +143,12 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-affiliation">
+                    <FieldLabel htmlFor="research-students-affiliation">
                       Affiliation
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-affiliation"
+                      id="research-students-affiliation"
                       aria-invalid={fieldState.invalid}
                       placeholder="Enter your institution/organization"
                       autoComplete="organization"
@@ -205,12 +205,12 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-mobile">
+                    <FieldLabel htmlFor="research-students-mobile">
                       Mobile Number
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-mobile"
+                      id="research-students-mobile"
                       aria-invalid={fieldState.invalid}
                       placeholder="07XXXXXXXX"
                       autoComplete="tel"
@@ -228,12 +228,12 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-whatsapp">
+                    <FieldLabel htmlFor="research-students-whatsapp">
                       WhatsApp Number
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-whatsapp"
+                      id="research-students-whatsapp"
                       aria-invalid={fieldState.invalid}
                       placeholder="07XXXXXXXX"
                       autoComplete="tel"
@@ -251,12 +251,12 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-email">
+                    <FieldLabel htmlFor="research-students-email">
                       Email Address
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-email"
+                      id="research-students-email"
                       aria-invalid={fieldState.invalid}
                       placeholder="your.email@example.com"
                       autoComplete="email"
@@ -274,12 +274,12 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-linkedin">
+                    <FieldLabel htmlFor="research-students-linkedin">
                       LinkedIn Profile
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-linkedin"
+                      id="research-students-linkedin"
                       aria-invalid={fieldState.invalid}
                       placeholder="https://linkedin.com/in/yourprofile"
                       autoComplete="url"
@@ -297,12 +297,12 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-orcid">
+                    <FieldLabel htmlFor="research-students-orcid">
                       ORCID Profile
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-orcid"
+                      id="research-students-orcid"
                       aria-invalid={fieldState.invalid}
                       placeholder="https://orcid.org/yourid"
                       autoComplete="url"
@@ -320,12 +320,12 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-researchgate">
+                    <FieldLabel htmlFor="research-students-researchgate">
                       ResearchGate Profile
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-researchgate"
+                      id="research-students-researchgate"
                       aria-invalid={fieldState.invalid}
                       placeholder="https://researchgate.net/profile/yourprofile"
                       autoComplete="url"
@@ -343,12 +343,12 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-scholar">
+                    <FieldLabel htmlFor="research-students-scholar">
                       Google Scholar Profile
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-scholar"
+                      id="research-students-scholar"
                       aria-invalid={fieldState.invalid}
                       placeholder="https://scholar.google.com/citations?user=yourid"
                       autoComplete="url"
@@ -369,7 +369,7 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-category">
+                    <FieldLabel htmlFor="research-students-category">
                       Major Research Area
                     </FieldLabel>
                     {isLoading ? (
@@ -398,12 +398,12 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-minor">
+                    <FieldLabel htmlFor="research-students-minor">
                       Minor Research Area
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-minor"
+                      id="research-students-minor"
                       aria-invalid={fieldState.invalid}
                       placeholder="Specify your minor research area"
                       autoComplete="off"

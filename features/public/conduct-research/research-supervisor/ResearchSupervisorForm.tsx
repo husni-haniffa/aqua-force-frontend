@@ -67,7 +67,7 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-title">
+                    <FieldLabel htmlFor="research-supervisor-title">
                       Title
                     </FieldLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
@@ -95,12 +95,12 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-name">
+                    <FieldLabel htmlFor="research-supervisor-name">
                       Full Name
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-name"
+                      id="research-supervisor-name"
                       aria-invalid={fieldState.invalid}
                       placeholder="Enter your full name"
                       autoComplete="name"
@@ -117,12 +117,12 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-designation">
+                    <FieldLabel htmlFor="research-supervisor-designation">
                       Designation
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-designation"
+                      id="research-supervisor-designation"
                       aria-invalid={fieldState.invalid}
                       placeholder="Enter your designation"
                       autoComplete="organization-title"
@@ -142,12 +142,12 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-affiliation">
+                    <FieldLabel htmlFor="research-supervisor-affiliation">
                       Affiliation
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-affiliation"
+                      id="research-supervisor-affiliation"
                       aria-invalid={fieldState.invalid}
                       placeholder="Enter your institution/organization"
                       autoComplete="organization"
@@ -166,7 +166,7 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="degree-title">
+                    <FieldLabel htmlFor="research-supervisor-degree">
                       Degree
                     </FieldLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
@@ -209,12 +209,12 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-mobile">
+                    <FieldLabel htmlFor="research-supervisor-mobile">
                       Mobile Number
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-mobile"
+                      id="research-supervisor-mobile"
                       aria-invalid={fieldState.invalid}
                       placeholder="07XXXXXXXX"
                       autoComplete="tel"
@@ -232,12 +232,12 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-whatsapp">
+                    <FieldLabel htmlFor="research-supervisor-whatsapp">
                       WhatsApp Number
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-whatsapp"
+                      id="research-supervisor-whatsapp"
                       aria-invalid={fieldState.invalid}
                       placeholder="07XXXXXXXX"
                       autoComplete="tel"
@@ -255,12 +255,12 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-email">
+                    <FieldLabel htmlFor="research-supervisor-email">
                       Email Address
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-email"
+                      id="research-supervisor-email"
                       aria-invalid={fieldState.invalid}
                       placeholder="your.email@example.com"
                       autoComplete="email"
@@ -278,12 +278,12 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-linkedin">
+                    <FieldLabel htmlFor="research-supervisor-linkedin">
                       LinkedIn Profile
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-linkedin"
+                      id="research-supervisor-linkedin"
                       aria-invalid={fieldState.invalid}
                       placeholder="https://linkedin.com/in/yourprofile"
                       autoComplete="url"
@@ -301,12 +301,12 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-orcid">
+                    <FieldLabel htmlFor="research-supervisor-orcid">
                       ORCID Profile
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-orcid"
+                      id="research-supervisor-orcid"
                       aria-invalid={fieldState.invalid}
                       placeholder="https://orcid.org/yourid"
                       autoComplete="url"
@@ -324,12 +324,12 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-researchgate">
+                    <FieldLabel htmlFor="research-supervisor-researchgate">
                       ResearchGate Profile
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-researchgate"
+                      id="research-supervisor-researchgate"
                       aria-invalid={fieldState.invalid}
                       placeholder="https://researchgate.net/profile/yourprofile"
                       autoComplete="url"
@@ -347,12 +347,12 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-scholar">
+                    <FieldLabel htmlFor="research-supervisor-scholar">
                       Google Scholar Profile
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-scholar"
+                      id="research-supervisor-scholar"
                       aria-invalid={fieldState.invalid}
                       placeholder="https://scholar.google.com/citations?user=yourid"
                       autoComplete="url"
@@ -373,7 +373,7 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-category">
+                    <FieldLabel htmlFor="research-supervisor-category">
                       Major Research Area
                     </FieldLabel>
                     {isLoading ? (
@@ -402,12 +402,12 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-minor">
+                    <FieldLabel htmlFor="research-supervisor-minor">
                       Minor Research Area
                     </FieldLabel>
                     <Input
                       {...field}
-                      id="research-idea-minor"
+                      id="research-supervisor-minor"
                       aria-invalid={fieldState.invalid}
                       placeholder="Specify your minor research area"
                       autoComplete="off"
@@ -428,13 +428,13 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="No of students">
+                    <FieldLabel htmlFor="research-supervisor-noOfStudents">
                       No of Students
                     </FieldLabel>
                     <Input
                       type="number"
                       {...field}
-                      id="research-idea-description"
+                      id="research-supervisor-noOfStudents"
                       aria-invalid={fieldState.invalid}
                       placeholder="50"
                       autoComplete="off"
@@ -454,7 +454,7 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
     const isOther = field.value === "I can contribute in another way";
     return (
       <Field data-invalid={fieldState.invalid}>
-        <FieldLabel htmlFor="research-helps-contribution">
+        <FieldLabel htmlFor="research-supervisor-howCanYouContribute">
           How can you contribute?
         </FieldLabel>
         <Select
@@ -475,7 +475,7 @@ const ResearchSupervisorForm = ({ onSuccess } : ResearchSupervisorFormProps) => 
 
         {isOther && (
           <Input
-            id="research-helps-contribution-other"
+            id="research-supervisor-contribution-other"
             placeholder="Please specify how you can contribute..."
             onChange={(e) => field.onChange(e.target.value)} // ← Use onChange directly
             onBlur={field.onBlur}

@@ -411,7 +411,7 @@ const ResearchIdeaForm = ({ onSuccess } : ResearchIdeaFormProps) => {
     const isOther = field.value === "I can contribute in another way";
     return (
       <Field data-invalid={fieldState.invalid}>
-        <FieldLabel htmlFor="research-helps-contribution">
+        <FieldLabel htmlFor="research-idea-contribution">
           How can you contribute?
         </FieldLabel>
         <Select
@@ -432,7 +432,7 @@ const ResearchIdeaForm = ({ onSuccess } : ResearchIdeaFormProps) => {
 
         {isOther && (
           <Input
-            id="research-helps-contribution-other"
+            id="research-idea-contribution-other"
             placeholder="Please specify how you can contribute..."
             onChange={(e) => field.onChange(e.target.value)} // ← Use onChange directly
             onBlur={field.onBlur}
