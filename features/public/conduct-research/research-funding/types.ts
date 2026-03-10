@@ -64,7 +64,7 @@ export const formSchema = z.object({
     degree: z
         .string()
         .trim()
-        .min(1, "Student Type required"),
+        .min(1, "Degree is required"),
 
     categoryId: z
         .string()

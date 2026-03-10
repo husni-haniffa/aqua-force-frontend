@@ -324,7 +324,7 @@ const ResearchIdeaForm = ({ onSuccess } : ResearchIdeaFormProps) => {
               />
                 </div>
 
-                <div  className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div  className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {/* Research Details */}
               <Controller
                 name="categoryId"
@@ -404,42 +404,49 @@ const ResearchIdeaForm = ({ onSuccess } : ResearchIdeaFormProps) => {
                 )}
               />
 
-              <Controller
-                name="howCanYouContribute"
-                control={form.control}
-                render={({ field, fieldState }) => (
-                  <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="research-idea-contribution">
-                      How can you contribute?
-                    </FieldLabel>
-                    <Select onValueChange={field.onChange} value={field.value}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select contribution type" className="text-xs xl:text-sm" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {typeofContributions?.map((type) => (
-                            <SelectItem key={type.id} value={type.value} className="text-xs xl:text-sm">
-                              {type.value}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    {field.value === "I can contribute in another way" && (
-                      <Input
-                        {...field}
-                        id="research-idea-contribution-other"
-                        aria-invalid={fieldState.invalid}
-                        placeholder="Please specify how you can contribute..."
-                        autoComplete="off"
-                        className="text-xs xl:text-sm mt-2"
-                      />
-                    )}
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
-                  </Field>
-                )}
-              />
+             <Controller
+  name="howCanYouContribute"
+  control={form.control}
+  render={({ field, fieldState }) => {
+    const isOther = field.value === "I can contribute in another way";
+    return (
+      <Field data-invalid={fieldState.invalid}>
+        <FieldLabel htmlFor="research-helps-contribution">
+          How can you contribute?
+        </FieldLabel>
+        <Select
+          onValueChange={field.onChange}
+          value={isOther ? "I can contribute in another way" : field.value}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="Select contribution type" />
+          </SelectTrigger>
+          <SelectContent>
+            {typeofContributions?.map((type) => (
+              <SelectItem key={type.id} value={type.value}>
+                {type.value}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        {isOther && (
+          <Input
+            id="research-helps-contribution-other"
+            placeholder="Please specify how you can contribute..."
+            onChange={(e) => field.onChange(e.target.value)} // ← Use onChange directly
+            onBlur={field.onBlur}
+            ref={field.ref}
+            value={isOther ? "" : field.value} // ← Don't bind the "other" string here
+            className="text-xs xl:text-sm mt-2"
+          />
+        )}
+
+        {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+      </Field>
+    );
+  }}
+/>
             </FieldGroup>
           </form>
         </CardContent>

@@ -22,7 +22,7 @@ const FundingView = ({ data }: {data: ResearchFunding}) => {
             <div>
                 <h6 className='font-bold text-slate-800 text-base'>Social Media</h6>
                 <div className='mt-1 mb-3 flex flex-wrap gap-6 text-sm'>
-                    <Link href={data.email} className='bg-blue-50 px-1.5 py-1 rounded text-blue-500 hover:text-blue-600'> Email</Link>
+                    <Link href={`mailto:${data.email}`} className='bg-blue-50 px-1.5 py-1 rounded text-blue-500 hover:text-blue-600'> Email</Link>
                     <Link href={data.linkedin} className='bg-blue-50 px-1.5 py-1 rounded text-blue-500 hover:text-blue-600'>LinkedIn</Link>
                     <Link href={data.researchgate} className='bg-blue-50 px-1.5 py-1 rounded text-blue-500 hover:text-blue-600'>Research Gate</Link>
                     <Link href={data.orcid} className='bg-blue-50 px-1.5 py-1 rounded text-blue-500 hover:text-blue-600'>ORCID</Link>

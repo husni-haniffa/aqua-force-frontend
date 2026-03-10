@@ -431,8 +431,8 @@ const ResearchStudentsForm = ({ onSuccess } : ResearchStudentsFormProps) => {
                       {...field}
                       id="research-location-description"
                       aria-invalid={fieldState.invalid}
-                      placeholder="In University"
-                      autoComplete="off"
+                      placeholder="University of Moratuwa"
+                      autoComplete="on"
                       className="text-xs xl:text-sm"
                     />
                     {fieldState.invalid && (
