@@ -3,18 +3,19 @@ import { useEffect, useState } from 'react'
 import ButtonLoader from '@/components/ui/button-loader'
 import { Button } from '@/components/ui/button'
 import { ConfirmDialog } from '@/components/ui/confirm-dialog'
-import Link from 'next/link'
 import { AlertError } from '@/components/ui/alert-error'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { View } from 'lucide-react'
-import { formateDate } from '@/lib/format'
-import { useResearchSupervisor } from './supervisor.hooks'
+import { useDeleteResearcSupervisor, useResearchSupervisor } from './supervisor.hooks'
 import SupervisorView from './SupervisorView'
 
 const SupervisorTable = ({ search }: { search: string }) => {
 
+      const [deletingId, setDeletingId] = useState<string | null>(null)
+
   const [debouncedSearch, setDebouncedSearch] = useState(search);
   const { data, isLoading, error } = useResearchSupervisor()
+      const deleteMutation = useDeleteResearcSupervisor(setDeletingId)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -47,6 +48,7 @@ const SupervisorTable = ({ search }: { search: string }) => {
                   <TableHead>No of Students</TableHead>
                   <TableHead>Research Area</TableHead>
                   <TableHead>More Info</TableHead>
+                  <TableHead>Delete</TableHead>
               </TableRow>
           </TableHeader>
         <TableBody>
@@ -75,6 +77,15 @@ const SupervisorTable = ({ search }: { search: string }) => {
                             <SupervisorView data={idea}/>
                         </DialogContent>
                       </Dialog>
+                    </TableCell>
+                    <TableCell>
+                        <ConfirmDialog
+                            onConfirm={() => deleteMutation.mutate(idea._id)}
+                            disabled={deletingId === idea._id}
+                            triggerText={
+                            deletingId === idea._id ? <ButtonLoader text="Deleting" /> : "Delete"
+                            }
+                        />
                     </TableCell>
               </TableRow>
             ))}

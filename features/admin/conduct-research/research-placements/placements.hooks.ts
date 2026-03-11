@@ -21,7 +21,7 @@ export function useDeleteResearchPlacement(
         onSettled: () => setDeletingId(null),
         onSuccess: () => {
             toast.success("Application deleted")
-            queryClient.invalidateQueries({ queryKey: ["research-placement"] })
+            queryClient.invalidateQueries({ queryKey: ["research-placements"] })
         },
         onError: (err: Error) => {
             toast.error(err.message ?? "Delete failed")
