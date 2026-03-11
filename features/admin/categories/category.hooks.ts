@@ -24,7 +24,7 @@ export function useCategoryById(categoryId: string) {
         queryFn: async () => {
             const token = await getToken()
             if (!token) throw new Error("Not authenticated")
-            return fetchCategoryById(categoryId, token)
+            return fetchCategoryById(categoryId)
         },
     })
 }

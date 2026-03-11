@@ -11,7 +11,7 @@ export const fetchCategories = async (): Promise<CategoryResponse[]> => {
     return result.data
 }
 
-export const fetchCategoryById = async (id: string, token: string): Promise<CategoryResponse> => {
+export const fetchCategoryById = async (id: string): Promise<CategoryResponse> => {
     const response = await fetch(`${BASE_URL}/categories/${id}`)
     const result = await response.json()
     if (!response.ok) {

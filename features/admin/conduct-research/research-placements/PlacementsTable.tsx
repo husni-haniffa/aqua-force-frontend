@@ -1,13 +1,9 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { useEffect, useState } from 'react'
-import ButtonLoader from '@/components/ui/button-loader'
 import { Button } from '@/components/ui/button'
-import { ConfirmDialog } from '@/components/ui/confirm-dialog'
-import Link from 'next/link'
 import { AlertError } from '@/components/ui/alert-error'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { View } from 'lucide-react'
-import { formateDate } from '@/lib/format'
 import { useResearchPlacements } from './placements.hooks'
 import PlacementsView from './PlacementsView'
 
