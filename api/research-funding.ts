@@ -1,8 +1,11 @@
-
 import { ResearchFunding } from "@/features/public/conduct-research/research-funding/types"
 import { BASE_URL } from "@/types/api"
+import { z } from "zod"
+import { formSchema } from "@/features/public/conduct-research/research-funding/types"
 
-export const createResearchFunding = async (data: any) => {
+type ResearchFundingRequest = z.infer<typeof formSchema>;
+
+export const createResearchFunding = async (data: ResearchFundingRequest) => {
     const response = await fetch(`${BASE_URL}/conduct-research/research-funding`, {
         method: 'POST',
         headers: { 

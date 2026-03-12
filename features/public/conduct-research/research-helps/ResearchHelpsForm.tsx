@@ -8,18 +8,14 @@ import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import z from "zod"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
 import { useCategories } from "@/features/admin/categories/category.hooks"
 import { AlertError } from "@/components/ui/alert-error"
-import { useRouter } from "next/navigation"
 import { formSchema, ResearchHelpsFormProps, typeofContributions } from "./types"
 import { SelectSkeleton } from "@/features/user/submissions/Skeleton"
 import { useCreateResearchHelps } from "./helps.hooks"
 
 
 const ResearchHelpsForm = ({ onSuccess } : ResearchHelpsFormProps) => {
-
-  const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
