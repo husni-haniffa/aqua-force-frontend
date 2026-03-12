@@ -143,6 +143,8 @@ export interface ResearchHelps {
     }
     minorResearchArea: string;
     howCanYouContribute: string;
+    createdAt: string
+    updatedAt: string
 }
 
 export interface ResearchHelpsFormProps {

@@ -8,6 +8,7 @@ import { View } from 'lucide-react'
 import { useDeleteResearchIdea, useResearchIdea } from './idea.hooks'
 import IdeaView from './IdeaView'
 import { IdeaTableSkeleton } from './Skeleton'
+import { formateDate } from '@/lib/format'
 
 const IdeaTable = ({ search }: { search: string }) => {
 
@@ -44,6 +45,7 @@ const IdeaTable = ({ search }: { search: string }) => {
                   <TableHead>Designation</TableHead>
                   <TableHead>Affiliation</TableHead>
                   <TableHead>Research Area</TableHead>
+                  <TableHead>Applied on</TableHead>
                   <TableHead>More Info</TableHead>
                   <TableHead>Delete</TableHead>
               </TableRow>
@@ -58,6 +60,7 @@ const IdeaTable = ({ search }: { search: string }) => {
                     <TableCell>{idea.designation}</TableCell>
                     <TableCell>{idea.affiliation}</TableCell>
                     <TableCell>{idea.categoryId.name}</TableCell>
+                    <TableCell>{formateDate(new Date(idea.updatedAt))}</TableCell>
                     <TableCell>
                       <Dialog>
                         <DialogTrigger asChild>

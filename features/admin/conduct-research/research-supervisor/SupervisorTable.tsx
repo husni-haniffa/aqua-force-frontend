@@ -8,6 +8,7 @@ import { View } from 'lucide-react'
 import { useDeleteResearcSupervisor, useResearchSupervisor } from './supervisor.hooks'
 import SupervisorView from './SupervisorView'
 import { SupervisorTableSkeleton } from './Skeleton'
+import { formateDate } from '@/lib/format'
 
 const SupervisorTable = ({ search }: { search: string }) => {
 
@@ -47,6 +48,7 @@ const SupervisorTable = ({ search }: { search: string }) => {
                   <TableHead>Affiliation</TableHead>
                   <TableHead>No of Students</TableHead>
                   <TableHead>Research Area</TableHead>
+                  <TableHead>Applied on</TableHead>
                   <TableHead>More Info</TableHead>
                   <TableHead>Delete</TableHead>
               </TableRow>
@@ -63,6 +65,7 @@ const SupervisorTable = ({ search }: { search: string }) => {
                     <TableCell>{idea.affiliation}</TableCell>
                     <TableCell>{idea.noOfStudents}</TableCell>
                     <TableCell>{idea.categoryId.name}</TableCell>
+                    <TableCell>{formateDate(new Date(idea.updatedAt))}</TableCell>
                     <TableCell>
                       <Dialog>
                         <DialogTrigger asChild>

@@ -14,6 +14,7 @@ export const HelpsTableSkeleton = () => {
                 <TableHead>Designation</TableHead>
                 <TableHead>Affiliation</TableHead>
                 <TableHead>Research Area</TableHead>
+                <TableHead>Applied on</TableHead>
                 <TableHead>More Info</TableHead>
                 <TableHead>Delete</TableHead>
             </TableRow>
@@ -26,6 +27,9 @@ export const HelpsTableSkeleton = () => {
             </TableCell>
             <TableCell>
              <Skeleton className="h-5 w-15" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="h-5 w-15" />
             </TableCell>
             <TableCell>
               <Skeleton className="h-5 w-15" />
