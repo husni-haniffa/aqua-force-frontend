@@ -3,18 +3,20 @@ import { useEffect, useState } from 'react'
 import ButtonLoader from '@/components/ui/button-loader'
 import { Button } from '@/components/ui/button'
 import { ConfirmDialog } from '@/components/ui/confirm-dialog'
-import Link from 'next/link'
 import { AlertError } from '@/components/ui/alert-error'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { View } from 'lucide-react'
-import { formateDate } from '@/lib/format'
-import { useResearchHelps } from './helps.hooks'
+import { useDeleteResearchHelp, useResearchHelps } from './helps.hooks'
 import HelpsView from './HelpsView'
+import { HelpsTableSkeleton } from './Skeleton'
 
 const HelpsTable = ({ search }: { search: string }) => {
 
+      const [deletingId, setDeletingId] = useState<string | null>(null)
+
   const [debouncedSearch, setDebouncedSearch] = useState(search);
   const { data, isLoading, error } = useResearchHelps()
+      const deleteMutation = useDeleteResearchHelp(setDeletingId)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -25,7 +27,7 @@ const HelpsTable = ({ search }: { search: string }) => {
 
   const isSearchingHelps = search !== debouncedSearch;
 
-  if (isLoading || isSearchingHelps) return <p>Applications Loading</p>
+  if (isLoading || isSearchingHelps) return <HelpsTableSkeleton/>
   if (error instanceof Error) return <AlertError message={error.message}/>
   if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No applications submitted yet</p>
   
@@ -46,6 +48,7 @@ const HelpsTable = ({ search }: { search: string }) => {
                   <TableHead>Affiliation</TableHead>
                   <TableHead>Research Area</TableHead>
                   <TableHead>More Info</TableHead>
+                  <TableHead>Delete</TableHead>
               </TableRow>
           </TableHeader>
         <TableBody>
@@ -73,6 +76,15 @@ const HelpsTable = ({ search }: { search: string }) => {
                             <HelpsView data={idea}/>
                         </DialogContent>
                       </Dialog>
+                    </TableCell>
+                    <TableCell>
+                        <ConfirmDialog
+                            onConfirm={() => deleteMutation.mutate(idea._id)}
+                            disabled={deletingId === idea._id}
+                            triggerText={
+                            deletingId === idea._id ? <ButtonLoader text="Deleting" /> : "Delete"
+                            }
+                        />
                     </TableCell>
               </TableRow>
             ))}

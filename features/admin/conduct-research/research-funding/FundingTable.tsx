@@ -8,13 +8,18 @@ import { AlertError } from '@/components/ui/alert-error'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { View } from 'lucide-react'
 import { formateDate } from '@/lib/format'
-import { useResearchFunding } from './funding.hooks'
+import { useDeleteResearchFunding, useResearchFunding } from './funding.hooks'
 import FundingView from './FundingView'
+import { FundingTableSkeleton } from './Skeleton'
 
 const FundingTable = ({ search }: { search: string }) => {
 
+      const [deletingId, setDeletingId] = useState<string | null>(null)
+
   const [debouncedSearch, setDebouncedSearch] = useState(search);
   const { data, isLoading, error } = useResearchFunding()
+      const deleteMutation = useDeleteResearchFunding(setDeletingId)
+  
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -25,7 +30,7 @@ const FundingTable = ({ search }: { search: string }) => {
 
   const isSearchingFunding = search !== debouncedSearch;
 
-  if (isLoading || isSearchingFunding) return <p>Applications Loading</p>
+  if (isLoading || isSearchingFunding) return <FundingTableSkeleton/>
   if (error instanceof Error) return <AlertError message={error.message}/>
   if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No applications submitted yet</p>
   
@@ -47,6 +52,7 @@ const FundingTable = ({ search }: { search: string }) => {
                   <TableHead>Research Area</TableHead>
                   <TableHead>Funding Amount</TableHead>
                   <TableHead>More Info</TableHead>
+                  <TableHead>Delete</TableHead>
               </TableRow>
           </TableHeader>
         <TableBody>
@@ -75,6 +81,15 @@ const FundingTable = ({ search }: { search: string }) => {
                             <FundingView data={idea}/>
                         </DialogContent>
                       </Dialog>
+                    </TableCell>
+                    <TableCell>
+                        <ConfirmDialog
+                            onConfirm={() => deleteMutation.mutate(idea._id)}
+                            disabled={deletingId === idea._id}
+                            triggerText={
+                            deletingId === idea._id ? <ButtonLoader text="Deleting" /> : "Delete"
+                            }
+                        />
                     </TableCell>
               </TableRow>
             ))}
