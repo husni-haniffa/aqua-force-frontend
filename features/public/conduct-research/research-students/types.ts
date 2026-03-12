@@ -103,6 +103,8 @@ export interface ResearchStudents {
     }
     minorResearchArea: string;
     whereWouldYouLikeToConductResearch: string;
+    createdAt: string
+    updatedAt: string
 }
 
 export interface ResearchStudentsFormProps {

@@ -125,6 +125,8 @@ export interface ResearchPlacements {
     }
     minorResearchIdea: string;
     howCanYouContribute: string;
+    createdAt: string
+    updatedAt: string
 }
 
 export interface ResearchPlacementsFormProps {

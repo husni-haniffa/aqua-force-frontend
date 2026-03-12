@@ -1,16 +1,23 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
+import { ConfirmDialog } from '@/components/ui/confirm-dialog'
 import { AlertError } from '@/components/ui/alert-error'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { View } from 'lucide-react'
-import { useResearchSupervisor } from './supervisor.hooks'
+import { useDeleteResearcSupervisor, useResearchSupervisor } from './supervisor.hooks'
 import SupervisorView from './SupervisorView'
+import { SupervisorTableSkeleton } from './Skeleton'
+import { formateDate } from '@/lib/format'
+import ButtonLoader from '@/components/ui/button-loader'
 
 const SupervisorTable = ({ search }: { search: string }) => {
 
+      const [deletingId, setDeletingId] = useState<string | null>(null)
+
   const [debouncedSearch, setDebouncedSearch] = useState(search);
   const { data, isLoading, error } = useResearchSupervisor()
+      const deleteMutation = useDeleteResearcSupervisor(setDeletingId)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -21,7 +28,7 @@ const SupervisorTable = ({ search }: { search: string }) => {
 
   const isSearchingSupervisor = search !== debouncedSearch;
 
-  if (isLoading || isSearchingSupervisor) return <p>Applications Loading</p>
+  if (isLoading || isSearchingSupervisor) return <SupervisorTableSkeleton/>
   if (error instanceof Error) return <AlertError message={error.message}/>
   if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No applications submitted yet</p>
   
@@ -42,7 +49,9 @@ const SupervisorTable = ({ search }: { search: string }) => {
                   <TableHead>Affiliation</TableHead>
                   <TableHead>No of Students</TableHead>
                   <TableHead>Research Area</TableHead>
+                  <TableHead>Applied on</TableHead>
                   <TableHead>More Info</TableHead>
+                  <TableHead>Delete</TableHead>
               </TableRow>
           </TableHeader>
         <TableBody>
@@ -57,6 +66,7 @@ const SupervisorTable = ({ search }: { search: string }) => {
                     <TableCell>{idea.affiliation}</TableCell>
                     <TableCell>{idea.noOfStudents}</TableCell>
                     <TableCell>{idea.categoryId.name}</TableCell>
+                    <TableCell>{formateDate(new Date(idea.updatedAt))}</TableCell>
                     <TableCell>
                       <Dialog>
                         <DialogTrigger asChild>
@@ -71,6 +81,15 @@ const SupervisorTable = ({ search }: { search: string }) => {
                             <SupervisorView data={idea}/>
                         </DialogContent>
                       </Dialog>
+                    </TableCell>
+                    <TableCell>
+                        <ConfirmDialog
+                            onConfirm={() => deleteMutation.mutate(idea._id)}
+                            disabled={deletingId === idea._id}
+                            triggerText={
+                            deletingId === idea._id ? <ButtonLoader text="Deleting" /> : "Delete"
+                            }
+                        />
                     </TableCell>
               </TableRow>
             ))}
