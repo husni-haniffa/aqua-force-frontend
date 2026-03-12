@@ -9,6 +9,7 @@ import { useDeleteResearchStudent, useResearchStudents } from './students.hooks'
 import StudentsView from './StudentsView'
 import { StudentsTableSkeleton } from './Skeleton'
 import { formateDate } from '@/lib/format'
+import ButtonLoader from '@/components/ui/button-loader'
 
 const StudentsTable = ({ search }: { search: string }) => {
 

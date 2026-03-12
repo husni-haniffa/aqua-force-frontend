@@ -9,6 +9,7 @@ import { useDeleteResearchPlacement, useResearchPlacements } from './placements.
 import PlacementsView from './PlacementsView'
 import { PlacementsTableSkeleton } from './Skeleton'
 import { formateDate } from '@/lib/format'
+import ButtonLoader from '@/components/ui/button-loader'
 
 const PlacementsTable = ({ search }: { search: string }) => {
 

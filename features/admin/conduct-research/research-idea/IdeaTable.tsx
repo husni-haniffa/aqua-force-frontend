@@ -9,6 +9,7 @@ import { useDeleteResearchIdea, useResearchIdea } from './idea.hooks'
 import IdeaView from './IdeaView'
 import { IdeaTableSkeleton } from './Skeleton'
 import { formateDate } from '@/lib/format'
+import ButtonLoader from '@/components/ui/button-loader'
 
 const IdeaTable = ({ search }: { search: string }) => {
 

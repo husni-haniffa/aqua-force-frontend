@@ -9,6 +9,7 @@ import { useDeleteResearchHelp, useResearchHelps } from './helps.hooks'
 import HelpsView from './HelpsView'
 import { HelpsTableSkeleton } from './Skeleton'
 import { formateDate } from '@/lib/format'
+import ButtonLoader from '@/components/ui/button-loader'
 
 const HelpsTable = ({ search }: { search: string }) => {
 

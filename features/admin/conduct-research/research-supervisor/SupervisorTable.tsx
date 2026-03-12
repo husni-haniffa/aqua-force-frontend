@@ -9,6 +9,7 @@ import { useDeleteResearcSupervisor, useResearchSupervisor } from './supervisor.
 import SupervisorView from './SupervisorView'
 import { SupervisorTableSkeleton } from './Skeleton'
 import { formateDate } from '@/lib/format'
+import ButtonLoader from '@/components/ui/button-loader'
 
 const SupervisorTable = ({ search }: { search: string }) => {
 
