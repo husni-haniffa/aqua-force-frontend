@@ -8,6 +8,8 @@ import { formateDate } from '@/lib/format'
 import { useDeleteResearchFunding, useResearchFunding } from './funding.hooks'
 import FundingView from './FundingView'
 import { FundingTableSkeleton } from './Skeleton'
+import { ConfirmDialog } from '@/components/ui/confirm-dialog'
+import ButtonLoader from '@/components/ui/button-loader'
 
 const FundingTable = ({ search }: { search: string }) => {
 
