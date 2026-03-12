@@ -1,16 +1,21 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
+import { ConfirmDialog } from '@/components/ui/confirm-dialog'
 import { AlertError } from '@/components/ui/alert-error'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { View } from 'lucide-react'
-import { useResearchStudents } from './students.hooks'
+import { useDeleteResearchStudent, useResearchStudents } from './students.hooks'
 import StudentsView from './StudentsView'
+import { StudentsTableSkeleton } from './Skeleton'
 
 const StudentsTable = ({ search }: { search: string }) => {
 
+      const [deletingId, setDeletingId] = useState<string | null>(null)
+
   const [debouncedSearch, setDebouncedSearch] = useState(search);
   const { data, isLoading, error } = useResearchStudents()
+      const deleteMutation = useDeleteResearchStudent(setDeletingId)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -21,7 +26,7 @@ const StudentsTable = ({ search }: { search: string }) => {
 
   const isSearchingStudent = search !== debouncedSearch;
 
-  if (isLoading || isSearchingStudent) return <p>Applications Loading</p>
+  if (isLoading || isSearchingStudent) return <StudentsTableSkeleton/>
   if (error instanceof Error) return <AlertError message={error.message}/>
   if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No applications submitted yet</p>
   
@@ -42,6 +47,7 @@ const StudentsTable = ({ search }: { search: string }) => {
                   <TableHead>Affiliation</TableHead>
                   <TableHead>Research Area</TableHead>
                   <TableHead>More Info</TableHead>
+                  <TableHead>Delete</TableHead>
               </TableRow>
           </TableHeader>
         <TableBody>
@@ -69,6 +75,15 @@ const StudentsTable = ({ search }: { search: string }) => {
                             <StudentsView data={idea}/>
                         </DialogContent>
                       </Dialog>
+                    </TableCell>
+                    <TableCell>
+                        <ConfirmDialog
+                            onConfirm={() => deleteMutation.mutate(idea._id)}
+                            disabled={deletingId === idea._id}
+                            triggerText={
+                            deletingId === idea._id ? <ButtonLoader text="Deleting" /> : "Delete"
+                            }
+                        />
                     </TableCell>
               </TableRow>
             ))}

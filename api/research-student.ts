@@ -33,3 +33,17 @@ export const fetchResearchStudent = async (token: string): Promise<ResearchStude
     }
     return result.data
 }
+
+export const deleteResearchStudent = async (id: string, token: string) => {
+    const response = await fetch(`${BASE_URL}/conduct-research/research-student/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+    })
+    const result = await response.json()
+    if (!response.ok) {
+        throw new Error(result.message || "Network request failed")
+    }
+    return result
+}
