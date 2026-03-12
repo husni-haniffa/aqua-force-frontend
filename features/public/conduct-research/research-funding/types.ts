@@ -138,6 +138,8 @@ export interface ResearchFunding {
     minorResearchAreaForFunding: string;
     fundingAmount: string;
     howCanYouContribute: string;
+    createdAt: string
+    updatedAt: string
 }
 
 export interface ResearchFundingFormProps {

@@ -8,6 +8,8 @@ import { View } from 'lucide-react'
 import { useDeleteResearchStudent, useResearchStudents } from './students.hooks'
 import StudentsView from './StudentsView'
 import { StudentsTableSkeleton } from './Skeleton'
+import { formateDate } from '@/lib/format'
+import ButtonLoader from '@/components/ui/button-loader'
 
 const StudentsTable = ({ search }: { search: string }) => {
 
@@ -46,6 +48,7 @@ const StudentsTable = ({ search }: { search: string }) => {
                   <TableHead>Designation</TableHead>
                   <TableHead>Affiliation</TableHead>
                   <TableHead>Research Area</TableHead>
+                  <TableHead>Applied on</TableHead>
                   <TableHead>More Info</TableHead>
                   <TableHead>Delete</TableHead>
               </TableRow>
@@ -61,6 +64,7 @@ const StudentsTable = ({ search }: { search: string }) => {
                     <TableCell>{idea.designation}</TableCell>
                     <TableCell>{idea.affiliation}</TableCell>
                     <TableCell>{idea.categoryId.name}</TableCell>
+                    <TableCell>{formateDate(new Date(idea.updatedAt))}</TableCell>
                     <TableCell>
                       <Dialog>
                         <DialogTrigger asChild>

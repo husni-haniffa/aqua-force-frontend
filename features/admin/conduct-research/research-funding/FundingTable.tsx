@@ -8,6 +8,8 @@ import { formateDate } from '@/lib/format'
 import { useDeleteResearchFunding, useResearchFunding } from './funding.hooks'
 import FundingView from './FundingView'
 import { FundingTableSkeleton } from './Skeleton'
+import { ConfirmDialog } from '@/components/ui/confirm-dialog'
+import ButtonLoader from '@/components/ui/button-loader'
 
 const FundingTable = ({ search }: { search: string }) => {
 
@@ -48,6 +50,7 @@ const FundingTable = ({ search }: { search: string }) => {
                   <TableHead>Affiliation</TableHead>
                   <TableHead>Research Area</TableHead>
                   <TableHead>Funding Amount</TableHead>
+                  <TableHead>Applied on</TableHead>
                   <TableHead>More Info</TableHead>
                   <TableHead>Delete</TableHead>
               </TableRow>
@@ -64,6 +67,7 @@ const FundingTable = ({ search }: { search: string }) => {
                     <TableCell>{idea.affiliation}</TableCell>
                     <TableCell>{idea.categoryId.name}</TableCell>
                     <TableCell>{idea.fundingAmount}</TableCell>
+                    <TableCell>{formateDate(new Date(idea.updatedAt))}</TableCell>
                     <TableCell>
                       <Dialog>
                         <DialogTrigger asChild>

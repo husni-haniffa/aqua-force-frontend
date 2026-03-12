@@ -15,6 +15,7 @@ export const FundingTableSkeleton = () => {
                 <TableHead>Affiliation</TableHead>
                 <TableHead>Research Area</TableHead>
                 <TableHead>Funding Amount</TableHead>
+                 <TableHead>Applied on</TableHead>
                 <TableHead>More Info</TableHead>
                 <TableHead>Delete</TableHead>
             </TableRow>
@@ -27,6 +28,9 @@ export const FundingTableSkeleton = () => {
             </TableCell>
             <TableCell>
              <Skeleton className="h-5 w-15" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="h-5 w-15" />
             </TableCell>
             <TableCell>
               <Skeleton className="h-5 w-15" />

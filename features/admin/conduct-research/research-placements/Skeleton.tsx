@@ -1,5 +1,4 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 
 export const PlacementsTableSkeleton = () => {
@@ -13,6 +12,7 @@ export const PlacementsTableSkeleton = () => {
                 <TableHead>Designation</TableHead>
                 <TableHead>Affiliation</TableHead>
                 <TableHead>Research Area</TableHead>
+                <TableHead>Applied on</TableHead>
                 <TableHead>More Info</TableHead>
                 <TableHead>Delete</TableHead>
             </TableRow>
@@ -25,6 +25,9 @@ export const PlacementsTableSkeleton = () => {
             </TableCell>
             <TableCell>
              <Skeleton className="h-5 w-15" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="h-5 w-15" />
             </TableCell>
             <TableCell>
               <Skeleton className="h-5 w-15" />

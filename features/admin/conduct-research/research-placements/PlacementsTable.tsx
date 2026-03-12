@@ -8,6 +8,8 @@ import { View } from 'lucide-react'
 import { useDeleteResearchPlacement, useResearchPlacements } from './placements.hooks'
 import PlacementsView from './PlacementsView'
 import { PlacementsTableSkeleton } from './Skeleton'
+import { formateDate } from '@/lib/format'
+import ButtonLoader from '@/components/ui/button-loader'
 
 const PlacementsTable = ({ search }: { search: string }) => {
 
@@ -45,6 +47,7 @@ const PlacementsTable = ({ search }: { search: string }) => {
                   <TableHead>Designation</TableHead>
                   <TableHead>Affiliation</TableHead>
                   <TableHead>Research Area</TableHead>
+                  <TableHead>Applied on</TableHead>
                   <TableHead>More Info</TableHead>
                   <TableHead>Delete</TableHead>
               </TableRow>
@@ -59,6 +62,7 @@ const PlacementsTable = ({ search }: { search: string }) => {
                     <TableCell>{idea.designation}</TableCell>
                     <TableCell>{idea.affiliation}</TableCell>
                     <TableCell>{idea.categoryId.name}</TableCell>
+                    <TableCell>{formateDate(new Date(idea.updatedAt))}</TableCell>
                     <TableCell>
                       <Dialog>
                         <DialogTrigger asChild>

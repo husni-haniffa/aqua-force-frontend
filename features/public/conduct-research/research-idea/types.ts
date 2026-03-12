@@ -132,6 +132,8 @@ export interface ResearchIdea {
     minorResearchIdea: string;
     researchIdea: string;
     howCanYouContribute: string;
+    createdAt: string
+    updatedAt: string
 }
 
 export interface ResearchIdeaFormProps {

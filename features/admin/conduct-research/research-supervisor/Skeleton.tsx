@@ -1,5 +1,4 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 
 export const SupervisorTableSkeleton = () => {
@@ -15,6 +14,7 @@ export const SupervisorTableSkeleton = () => {
                 <TableHead>Affiliation</TableHead>
                 <TableHead>No of Students</TableHead>
                 <TableHead>Research Area</TableHead>
+                <TableHead>Applied on</TableHead>
                 <TableHead>More Info</TableHead>
                 <TableHead>Delete</TableHead>
             </TableRow>

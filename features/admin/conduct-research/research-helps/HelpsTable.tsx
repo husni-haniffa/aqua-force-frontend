@@ -8,6 +8,8 @@ import { View } from 'lucide-react'
 import { useDeleteResearchHelp, useResearchHelps } from './helps.hooks'
 import HelpsView from './HelpsView'
 import { HelpsTableSkeleton } from './Skeleton'
+import { formateDate } from '@/lib/format'
+import ButtonLoader from '@/components/ui/button-loader'
 
 const HelpsTable = ({ search }: { search: string }) => {
 
@@ -46,6 +48,7 @@ const HelpsTable = ({ search }: { search: string }) => {
                   <TableHead>Designation</TableHead>
                   <TableHead>Affiliation</TableHead>
                   <TableHead>Research Area</TableHead>
+                  <TableHead>Applied on</TableHead>
                   <TableHead>More Info</TableHead>
                   <TableHead>Delete</TableHead>
               </TableRow>
@@ -61,6 +64,7 @@ const HelpsTable = ({ search }: { search: string }) => {
                     <TableCell>{idea.designation}</TableCell>
                     <TableCell>{idea.affiliation}</TableCell>
                     <TableCell>{idea.categoryId.name}</TableCell>
+                    <TableCell>{formateDate(new Date(idea.updatedAt))}</TableCell>
                     <TableCell>
                       <Dialog>
                         <DialogTrigger asChild>

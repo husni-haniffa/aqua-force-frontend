@@ -133,6 +133,8 @@ export interface ResearchSupervisor {
     minorResearchIdea: string;
     noOfStudents: string;
     howCanYouContribute: string;
+    createdAt: string
+    updatedAt: string
 }
 
 export interface ResearchSupervisorFormProps {
