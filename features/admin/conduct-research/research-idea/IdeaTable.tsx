@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { View } from 'lucide-react'
 import { useDeleteResearchIdea, useResearchIdea } from './idea.hooks'
 import IdeaView from './IdeaView'
+import { IdeaTableSkeleton } from './Skeleton'
 
 const IdeaTable = ({ search }: { search: string }) => {
 
@@ -25,7 +26,7 @@ const IdeaTable = ({ search }: { search: string }) => {
 
   const isSearchingNews = search !== debouncedSearch;
 
-  if (isLoading || isSearchingNews) return <p>Applications Loading</p>
+  if (isLoading || isSearchingNews) return <IdeaTableSkeleton/>
   if (error instanceof Error) return <AlertError message={error.message}/>
   if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No applications submitted yet</p>
     

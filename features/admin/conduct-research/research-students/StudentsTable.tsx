@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { View } from 'lucide-react'
 import { useDeleteResearchStudent, useResearchStudents } from './students.hooks'
 import StudentsView from './StudentsView'
+import { StudentsTableSkeleton } from './Skeleton'
 
 const StudentsTable = ({ search }: { search: string }) => {
 
@@ -26,7 +27,7 @@ const StudentsTable = ({ search }: { search: string }) => {
 
   const isSearchingStudent = search !== debouncedSearch;
 
-  if (isLoading || isSearchingStudent) return <p>Applications Loading</p>
+  if (isLoading || isSearchingStudent) return <StudentsTableSkeleton/>
   if (error instanceof Error) return <AlertError message={error.message}/>
   if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No applications submitted yet</p>
   

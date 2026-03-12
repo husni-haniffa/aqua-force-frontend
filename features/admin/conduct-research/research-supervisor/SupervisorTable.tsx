@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { View } from 'lucide-react'
 import { useDeleteResearcSupervisor, useResearchSupervisor } from './supervisor.hooks'
 import SupervisorView from './SupervisorView'
+import { SupervisorTableSkeleton } from './Skeleton'
 
 const SupervisorTable = ({ search }: { search: string }) => {
 
@@ -26,7 +27,7 @@ const SupervisorTable = ({ search }: { search: string }) => {
 
   const isSearchingSupervisor = search !== debouncedSearch;
 
-  if (isLoading || isSearchingSupervisor) return <p>Applications Loading</p>
+  if (isLoading || isSearchingSupervisor) return <SupervisorTableSkeleton/>
   if (error instanceof Error) return <AlertError message={error.message}/>
   if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No applications submitted yet</p>
   

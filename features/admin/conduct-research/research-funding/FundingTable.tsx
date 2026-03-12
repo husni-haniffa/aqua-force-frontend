@@ -10,6 +10,7 @@ import { View } from 'lucide-react'
 import { formateDate } from '@/lib/format'
 import { useDeleteResearchFunding, useResearchFunding } from './funding.hooks'
 import FundingView from './FundingView'
+import { FundingTableSkeleton } from './Skeleton'
 
 const FundingTable = ({ search }: { search: string }) => {
 
@@ -29,7 +30,7 @@ const FundingTable = ({ search }: { search: string }) => {
 
   const isSearchingFunding = search !== debouncedSearch;
 
-  if (isLoading || isSearchingFunding) return <p>Applications Loading</p>
+  if (isLoading || isSearchingFunding) return <FundingTableSkeleton/>
   if (error instanceof Error) return <AlertError message={error.message}/>
   if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No applications submitted yet</p>
   

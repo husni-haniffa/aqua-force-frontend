@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { View } from 'lucide-react'
 import { useDeleteResearchHelp, useResearchHelps } from './helps.hooks'
 import HelpsView from './HelpsView'
+import { HelpsTableSkeleton } from './Skeleton'
 
 const HelpsTable = ({ search }: { search: string }) => {
 
@@ -26,7 +27,7 @@ const HelpsTable = ({ search }: { search: string }) => {
 
   const isSearchingHelps = search !== debouncedSearch;
 
-  if (isLoading || isSearchingHelps) return <p>Applications Loading</p>
+  if (isLoading || isSearchingHelps) return <HelpsTableSkeleton/>
   if (error instanceof Error) return <AlertError message={error.message}/>
   if (!data || data.length === 0) return <p className='flex items-center justify-center font-semibold text-lg'>No applications submitted yet</p>
   
