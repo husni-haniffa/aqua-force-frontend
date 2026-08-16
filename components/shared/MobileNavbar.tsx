@@ -6,7 +6,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { navLinks } from "@/lib/navLinks";
 import { usePathname } from "next/navigation";
-import { SignedIn, SignedOut, SignOutButton } from '@clerk/nextjs'
+import { SignedIn, SignedOut, SignOutButton, UserButton } from '@clerk/nextjs'
 import { useCheckRole } from "@/utils/checkRole";
 import React from "react";
 
@@ -119,9 +119,9 @@ const MobileNavbar = () => {
                 </SignedOut>
 
                 <SignedIn>
-                  <Button size="sm" asChild className="font-semibold">
-                    <SignOutButton />
-                  </Button>
+                  <div className="flex justify-center items-center bg-blue-500 border rounded-md">
+                    <UserButton />
+                  </div>
                 </SignedIn>
               </div>
             </div>
