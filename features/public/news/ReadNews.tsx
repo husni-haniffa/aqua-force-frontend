@@ -51,7 +51,7 @@ const ReadNews = ({ id }: { id: string }) => {
         <div className="h-px bg-slate-100" />
 
         {/* Content */}
-        <p className="text-sm md:text-base text-slate-500 leading-relaxed line-clamp-6">
+        <p className="text-sm md:text-base text-slate-500 leading-relaxed">
           {data?.content}
         </p>
 
