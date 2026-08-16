@@ -4,7 +4,7 @@ import { Button } from '../ui/button'
 import { navLinks } from '@/lib/navLinks'
 import { usePathname } from 'next/navigation'
 import MobileNavbar from './MobileNavbar'
-import { SignedIn, SignedOut, SignOutButton } from '@clerk/nextjs'
+import { SignedIn, SignedOut, SignOutButton, UserButton } from '@clerk/nextjs'
 import { useCheckRole } from '@/utils/checkRole'
 import React from 'react'
 
@@ -79,7 +79,7 @@ const Navbar = () => {
             </SignedOut>
             <SignedIn>
               <Button size="sm" asChild className='font-semibold'>
-                <SignOutButton />
+                <UserButton />
               </Button>
             </SignedIn>
           </div>
